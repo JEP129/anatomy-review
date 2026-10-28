@@ -95,6 +95,15 @@ figcaption{font:13px/1.5 var(--body);color:var(--muted);margin-top:8px}
 .pager .nx{text-align:right;margin-left:auto}
 .pager small{display:block;color:var(--muted);font:12px var(--mono)}
 
+/* interactive figures */
+.viz{margin:22px 0;background:var(--sheet);border:1px solid var(--plate);border-radius:8px;padding:12px 14px}
+.viz::before{content:"互動圖";display:block;font:700 12px/1 var(--mono);letter-spacing:.12em;color:var(--plate);margin-bottom:8px}
+.viz svg{display:block;width:100%;height:auto;max-width:min(100%,520px);margin:0 auto}
+.vz-ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0 4px;font-size:14px}
+.vz-ctl input[type=range]{flex:1 1 180px;min-width:0;accent-color:var(--plate)}
+.vz-read{font:500 14px/1.6 var(--body);margin:6px 0 2px;font-variant-numeric:tabular-nums}
+.vz-cap{font-size:13px;color:var(--muted);margin:4px 0 0}
+
 /* home */
 .lecgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:12px;margin:16px 0 26px}
 .lec{background:var(--sheet);border:1px solid var(--rule);border-radius:8px;padding:14px 16px;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:4px}
@@ -263,6 +272,7 @@ figcaption{font:13px/1.5 var(--body);color:var(--muted);margin-top:8px}
 <figure class="fig"><img src="figs/K1-p013.jpg" alt="凹凸原則圖示"><figcaption>Concave on convex（同向）／Convex on concave（反向）；膝伸展與肩外展範例（講義 p.13）</figcaption></figure>
 <div class="key"><p class="lbl">必背重點</p><p>凸動凹 → 滑動<b>反向</b>（例：肩外展，肱骨頭凸面往上 rolling、<b>往下 slide</b>——superior rolling／inferior sliding）；凹動凸 → 滑動<b>同向</b>（例：膝伸直時脛骨平台在股骨髁上，同向滑動）。</p></div>
 <div class="trap"><p class="lbl">易混淆</p><p><b>骨運動學 osteokinematics</b>＝骨頭的大角度運動（量角器測 ROM）；<b>關節運動學 arthrokinematics</b>＝關節面間的 roll／slide／spin 微小運動。</p></div>
+<div class="viz" data-viz="convex"></div>
 </section>
 
 <section class="page" id="p-K1-c" data-title="牛頓定律與槓桿" data-group="第1講 肌動學概論">
@@ -326,6 +336,7 @@ figcaption{font:13px/1.5 var(--body);color:var(--muted);margin-top:8px}
 </ul>
 <div class="trap"><p class="lbl">易混淆</p><p>Passive insufficiency＝<b>拮抗肌</b>太緊限制動作；Active insufficiency＝主動肌縮到太短無力。Tenodesis＝肌腱被牽拉帶出的被動動作。</p></div>
 
+<div class="viz" data-viz="hamstring"></div>
 <h2>十、肌肉長度－張力關係（p.26–27、30）</h2>
 <p>肌肉力量／最大自主收縮 (maximum voluntary contraction, MVC)。<b>離體肌肉 (detached muscle)</b> 以靜止長度 (resting length) 為基準：</p>
 <table class="tbl">
@@ -340,6 +351,7 @@ figcaption{font:13px/1.5 var(--body);color:var(--muted);margin-top:8px}
 </tbody></table>
 <figure class="fig"><img src="figs/K1-p027.jpg" alt="長度張力曲線"><figcaption>A：肌節長度與張力（最理想長度 2.2 μm）；B：主動、被動、總張力曲線（講義 p.27）</figcaption></figure>
 <div class="key"><p class="lbl">必背重點</p><p>最大主動張力在<b>比休息長度稍長</b>時；繼續拉長，主動張力<b>先增加後減少</b>（被動張力則持續上升，總張力＝主動＋被動）。理想肌節長度約 2.2 μm（粗細肌絲重疊最佳）。</p></div>
+<div class="viz" data-viz="lentension"></div>
 </section>
 
 <section class="page" id="p-K1-e" data-title="肌肉構造與收縮機制" data-group="第1講 肌動學概論">
@@ -381,6 +393,7 @@ figcaption{font:13px/1.5 var(--body);color:var(--muted);margin-top:8px}
 <div class="key"><p class="lbl">必背重點</p><p><span class="term">滑動絲學說<i>Sliding filament theory</i></span>：收縮時粗肌絲的肌凝蛋白<b>橫橋</b> (cross bridge) 與細肌絲肌動蛋白結合，細肌絲滑入粗肌絲之間；<b>不是蛋白本身縮短</b>（橫橋學說 cross bridge theory）。唯一長度不變的是<b>粗肌絲／A 帶</b>。</p></div>
 <div class="mn"><p class="lbl">記憶口訣</p><p>收縮「<b>I、H 縮，A 不變</b>」；「Z 往中間靠」。</p></div>
 
+<div class="viz" data-viz="sarcomere"></div>
 <h2>十三、興奮收縮耦合與放鬆（p.39、42–47）</h2>
 <h3>膜電位與動作電位</h3>
 <ul>
@@ -505,6 +518,7 @@ figcaption{font:13px/1.5 var(--body);color:var(--muted);margin-top:8px}
 <li>肌纖維依收縮速度分快、慢；依收縮及代謝特徵分 SO / FOG / FG；依顏色分快縮白、快縮紅、慢縮紅；Brooke 分 I 型與 II 型。</li>
 <li>低強度運動：慢肌先動員；強度大：快肌也加入。</li>
 </ul>
+<div class="viz" data-viz="spindle"></div>
 </section>
 
 <!-- ===== K2 ===== -->
@@ -653,6 +667,7 @@ figcaption{font:13px/1.5 var(--body);color:var(--muted);margin-top:8px}
 <div class="key"><p class="lbl">必背重點</p><p>節律 ST：GH = 1：2；180° = 120°(GH) + 60°(ST)；ST 的 60° = AC 30° + SC 30°。</p></div>
 <div class="trap"><p class="lbl">易混淆</p><p>講義有「GH ： ST」與「ST ： GH」兩種寫法：額狀面 GH：ST = 2：1（=ST：GH 1：2）；肩胛骨平面 GH：ST = 1.25：1。考題問「scapulothoracic 與 glenohumeral 之比」時答 1：2。</p></div>
 <div class="mn"><p class="lbl">記憶口訣</p><p>「肩 1 肱 2，12 + 6 = 18（120+60=180）」；前 30° 先只動肱骨（setting phase）。</p></div>
+<div class="viz" data-viz="shrhythm"></div>
 </section>
 
 <section class="page" id="p-K2-c" data-title="肩部肌肉（起止點、神經、動作）" data-group="第2講 肩關節複合體">
@@ -1046,6 +1061,290 @@ figcaption{font:13px/1.5 var(--body);color:var(--muted);margin-top:8px}
 </div>
 <script id="quizdata" type="application/json">{"K1": {"cards": [{"f": "Kinematics 運動學", "b": "描述物體在空間的運動範圍與軌跡（位置、速率、時間的關係），不談力"}, {"f": "Kinetics 運動力學包含哪兩部分？", "b": "靜力學 statics（平衡下外力產生的內力）與動力學 dynamics（不平衡時的外效應）"}, {"f": "人體計量學 Anthropometry：靜態 vs 動態", "b": "靜態＝結構性（尺寸、質量、體積、形狀）；動態＝功能性（活動角度、範圍、施力程度）"}, {"f": "Center of gravity (COG) 站立時的位置", "b": "第二薦椎（S2）前方約一吋"}, {"f": "矢狀面 Sagittal plane 的主要動作與軸", "b": "屈曲／伸直；額狀-水平軸（mediolateral axis）"}, {"f": "額狀面 Frontal (coronal) plane 的主要動作與軸", "b": "外展／內收；矢狀-水平軸（anteroposterior axis）"}, {"f": "水平面 Transverse plane 的主要動作與軸", "b": "旋轉 rotation；垂直軸 vertical (longitudinal) axis"}, {"f": "自由度 3 個的關節", "b": "髖關節 hip、盂肱關節 gleno-humeral（杵臼關節）"}, {"f": "環轉運動 Circumduction 出現於", "b": "2 或 3 個自由度的關節；1 個自由度的關節沒有"}, {"f": "Open vs Closed kinematic chain", "b": "開放鏈：遠端肢段自由懸空；封閉鏈：遠端肢段固定"}, {"f": "杵臼關節 Ball & socket 例子", "b": "肩、髖；動作含屈伸、外展內收、旋轉"}, {"f": "屈戍關節 Hinge joint", "b": "只做屈曲與伸直；肘、指間關節"}, {"f": "髁狀關節 Condyloid joint", "b": "橢圓凸面嵌橢圓凹面，多方向但無法旋轉；掌指關節、橈腕關節"}, {"f": "鞍狀關節 Saddle joint", "b": "兩關節面各有凹凸，多方向活動；腕骨大菱形骨—拇指掌骨、胸鎖關節"}, {"f": "樞軸關節 Pivot joint", "b": "只能旋轉；寰椎—樞椎、橈尺近端"}, {"f": "凹凸原則：凸面骨在凹面上動", "b": "關節面滑動方向與骨頭角動作方向相反"}, {"f": "凹凸原則：凹面骨在凸面上動", "b": "關節面滑動方向與骨頭角動作方向相同"}, {"f": "牛頓第二定律", "b": "F = ma，作用力＝質量×加速度"}, {"f": "第一類槓桿 位置與例子", "b": "支點在中間；抬頭（枕寰關節為支點，背部肌肉為作用力）"}, {"f": "第二類槓桿 位置與例子", "b": "阻力在中間，力臂>阻力臂；踮腳尖（蹠趾為支點，小腿肌為作用力）"}, {"f": "第三類槓桿 位置與例子", "b": "作用力在中間，力臂<阻力臂；肱二頭肌前臂舉重（肘為支點）；人體最普遍"}, {"f": "等長收縮 Isometric", "b": "肌肉長度不變；持續 6 秒才有增肌力效果；適合急性癒合期、增加關節穩定度"}, {"f": "等速收縮 Isokinetic 特色與限制", "b": "速度恆定、阻力隨力量調整；儀器昂貴、多為開放鏈、不宜急性期、速度不超過 120°/秒"}, {"f": "肌肉張力大小排序", "b": "eccentric > isometric > concentric"}, {"f": "最易引起遲發性肌肉酸痛 DOMS 的收縮", "b": "離心收縮 eccentric（也較易拉傷）"}, {"f": "被動不足 Passive insufficiency", "b": "拮抗肌為跨雙關節肌，被拉到最長而限制主動肌的關節活動度；例：髖屈曲配膝伸直僅 60–80°"}, {"f": "肌腱作用 Tendon action (tenodesis)", "b": "主動肌無力時，拮抗肌收縮把主動肌拉緊，產生被動關節動作"}, {"f": "肌肉在何長度產生最大主動張力", "b": "約休息長度的 110%（比靜止稍長）"}, {"f": "epimysium / perimysium / endomysium", "b": "肌外膜（整條肌肉）／肌束膜（每條肌束）／肌內膜（每條肌纖維）"}, {"f": "肌節 sarcomere 長度（放鬆／收縮／拉長）", "b": "2.5 μm／約 1.5 μm／約 3.0 μm"}, {"f": "肌肉收縮時 A band、I band、H zone", "b": "A 帶不變；I 帶變窄；H 區變窄甚至消失；Z 線靠近"}, {"f": "T system vs SR", "b": "橫小管 T system：加速傳導動作電位；肌漿網 SR：貯存與釋放 Ca²⁺"}, {"f": "Ca²⁺ 在收縮中與誰結合", "b": "肌鈣蛋白 troponin 的 C 單位，使 actin 活化位暴露"}, {"f": "神經肌肉接合處的傳導物質與分解酶", "b": "乙醯膽鹼 Acetylcholine；膽鹼酯酶 Cholinesterase"}, {"f": "動作電位閾值", "b": "約 −55 mV；全有全無定律"}, {"f": "Type I 慢縮纖維特徵", "b": "紅、小、粒線體多、肌紅蛋白高、氧化磷酸化、耐疲勞、收縮慢"}, {"f": "Type IIb（FG）快縮纖維特徵", "b": "白、大、粒線體少、醣解、收縮快、易疲勞"}, {"f": "肌纖維徵召順序", "b": "Type I → IIa → IIb（size principle：小運動神經元先徵召）"}, {"f": "運動單位 Motor unit", "b": "一個運動神經元＋其軸突＋所支配的所有肌纖維；眼肌約 5 條，大肌肉 1000 條以上"}, {"f": "肌力分級的三種方式", "b": "先用神經支配比最小的；增加徵召的運動單位數；增加刺激頻率"}, {"f": "Ia / Ib / II 傳入纖維", "b": "Ia：肌梭初級（速度）；Ib：高爾基腱器（張力）；II：肌梭次級（長度量）"}, {"f": "高爾基腱器 GTO 功能", "b": "偵測肌肉張力，過度收縮時經抑制性中間神經元抑制作用肌，保護肌肉"}, {"f": "肌梭 Muscle spindle 功能", "b": "偵測肌肉長度及其變化速率；維持姿勢肌張力；由 γ 運動神經元調節敏感度"}, {"f": "梭外肌／梭內肌 的運動神經", "b": "梭外：Aα；梭內：Aγ"}], "mcq": [{"q": "下列何項學問在研究動作的表徵（描述運動的位置、軌跡、速率）？", "o": ["動力學 kinetics", "運動學 kinematics", "肌肉力學 muscle mechanics", "人體計量學 anthropometry"], "a": 1, "e": "運動學描述運動的範圍與軌跡，不探討產生運動的力。"}, {"q": "使用量角器測量關節活動度（ROM）時，主要是應用下列何者？", "o": ["關節運動學 arthrokinematics", "動力學 kinetics", "骨運動學 osteokinematics", "人體計量學的靜態測量"], "a": 2, "e": "量角器測的是骨頭的角度運動，屬骨運動學。"}, {"q": "人體站立時，重心位於何處？", "o": ["第二薦椎前方約一吋", "第十二胸椎前方", "第五腰椎後方", "恥骨聯合上方"], "a": 0, "e": "站立重心約在 S2 前方一吋。"}, {"q": "肘關節彎曲、伸直（屈伸）發生在哪個平面、繞哪個軸？", "o": ["額狀面，矢狀-水平軸", "矢狀面，額狀-水平軸", "水平面，垂直軸", "額狀面，垂直軸"], "a": 1, "e": "屈伸在矢狀面，繞額狀（橫向）水平軸。"}, {"q": "下列何者有三個自由度？", "o": ["肘關節", "指間關節", "髖關節", "橈腕關節"], "a": 2, "e": "髖與盂肱關節為杵臼關節，3 自由度；肘、指間 1 個；橈腕 2 個。"}, {"q": "環轉運動（circumduction）存在於哪種關節？", "o": ["只有 1 個自由度的關節", "2 或 3 個自由度的關節", "所有滑液關節", "只有樞軸關節"], "a": 1, "e": "環轉是 2、3 自由度關節的特徵，1 自由度沒有。"}, {"q": "寰椎與樞椎之間的關節型態屬於？", "o": ["屈戍關節", "髁狀關節", "鞍狀關節", "樞軸關節"], "a": 3, "e": "樞軸關節只能旋轉；寰樞、橈尺近端為例。"}, {"q": "拇指的腕掌關節（大菱形骨與第一掌骨）及胸鎖關節屬於何種關節？", "o": ["鞍狀關節", "滑動關節", "髁狀關節", "屈戍關節"], "a": 0, "e": "兩關節面各有凹凸，可多方向活動，為鞍狀關節。"}, {"q": "凸面骨頭在凹面上移動（如肩外展時肱骨頭），關節面的滑動方向與骨頭角動作方向的關係為何？", "o": ["相同", "相反", "垂直", "沒有滑動"], "a": 1, "e": "凸動凹→滑動反向；肱骨頭外展時往上 roll、往下 slide。"}, {"q": "人體中最普遍的槓桿型式為？", "o": ["第一類", "第二類", "第三類", "三類一樣多"], "a": 2, "e": "第三類（作用力在中間）最普遍，如肱二頭肌屈肘。"}, {"q": "踮腳尖時，其槓桿類型與阻力位置分別為？", "o": ["第一類，支點在中央", "第二類，阻力（體重）在中央", "第三類，作用力在中央", "第二類，作用力在中央"], "a": 1, "e": "踮腳尖：蹠趾為支點、體重在中間，力臂>阻力臂，為第二類。"}, {"q": "關於離心收縮的敘述，下列何者正確？", "o": ["肌肉長度明顯變短", "產生同樣的力需要徵召較多運動單位", "最大離心收縮產生的力大於最大向心收縮", "與向心收縮相比，較不易造成遲發性肌肉酸痛"], "a": 2, "e": "離心最大力較大、徵召動作單位較少、肌肉被拉長，最易引起 DOMS。"}, {"q": "肌肉張力由大到小的排序為？", "o": ["concentric > isometric > eccentric", "isometric > concentric > eccentric", "eccentric > concentric > isometric", "eccentric > isometric > concentric"], "a": 3, "e": "離心 > 等長 > 向心。"}, {"q": "有關等速收縮訓練，下列何者錯誤？", "o": ["訓練速度每秒不宜超過 120 度", "大部分只能做開放鏈訓練", "儀器昂貴", "適合在急性期積極施行"], "a": 3, "e": "等速收縮不宜在急性期施行。"}, {"q": "等長收縮要持續多久才有增進肌力的效果？", "o": ["2 秒", "6 秒", "15 秒", "30 秒"], "a": 1, "e": "講義：持續收縮 6 秒才具增進肌力效果。"}, {"q": "髖屈曲時，膝伸直（約 60–80°）的活動度小於膝屈曲（115–125°），其原因為？", "o": ["主動肌無力", "主動不足", "被動不足（hamstrings 被拉長）", "關節囊鬆弛"], "a": 2, "e": "拮抗肌為跨雙關節肌（後大腿肌群）被拉到最長，使髖屈曲受限，稱被動不足。"}, {"q": "依肌肉長度-張力關係，離體肌肉在何種長度下可產生最大張力？", "o": ["休息時長度", "比休息長度稍長", "比休息長度稍短", "比休息長度再拉長一倍"], "a": 1, "e": "約 110% 靜止長度時達最大張力；再拉長主動張力先升後降。"}, {"q": "包覆「整條肌肉」的結締組織稱為？", "o": ["肌內膜", "肌束膜", "肌外膜", "肌纖維膜"], "a": 2, "e": "肌外膜包整條肌肉，肌束膜包肌束，肌內膜包肌纖維。"}, {"q": "肌肉收縮時，下列何者長度不變？", "o": ["A 帶", "I 帶", "H 區", "肌節"], "a": 0, "e": "A 帶＝粗肌絲全長，不變；I 帶、H 區、肌節都縮短。"}, {"q": "肌漿網（SR）的主要功能為？", "o": ["合成 ATP", "加速動作電位傳導", "貯存與釋放鈣離子", "分解乙醯膽鹼"], "a": 2, "e": "SR 貯存／釋放 Ca²⁺；加速傳導的是橫小管 T system。"}, {"q": "Ca²⁺ 進入肌漿後，與下列何者結合而啟動收縮？", "o": ["肌凝蛋白", "肌鈣蛋白 C", "肌動蛋白", "肌紅蛋白"], "a": 1, "e": "Ca²⁺ 與 troponin C 結合→構型改變→露出 actin 活化位。"}, {"q": "下列何者為慢縮（Type I）肌纖維的特徵？", "o": ["直徑大、顏色白", "粒線體稀少", "氧化磷酸化為主要 ATP 來源、疲乏慢", "醣解酵素活性最高"], "a": 2, "e": "Type I：小、紅、粒線體多、有氧、耐疲勞。"}, {"q": "在低強度運動時，肌纖維徵召順序為？", "o": ["IIb → IIa → I", "I → IIa → IIb", "IIa → I → IIb", "同時徵召"], "a": 1, "e": "依 size principle，由慢肌先開始，再加入 IIa、IIb。"}, {"q": "支配肌梭梭內肌纖維的運動神經元為？", "o": ["Aα", "Aβ", "Aγ", "C 纖維"], "a": 2, "e": "梭外肌：Aα；梭內肌：Aγ。"}, {"q": "偵測肌肉張力、在過度收縮時抑制作用肌的受器是？", "o": ["肌梭 Ia", "高爾基腱器 Ib", "肌梭 II", "關節囊受器"], "a": 1, "e": "GTO（Ib）位於肌腱，經抑制性中間神經元抑制作用肌，具保護作用。"}]}, "K2": {"cards": [{"f": "肩胛骨與胸廓第幾根肋骨相對？附著幾塊肌肉？", "b": "第 2–7 肋；17 塊肌肉"}, {"f": "coracoid process 喙突的附著", "b": "聯合肌腱（肱二頭肌短頭＋喙肱肌）起點、胸小肌止點、喙肱韌帶／喙肩韌帶附著"}, {"f": "acromion 肩峰", "b": "肩胛棘向外延伸的寬扁突出，覆蓋肱骨頭，三角肌起點之一"}, {"f": "肱骨頭後傾角（retroversion）", "b": "相對於上髁軸向後轉約 30°"}, {"f": "大結節 greater tuberosity 的附著肌", "b": "棘上肌、棘下肌、小圓肌"}, {"f": "小結節 lesser tuberosity 的附著肌", "b": "肩胛下肌 subscapularis"}, {"f": "bicipital groove 二頭肌溝", "b": "位於大小結節間，肱二頭肌長頭肌腱通過；上有橫韌帶防滑脫"}, {"f": "rotator cuff 四條肌肉（SITS）", "b": "supraspinatus、infraspinatus、teres minor、subscapularis"}, {"f": "棘上肌 supraspinatus 動作／神經", "b": "外展；肩胛上神經"}, {"f": "棘下肌 infraspinatus 動作", "b": "外轉 ER、內收（神經：肩胛上神經）"}, {"f": "小圓肌 teres minor 動作／神經", "b": "外轉 ER、內收；腋神經"}, {"f": "肩胛下肌 subscapularis 動作", "b": "內轉 IR（止於小結節）"}, {"f": "肩關節 ROM 排序", "b": "肩（0–180°）＞ 髖（0–120°）＞ 腕 ＞ 肘"}, {"f": "肩關節屬第幾級槓桿？特點", "b": "第三級；力臂短費力，但得較大速度與活動長度"}, {"f": "斜方韌帶＋圓錐韌帶合稱", "b": "喙鎖韌帶 coracoclavicular lig.，連接鎖骨與喙突"}, {"f": "防盂肱脫臼的結構", "b": "喙肱韌帶、盂肱韌帶、肱橫韌帶、盂脣 glenoid labrum"}, {"f": "肱骨頭向下滑動對應的動作", "b": "外展（向上滑＝內收；向前滑＝伸直、外轉、水平外展；向後滑＝屈曲、內轉、水平內收）"}, {"f": "凸面／凹面滑動規則", "b": "肱骨頭（凸）滑動方向與骨動作相反；關節窩（凹）與肩胛骨動作相同方向"}, {"f": "scapulothoracic joint 肩胛胸廓關節", "b": "無骨性連結的假關節／功能性關節"}, {"f": "唯一連接上肢與胸腔的關節", "b": "胸鎖關節 sternoclavicular（鞍狀，有關節盤，3 度自由度）"}, {"f": "胸鎖關節與哪個關節結構相同？", "b": "拇指腕掌關節（CMC）"}, {"f": "胸鎖關節的韌帶", "b": "鎖骨間韌帶、前後胸鎖（囊）韌帶、肋鎖韌帶（第 1 肋下方）"}, {"f": "SC 關節抬高／下壓角度", "b": "抬高 30–45°；下壓 5–10°（被第 1 肋擋住）"}, {"f": "SC 休息位前突／後縮", "b": "前突 15°、後縮 15°"}, {"f": "鎖骨軸向旋轉何時出現？由什麼引起？", "b": "肩上舉超過 90° 後；喙鎖韌帶（斜方＋圓錐）拉緊"}, {"f": "維持 AC 關節穩定最重要的韌帶", "b": "喙鎖韌帶 coracoclavicular ligaments"}, {"f": "coracoacromial arch / supraspinatus outlet", "b": "肩胛頸＋肩峰＋喙肩韌帶＋喙突；其下有旋轉肌腱、二頭肌長頭腱、滑囊"}, {"f": "scapulohumeral rhythm 額狀面比例", "b": "前 30° 後 ST：GH = 1：2；每 15° = GH 10° + ST 5°"}, {"f": "肩外展 180° 的組成", "b": "盂肱 120° ＋ 肩胛向上旋轉 60°（AC 30° + SC 30°）"}, {"f": "scapular plane 的 GH：ST", "b": "1.25：1"}, {"f": "盂肱完全內轉時主動外展極限", "b": "約 60°（大結節撞肩峰／喙肩韌帶）；外轉 90° 則可到 90°"}, {"f": "手臂放身側 vs 完全上舉的旋轉總量", "b": "身側 180°（ER+IR）；完全上舉 90°（韌帶扭轉繃緊）"}, {"f": "serratus anterior 前鋸肌：神經／動作", "b": "長胸神經；肩胛骨外展與向上旋轉；止於肩胛內側緣"}, {"f": "trapezius 斜方肌：神經與上中下動作", "b": "副神經；上：上提＋上轉；中：上轉＋內收；下：上轉＋內收＋下壓"}, {"f": "rhomboid 菱形肌：神經／動作", "b": "肩背神經 dorsal scapular n.；向下旋轉、內收、上提"}, {"f": "pectoralis minor 胸小肌", "b": "第 2–5 肋 → 喙突；胸內側神經；下壓"}, {"f": "levator scapulae 提肩胛肌", "b": "上位頸椎橫突 → 肩胛內側緣；肩背神經；上提、向下旋轉"}, {"f": "deltoid 三角肌 神經／動作", "b": "腋神經；外展；止於三角肌粗隆"}, {"f": "latissimus dorsi 闊背肌", "b": "胸背神經（C6–C8）；IR、伸直、內收、肩胛下壓、抬高骨盆；止於小結節嵴"}, {"f": "coracobrachialis 喙肱肌", "b": "喙突 → 肱骨內側面；肌皮神經；屈曲、內收"}, {"f": "肩部靜態防半脫位三項", "b": "水平喙肱韌帶、上盂肱韌帶、關節囊內負壓"}, {"f": "winging scapula 翼狀肩胛", "b": "前鋸肌（長胸神經）麻痺；肩胛內側緣掀起，無法完全上舉"}, {"f": "斜方肌麻痺的表現", "b": "肩胛休息位向下旋轉、外展、下壓；肱骨頭易半脫位；無法後縮肩胛"}], "mcq": [{"q": "斜方韌帶（trapezoid）與圓錐韌帶（conoid）合稱為？", "o": ["肋鎖韌帶", "鎖骨間韌帶", "喙鎖韌帶", "上肱骨韌帶"], "a": 2, "e": "兩者連接鎖骨與喙突，合稱喙骨鎖骨韌帶。"}, {"q": "肩關節外展 180° 時，鎖骨產生軸向旋轉是因哪條韌帶被拉緊？", "o": ["喙鎖韌帶", "橫肱韌帶", "喙肩韌帶", "喙肱韌帶"], "a": 0, "e": "喙鎖韌帶拉緊使鎖骨向上旋轉。"}, {"q": "scapulohumeral rhythm 中，ST 與 GH 關節動作的比值為？", "o": ["1：2", "2：1", "1：3", "3：1"], "a": 0, "e": "前 30° 後肩胛骨：肱骨 = 1：2。"}, {"q": "下列有關正常 scapulohumeral rhythm 的敘述何者錯誤？", "o": ["可維護盂肱關節穩定", "增加三角肌收縮效果", "可增加手舉高的角度", "scapula 動作比 GH 大"], "a": 3, "e": "肩胛動作量只有 GH 的一半。"}, {"q": "下列何者「不是」盂肱關節的內轉肌？", "o": ["闊背肌", "肩胛下肌", "棘下肌", "大圓肌"], "a": 2, "e": "棘下肌為外轉與內收；其餘為內轉。"}, {"q": "哪一肌肉可同時使肩胛骨上提、內收、下降？", "o": ["斜方肌", "菱形肌", "闊背肌", "大圓肌"], "a": 0, "e": "上部上提、中部內收、下部下壓。"}, {"q": "翼狀肩胛（winging scapula）是因哪條肌肉無力？", "o": ["菱形肌", "肩胛下肌", "前鋸肌", "提肩胛肌"], "a": 2, "e": "前鋸肌（長胸神經）無力使內側緣掀起。"}, {"q": "哪一條旋轉肌袖肌腱「不是」附著在大結節？", "o": ["棘上肌", "棘下肌", "小圓肌", "肩胛下肌"], "a": 3, "e": "肩胛下肌止於小結節。"}, {"q": "前鋸肌的神經支配為？", "o": ["副神經", "肩背神經", "長胸神經", "腋神經"], "a": 2, "e": "前鋸肌：長胸神經。"}, {"q": "下列何者麻痺會導致手臂無法完全抬舉？", "o": ["前鋸肌", "闊背肌", "菱形肌", "提肩胛肌"], "a": 0, "e": "前鋸肌使肩胛外展與上旋，缺失則節律異常。"}, {"q": "使用腋下拐杖，要訓練病人的哪組肌肉最恰當？", "o": ["前鋸肌及胸大肌", "肱三頭肌及前鋸肌", "闊背肌及肱三頭肌", "前鋸肌及闊背肌"], "a": 2, "e": "闊背肌使肩下壓撐身，肱三頭肌伸肘（講義解答 C）。"}, {"q": "維持肱骨頭於肩關節中避免半脫位，下列肌肉何者最不具關鍵角色？", "o": ["棘上肌", "大圓肌", "棘下肌", "小圓肌"], "a": 1, "e": "大圓肌不屬旋轉肌袖。"}, {"q": "肩部外展時，使肱骨頭下沉最主要的肌肉為？", "o": ["棘上肌", "肩胛下肌", "三角肌", "背闊肌"], "a": 0, "e": "講義解答：棘上肌。"}, {"q": "肱骨頭滑動方向與動作對應，何者正確？", "o": ["向前滑：屈曲", "向後滑：外轉", "向下滑：外展", "向上滑：外展"], "a": 2, "e": "向下滑＝外展；向上滑＝內收；向前＝伸直/外轉/水平外展。"}, {"q": "關於胸鎖關節，何者正確？", "o": ["為滑車關節且無關節盤", "是唯一連接上肢與胸腔的關節", "脫臼比鎖骨骨折更常見", "只有 1 度自由度"], "a": 1, "e": "鞍狀、有關節盤、3 度自由度；鎖骨常先骨折。"}, {"q": "肩關節完全內轉時，主動外展大約限制在？", "o": ["30°", "60°", "90°", "120°"], "a": 1, "e": "大結節撞擊肩峰與喙肩韌帶。"}, {"q": "手臂完全上舉時，盂肱關節旋轉總量約為？", "o": ["30°", "60°", "90°", "180°"], "a": 2, "e": "身側為 180°，完全上舉僅 90°。"}, {"q": "斜方肌麻痺最可能出現？", "o": ["肩胛休息位向上旋轉", "肩胛休息位向下旋轉、外展、下壓", "肩胛無法前突", "肩胛內側緣翼狀"], "a": 1, "e": "斜方肌麻痺使肩胛下旋、肱骨頭易半脫位；翼狀為前鋸肌。"}, {"q": "喙肩弓（supraspinatus outlet）下方的軟組織「不包括」？", "o": ["旋轉肌袖肌腱", "肱二頭肌長頭腱", "肩峰下滑囊", "盂脣下關節盤"], "a": 3, "e": "肩關節無關節盤；其餘皆在弓下，是肩夾擠的解剖基礎。"}, {"q": "肩關節屬於第幾級槓桿？", "o": ["第一級", "第二級", "第三級", "不屬槓桿"], "a": 2, "e": "施力點在支點與受力點中間，力臂短、速度大。"}, {"q": "當肩上舉時三角肌拉力線直接向上，容易導致？", "o": ["肱骨頭撞擊喙肩弓／肩夾擠", "鎖骨骨折", "胸鎖脫臼", "肋骨骨折"], "a": 0, "e": "肱骨垂直上移撞喙肩弓或肩峰。"}, {"q": "闊背肌的神經支配為？", "o": ["腋神經", "胸背神經", "肩胛上神經", "肌皮神經"], "a": 1, "e": "thoracodorsal nerve（C6–C8）。"}, {"q": "肩外展 180° 的組成，下列何者正確？", "o": ["肱骨 60°＋肩胛 120°", "肱骨 120°＋肩胛 60°", "肱骨 90°＋肩胛 90°", "肱骨 150°＋肩胛 30°"], "a": 1, "e": "肩胛 60° = AC 30° + SC 30°。"}]}, "K3": {"cards": [{"f": "外上髁 Lateral epicondyle", "b": "肱骨遠端外側；伸肌附著（extensor epicondyle）；網球肘"}, {"f": "內上髁 Medial epicondyle", "b": "肱骨遠端內側；腕與指屈肌附著（flexor epicondyle）；高爾夫球肘"}, {"f": "網球肘（Tennis elbow）發生部位", "b": "外上髁，腕與指伸肌附著處"}, {"f": "高爾夫球肘（Golfer's elbow）發生部位", "b": "內上髁，腕與指屈肌附著處"}, {"f": "Triangle sign", "b": "鷹嘴突、內上髁、外上髁：屈曲 90° 為等腰三角形；完全伸直時成一直線"}, {"f": "三點觸診法", "b": "拇指放外上髁、食指放鷹嘴突、中指放內上髁"}, {"f": "鷹嘴突 Olecranon process", "b": "尺骨上端大突起；肘尖著桌時碰到桌面的部位"}, {"f": "尺神經 ulnar nerve 在肘的位置與易受壓姿勢", "b": "通過鷹嘴突與內上髁之間（內上髁溝）；肘屈 90° 最易受壓"}, {"f": "肱尺關節 Elbow (ulnohumeral) joint 類型", "b": "單軸樞紐關節 (uniaxial hinge)；屈曲與伸直"}, {"f": "肱尺關節的穩定來源", "b": "骨性構形 (bony configuration) 與兩側副韌帶"}, {"f": "肘關節運動軸", "b": "通過滑車 (trochlea) 與肱骨小頭 (capitulum) 中心的連線"}, {"f": "橈尺關節 Radioulnar joint 類型與動作", "b": "單軸樞軸關節 (pivot)；旋前與旋後"}, {"f": "旋後 Supination 時橈尺骨關係", "b": "橈骨與尺骨互相平行"}, {"f": "旋前 Pronation 時橈尺骨關係", "b": "橈骨橫越過尺骨"}, {"f": "Carry angle（提攜角）正常值", "b": "男 5–10°、女 10–15°"}, {"f": "Carry angle 成因", "b": "伸直時，遠端內側滑車延伸大於外側肱橈之間的距離"}, {"f": "Carry angle 過大的臨床意義", "b": "內側副韌帶易被拉扯斷裂／扯傷"}, {"f": "環狀韌帶 Annular ligament", "b": "包住橈骨頭、防止橈骨頭其他方向移動；與 quadrate ligament 防止上橈尺關節脫離"}, {"f": "肘關節囊鬆緊分布", "b": "前、後側較鬆（允許屈伸）；內、外側較緊（加強副韌帶支持）"}, {"f": "肘屈曲 ROM 與 end-feel", "b": "120–160°；前側 soft（肌肉接觸），後側 hard（尺骨冠狀突頂肱骨冠狀窩）"}, {"f": "肘伸直 ROM 與 end-feel", "b": "0–5°；hard，尺骨鷹嘴突頂肱骨鷹嘴窩"}, {"f": "肱尺關節休息位與最緊位", "b": "休息：屈 70° + 旋後 10°；最緊：伸直 + 旋後"}, {"f": "近端橈尺關節休息位與最緊位", "b": "休息：旋後 35° + 屈 70°；最緊：旋後 5°"}, {"f": "MCL 前束 (anterior bundle)", "b": "20–120° 最緊（全屈、全伸時鬆）；對抗外翻不穩定 (valgus) 最重要"}, {"f": "外側副韌帶中「主要外側穩定者」", "b": "Lateral ulnar collateral ligament"}, {"f": "骨間膜 Interosseous membrane", "b": "穩定橈尺骨，避免近端橈骨跑到尺骨上"}, {"f": "棒球投手最常拉傷的肘韌帶", "b": "尺側（內側）副韌帶 ulnar collateral ligament"}, {"f": "肱二頭肌 Biceps brachii 起止、神經、動作", "b": "長頭：盂上結節；短頭：喙突；止橈骨粗隆；肌皮神經 C5–C6；肩屈、肘屈、旋後"}, {"f": "肱肌 Brachialis", "b": "肱骨幹→尺骨冠狀突；肌皮神經；純肘屈，不論位置皆有利"}, {"f": "肱橈肌 Brachioradialis", "b": "外側髁上嵴→橈骨莖突；前臂中立位的純屈肘肌"}, {"f": "肱三頭肌 Triceps brachii 長頭近端附著", "b": "肩胛骨盂下結節；止尺骨鷹嘴突；橈神經 C7–C8；肘伸、肩伸"}, {"f": "肘後肌 Anconeus", "b": "外上髁→尺骨；橈神經；肘伸、穩定肘與近端橈尺關節"}, {"f": "旋前方肌 Pronator quadratus", "b": "尺、橈骨遠端 1/4 掌側；正中神經分支 C8–T1；慢速無阻力旋前才收縮；位置不影響其力量；深層難觸摸"}, {"f": "旋前圓肌 Pronator teres", "b": "較強的旋前肌；正中神經；雙關節肌；也協助阻抗式肘屈時抵消二頭肌的旋後"}, {"f": "主動不足 Active insufficiency", "b": "肌肉在最短長度收縮，位於長度–張力曲線最低點，收縮力弱"}, {"f": "橈神經在肘的路徑", "b": "通過肱三頭肌外側頭下方"}, {"f": "肱二頭肌 + 肱肌癱瘓的原因與表現", "b": "肌皮神經損傷；無法抬手，只能用甩的"}, {"f": "旋前圓肌與旋前方肌癱瘓", "b": "肘上方正中神經損傷；無法握杯、開鎖"}], "mcq": [{"q": "下列何者為網球肘 (tennis elbow) 的主要受累部位？", "o": ["內上髁，屈肌群附著處", "外上髁，伸肌群附著處", "鷹嘴突", "橈骨頭"], "a": 1, "e": "外上髁為腕與指伸肌附著處＝網球肘；內上髁為屈肌＝高爾夫球肘。"}, {"q": "肘關節屈曲 90° 時，鷹嘴突、內上髁與外上髁三點呈何種形狀？", "o": ["一直線", "直角三角形", "等腰三角形", "無固定關係"], "a": 2, "e": "Triangle sign：屈 90° 為等腰三角形，完全伸直時成一直線。"}, {"q": "提攜角（carry angle）的正常範圍何者正確？", "o": ["男 10–15°、女 5–10°", "男 5–10°、女 10–15°", "男女皆 0–5°", "男女皆 20–25°"], "a": 1, "e": "男 5–10°、女 10–15°；女性較大。"}, {"q": "肱尺關節的關節類型是？", "o": ["單軸樞紐關節", "雙軸橢圓關節", "單軸樞軸關節", "球窩關節"], "a": 0, "e": "肱尺關節為 uniaxial hinge，只做屈曲與伸直；橈尺關節才是 pivot。"}, {"q": "肘關節屈曲到終點時，後側的 end-feel 為何？", "o": ["Soft，上臂與前臂肌肉接觸", "Empty", "Hard，尺骨冠狀突碰到肱骨冠狀窩", "Hard，鷹嘴突碰到鷹嘴窩"], "a": 2, "e": "屈曲：前側 soft、後側 hard（coronoid process 入 coronoid fossa）；伸直才是鷹嘴突入鷹嘴窩。"}, {"q": "下列何者是對抗肘外翻不穩定 (valgus instability) 最重要的構造？", "o": ["橈側副韌帶", "環狀韌帶", "內側副韌帶前束", "骨間膜"], "a": 2, "e": "MCL 的 anterior bundle 是 valgus 最重要的約束；棒球投手最易拉傷尺側副韌帶。"}, {"q": "棒球投手最常見的肘韌帶拉傷發生於？", "o": ["橈側副韌帶", "尺側副韌帶", "環狀韌帶", "骨間膜"], "a": 1, "e": "投球產生外翻力量，傷內側（尺側）副韌帶。"}, {"q": "防止上橈尺關節脫離，主要靠？", "o": ["Cooper's ligament", "Interosseous membrane", "Annular ligament 與 quadrate ligament", "Annular ligament 與 oblique cord"], "a": 2, "e": "講義考題答案為 C。"}, {"q": "尺神經在肘部最容易受壓的姿勢是？", "o": ["肘完全伸直", "肘屈曲 90°", "前臂旋前", "肩外展"], "a": 1, "e": "尺神經經過鷹嘴突與內上髁之間，屈 90° 最易被壓迫。"}, {"q": "下列何者對肘後肌 (anconeus) 的敘述為真？①受尺神經支配 ②負責肘關節伸直 ③起緣自鷹嘴突 ④扮演肘關節的穩定角色", "o": ["③④", "②", "①②③④", "②④"], "a": 3, "e": "肘後肌：橈神經、起自外上髁、肘伸並穩定肘；故 ②④ 正確（講義答案 D）。"}, {"q": "下列何者對旋前圓肌 (pronator teres) 的敘述為真？①受正中神經支配 ②屬於雙關節肌肉 ③不能由表面直接觸摸 ④作用最強之旋前肌", "o": ["①②④", "②③", "③④", "①④"], "a": 0, "e": "旋前圓肌可觸摸，故 ③ 錯；①②④ 正確（講義答案 A）。"}, {"q": "肱二頭肌的功能為何？", "o": ["肘屈、前臂旋前、肩屈", "肘屈、前臂旋後、肩伸", "肘屈、前臂旋前、肩伸", "肘屈、前臂旋後、肩屈"], "a": 3, "e": "肱二頭肌：肩屈 + 肘屈 + 旋後（講義答案 D）。"}, {"q": "在下列哪種情況下肱三頭肌（長頭）會被拉到最長？", "o": ["肩伸直 + 肘伸直", "肩屈曲 + 肘伸直", "肩伸直 + 肘屈曲", "肩屈曲 + 肘屈曲"], "a": 3, "e": "長頭跨肩與肘，肩屈（拉長）加肘屈（拉長）最長（講義答案 D）。"}, {"q": "下列哪一條旋前肌的作用力較不受肘關節及前臂位置影響？", "o": ["肱橈肌", "旋前圓肌", "旋前方肌", "橈側屈腕肌"], "a": 2, "e": "旋前方肌（深層、單關節）受位置影響最小。"}, {"q": "下列哪一條肘關節肌肉最不可能用徒手觸摸？", "o": ["肱肌", "旋前圓肌", "旋前方肌", "肘後肌"], "a": 2, "e": "旋前方肌位於前臂遠端深層，最難觸摸。"}, {"q": "下列哪一條肌肉不論肘關節與前臂位置如何，均為有利的屈肘肌？", "o": ["肱二頭肌", "肱肌", "肱橈肌", "喙肱肌"], "a": 1, "e": "肱肌永遠是肘屈肌；二頭肌需旋後位，肱橈肌在中立位最有效；喙肱肌不跨肘。"}, {"q": "肱三頭肌癱瘓的常見原因是下列何者？（病人無法伸肘，躺著無法維持兩手高舉）", "o": ["肌皮神經損傷", "正中神經損傷", "橈神經損傷", "尺神經損傷"], "a": 2, "e": "肱三頭肌由橈神經 (C7–C8) 支配。"}, {"q": "病人無法握住杯子、無法開鎖，最可能為哪些肌肉癱瘓？", "o": ["肱二頭肌與肱肌", "旋前圓肌與旋前方肌", "肱三頭肌", "旋後肌"], "a": 1, "e": "肘上方正中神經損傷造成旋前肌群癱瘓；二頭肌與肱肌癱瘓則是無法抬手。"}, {"q": "前 MCL 在肘關節哪個角度範圍最緊？", "o": ["完全伸直", "完全屈曲", "20–120°", "0–5°"], "a": 2, "e": "前 MCL 影響 20–120° 的屈曲，在此範圍最緊，全屈與全伸時鬆。"}]}}</script>
 <script>
+window.VIZ={};
+VIZ.convex = function (el) {
+  var id = 'convex-angle', n = 0, concave = false;
+  while (document.getElementById(id)) id = 'convex-angle-' + (++n);
+  el.innerHTML = '<svg viewBox="0 0 340 315" width="100%" role="img" style="font-family:inherit;font-size:14px"></svg>' +
+    '<div class="vz-ctl"><button type="button" class="btn primary" aria-pressed="true">凸動凹</button> <button type="button" class="btn" aria-pressed="false">凹動凸</button> <label for="' + id + '">動作角度</label> <input id="' + id + '" type="range" min="0" max="90" step="1" value="35"></div>' +
+    '<p class="vz-read" aria-live="polite"></p><p class="vz-cap">示意：箭頭表示角度增加時的動作方向；關節面位移不按比例。</p>';
+  var svg = el.querySelector('svg'), slider = el.querySelector('input'), buttons = el.querySelectorAll('button'), read = el.querySelector('.vz-read');
+  function arrow(x1, y1, x2, y2, color) {
+    var a = Math.atan2(y2 - y1, x2 - x1), c = Math.cos(a), s = Math.sin(a);
+    return '<path d="M' + x1 + ' ' + y1 + 'L' + x2 + ' ' + y2 + 'M' + (x2 - 8*c + 5*s) + ' ' + (y2 - 8*s - 5*c) + 'L' + x2 + ' ' + y2 + 'L' + (x2 - 8*c - 5*s) + ' ' + (y2 - 8*s + 5*c) + '" fill="none" stroke="var(--' + color + ')" stroke-width="3" stroke-linejoin="round"/>';
+  }
+  function update() {
+    var a = +slider.value, r = Math.PI / 180, end = Math.min(a + 15, 100), start = Math.max(0, end - 30);
+    var ex = 150 + 109*Math.sin(end*r), ey = 145 + 109*Math.cos(end*r);
+    var drawing = concave ?
+      '<g transform="translate(' + (a/15) + ' 0) rotate(' + (-a) + ' 150 145)"><path d="M111 163 Q150 200 189 163 L180 195 L163 204 L163 270 L142 270 L142 204 L121 195Z" fill="var(--plate-soft)" stroke="var(--plate)" stroke-width="3"/></g>' +
+      '<path d="M138 59H162V117H138Z" fill="var(--sheet)" stroke="var(--ink)" stroke-width="3"/><circle cx="150" cy="145" r="35" fill="var(--sheet)" stroke="var(--ink)" stroke-width="3"/>' +
+      '<text x="18" y="79" fill="var(--ink)">股骨固定</text><text x="18" y="218" fill="var(--ink)">脛骨凹面移動</text>' + arrow(235, 64, 309, 64, 'plate') + arrow(235, 102, 309, 102, 'muscle') +
+      '<text x="235" y="52" fill="var(--ink)">向前滾動</text><text x="235" y="90" fill="var(--ink)">向前滑動</text>' :
+      '<path d="M127 100 Q82 145 127 190 L111 201 Q62 145 111 89Z" fill="var(--sheet)" stroke="var(--ink)" stroke-width="3"/>' +
+      '<g transform="translate(0 ' + (a/15) + ') rotate(' + (-a) + ' 150 145)"><path d="M140 166 L139 252 Q150 266 161 252 L160 166Z" fill="var(--plate-soft)" stroke="var(--plate)" stroke-width="3"/><circle cx="150" cy="145" r="35" fill="var(--plate-soft)" stroke="var(--plate)" stroke-width="3"/></g>' +
+      '<text x="13" y="229" fill="var(--ink)">關節盂固定</text><text x="111" y="76" fill="var(--ink)">肱骨頭凸面移動</text>' + arrow(46, 180, 46, 116, 'plate') + arrow(291, 115, 291, 179, 'muscle') +
+      '<text x="16" y="104" fill="var(--ink)">向上滾動</text><text x="258" y="103" fill="var(--ink)">向下滑動</text>';
+    svg.innerHTML = '<text x="12" y="23" fill="var(--ink)">' + (concave ? '凹動凸：膝伸直（脛骨移動）' : '凸動凹：肩外展（肱骨移動）') + '</text>' + drawing +
+      '<path d="M' + (150 + 109*Math.sin(start*r)) + ' ' + (145 + 109*Math.cos(start*r)) + ' A109 109 0 0 0 ' + ex + ' ' + ey + '" fill="none" stroke="var(--ink)" stroke-width="3"/>' +
+      arrow(ex - 4*Math.cos(end*r), ey + 4*Math.sin(end*r), ex, ey, 'ink') +
+      arrow(12, 295, 34, 295, 'ink') + '<text x="40" y="300" fill="var(--ink)">角動</text>' +
+      arrow(113, 295, 135, 295, 'plate') + '<text x="141" y="300" fill="var(--ink)">滾動</text>' +
+      arrow(222, 295, 244, 295, 'muscle') + '<text x="250" y="300" fill="var(--ink)">滑動</text>';
+    read.textContent = (concave ? '伸膝進度 ' + a + '°（剩餘膝屈曲 ' + (90-a) + '°）' : '肩外展 ' + a + '°') + '｜滑動方向與骨角動「' + (concave ? '相同' : '相反') + '」';
+    svg.setAttribute('aria-label', read.textContent);
+    slider.setAttribute('aria-valuetext', concave ? '伸膝進度' + a + '度，剩餘膝屈曲' + (90-a) + '度' : '肩外展' + a + '度');
+    Array.prototype.forEach.call(buttons, function (b, i) { var active = (i === 1) === concave; b.className = active ? 'btn primary' : 'btn'; b.setAttribute('aria-pressed', String(active)); });
+  }
+  buttons[0].addEventListener('click', function () { concave = false; update(); });
+  buttons[1].addEventListener('click', function () { concave = true; update(); });
+  slider.addEventListener('input', update);
+  update();
+};
+
+VIZ.hamstring = function (el) {
+  var id = 'hamstring-hip', n = 0, flexed = true;
+  while (document.getElementById(id)) id = 'hamstring-hip-' + (++n);
+  el.innerHTML = '<svg viewBox="0 0 340 350" width="100%" role="img" style="font-family:inherit;font-size:14px"></svg>' +
+    '<div class="vz-ctl"><button type="button" class="btn primary" aria-pressed="true">膝屈曲</button> <button type="button" class="btn" aria-pressed="false">膝伸直</button> <label for="' + id + '">髖屈曲（0–130°）</label> <input id="' + id + '" type="range" min="0" max="130" step="1" value="45"></div>' +
+    '<p class="vz-read" aria-live="polite"></p><p class="vz-cap">被動不足：拮抗肌太緊；主動不足：主動肌太短。</p>';
+  var svg = el.querySelector('svg'), slider = el.querySelector('input'), buttons = el.querySelectorAll('button'), read = el.querySelector('.vz-read');
+  function update() {
+    var limit = flexed ? 120 : 70, a = Math.min(+slider.value, limit), t = a*Math.PI/180, b = t - (flexed ? Math.PI/2 : 0);
+    slider.value = a;
+    var kx = 155 + 78*Math.cos(t), ky = 235 - 78*Math.sin(t), ax = kx + 72*Math.cos(b), ay = ky - 72*Math.sin(b);
+    var bx = kx + 8*Math.sin(t), by = ky + 8*Math.cos(t), ix = kx + 18*Math.cos(b) + 5*Math.sin(b), iy = ky - 18*Math.sin(b) + 5*Math.cos(b);
+    var strain = Math.max(0, Math.min(1, (a/limit - 0.55)/0.45));
+    var band = 'M148 246 Q' + ((148+bx)/2) + ' ' + ((246+by)/2 + 12*(1-strain)) + ' ' + bx + ' ' + by + ' L' + ix + ' ' + iy;
+    var arc = a ? '<path d="M191 235 A36 36 0 0 0 ' + (155+36*Math.cos(t)) + ' ' + (235-36*Math.sin(t)) + '" fill="none" stroke="var(--muted)"/>' : '';
+    svg.innerHTML = '<text x="12" y="22" fill="var(--ink)">仰臥、骨盆固定｜' + (flexed ? '膝屈曲90°' : '膝伸直0°') + '</text>' +
+      '<text x="12" y="46" fill="var(--ink)">髖屈曲上限 ' + limit + '°（範圍 ' + (flexed ? '115–125' : '60–80') + '°）</text>' +
+      '<path d="M12 262H164M27 262v49M150 262v49" fill="none" stroke="var(--rule)" stroke-width="3"/>' +
+      '<circle cx="32" cy="230" r="17" fill="var(--paper)" stroke="var(--ink)" stroke-width="3"/>' +
+      '<path d="M50 239H137M74 239L111 250H136" fill="none" stroke="var(--ink)" stroke-width="7" stroke-linecap="round"/>' +
+      '<path d="M136 223L160 226L164 244L145 252L133 242Z" fill="var(--sheet)" stroke="var(--ink)" stroke-width="3"/>' +
+      '<path d="M155 235L' + kx + ' ' + ky + 'L' + ax + ' ' + ay + '" fill="none" stroke="var(--ink)" stroke-width="7" stroke-linecap="round"/>' +
+      '<path d="M' + ax + ' ' + ay + 'l' + (-12*Math.sin(b)) + ' ' + (-12*Math.cos(b)) + '" fill="none" stroke="var(--ink)" stroke-width="5"/>' +
+      '<path d="' + band + '" fill="none" stroke="var(--plate)" stroke-width="10" stroke-linecap="round"/>' +
+      '<path d="' + band + '" fill="none" stroke="var(--muscle)" stroke-opacity="' + strain + '" stroke-width="10" stroke-linecap="round"/>' +
+      '<circle cx="148" cy="246" r="3" fill="var(--ink)"/><circle cx="155" cy="235" r="4" fill="var(--sheet)" stroke="var(--ink)"/>' +
+      '<circle cx="' + kx + '" cy="' + ky + '" r="4" fill="var(--sheet)" stroke="var(--ink)"/>' +
+      '<path d="M155 235H310" fill="none" stroke="var(--rule)" stroke-dasharray="4 4"/>' + arc +
+      '<text x="12" y="193" fill="var(--ink)">骨盆固定</text><path d="M90 190L140 223" fill="none" stroke="var(--muted)"/>' +
+      '<text x="12" y="330" fill="var(--ink)">後大腿肌：坐骨粗隆 → 膝下附著點</text>' +
+      '<text x="12" y="347" fill="var(--muted)">示意：越接近上限，肌帶越紅</text>';
+    read.textContent = '髖屈曲 ' + a + '°／上限 ' + limit + '°｜' + (a >= limit ? '被動不足：後大腿肌（拮抗肌）太緊' : '尚未達上限；後大腿肌隨髖屈曲拉長');
+    svg.setAttribute('aria-label', (flexed ? '膝屈曲，' : '膝伸直，') + read.textContent);
+    slider.setAttribute('aria-valuetext', '髖屈曲' + a + '度，上限' + limit + '度');
+    Array.prototype.forEach.call(buttons, function (button, i) { var on = (i === 0) === flexed; button.className = on ? 'btn primary' : 'btn'; button.setAttribute('aria-pressed', String(on)); });
+  }
+  buttons[0].addEventListener('click', function () { flexed = true; update(); });
+  buttons[1].addEventListener('click', function () { flexed = false; update(); });
+  slider.addEventListener('input', update);
+  update();
+};
+
+VIZ.lentension = function (el) {
+  var id = 'lentension-length', n = 0;
+  while (document.getElementById(id)) id = 'lentension-length-' + (++n);
+  el.innerHTML = '<svg viewBox="0 0 340 290" width="100%" role="img" style="font-family:inherit;font-size:14px"></svg>' +
+    '<div class="vz-ctl"><label for="' + id + '">肌肉長度（靜止長度％）</label> <input id="' + id + '" type="range" min="0" max="200" step="1" value="110"></div>' +
+    '<p class="vz-read" aria-live="polite"></p><p class="vz-cap">張力為示意值；總張力＝主動＋被動，非實測曲線。</p>';
+  var svg = el.querySelector('svg'), slider = el.querySelector('input'), read = el.querySelector('.vz-read');
+  function active(x) { return x <= 50 || x >= 170 ? 0 : Math.sin(Math.PI * (x-50) / 120); }
+  function passive(x) { return x <= 100 ? 0 : 1.8 * (Math.exp((x-100)/25)-1) / (Math.exp(4)-1); }
+  function px(x) { return 42 + x*1.36; }
+  function py(y) { return 225 - 80*y; }
+  function curve(f, color, dash) {
+    var d = '';
+    for (var x = 0; x <= 200; x++) d += (x ? 'L' : 'M') + px(x).toFixed(2) + ' ' + py(f(x)).toFixed(2);
+    return '<path d="' + d + '" fill="none" stroke="var(--' + color + ')" stroke-width="2.5"' + (dash ? ' stroke-dasharray="6 4"' : '') + '/>';
+  }
+  var base = '<path d="M42 64V225H314" fill="none" stroke="var(--muted)"/>' +
+    '<text x="12" y="53" fill="var(--muted)">張力（示意）</text><text x="314" y="53" text-anchor="end" fill="var(--ink)">200% 瀕臨撕裂</text>';
+  [0, 50, 100, 150, 200].forEach(function (x) {
+    base += '<path d="M' + px(x) + ' 225v5" fill="none" stroke="var(--muted)"/><text x="' + px(x) + '" y="247" text-anchor="middle" fill="var(--ink)">' + x + '</text>';
+  });
+  base += '<text x="178" y="276" text-anchor="middle" fill="var(--ink)">肌肉長度（靜止長度％）</text>';
+  [110, 170].forEach(function (x) {
+    base += '<path d="M' + px(x) + ' 76V225" fill="none" stroke="var(--rule)" stroke-dasharray="3 4"/><text x="' + px(x) + '" y="70" text-anchor="middle" fill="var(--muted)">' + x + '%</text>';
+  });
+  base += curve(function (x) { return active(x) + passive(x); }, 'ink', false) + curve(passive, 'muscle', true) + curve(active, 'plate', false);
+  [['主動', 'plate'], ['被動', 'muscle'], ['總張力', 'ink']].forEach(function (v, i) {
+    var x = 12 + i*105;
+    base += '<path d="M' + x + ' 17h22" fill="none" stroke="var(--' + v[1] + ')" stroke-width="3"' + (i === 1 ? ' stroke-dasharray="6 4"' : '') + '/><text x="' + (x+28) + '" y="22" fill="var(--ink)">' + v[0] + '</text>';
+  });
+  function update() {
+    var x = +slider.value, a = active(x), p = passive(x), region = x < 50 ? '＜50%：無主動張力' : x < 110 ? '50–110%：主動張力上升' : x === 110 ? '110%：主動張力最大' : x < 170 ? '110–170%：主動張力下降' : x < 200 ? '170–200%：被動張力使總張力再上升' : '200%：瀕臨撕裂';
+    var cursor = '<path d="M' + px(x) + ' 76V225" fill="none" stroke="var(--muted)" stroke-dasharray="2 3"/>';
+    [[a+p, 'ink', 6], [p, 'muscle', 4], [a, 'plate', 2.5]].forEach(function (v) {
+      cursor += '<circle cx="' + px(x) + '" cy="' + py(v[0]) + '" r="' + v[2] + '" fill="var(--' + v[1] + ')"/>';
+    });
+    svg.innerHTML = base + cursor;
+    read.textContent = '長度 ' + x + '%｜區間：' + region + '｜' + (a === 0 && p === 0 ? '主動與被動張力皆為零（示意）' : a > p ? '主動張力占優勢' : p > a ? '被動張力占優勢' : '主動與被動張力相等');
+    svg.setAttribute('aria-label', read.textContent);
+    slider.setAttribute('aria-valuetext', '靜止長度的' + x + '%');
+  }
+  slider.addEventListener('input', update);
+  update();
+};
+
+VIZ.sarcomere = function (el) {
+  var S = 100, CX = 170, TK = 1.6, TN = 1.0, L = 2.5, raf = 0, t0 = 0;
+  var rm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  el.innerHTML = '<svg viewBox="0 0 340 215" width="100%" role="img" aria-label="肌節滑動肌絲示意"><g id="sar-g"></g></svg>' +
+    '<div class="vz-ctl"><label for="sar-rng">肌節長度</label> <input type="range" id="sar-rng" min="1.5" max="3" step="0.01" value="2.5" style="flex:1;min-width:140px"> ' +
+    '<button class="btn primary" id="sar-play" type="button">播放</button></div>' +
+    '<p class="vz-read" id="sar-read"></p>' +
+    '<p class="vz-cap">滑動肌絲：粗、細肌絲本身長度不變，只是互相滑過；刻度 2.2 μm＝最適長度（粗細肌絲重疊最佳，張力最大）。長度為示意比例。</p>';
+  var g = el.querySelector('#sar-g'), rng = el.querySelector('#sar-rng'), rd = el.querySelector('#sar-read'), pb = el.querySelector('#sar-play');
+  function br(x1, x2, y, lab, col) {
+    return '<path d="M' + x1 + ' ' + (y - 4) + 'V' + y + 'H' + x2 + 'V' + (y - 4) + '" fill="none" style="stroke:var(' + col + ')" stroke-width="2"/>' +
+      '<text x="' + (x1 + x2) / 2 + '" y="' + (y + 14) + '" text-anchor="middle" font-size="12" style="fill:var(--ink)">' + lab + '</text>';
+  }
+  function f(v) { return v.toFixed(2); }
+  function draw() {
+    var zl = CX - L / 2 * S, zr = CX + L / 2 * S, tw = Math.min(TK, L), tl = CX - tw / 2 * S, tr = CX + tw / 2 * S;
+    var I = Math.max(0, L - TK), H = Math.max(0, L - 2 * TN), h = '';
+    [60, 90, 120].forEach(function (y) {
+      h += '<rect x="' + tl + '" y="' + y + '" width="' + (tr - tl) + '" height="10" style="fill:var(--muscle)"/>';
+    });
+    h += '<line x1="' + CX + '" y1="56" x2="' + CX + '" y2="134" style="stroke:var(--paper)" stroke-width="2"/>';
+    [80, 110].forEach(function (y) {
+      h += '<line x1="' + zl + '" y1="' + y + '" x2="' + (zl + TN * S) + '" y2="' + y + '" style="stroke:var(--plate)" stroke-width="3" stroke-linecap="round"/>' +
+        '<line x1="' + zr + '" y1="' + y + '" x2="' + (zr - TN * S) + '" y2="' + y + '" style="stroke:var(--plate)" stroke-width="3" stroke-linecap="round" opacity=".85"/>';
+    });
+    h += '<line x1="' + zl + '" y1="50" x2="' + zl + '" y2="140" style="stroke:var(--ink)" stroke-width="4"/><line x1="' + zr + '" y1="50" x2="' + zr + '" y2="140" style="stroke:var(--ink)" stroke-width="4"/>' +
+      '<text x="' + zl + '" y="46" text-anchor="middle" font-size="12" style="fill:var(--ink)">Z線</text><text x="' + zr + '" y="46" text-anchor="middle" font-size="12" style="fill:var(--ink)">Z線</text>';
+    h += br(tl, tr, 22, 'A帶＝' + f(TK) + ' μm（粗肌絲，不變）', '--muscle');
+    h += br(zl, tl, 156, 'I', '--plate') + br(tr, zr, 156, 'I', '--plate');
+    if (H > 0.005) h += br(CX - H / 2 * S, CX + H / 2 * S, 182, 'H區', '--ochre');
+    else h += '<text x="' + CX + '" y="196" text-anchor="middle" font-size="12" style="fill:var(--ochre)">H區＝0（細肌絲相接）</text>';
+    h += '<text x="2" y="98" font-size="11" style="fill:var(--muscle)">粗</text><text x="2" y="84" font-size="11" style="fill:var(--plate)">細</text>';
+    g.innerHTML = h;
+    rd.innerHTML = 'Z–Z 長度 <b>' + f(L) + ' μm</b>' + (L > 2.45 && L < 2.55 ? '（放鬆）' : L < 1.55 ? '（完全收縮）' : '') + '｜A帶 ' + f(TK) + '｜I帶 ' + f(I) + '（兩側合計）｜H區 ' + f(H) + '<br><b>A帶不變；I帶、H區變短</b>' + (L < 2.0 ? '；細肌絲在中央重疊' : '') + (L < TK ? '；粗肌絲抵住Z線（示意）' : '') + '（肌絲本身不縮短）';
+    rng.value = L;
+  }
+  function stop() { cancelAnimationFrame(raf); raf = 0; pb.textContent = '播放'; }
+  function step(ts) {
+    if (!t0) t0 = ts;
+    var p = (ts - t0) / 5000;
+    if (p >= 1) { L = 2.5; draw(); stop(); return; }
+    L = 2.5 - (p < 0.5 ? p * 2 : 2 - p * 2); draw(); raf = requestAnimationFrame(step);
+  }
+  pb.onclick = function () {
+    if (raf) { stop(); return; }
+    if (rm) { L = 1.5; draw(); return; }
+    t0 = 0; pb.textContent = '暫停'; raf = requestAnimationFrame(step);
+  };
+  rng.oninput = function () { if (raf) stop(); L = +rng.value; draw(); };
+  var tk = document.createElement('div');
+  tk.style.cssText = 'font-size:12px;color:var(--muted);position:relative;height:16px;margin:0 8px';
+  tk.innerHTML = '<span style="position:absolute;left:0">1.5</span><span style="position:absolute;left:' + ((2.2 - 1.5) / 1.5 * 100) + '%;transform:translateX(-50%)">▲ 2.2 最適長度</span><span style="position:absolute;right:0">3.0</span>';
+  rd.parentNode.insertBefore(tk, rd);
+  draw();
+};
+
+VIZ.shrhythm = function (el) {
+  var id = 'shrhythm-angle', n = 0, plane = false;
+  while (document.getElementById(id)) id = 'shrhythm-angle-' + (++n);
+  el.innerHTML = '<svg viewBox="0 0 340 310" width="100%" role="img" style="font-family:inherit;font-size:14px"></svg>' +
+    '<div class="vz-ctl"><button type="button" class="btn" aria-pressed="false">肩胛骨平面</button> <label for="' + id + '">總外展角度</label> <input id="' + id + '" type="range" min="0" max="180" step="1" value="90"></div>' +
+    '<p class="vz-read" aria-live="polite"></p><p class="vz-cap">講義「前30°主要只動肱骨」是簡化說法；本圖採固定比例，不繪成分段曲線。</p>';
+  var svg = el.querySelector('svg'), slider = el.querySelector('input'), button = el.querySelector('button'), read = el.querySelector('.vz-read');
+  function point(r, a) { a *= Math.PI / 180; return (175 + r * Math.sin(a)) + ',' + (160 + r * Math.cos(a)); }
+  function arc(r, a, b, color) {
+    return b > a ? '<path d="M' + point(r, a) + ' A' + r + ',' + r + ' 0 0 0 ' + point(r, b) + '" fill="none" style="stroke:var(--' + color + ')" stroke-width="3"/>' : '';
+  }
+  function update() {
+    var total = +slider.value, gh = total * (plane ? 1.25 / 2.25 : 2 / 3), st = total - gh;
+    svg.setAttribute('aria-label', '肩胛肱骨節律示意：總外展' + total + '度，盂肱' + gh.toFixed(1) + '度，肩胛胸廓' + st.toFixed(1) + '度');
+    svg.innerHTML = '<text x="12" y="21" fill="var(--ink)">肱骨（GH）</text><path d="M108 16h23" fill="none" stroke="var(--ink)" stroke-width="5"/>' +
+      '<text x="166" y="21" fill="var(--ink)">肩胛骨（ST）</text><path d="M291 16h24" fill="none" stroke="var(--plate)" stroke-width="5"/>' +
+      '<text x="12" y="45" fill="var(--muted)">' + (plane ? '肩胛骨平面比例示意：GH：ST＝1.25：1' : '額狀面：每15°＝GH 10°＋ST 5°') + '</text>' +
+      '<path d="M96 94 Q66 117 65 171 L65 278 L165 278 L165 155 Q159 112 133 94Z" fill="var(--paper)" stroke="var(--rule)"/>' +
+      '<path d="M175 160V280" fill="none" stroke="var(--rule)" stroke-dasharray="4 4"/>' +
+      '<g transform="rotate(' + (-st) + ' 175 160)"><path d="M170 147 L100 164 L139 231 L175 168Z" fill="var(--plate-soft)" stroke="var(--plate)" stroke-width="3"/>' +
+      '<path d="M175 160v75" fill="none" stroke="var(--plate)" stroke-dasharray="4 4"/></g>' +
+      '<g transform="rotate(' + (-total) + ' 175 160)"><path d="M168 171 L166 259 Q175 275 184 259 L182 171Z" fill="var(--sheet)" stroke="var(--ink)" stroke-width="3"/>' +
+      '<circle cx="175" cy="160" r="13" fill="var(--sheet)" stroke="var(--ink)" stroke-width="3"/></g>' +
+      arc(32, 0, st, 'plate') + arc(53, st, total, 'ink') +
+      '<text x="12" y="301" fill="var(--muted)">' + (total === 180 && !plane ? 'ST 60°＝肩鎖（AC）30°＋胸鎖（SC）30°' : '示意：肩胛骨向上旋轉，肱骨隨外展抬起') + '</text>';
+    read.textContent = '總外展 ' + total + '°｜盂肱（GH）' + gh.toFixed(1) + '°＋肩胛胸廓（ST）' + st.toFixed(1) + '°' + (total === 180 && !plane ? '；ST 60°＝AC 30°＋SC 30°' : '');
+    slider.setAttribute('aria-valuetext', '總外展' + total + '度');
+    button.className = plane ? 'btn primary' : 'btn';
+    button.setAttribute('aria-pressed', String(plane));
+  }
+  slider.addEventListener('input', update);
+  button.addEventListener('click', function () { plane = !plane; update(); });
+  update();
+};
+
+VIZ.spindle = function (el) {
+  var CY = 112, T = 4000, mode = '', raf = 0, t0 = 0, ph = 0, last = 0, st = { e: 0, ia: 0, ii: 0, ib: 0, tn: 0 };
+  var rm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  el.innerHTML = '<svg viewBox="0 0 340 272" width="100%" role="img" aria-label="肌梭與高爾基肌腱器示意"><g id="spn-g"></g></svg>' +
+    '<div class="vz-ctl"><button class="btn" id="spn-fast" type="button">快速拉長</button> <button class="btn" id="spn-slow" type="button">慢速拉長</button> <button class="btn" id="spn-act" type="button">主動收縮（張力↑）</button></div>' +
+    '<p class="vz-read" id="spn-read"></p>' +
+    '<p class="vz-cap">肌梭與梭外肌<b>平行</b>、偵測長度；高爾基肌腱器與肌纖維<b>串聯</b>、偵測張力。放電頻率為示意，非實測值。</p>';
+  var g = el.querySelector('#spn-g'), rd = el.querySelector('#spn-read');
+  function tx(x, y, s, c, a) { return '<text x="' + x + '" y="' + y + '" font-size="12" text-anchor="' + (a || 'start') + '" style="fill:var(' + (c || '--ink') + ')">' + s + '</text>'; }
+  function dots(x, y1, y2, rate, col, off) {
+    var n = Math.round(rate * 7), h = '<line x1="' + x + '" y1="' + y1 + '" x2="' + x + '" y2="' + y2 + '" style="stroke:var(' + col + ')" stroke-width="1.5" opacity=".5"/>';
+    for (var i = 0; i < n; i++) { var p = (ph + off + i / 7) % 1; h += '<circle cx="' + x + '" cy="' + (y1 - (y1 - y2) * p) + '" r="3.2" style="fill:var(' + col + ')"/>'; }
+    return h;
+  }
+  function draw() {
+    var L = 140 + 50 * st.e, x0 = 60, x1 = x0 + L, sx = x0 + L * 0.45, hw = 24 * L / 140, gx = x1 + 12, h = '';
+    h += '<rect x="8" y="8" width="324" height="28" rx="4" style="fill:var(--plate-soft)"/>' + tx(170, 27, '脊髓 spinal cord', '--ink', 'middle');
+    h += '<rect x="10" y="' + (CY - 8) + '" width="' + (x0 - 10) + '" height="16" style="fill:var(--ochre-soft)"/><rect x="' + x1 + '" y="' + (CY - 8) + '" width="52" height="16" style="fill:var(--ochre-soft)"/>';
+    h += '<path d="M' + x0 + ' ' + CY + 'C' + (x0 + 25) + ' ' + (CY - 48) + ' ' + (x1 - 25) + ' ' + (CY - 48) + ' ' + x1 + ' ' + CY + 'C' + (x1 - 25) + ' ' + (CY + 48) + ' ' + (x0 + 25) + ' ' + (CY + 48) + ' ' + x0 + ' ' + CY + 'Z" style="fill:var(--muscle-soft);stroke:var(--muscle)" stroke-width="2"/>';
+    [-22, 22, 34].forEach(function (d) { h += '<line x1="' + (x0 + 14) + '" y1="' + (CY + d) + '" x2="' + (x1 - 14) + '" y2="' + (CY + d) + '" style="stroke:var(--muscle)" stroke-width="1.2" opacity=".5"/>'; });
+    h += '<line x1="' + (sx - hw - 14) + '" y1="' + CY + '" x2="' + (sx + hw + 14) + '" y2="' + CY + '" style="stroke:var(--violet)" stroke-width="2"/>' +
+      '<rect x="' + (sx - hw) + '" y="' + (CY - 8) + '" width="' + 2 * hw + '" height="16" rx="8" style="fill:var(--violet-soft);stroke:var(--violet)" stroke-width="2"/>';
+    h += '<rect x="' + (gx - 6) + '" y="' + (CY - 12) + '" width="12" height="24" rx="3" style="fill:var(--ochre);stroke:var(--ink)"/>';
+    h += '<path d="M' + (sx - hw - 14) + ' ' + (CY - 4) + 'Q' + (sx - hw - 24) + ' 60 ' + (sx - hw - 24) + ' 36" fill="none" style="stroke:var(--violet)" stroke-dasharray="4 3" stroke-width="1.5"/>';
+    h += dots(sx - 6, CY - 9, 36, st.ia, '--muscle', 0) + dots(sx + 6, CY - 9, 36, st.ii, '--violet', 0.3) + dots(gx, CY - 13, 36, st.ib, '--plate', 0.15);
+    h += tx(sx - hw - 28, 54, 'Aγ', '--violet', 'end') + tx(sx - 12, 62, 'Ia', '--muscle', 'end') + tx(sx + 10, 62, 'II', '--violet') + tx(gx + 10, 62, 'Ib', '--plate');
+    h += tx(x0 - 4, CY + 28, '肌腱', '--muted', 'end') + tx(x1 + 28, CY + 28, '肌腱', '--muted', 'middle');
+    h += '<line x1="10" y1="184" x2="330" y2="184" style="stroke:var(--rule)"/>';
+    h += '<rect x="10" y="194" width="10" height="10" style="fill:var(--muscle)"/>' + tx(28, 204, '梭外肌 Aα（α運動神經元）', '--muscle');
+    h += '<rect x="10" y="212" width="10" height="10" style="fill:var(--violet)"/>' + tx(28, 222, '梭內肌 Aγ（γ運動神經元，肌梭與肌肉平行）', '--violet');
+    h += '<rect x="10" y="230" width="10" height="10" style="fill:var(--ochre)"/>' + tx(28, 240, '高爾基肌腱器（與肌肉串聯，Ib）', '--plate');
+    h += tx(10, 262, '張力（示意）', '--muted') + '<rect x="100" y="254" width="120" height="8" rx="3" style="fill:var(--rule)"/><rect x="100" y="254" width="' + 120 * st.tn + '" height="8" rx="3" style="fill:var(--bad)"/>';
+    g.innerHTML = h;
+  }
+  function msg() {
+    var m = el.querySelector('.vz-ctl').children;
+    for (var i = 0; i < m.length; i++) m[i].className = 'btn' + (m[i].id === 'spn-' + mode ? ' primary' : '');
+    if (mode === 'act') rd.innerHTML = '<b>主動收縮：張力↑</b> → 高爾基肌腱器（Ib）放電最多；肌梭被縮短而「卸載」，Ia 趨於停放。<br>GTO 反射：<b>抑制同名肌、興奮拮抗肌</b>。';
+    else if (mode) rd.innerHTML = (mode === 'fast' ? '<b>快速拉長</b>：Ia（相位＋張力性）爆發性放電、之後維持張力性；II（只有張力性）隨長度升高，與慢速拉長相同。' : '<b>慢速拉長</b>：Ia 只剩張力性反應（放電較少）；II 與快速拉長相同。') + '<br>肌梭牽張反射：<b>興奮同名肌（作用肌）、抑制拮抗肌</b>。';
+    else rd.innerHTML = '請選一種情境。肌梭（Ia、II）→ 興奮同名肌、抑制拮抗肌；GTO（Ib）→ 抑制同名肌、興奮拮抗肌。';
+  }
+  function cal(t) {
+    var e = 0, ia = 0, ii = 0, ib = 0, tn = 0, c;
+    if (mode === 'fast') { e = Math.min(t / 500, 1); ia = t < 500 ? 1 : 0.5; ii = 0.5 * e; ib = 0.1 * e; tn = 0.15 * e; }
+    else if (mode === 'slow') { e = Math.min(t / 2500, 1); ia = 0.5 * e + (t < 2500 ? 0.1 : 0); ii = 0.5 * e; ib = 0.1 * e; tn = 0.15 * e; }
+    else if (mode === 'act') { c = Math.min(t / 1500, 1); e = -0.35 * c; ia = 0.05; ib = c; tn = c; }
+    st = { e: e, ia: ia, ii: ii, ib: ib, tn: tn };
+  }
+  function step(ts) {
+    if (!t0) { t0 = ts; last = ts; }
+    ph = (ph + (ts - last) / 1200) % 1; last = ts;
+    cal(Math.min(ts - t0, T)); draw();
+    raf = (ts - t0 < T + 1500) ? requestAnimationFrame(step) : 0;
+  }
+  function go(m) {
+    cancelAnimationFrame(raf); mode = m; t0 = 0; msg();
+    if (rm) { cal(T); draw(); return; }
+    raf = requestAnimationFrame(step);
+  }
+  ['fast', 'slow', 'act'].forEach(function (k) { el.querySelector('#spn-' + k).onclick = function () { go(k); }; });
+  cal(0); draw(); msg();
+};
+
+</script>
+<script>
 (function(){
   var Q=JSON.parse(document.getElementById('quizdata').textContent);
   var main=document.getElementById('main');
@@ -1093,6 +1392,7 @@ figcaption{font:13px/1.5 var(--body);color:var(--muted);margin-top:8px}
     pages.forEach(function(x){x.hidden=x!==p});
     nl.querySelectorAll('a').forEach(function(a){if(a.dataset.for===p.id)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
     if(p.dataset.quiz&&!built[p.id]){built[p.id]=1;buildQuiz(p)}
+    p.querySelectorAll('.viz[data-viz]:not([data-ready])').forEach(function(el){el.dataset.ready='1';var f=window.VIZ[el.dataset.viz];if(f){try{f(el)}catch(err){el.remove();console.error(err)}}else el.remove()});
     document.body.classList.remove('navopen');
     window.scrollTo(0,0);store('anat-last',p.id);
   }
