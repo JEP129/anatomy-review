@@ -1,0 +1,2435 @@
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>基礎生理與解剖學 複習</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;900&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: an anatomical-atlas study binder. Sidebar of lectures → topics (top drawer on phones); one topic sheet visible at a time;
+   each lecture ends with flashcards + a practice quiz. Ink = plate teal, muscle red = 必背, ochre = 易混淆, slate-violet = 口訣. */
+:root{
+  --paper:#eef1f0; --sheet:#fbfcfb; --ink:#17211f; --muted:#5a6866; --rule:#d5dcda;
+  --plate:#1d5c57; --plate-soft:#e2efed;
+  --muscle:#a8322d; --muscle-soft:#f7e7e5;
+  --ochre:#8a6410; --ochre-soft:#f6eedb;
+  --violet:#4f4a8c; --violet-soft:#ebeaf6;
+  --ok:#2c7a46; --bad:#b3362f;
+  --display:"Noto Serif TC","Songti TC",serif;
+  --body:"Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#101615; --sheet:#171f1e; --ink:#e2e9e7; --muted:#98a7a4; --rule:#2b3634;
+  --plate:#7cc7bd; --plate-soft:#173230; --muscle:#f08a80; --muscle-soft:#3a1d1b;
+  --ochre:#e2b85a; --ochre-soft:#33290f; --violet:#aaa5ef; --violet-soft:#25233f;
+  --ok:#6fcf8e; --bad:#f08a80; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#101615; --sheet:#171f1e; --ink:#e2e9e7; --muted:#98a7a4; --rule:#2b3634;
+  --plate:#7cc7bd; --plate-soft:#173230; --muscle:#f08a80; --muscle-soft:#3a1d1b;
+  --ochre:#e2b85a; --ochre-soft:#33290f; --violet:#aaa5ef; --violet-soft:#25233f;
+  --ok:#6fcf8e; --bad:#f08a80; color-scheme:dark}
+
+*{box-sizing:border-box}
+html,body{background:var(--paper);color:var(--ink)}
+body{font:16px/1.75 var(--body);padding-left:max(0px,env(safe-area-inset-left,0px));padding-right:max(0px,env(safe-area-inset-right,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--sheet)}
+a{color:var(--plate)}
+:focus-visible{outline:2px solid var(--plate);outline-offset:2px}
+
+.shell{display:grid;grid-template-columns:272px minmax(0,1fr);min-height:100vh}
+nav.side{position:sticky;top:env(safe-area-inset-top,0px);height:100vh;overflow:auto;background:var(--sheet);border-right:1px solid var(--rule);padding:20px 14px 40px 18px}
+.brand{font:900 1.2rem/1.3 var(--display);margin:0 0 2px;letter-spacing:.02em}
+.brand-sub{font:12px/1.4 var(--mono);color:var(--muted);margin:0 0 14px}
+.tools{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.tools button,.btn{font:500 13px/1 var(--body);padding:7px 10px;border-radius:6px;border:1px solid var(--rule);background:var(--sheet);color:var(--ink);cursor:pointer}
+.tools button[aria-pressed="true"],.btn.primary{background:var(--plate);border-color:var(--plate);color:var(--sheet)}
+.navgrp{margin:14px 0 4px;font:600 12px/1.4 var(--mono);letter-spacing:.06em;color:var(--plate);text-transform:uppercase}
+nav.side a{display:block;text-decoration:none;color:var(--ink);font-size:14px;line-height:1.45;padding:6px 8px;border-radius:6px}
+nav.side a:hover{background:var(--plate-soft)}
+nav.side a[aria-current="page"]{background:var(--plate-soft);color:var(--plate);font-weight:700}
+nav.side a.qz{color:var(--muscle)}
+nav.side a.qz[aria-current="page"]{background:var(--muscle-soft);color:var(--muscle)}
+
+main{min-width:0;padding-block:36px 80px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+section.page{max-width:780px;margin:0 auto}
+.crumb{font:500 12px/1.4 var(--mono);letter-spacing:.08em;color:var(--plate);margin:0 0 6px;text-transform:uppercase}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.35}
+h1{font-size:2rem;font-weight:900;margin:0 0 18px}
+section.page>h2:first-of-type{margin-top:0}
+h2{font-size:1.5rem;font-weight:900;margin:44px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--ink)}
+h3{font-size:1.15rem;font-weight:600;margin:30px 0 8px;color:var(--plate)}
+p{margin:0 0 12px}
+ul,ol{margin:0 0 14px;padding-left:1.4em}
+li{margin:3px 0}
+b{font-weight:700}
+.term{white-space:normal;font-weight:700}
+.term i{font:italic 500 .92em var(--body);color:var(--plate);margin-left:.3em;font-style:italic}
+.term i::before{content:"("}.term i::after{content:")"}
+body.hide-en .term i{filter:blur(5px);cursor:pointer;user-select:none}
+body.hide-en .term i.peek{filter:none}
+
+.key,.trap,.mn{border-radius:8px;padding:14px 16px 4px;margin:18px 0}
+.key{background:var(--muscle-soft);border-left:4px solid var(--muscle)}
+.trap{background:var(--ochre-soft);border-left:4px solid var(--ochre)}
+.mn{background:var(--violet-soft);border-left:4px solid var(--violet)}
+.lbl{font:700 12px/1 var(--mono);letter-spacing:.12em;margin:0 0 10px}
+.key .lbl{color:var(--muscle)}.trap .lbl{color:var(--ochre)}.mn .lbl{color:var(--violet)}
+
+.tblwrap{overflow-x:auto;margin:14px 0 20px}
+table.tbl{border-collapse:collapse;width:100%;font-size:14.5px;line-height:1.55}
+table.tbl th{font-weight:700;text-align:left;border-bottom:2px solid var(--ink);padding:7px 10px;white-space:nowrap}
+table.tbl td{border-bottom:1px solid var(--rule);padding:7px 10px;vertical-align:top}
+table.tbl tbody tr:hover{background:var(--plate-soft)}
+
+figure.fig{margin:22px 0;background:var(--sheet);border:1px solid var(--rule);border-radius:8px;padding:10px}
+figure.fig img{display:block;width:100%;height:auto;border-radius:4px;background:#fff;cursor:zoom-in}
+figure.fig.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+figure.fig.two figcaption{grid-column:1/-1}
+figcaption{font:13px/1.5 var(--body);color:var(--muted);margin-top:8px}
+.zoom{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;padding:max(16px,env(safe-area-inset-top,0px)) 16px;cursor:zoom-out}
+.zoom img{max-width:100%;max-height:100%;background:#fff}
+
+.pager{display:flex;justify-content:space-between;gap:12px;margin-top:48px;padding-top:16px;border-top:1px solid var(--rule)}
+.pager a{text-decoration:none;font-size:14px;max-width:48%}
+.pager .nx{text-align:right;margin-left:auto}
+.pager small{display:block;color:var(--muted);font:12px var(--mono)}
+
+/* home */
+.lecgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:12px;margin:16px 0 26px}
+.lec{background:var(--sheet);border:1px solid var(--rule);border-radius:8px;padding:14px 16px;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:4px}
+.lec:hover{border-color:var(--plate)}
+.lec .no{font:500 12px var(--mono);color:var(--plate)}
+.lec .nm{font:900 1.05rem/1.4 var(--display)}
+.lec .ct{font-size:13px;color:var(--muted)}
+
+/* quiz */
+.qtabs{display:flex;gap:6px;margin:0 0 18px;flex-wrap:wrap}
+.card{background:var(--sheet);border:1px solid var(--rule);border-radius:10px;min-height:190px;padding:28px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;cursor:pointer;user-select:none}
+.card .side-lbl{font:600 11px var(--mono);letter-spacing:.12em;color:var(--muted);margin-bottom:12px}
+.card .txt{font:600 1.25rem/1.6 var(--body);white-space:pre-line}
+.card.flipped{border-color:var(--plate);background:var(--plate-soft)}
+.cardbar{display:flex;gap:8px;justify-content:center;align-items:center;flex-wrap:wrap;margin:14px 0}
+.count{font:13px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.mcq{background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:16px 18px;margin:0 0 14px}
+.mcq .qn{font:600 12px var(--mono);color:var(--muted)}
+.mcq .qt{font-weight:500;margin:4px 0 10px}
+.mcq button.opt{display:block;width:100%;text-align:left;font:15px/1.5 var(--body);padding:9px 12px;margin:6px 0;border:1px solid var(--rule);border-radius:7px;background:var(--paper);color:var(--ink);cursor:pointer}
+.mcq button.opt:hover:not(:disabled){border-color:var(--plate)}
+.mcq button.opt.right{border-color:var(--ok);background:var(--plate-soft);color:var(--ok);font-weight:700}
+.mcq button.opt.wrong{border-color:var(--bad);background:var(--muscle-soft);color:var(--bad)}
+.mcq button.opt:disabled{cursor:default}
+.mcq .ex{font-size:14px;color:var(--muted);margin:8px 0 2px}
+.score{font:600 15px var(--mono);font-variant-numeric:tabular-nums;margin:0 0 14px}
+
+/* phone */
+.topbar{display:none}
+@media (max-width:860px){
+  .shell{grid-template-columns:1fr}
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--sheet);border-bottom:1px solid var(--rule);padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+  .topbar .brand{font-size:1rem;margin:0}
+  nav.side{position:fixed;top:0;left:0;bottom:0;width:min(300px,86vw);z-index:30;transform:translateX(-105%);transition:transform .2s;padding-top:calc(20px + env(safe-area-inset-top,0px));padding-left:max(18px,env(safe-area-inset-left,0px))}
+  body.navopen nav.side{transform:none;box-shadow:0 0 0 100vmax rgba(0,0,0,.35)}
+  main{padding-block:22px 60px}
+  h1{font-size:1.6rem}
+  figure.fig.two{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){nav.side{transition:none}}
+</style>
+
+<div class="topbar"><p class="brand">基礎生理與解剖學</p><button class="btn" id="menuBtn" aria-label="開啟目錄">目錄</button></div>
+<div class="shell">
+<nav class="side" id="side" aria-label="章節">
+  <p class="brand">基礎生理與解剖學</p>
+  <p class="brand-sub">林逸鴻 · 中華醫事科技大學</p>
+  <div class="tools">
+    <button id="hideEn" aria-pressed="false" title="把術語的英文模糊起來，點一下才顯示">遮英文</button>
+    <button id="themeBtn">深淺色</button>
+  </div>
+  <div id="navlist"></div>
+</nav>
+<main id="main">
+
+<section class="page" id="home" data-title="首頁" data-group="開始">
+  <p class="crumb">林逸鴻 · 中華醫事科技大學</p>
+  <h1>基礎生理與解剖學 複習</h1>
+  <p>依照四份講義（解剖生理 1–4）整理：緒論與組織、骨骼系統 1–3、骨盆與下肢、關節、肌肉系統。重點中文說明，術語保留英文。</p><div class="lecgrid" id="lecgrid"></div>
+  <h2>怎麼用</h2>
+  <ul>
+    <li>左側目錄依講義分章，一次看一頁。每章最後一頁是<b style="color:var(--muscle)">自我測驗</b>（字卡＋選擇題）。</li>
+    <li><b>紅框 必背重點</b>：考前最後一天看這些就好。<b>黃框 易混淆</b>：常考的對比。<b>紫框 記憶口訣</b>。</li>
+    <li>按「<b>遮英文</b>」會把術語的英文模糊掉，自己先想英文，再點一下看答案。</li>
+    <li>講義圖片點一下可以放大。</li>
+  </ul>
+</section>
+
+<!-- ===== L1 ===== -->
+<section class="page" id="p-L1-a" data-title="解剖生理學與組成階層" data-group="第1講 緒論與組織">
+<h2>解剖學與生理學的定義</h2>
+<ul>
+<li><span class="term">人體解剖學<i>human anatomy</i></span>：探討人體構造及各構造之間關係的學問。</li>
+<li><span class="term">人體生理學<i>human physiology</i></span>：探討人體各部分功能的學問。</li>
+<li>解剖與生理不能完全分開：<b>構造決定功能</b>（例：扁平足）；<b>功能影響構造</b>的大小、形狀與健康（例：心臟肥大）。</li>
+</ul>
+<h3>解剖學的分支（表1-1）</h3>
+<table class="tbl">
+<thead><tr><th>分支</th><th>說明</th></tr></thead>
+<tbody>
+<tr><td><span class="term">大體解剖學<i>gross anatomy</i></span></td><td>不用顯微鏡即可看到的構造。(1) <b>系統解剖學</b> systemic：依器官系統（如神經系統、呼吸系統）；(2) <b>局部解剖學</b> regional：依特定部位（如頭部、胸部）。</td></tr>
+<tr><td><span class="term">外科解剖學<i>surgical anatomy</i></span></td><td>外科手術中特別重要的解剖特徵。</td></tr>
+<tr><td><span class="term">體表解剖學<i>surface anatomy</i></span></td><td>人體的形態及表面特徵。</td></tr>
+<tr><td><span class="term">顯微解剖學<i>microscopic anatomy</i></span></td><td>顯微構造。(1) <b>組織學</b> histology：研究組織；(2) <b>細胞學</b> cytology：研究細胞。</td></tr>
+<tr><td><span class="term">發育解剖學<i>developmental anatomy</i></span></td><td>受精卵至成體的發育過程。</td></tr>
+<tr><td><span class="term">胚胎學<i>embryology</i></span></td><td>受精卵至<b>第八週</b>在子宮內的胚胎發育形成。</td></tr>
+<tr><td><span class="term">病理解剖學<i>pathological anatomy</i></span></td><td>因疾病所產生的構造變化。</td></tr>
+<tr><td><span class="term">放射照相解剖學<i>radiographic anatomy</i></span></td><td>以放射照像（X射線）技術研究人體構造。</td></tr>
+</tbody></table>
+<h3>生理學的分支（表1-2）</h3>
+<table class="tbl">
+<thead><tr><th>分支</th><th>說明</th></tr></thead>
+<tbody>
+<tr><td><span class="term">一般生理學<i>general physiology</i></span></td><td>研究一般生理作用，為生理學「通論」。</td></tr>
+<tr><td><span class="term">系統生理學<i>systemic physiology</i></span></td><td>研究各器官系統特有功能，為生理學「個論」；如神經生理學、消化生理學、內分泌生理學。</td></tr>
+<tr><td><span class="term">動物生理學<i>animal physiology</i></span></td><td>研究動物的生理功能。</td></tr>
+<tr><td><span class="term">人體生理學<i>human physiology</i></span></td><td>研究人體的生理功能。</td></tr>
+<tr><td><span class="term">比較生理學<i>comparative physiology</i></span></td><td>比較各種動物間功能行使的差異及演化上的關係。</td></tr>
+<tr><td><span class="term">應用生理學<i>applied physiology</i></span></td><td>(1) <b>環境生理學</b>：外在環境與生理功能的關係（如航空生理學、深海潛水生理學）；(2) <b>臨床（病理）生理學</b>：由臨床病理學基礎了解正常功能與病變的關係。</td></tr>
+</tbody></table>
+
+<h2>人體組成的階層（圖1-1）</h2>
+<figure class="fig"><img src="figs/L1-p006.jpg" alt="人體組成六個階層圖"><figcaption>圖1-1 人體組成的各個階層（講義 p.6）</figcaption></figure>
+<ol>
+<li><span class="term">化學階層<i>chemical level</i></span>：原子結合成分子。</li>
+<li><span class="term">細胞階層<i>cellular level</i></span>：由各種分子組成細胞（例：平滑肌細胞）。</li>
+<li><span class="term">組織階層<i>tissue level</i></span>：由類似的細胞組成（例：平滑肌組織）。</li>
+<li><span class="term">器官階層<i>organ level</i></span>：由各種組織組成（例：血管，含上皮、平滑肌、結締組織）。</li>
+<li><span class="term">系統階層<i>system level</i></span>：由各種器官組成（例：心臟血管系統）。</li>
+<li><span class="term">生物體階層<i>organismal level</i></span>：由各系統組成完整個體。</li>
+</ol>
+<div class="mn"><p class="lbl">記憶口訣</p><p>「化細組器系生」＝化學、細胞、組織、器官、系統、生物體（由小到大）。</p></div>
+
+<h2>人體的主要系統（表1-3，共 12 個）</h2>
+<table class="tbl">
+<thead><tr><th>系統</th><th>代表器官</th><th>功能</th></tr></thead>
+<tbody>
+<tr><td><span class="term">皮膚系統<i>integumentary</i></span></td><td>皮膚、毛髮、指甲、汗腺、皮脂腺</td><td>調節體溫、保護身體、排除廢物、接受溫度/壓力/痛等刺激</td></tr>
+<tr><td><span class="term">骨骼系統<i>skeletal</i></span></td><td>骨骼、軟骨、韌帶、關節（骨骼 <b>206</b> 塊；骨髓造血）</td><td>支持及保護軟組織、與肌肉配合產生運動、貯存礦物質</td></tr>
+<tr><td><span class="term">肌肉系統<i>muscular</i></span></td><td>肌肉（骨骼肌 700 多塊；另有平滑肌、心肌）</td><td>與骨骼配合產生運動、維持姿勢、產生熱量</td></tr>
+<tr><td><span class="term">神經系統<i>nervous</i></span></td><td>腦、脊髓、神經、眼耳等特殊感覺器官</td><td>經由神經衝動調節身體活動</td></tr>
+<tr><td><span class="term">內分泌系統<i>endocrine</i></span></td><td>甲狀腺、腎上腺、腦下垂體、松果腺、胸腺、胰臟、睪丸、卵巢</td><td>藉心臟血管系統輸送激素至標的器官而調節身體活動</td></tr>
+<tr><td><span class="term">心臟血管系統<i>cardiovascular</i></span></td><td>血液、心臟、血管</td><td>送氧、養分、激素至細胞，帶走CO<sub>2</sub>與廢物；維持酸鹼平衡、抵抗疾病、形成血塊防出血、調節體溫</td></tr>
+<tr><td><span class="term">淋巴系統<i>lymphatic</i></span></td><td>淋巴、淋巴管、脾臟、胸腺、淋巴結、扁桃體</td><td>將蛋白質及血漿送回血管系統、將部分脂肪由消化道送入血管、過濾體液、製造淋巴球、抵抗疾病</td></tr>
+<tr><td><span class="term">呼吸系統<i>respiratory</i></span></td><td>鼻腔、咽、喉、氣管、支氣管、肺</td><td>供給O<sub>2</sub>、排除CO<sub>2</sub>、幫助調節酸鹼平衡</td></tr>
+<tr><td><span class="term">消化系統<i>digestive</i></span></td><td>食道、胃、腸；附屬器官：唾液腺、肝、膽囊、胰</td><td>消化及吸收食物，排出不能吸收的部分</td></tr>
+<tr><td><span class="term">泌尿系統<i>urinary</i></span></td><td>腎臟、輸尿管、膀胱、尿道</td><td>製造、收集、排除尿液；排除過多水分、鹽類、廢物；維持水分及電解質平衡</td></tr>
+<tr><td><span class="term">男性生殖系統<i>male reproductive</i></span></td><td>睪丸、輸精管、前列腺</td><td>繁殖生物體</td></tr>
+<tr><td><span class="term">女性生殖系統<i>female reproductive</i></span></td><td>卵巢、輸卵管（uterine tube）、子宮、陰道</td><td>繁殖生物體</td></tr>
+</tbody></table>
+<p>（表1-3 把生殖系統合為一項共 11 項；圖1-2 另分男、女而為 12 圖。）</p>
+<div class="key"><p class="lbl">必背重點</p>
+<ul>
+<li>骨骼 206 塊；骨骼肌 700 多塊。</li>
+<li>皮膚＝調節體溫；骨骼＝支持＋貯礦物質＋（骨髓）造血；肌肉＝運動＋姿勢＋產熱。</li>
+<li>神經系統：中樞＝腦＋脊髓；周邊＝神經。神經是「衝動」調節，內分泌是「激素」調節。</li>
+<li>圖1-2 器官標示：松果腺 pineal、腦下垂體 pituitary、甲狀腺 thyroid、胸腺 thymus、腎上腺 adrenal、胰臟 pancreas；淋巴系統含扁桃體 palatine tonsil、脾 spleen、胸管 thoracic duct。</li>
+</ul></div>
+</section>
+
+<section class="page" id="p-L1-b" data-title="解剖術語與體腔" data-group="第1講 緒論與組織">
+<h2>解剖學姿勢與方位術語</h2>
+<p><span class="term">解剖學姿勢<i>anatomical position</i></span>：人體<b>直立面對觀察者</b>，上肢自然下垂置於身體兩側，<b>手掌面朝前</b>。（講義文字標「圖1-6」，但 p.10 的 Figure 1.6 其實是骨的形狀分類，疑為標號誤植。）</p>
+<figure class="fig"><img src="figs/L1-p018.jpg" alt="人體各部位名稱前後面觀"><figcaption>人體各區名稱（前、後面觀）（講義 p.18）</figcaption></figure>
+<p>常見部位名：頭 cephalic、顱 cranial、面 facial、頸 cervical、胸 thoracic、腹 abdominal、骨盆 pelvic、腋 axillary、上臂 brachial、肘前 antecubital、前臂 antebrachial、腕 carpal、手 manus、鼠蹊 inguinal、股 femoral、膝蓋 patellar、膕窩 popliteal、小腿 crural、踝 tarsal、足 pedal；背側：背 dorsal、肘後 olecranal、腰 lumbar、臀 gluteal、小腿肚 sural、足跟 calcaneal、足底 plantar。</p>
+<figure class="fig"><img src="figs/L1-p019.jpg" alt="指示方位術語圖"><figcaption>指示方位術語（講義 p.19）</figcaption></figure>
+<table class="tbl">
+<thead><tr><th>術語</th><th>定義</th><th>例子</th></tr></thead>
+<tbody>
+<tr><td><span class="term">上方<i>superior (cephalic/cranial)</i></span></td><td>朝向頭部或構造的上面部分</td><td>胸腔在腹腔上方</td></tr>
+<tr><td><span class="term">下方<i>inferior (caudal)</i></span></td><td>遠離頭部或向著構造的下面</td><td>頸部在頭部下方</td></tr>
+<tr><td><span class="term">前面（腹面）<i>anterior (ventral)</i></span></td><td>靠近身體前面</td><td>氣管位於食道前面</td></tr>
+<tr><td><span class="term">後面（背面）<i>posterior (dorsal)</i></span></td><td>靠近身體後面</td><td>心臟位於胸骨後面</td></tr>
+<tr><td><span class="term">內側<i>medial</i></span></td><td>靠近身體或構造的正中線</td><td>脛骨位於小腿內側</td></tr>
+<tr><td><span class="term">外側<i>lateral</i></span></td><td>遠離正中線</td><td>耳位於眼之外側</td></tr>
+<tr><td><span class="term">中間的<i>intermediate</i></span></td><td>介於內側與外側構造之間</td><td>食指位於中指及拇指之間</td></tr>
+<tr><td><span class="term">同側<i>ipsilateral</i></span></td><td>位於身體同側</td><td>脾臟與降結腸</td></tr>
+<tr><td><span class="term">對側<i>contralateral</i></span></td><td>位於身體不同側</td><td>膽囊與降結腸</td></tr>
+<tr><td><span class="term">近側<i>proximal</i></span></td><td>靠近四肢附著於軀幹處／構造的附著點</td><td>肱骨位於尺骨近側</td></tr>
+<tr><td><span class="term">遠側<i>distal</i></span></td><td>遠離四肢附著於軀幹處</td><td>膝蓋位於大腿遠側</td></tr>
+<tr><td><span class="term">淺層<i>superficial</i></span></td><td>靠近身體表面</td><td>手臂皮膚位於骨骼之淺層</td></tr>
+<tr><td><span class="term">深層<i>deep</i></span></td><td>遠離身體表面</td><td>手臂肌肉位於皮膚之深層</td></tr>
+<tr><td><span class="term">壁層<i>parietal</i></span></td><td>屬於或形成體腔之外壁</td><td>腹膜壁層＝腹膜腔外層</td></tr>
+<tr><td><span class="term">臟層<i>visceral</i></span></td><td>屬於內臟之被膜</td><td>腹膜臟層＝腹膜腔內層</td></tr>
+</tbody></table>
+<figure class="fig"><img src="figs/L1-p021.jpg" alt="表1-4 後半"><figcaption>表1-4 解剖學的術語（講義 p.21）</figcaption></figure>
+<div class="trap"><p class="lbl">易混淆</p>
+<ul>
+<li>同側 ipsilateral vs 對側 contralateral；近側 proximal vs 遠側 distal（只用於四肢／有附著點的構造）。</li>
+<li>淺層 superficial vs 深層 deep；壁層 parietal（貼體壁）vs 臟層 visceral（貼器官）。</li>
+<li>cranial＝頭側＝superior；caudal＝尾側＝inferior；ventral＝anterior；dorsal＝posterior。</li>
+</ul></div>
+
+<h2>人體的三種基本剖面</h2>
+<table class="tbl">
+<thead><tr><th>剖面</th><th>切開方向</th><th>分成</th></tr></thead>
+<tbody>
+<tr><td><span class="term">矢狀切面<i>sagittal plane</i></span></td><td>前後方向切開</td><td><b>左、右</b>兩半。通過正中線＝<span class="term">正中矢狀切面<i>midsagittal</i></span>；不通過正中線＝<span class="term">矢狀旁面<i>parasagittal</i></span></td></tr>
+<tr><td><span class="term">冠狀切面<i>coronal</i></span>＝<span class="term">額切面<i>frontal plane</i></span></td><td>左右方向切開</td><td><b>前、後</b>兩半</td></tr>
+<tr><td><span class="term">水平切面<i>horizontal</i></span>＝<span class="term">橫切面<i>transverse plane</i></span></td><td>水平方向切開</td><td><b>上、下</b>兩半</td></tr>
+</tbody></table>
+<div class="mn"><p class="lbl">記憶口訣</p><p>矢＝左右、冠＝前後、水平＝上下。矢狀像箭由前射向後，把人劈成左右。</p></div>
+
+<h2>體腔（圖1-8）</h2>
+<figure class="fig"><img src="figs/L1-p026.jpg" alt="體腔分區圖"><figcaption>圖1-8 體腔（講義 p.26）</figcaption></figure>
+<p>人體縱軸含兩大體腔：<b>背側體腔</b>（後腔）與<b>腹側體腔</b>（前腔）。</p>
+<h3>背側體腔 dorsal body cavity</h3>
+<p>位於背側、近體表，密閉；分兩部分：</p>
+<ul>
+<li><span class="term">顱腔<i>cranial cavity</i></span>：由顱骨圍成，含<b>腦</b>，經<b>枕骨大孔</b>與椎管相通。</li>
+<li><span class="term">脊髓腔<i>spinal cavity</i></span>：由各脊椎骨的椎孔相連而成，含<b>脊髓及脊神經根</b>。</li>
+</ul>
+<h3>腹側體腔 ventral body cavity</h3>
+<ul>
+<li>其內器官稱<span class="term">內臟<i>viscera</i></span>；腔壁由皮膚、結締組織、骨骼、肌肉及漿膜構成。</li>
+<li>以<span class="term">橫膈<i>diaphragm</i></span>分為上部<b>胸腔</b>與下部<b>腹盆腔</b>。</li>
+</ul>
+<h3>胸腔 thoracic cavity：含三個腔</h3>
+<ol>
+<li><span class="term">胸膜腔<i>pleural cavity</i></span>：胸膜圍成的密閉腔，左右各一，空間很小，<b>不含器官</b>，只有少量潤滑液；胸膜臟層蓋在肺表面。</li>
+<li><span class="term">縱隔腔<i>mediastinum</i></span>：左右肺之間，由前方胸骨延伸至後方脊柱。以<b>胸骨角</b>與<b>第4胸椎(T4)</b>連線為界：
+<ul>
+<li><b>上縱隔</b>：氣管、食道、胸腺、大血管。</li>
+<li><b>下縱隔</b>再分前、中、後：前縱隔含<b>胸腺</b>（講義寫法）；中縱隔含<b>心臟</b>；後縱隔含<b>食道、支氣管、胸管、降主動脈</b>。</li>
+</ul></li>
+<li><span class="term">心包腔<i>pericardial cavity</i></span>：位於縱隔內，圍繞心臟的密閉小腔，<b>不含心臟</b>，含潤滑液；心包膜臟層蓋在心臟表面。</li>
+</ol>
+<figure class="fig"><img src="figs/L1-p031.jpg" alt="縱隔腔分區"><figcaption>圖1-9 縱隔腔（講義 p.31）</figcaption></figure>
+<h3>腹盆腔 abdominopelvic cavity</h3>
+<ul>
+<li><span class="term">腹腔<i>abdominal cavity</i></span>：<b>最大的體腔</b>。上以橫膈與胸腔為界；下以<b>薦岬（薦骨上緣）</b>與<b>恥骨聯合上緣</b>的假想連線與骨盆腔為界。含胃、脾、肝、膽囊、胰、腎、小腸、大腸大部分、神經血管。</li>
+<li><span class="term">骨盆腔<i>pelvic cavity</i></span>：位於腹腔下方、與腹腔相連。含膀胱、乙狀結腸、直腸及內生殖器官（男：前列腺、精囊、輸精管；女：子宮、卵巢、輸卵管）。</li>
+</ul>
+<div class="trap"><p class="lbl">易混淆</p><p>胸膜腔與心包腔都是「含液體、不含器官」的潛在空腔；器官（肺、心）是被其臟層覆蓋，而非在腔內。腎臟在腹腔（講義列於腹腔內容物）。</p></div>
+
+<h2>腹盆腔的區域劃分</h2>
+<h3>九分法（圖1-10）</h3>
+<p>兩條<b>水平線</b>（分別通過左右<b>肋骨下緣</b>及左右<b>髂骨結節</b>）＋兩條<b>垂直線</b>（分別通過<b>髂前上棘與恥骨聯合連線之中點</b>），將腹部分九區。</p>
+<table class="tbl">
+<thead><tr><th>右季肋區</th><th>腹上區</th><th>左季肋區</th></tr></thead>
+<tbody>
+<tr><td>肝右葉、膽囊、十二指腸、結腸右曲、右腎上1/3</td><td>肝左葉及右葉靠中線部分、胃小彎及幽門部、十二指腸上部及下行部、胰頭與體部、左右腎上腺</td><td>胃體與胃底、脾臟、胰尾、結腸左曲、左腎上2/3</td></tr>
+</tbody>
+<thead><tr><th>右腰區</th><th>臍區</th><th>左腰區</th></tr></thead>
+<tbody>
+<tr><td>盲腸上半部、升結腸、右腎下2/3、部分十二指腸與迴腸</td><td>十二指腸下段、空腸、迴腸、橫結腸中段、腹主動脈、下腔靜脈、腎門</td><td>降結腸、左腎下1/3、空腸與結腸</td></tr>
+</tbody>
+<thead><tr><th>右髂區</th><th>腹下區</th><th>左髂區</th></tr></thead>
+<tbody>
+<tr><td>盲腸下半部、闌尾、右精索、右側卵巢與輸卵管</td><td>小腸、部分乙狀結腸、子宮、膀胱</td><td>乙狀結腸、左精索、左側卵巢與輸卵管</td></tr>
+</tbody></table>
+<figure class="fig"><img src="figs/L1-p036.jpg" alt="腹盆腔九分法"><figcaption>圖1-10 腹盆腔之九分法（講義 p.36）</figcaption></figure>
+<h3>四象限（圖1-11）</h3>
+<p>通過<b>肚臍</b>的一條垂直線＋一條水平線，分四象限 quadrant。</p>
+<table class="tbl">
+<thead><tr><th>象限</th><th>主要內容</th></tr></thead>
+<tbody>
+<tr><td>右上 RUQ</td><td>肝與膽囊、胰頭、幽門、十二指腸、結腸右曲（肝曲）、部分升結腸與橫結腸、右腎上腺、右腎上方</td></tr>
+<tr><td>左上 LUQ</td><td>肝左葉、胰體部、胃、部分小腸、結腸左曲（脾曲）、部分橫結腸與降結腸、左腎上腺、左腎上方</td></tr>
+<tr><td>右下 RLQ</td><td>右腎下方、部分升結腸、<b>盲腸與闌尾</b>、右精索、子宮右側、右卵巢與輸卵管</td></tr>
+<tr><td>左下 LLQ</td><td>左腎下方、部分降結腸、<b>乙狀結腸</b>、左精索、子宮左側、左卵巢與輸卵管</td></tr>
+</tbody></table>
+<figure class="fig"><img src="figs/L1-p037.jpg" alt="腹盆腔四象限"><figcaption>圖1-11 腹盆腔之四象限（講義 p.37）</figcaption></figure>
+<div class="mn"><p class="lbl">記憶口訣</p><p>闌尾炎＝右下（RLQ，盲腸闌尾在右下）；脾臟、胃＝左上（LUQ）；肝、膽＝右上（RUQ）。九分法上排「季腹季」、中排「腰臍腰」、下排「髂腹下髂」。</p></div>
+</section>
+
+<section class="page" id="p-L1-c" data-title="組織總論與上皮組織" data-group="第1講 緒論與組織">
+<h2>組織總論</h2>
+<p><span class="term">組織<i>tissue</i></span>：一群<b>胚胎來源及構造相似</b>的細胞，以細胞間質緊密相連，共同執行特定功能。研究組織的學問＝<span class="term">組織學<i>histology</i></span>。</p>
+<div class="key"><p class="lbl">必背重點：四大類組織</p><ol>
+<li><span class="term">上皮組織<i>epithelial tissue</i></span></li>
+<li><span class="term">結締組織<i>connective tissue</i></span></li>
+<li><span class="term">肌肉組織<i>muscle tissue</i></span></li>
+<li><span class="term">神經組織<i>nervous tissue</i></span></li></ol></div>
+
+<h2>上皮組織 epithelial tissue</h2>
+<p>簡稱上皮 epithelium，包括<b>上皮</b>與<b>腺體</b> gland。</p>
+<div class="key"><p class="lbl">上皮的特徵</p><ul>
+<li>有暴露於體外、腔室或通道的<b>游離面</b>，細胞以<span class="term">細胞接合<i>cell junction</i></span>緊密相連。</li>
+<li>有<span class="term">極性<i>polarity</i></span>：游離的<b>頂端 apical</b>、細胞內部、<b>基部 basal</b>。</li>
+<li>底部藉<span class="term">基底膜<i>basement membrane</i></span>與下層結締組織相接。</li>
+<li><b>缺乏血管</b>：養分由深層組織或游離面取得。</li>
+<li><b>可快速再生</b>：上皮細胞可能只存活 1–2 天，靠<span class="term">幹細胞<i>stem cell</i></span>持續有絲分裂維持。</li>
+</ul></div>
+<h3>上皮的功能</h3>
+<ol>
+<li><b>保護</b>：避免磨損、脫水、化學或生物因子傷害。</li>
+<li><b>過濾</b>：進出身體的物質都需通過上皮。</li>
+<li><b>感覺</b>：含大量感覺神經，對刺激敏感。</li>
+<li><b>分泌</b>：產生分泌物的上皮細胞稱<b>腺體細胞</b>。</li>
+</ol>
+<div class="mn"><p class="lbl">記憶口訣</p><p>上皮四功能「保過感泌」＝保護、過濾、感覺、分泌。</p></div>
+<h3>上皮的分類</h3>
+<ul>
+<li><b>被覆與內襯上皮</b>：<span class="term">被覆上皮<i>covering</i></span>形成身體外表的蓋被；<span class="term">內襯上皮<i>lining</i></span>襯於腹側體腔、消化道、呼吸道、血管等腔面，並與神經組織構成感覺器官的一部分，也是產生配子（精子與卵）的組織。</li>
+<li><b>腺體上皮</b> glandular epithelium：組成腺體的分泌部分。</li>
+</ul>
+
+<h3>被覆與內襯上皮：依「層數」與「形狀」分類</h3>
+<table class="tbl">
+<thead><tr><th>依層數</th><th>特性</th></tr></thead>
+<tbody>
+<tr><td><span class="term">單層上皮<i>simple</i></span></td><td>單層排列，有<b>吸收或過濾</b>功能，位於不易被撕傷處。</td></tr>
+<tr><td><span class="term">複層上皮<i>stratified</i></span></td><td>多層，<b>無吸收或過濾</b>功能，位於易被撕傷處。</td></tr>
+<tr><td><span class="term">偽複層上皮<i>pseudostratified</i></span></td><td>較少見；<b>只有一層細胞</b>，但有些細胞未達表層，看似多層。表面細胞可分泌黏液、含<b>纖毛 cilia</b>，把黏液或異物排出。</td></tr>
+</tbody></table>
+<table class="tbl">
+<thead><tr><th>依細胞形狀</th><th>特性</th></tr></thead>
+<tbody>
+<tr><td><span class="term">鱗狀<i>squamous</i></span></td><td>扁平鱗片狀，像磁磚互相連接。</td></tr>
+<tr><td><span class="term">立方<i>cuboidal</i></span></td><td>橫切面呈方形，有時六角形。</td></tr>
+<tr><td><span class="term">柱狀<i>columnar</i></span></td><td>橫切面呈高的圓柱狀。</td></tr>
+<tr><td><span class="term">變形<i>transitional</i></span></td><td>數種形狀細胞集合，出現於<b>需大張力或膨脹</b>處。最底層立方至柱狀、中間層立方至多角形、最表層立方至鱗狀（依拉扯程度而變）。</td></tr>
+</tbody></table>
+<div class="trap"><p class="lbl">易混淆</p><p>偽複層柱狀上皮「看起來多層、實際只有一層」；所有細胞都接觸基底膜。</p></div>
+
+<h3>上皮組織的分類（表3-1）</h3>
+<table class="tbl">
+<thead><tr><th>上皮種類</th><th>功能</th><th>分布部位</th></tr></thead>
+<tbody>
+<tr><td>單層鱗狀 simple squamous</td><td>擴散、滲透、過濾</td><td>肺泡、腎臟鮑氏囊、心臟血管內皮</td></tr>
+<tr><td>單層立方 simple cuboidal</td><td>分泌、吸收</td><td>腎小管上皮、腺體導管、甲狀腺濾泡、視網膜色素上皮</td></tr>
+<tr><td>單層柱狀 simple columnar</td><td>分泌、吸收、保護</td><td>輸卵管、部分消化道及呼吸道</td></tr>
+<tr><td>複層鱗狀 stratified squamous</td><td>保護</td><td>皮膚、口腔、食道、陰道、肛門</td></tr>
+<tr><td>複層立方 stratified cuboidal</td><td>保護</td><td>汗腺導管</td></tr>
+<tr><td>複層柱狀 stratified columnar</td><td>保護</td><td>食道與胃交接處</td></tr>
+<tr><td>變形上皮 transitional</td><td>容許擴張與收縮</td><td>膀胱與輸尿管</td></tr>
+<tr><td>偽複層柱狀 pseudostratified columnar</td><td>分泌、保護</td><td>氣管、男性尿道</td></tr>
+<tr><td>外分泌腺 exocrine gland</td><td>分泌</td><td>腺體</td></tr>
+<tr><td>內分泌腺 endocrine gland</td><td>分泌</td><td>腺體</td></tr>
+</tbody></table>
+<figure class="fig two"><img src="figs/L1-p049.jpg" alt="表3-1 上皮組織分類"><img src="figs/L1-p053.jpg" alt="圖3-7 外分泌腺結構分類"><figcaption>表3-1 上皮組織的分類（p.49）；圖3-7 外分泌腺的結構分類（p.53）</figcaption></figure>
+<div class="mn"><p class="lbl">記憶口訣</p><p>薄而要「交換」的地方用單層鱗狀（肺泡、血管內皮）；要「耐磨」的地方用複層鱗狀（皮膚、口腔、食道、陰道、肛門）；要「撐大縮小」用變形（膀胱、輸尿管）；氣管有纖毛排痰＝偽複層纖毛柱狀。</p></div>
+
+<h2>腺體上皮 glandular epithelium</h2>
+<p>腺體上皮細胞聚集於被覆與內襯上皮深處而成腺體，具分泌功能。依分泌位置分兩類：</p>
+<table class="tbl">
+<thead><tr><th></th><th>外分泌腺 exocrine</th><th>內分泌腺 endocrine</th></tr></thead>
+<tbody>
+<tr><td>導管</td><td><b>有</b>導管，送到皮膚表面或空腔／其他上皮表面</td><td><b>無導管</b>（無管腺）</td></tr>
+<tr><td>分泌物</td><td>黏液、汗液、油、蠟、消化酶等</td><td>激素 hormone，先入血液或淋巴再到作用部位</td></tr>
+<tr><td>起源</td><td>上皮組織</td><td>胚胎來源亦起源於上皮組織</td></tr>
+</tbody></table>
+<h3>外分泌腺的結構分類</h3>
+<ul>
+<li><span class="term">單細胞腺<i>unicellular gland</i></span>：只含一個細胞，例如消化道、呼吸道、泌尿與生殖道內襯上皮的<b>杯狀細胞 goblet cell</b>，分泌黏液潤滑黏膜。</li>
+<li><span class="term">多細胞腺<i>multicellular gland</i></span>：含導管與分泌部：
+<ul>
+<li>依<b>分泌部形狀</b>：<span class="term">管狀腺<i>tubular</i></span>（管狀）、<span class="term">泡狀腺<i>acinar</i></span>（燈泡狀）、<span class="term">管泡狀腺<i>tubuloacinar</i></span>（兩者皆有）。</li>
+<li>依<b>導管是否分支</b>：<span class="term">單式腺<i>simple</i></span>（導管不分支）、<span class="term">複式腺<i>compound</i></span>（導管分支）。</li>
+</ul></li>
+</ul>
+<table class="tbl">
+<thead><tr><th>類型</th><th>例子（圖3-7）</th></tr></thead>
+<tbody>
+<tr><td>單式管狀 simple tubular</td><td>小腸腺</td></tr>
+<tr><td>單式彎曲管狀 simple coiled tubular</td><td>局泌汗腺</td></tr>
+<tr><td>單式分支管狀 simple branched tubular</td><td>胃腺、食道、舌頭及十二指腸的黏液腺</td></tr>
+<tr><td>單式分支泡狀 simple branched alveolar</td><td>皮脂腺</td></tr>
+<tr><td>複式管狀 compound tubular</td><td>口腔黏液腺、男性尿道球腺、睪丸生精管</td></tr>
+<tr><td>複式泡狀 compound alveolar</td><td>乳腺</td></tr>
+<tr><td>複式管泡狀 compound tubuloalveolar</td><td>唾液腺、呼吸道腺體及胰臟</td></tr>
+</tbody></table>
+<div class="trap"><p class="lbl">易混淆</p><p>管狀／泡狀＝看「分泌部形狀」；單式／複式＝看「導管有無分支」。外分泌有導管、內分泌無導管。</p></div>
+</section>
+
+<section class="page" id="p-L1-d" data-title="結締、肌肉與神經組織" data-group="第1講 緒論與組織">
+<h2>結締組織 connective tissue</h2>
+<p>體內<b>含量最多、分布最廣</b>的組織。均含<b>細胞、基質 ground substance、纖維 fiber</b>。</p>
+<div class="key"><p class="lbl">功能（6 項）</p><ol>
+<li>提供構造上的支架</li><li>運輸體內物質</li><li>保護器官</li><li>連接不同組織</li><li>貯存能量及礦物質</li><li>吞噬細胞碎片及入侵微生物</li></ol>
+<p>口訣：「支運保連貯吞」。</p></div>
+<p>細胞均由胚胎期的<b>間質細胞 mesenchymal cell</b> 分化而來。除<b>軟骨不含血管</b>外，結締組織均富含血管。</p>
+<h3>四大類</h3>
+<ol>
+<li><span class="term">固有結締組織<i>connective tissue proper</i></span>：疏鬆、緻密、脂肪、彈性、網狀結締組織。</li>
+<li><span class="term">軟骨<i>cartilage</i></span>：透明、纖維、彈性軟骨。</li>
+<li><span class="term">硬骨<i>bone</i></span>。</li>
+<li><span class="term">血液<i>blood</i></span>：液體結締組織。</li>
+</ol>
+<p>（軟骨與硬骨合稱支持性結締組織。）</p>
+
+<h3>固有結締組織的細胞</h3>
+<table class="tbl">
+<thead><tr><th>細胞</th><th>功能</th></tr></thead>
+<tbody>
+<tr><td><span class="term">成纖維細胞<i>fibroblast</i></span></td><td>纖細或星形；合成、分泌結締組織纖維；分泌<b>玻尿酸</b>使基質具黏性</td></tr>
+<tr><td><span class="term">巨噬細胞<i>macrophage</i></span></td><td>吞噬受傷細胞及入侵病原體</td></tr>
+<tr><td><span class="term">脂肪細胞<i>adipose cell</i></span></td><td>貯存脂肪</td></tr>
+<tr><td><span class="term">幹細胞<i>stem cell</i></span></td><td>組織受傷或更新時分裂增生，分化成其他結締組織細胞</td></tr>
+<tr><td><span class="term">肥胖細胞<i>mast cell</i></span></td><td>製造<b>肝素 heparin</b>（防血液凝固）與<b>組織胺 histamine</b>（增加受傷處血流）</td></tr>
+<tr><td><span class="term">漿細胞<i>plasma cell</i></span></td><td>由 <b>B 淋巴球</b>分化，產生<b>抗體</b></td></tr>
+</tbody></table>
+<h3>三種纖維</h3>
+<table class="tbl">
+<thead><tr><th>纖維</th><th>成分／特性</th><th>常見部位</th></tr></thead>
+<tbody>
+<tr><td><span class="term">膠原纖維<i>collagenous</i></span>（白纖維）</td><td>膠原蛋白 collagen 成束；<b>數量最多</b>、較粗、無分枝、強韌、抗拉力</td><td>硬骨、軟骨、肌腱、韌帶、硬腦膜</td></tr>
+<tr><td><span class="term">彈性纖維<i>elastic</i></span>（黃纖維）</td><td>彈性蛋白 elastin；較細、不規則分枝、伸展性大</td><td>皮膚、血管、肺臟</td></tr>
+<tr><td><span class="term">網狀纖維<i>reticular</i></span></td><td>主要由膠原蛋白組成，表面包醣蛋白；很細、分枝成網；支持與強固</td><td>脾臟、淋巴結</td></tr>
+</tbody></table>
+<h3>基質 ground substance</h3>
+<p>散佈於纖維與細胞之間，由<b>糖胺聚醣 glycosaminoglycan</b> 與蛋白質結合成<b>蛋白聚醣 proteoglycan</b>。成分含玻尿酸、硫酸軟骨素、硫酸皮膚素、硫酸角質素及附著蛋白；影響組織的發育、移動、增生、形狀與代謝。</p>
+
+<h3>固有結締組織的種類</h3>
+<table class="tbl">
+<thead><tr><th>種類</th><th>特徵</th><th>位置／功能</th></tr></thead>
+<tbody>
+<tr><td><span class="term">疏鬆結締組織<i>loose (areolar)</i></span></td><td>體內<b>含量最多</b>；膠原纖維較少、彈性纖維較多，鬆散交織；延展性好但易撕裂；蜂窩狀故稱<b>蜂窩組織</b>，發炎＝<b>蜂窩組織炎 cellulitis</b></td><td>皮下（連接皮膚與肌肉）、填充肌肉間隙、使神經血管黏附周圍構造、腸繫膜、胃腸／呼吸／泌尿道內襯上皮下</td></tr>
+<tr><td><span class="term">脂肪組織<i>adipose</i></span></td><td>脂肪細胞 adipocyte（起源於成纖維細胞）；大脂肪滴擠壓核到邊緣，形似<b>印章戒指 signet ring</b>；貯存三酸甘油酯</td><td>皮下層、腎周圍、心臟基部與表面、長骨骨髓、關節周圍、眼球後；<b>絕緣體</b>、減少熱散失、主要能量來源</td></tr>
+<tr><td><span class="term">緻密規則結締組織<i>dense regular</i></span></td><td>膠原纖維沿拉力方向整齊<b>平行</b>排列；銀白、堅韌；又稱白色纖維組織</td><td><b>肌腱、腱膜、韌帶</b></td></tr>
+<tr><td><span class="term">緻密不規則結締組織<i>dense irregular</i></span></td><td>膠原纖維<b>交織</b>、方向不規則，常呈片狀</td><td>肌膜、真皮深層、骨外膜、軟骨外膜、器官被膜</td></tr>
+<tr><td><span class="term">彈性結締組織<i>elastic</i></span></td><td>分枝彈性纖維，黃色；可牽張並彈回</td><td>喉軟骨、彈性血管壁、氣管、支氣管、肺；<b>黃韌帶 ligamentum flavum</b>（脊椎）、<b>項韌帶 ligamentum nuchae</b>、陰莖懸韌帶、<b>真聲帶</b></td></tr>
+<tr><td><span class="term">網狀結締組織<i>reticular</i></span></td><td>交織的網狀纖維與網狀細胞</td><td>淋巴組織的主要架構；為肝、脾、淋巴結提供精緻支持基質；幫助平滑肌細胞連結</td></tr>
+</tbody></table>
+<h4>脂肪組織的兩種</h4>
+<table class="tbl">
+<thead><tr><th></th><th>白色脂肪 white</th><th>棕色脂肪 brown</th></tr></thead>
+<tbody>
+<tr><td>脂滴</td><td>細胞質內<b>一個大脂滴</b></td><td><b>許多小脂滴</b>，細胞間微血管網豐富</td></tr>
+<tr><td>分布</td><td>成人皮下層</td><td>新生兒較多、成人較少</td></tr>
+</tbody></table>
+<figure class="fig two"><img src="figs/L1-p061.jpg" alt="蜂窩組織與脂肪組織"><img src="figs/L1-p062.jpg" alt="緻密規則與不規則結締組織"><figcaption>蜂窩組織與脂肪組織（p.61）；緻密規則／不規則結締組織（p.62）</figcaption></figure>
+<div class="trap"><p class="lbl">易混淆</p><ul>
+<li>緻密<b>規則</b>（平行排列：肌腱、韌帶）vs 緻密<b>不規則</b>（交織：真皮深層、被膜）。</li>
+<li>膠原纖維（白、粗、強韌、抗拉）vs 彈性纖維（黃、細、可伸展）vs 網狀纖維（細、網狀，脾與淋巴結）。</li>
+<li>黃韌帶／項韌帶屬彈性結締組織，不是緻密規則。</li>
+</ul></div>
+
+<h2>軟骨 cartilage（支持性結締組織）</h2>
+<ul>
+<li>強固結締組織，支持與保護。膠狀基質含<b>硫酸軟骨素</b>及交織的膠原與彈性纖維；只含<span class="term">軟骨細胞<i>chondrocyte</i></span>，位於<span class="term">陷窩<i>lacunae</i></span>（骨隙）內。</li>
+<li>外包<span class="term">軟骨外膜<i>perichondrium</i></span>。<b>無血管或神經</b>，靠基質與外膜血管擴散供養；<b>再生修復慢</b>。</li>
+</ul>
+<table class="tbl">
+<thead><tr><th>種類</th><th>特徵</th><th>分布</th></tr></thead>
+<tbody>
+<tr><td><span class="term">透明軟骨<i>hyaline</i></span></td><td>含不易染色的緻密膠原纖維；<b>體內最多</b>；提供彈性與支持</td><td>關節軟骨、骨骺板、肋軟骨；鼻、喉、氣管、支氣管（維持呼吸道通暢）</td></tr>
+<tr><td><span class="term">纖維軟骨<i>fibrocartilage</i></span></td><td>含大量膠原纖維；強固、<b>緩衝襯墊</b></td><td>活動度大或需強力支持處：脊柱<b>椎間盤</b>、<b>恥骨聯合</b></td></tr>
+<tr><td><span class="term">彈性軟骨<i>elastic</i></span></td><td>軟骨細胞位於彈性纖維線狀網；提供強度並維持形狀</td><td>會厭、耳翼、耳咽管、鼻翼</td></tr>
+</tbody></table>
+<div class="mn"><p class="lbl">記憶口訣</p><p>透明＝「關節肋骨氣管」；纖維＝「椎間盤、恥骨聯合」（耐壓緩衝）；彈性＝「會厭、耳、鼻翼」（外形要彈回）。</p></div>
+
+<h2>硬骨 bone</h2>
+<ul>
+<li>軟骨與硬骨共同構成骨骼系統；含大量間質與<span class="term">骨細胞<i>osteocyte</i></span>。</li>
+<li>間質由<b>礦物鹽類（主要磷酸鈣、碳酸鈣）</b>與<b>膠原纖維</b>組成；鹽類造成硬度。</li>
+<li>依間質與細胞排列分<span class="term">緻密骨<i>compact bone</i></span>與<span class="term">海綿骨<i>spongy bone</i></span>。</li>
+<li>緻密骨基本單位＝<span class="term">骨元<i>osteon</i></span>＝<span class="term">哈氏系統<i>Haversian system</i></span>，由<b>骨板、陷窩、骨小管、中央管</b>組成。</li>
+</ul>
+<div class="key"><p class="lbl">骨骼系統功能</p><p>支持軟組織、保護脆弱構造、與骨骼肌一起產生運動、儲存鈣與磷、紅骨髓製造血球。</p></div>
+<h3>軟骨與硬骨的比較（表3-3）</h3>
+<table class="tbl">
+<thead><tr><th>特性</th><th>軟骨</th><th>硬骨</th></tr></thead>
+<tbody>
+<tr><td>細胞</td><td>隙內含軟骨細胞</td><td>隙內含骨細胞</td></tr>
+<tr><td>基質</td><td>軟骨質（蛋白糖）、水</td><td>不可溶的鈣鹽結晶（磷酸鈣和碳酸鈣）</td></tr>
+<tr><td>纖維</td><td>膠原、彈性及網狀纖維</td><td>主要是膠原纖維</td></tr>
+<tr><td>血管</td><td><b>無</b></td><td><b>廣泛</b></td></tr>
+<tr><td>覆蓋物</td><td>軟骨膜</td><td>骨外膜</td></tr>
+<tr><td>強度</td><td>有限：易彎曲但不易斷裂</td><td>堅固：對抗外力到破裂點</td></tr>
+<tr><td>氧氣需求</td><td>相對低</td><td>相對高</td></tr>
+<tr><td>營養運送</td><td>經由基質擴散</td><td>經由細胞質與骨小管內的液體擴散</td></tr>
+<tr><td>修護能力</td><td>有限</td><td>旺盛</td></tr>
+</tbody></table>
+<figure class="fig"><img src="figs/L1-p073.jpg" alt="表3-3 軟骨與硬骨比較"><figcaption>表3-3 軟骨和硬骨的比較（講義 p.73）</figcaption></figure>
+
+<h2>血液 blood</h2>
+<p>液狀結締組織，由<b>定形成分</b>與<b>血漿 plasma</b> 組成。</p>
+<ul>
+<li><b>紅血球 erythrocyte</b>：將氧由肺攜往全身，並把CO<sub>2</sub>送回肺排出。</li>
+<li><b>白血球 leukocyte</b>：與吞噬、免疫及過敏反應有關。</li>
+<li><b>血小板 platelet</b>：與血液凝固有關。</li>
+<li><b>血漿</b>：稻草色液體，主要為水及可溶物（營養物質、酶、激素、呼吸氣體、離子）。</li>
+</ul>
+
+<h2>肌肉組織 muscle tissue</h2>
+<p>由肌肉細胞組成，收縮時引起運動；分三類。</p>
+<table class="tbl">
+<thead><tr><th></th><th>骨骼肌 skeletal</th><th>心肌 cardiac</th><th>平滑肌 smooth</th></tr></thead>
+<tbody>
+<tr><td>位置</td><td>與骨骼相連</td><td>形成心臟厚壁</td><td>中空構造壁：血管、胃、腸、膀胱</td></tr>
+<tr><td>細胞形態</td><td>圓筒狀纖維，<b>多核</b>，核靠近肌漿膜</td><td>略呈四方形，<b>單核、位中央</b></td><td><b>梭狀</b>，單核位中央</td></tr>
+<tr><td>橫紋</td><td>有（橫紋肌）</td><td>有</td><td><b>無</b></td></tr>
+<tr><td>意識控制</td><td>隨意肌 voluntary</td><td>不隨意肌</td><td>不隨意肌</td></tr>
+<tr><td>特有構造</td><td>肌原纖維 myofibril（暗帶與明帶）、肌漿膜 sarcolemma、肌漿 sarcoplasm</td><td><b>肌間盤 intercalated disc</b>：強化組織、幫助神經傳導</td><td>—</td></tr>
+</tbody></table>
+<div class="mn"><p class="lbl">記憶口訣</p><p>骨骼肌「多核、橫紋、隨意」；心肌「單核、橫紋、不隨意、有肌間盤」；平滑肌「單核、無橫紋、不隨意」。</p></div>
+
+<h2>神經組織 nervous tissue</h2>
+<p>位於腦、脊髓及周邊神經；由<span class="term">神經細胞<i>neuron</i></span>與<span class="term">神經膠細胞<i>neuroglia</i></span>組成。</p>
+<ul>
+<li><b>神經元</b>：神經系統的<b>結構與功能單位</b>；接受刺激，轉為神經衝動，傳給另一神經元、肌纖維或腺體。</li>
+<li><b>細胞體</b> cell body：含核及胞器。</li>
+<li><b>樹突</b> dendrite：高度分枝，把衝動<b>傳向</b>細胞體。</li>
+<li><b>軸突</b> axon：<b>只有一條</b>，把衝動<b>傳離</b>細胞體。</li>
+<li><b>神經膠細胞</b>：支持、修護神經組織，提供神經元營養。</li>
+</ul>
+<div class="mn"><p class="lbl">記憶口訣</p><p>樹突「入」、軸突「出」（Dendrite toward、Axon away）；軸突只有一條。</p></div>
+</section>
+
+<section class="page" id="p-L1-e" data-title="膜與組織修復" data-group="第1講 緒論與組織">
+<h2>膜 membrane</h2>
+<p>依上皮層與其下結締組織結合方式分類：</p>
+<ul>
+<li><span class="term">上皮膜<i>epithelial membrane</i></span>（由上皮＋其下結締組織組成）：<b>黏膜、漿膜、皮膜</b>。</li>
+<li><span class="term">滑膜<i>synovial membrane</i></span>：由<b>不完整</b>的上皮層（實際不含上皮層）構成。</li>
+</ul>
+<table class="tbl">
+<thead><tr><th>膜</th><th>組成</th><th>位置與功能</th></tr></thead>
+<tbody>
+<tr><td><span class="term">黏膜<i>mucous membrane</i></span></td><td>上皮層（有<b>杯狀細胞</b>分泌黏液）＋結締組織層<b>固有層 lamina propria</b></td><td>襯於<b>對外開口</b>的管腔：消化道、呼吸道、泌尿道、生殖道。上皮因部位而異（食道＝複層鱗狀；腸＝單層柱狀）。潤滑保護；呼吸道捕捉顆粒；消化道潤滑食物、分泌消化酶、吸收營養。固有層連結上皮與下層、使黏膜有彈性、固定血管、保護下方肌肉、供應上皮氧與營養並移除廢物</td></tr>
+<tr><td><span class="term">漿膜<i>serous membrane</i></span></td><td>薄的疏鬆結締組織＋外覆一層<b>間皮 mesothelium</b></td><td>襯於<b>不直接開口體外</b>的體腔並覆蓋腔內器官。雙層壁囊：<b>壁層</b>貼體腔壁、<b>臟層</b>覆蓋器官；兩層間的小腔含間皮分泌的漿液，減少摩擦</td></tr>
+<tr><td><span class="term">皮膜<i>cutaneous membrane</i></span></td><td><b>角質化複層鱗狀上皮</b>＋<b>緻密不規則結締組織</b></td><td>即皮膚；覆蓋身體表面；較厚、防水、通常乾燥</td></tr>
+<tr><td><span class="term">滑膜<i>synovial membrane</i></span></td><td>滑膜細胞 synoviocytes、疏鬆結締組織、彈性纖維及脂肪；<b>無上皮層</b></td><td>襯於關節腔；滑液潤滑骨端、減輕摩擦，也是<b>關節軟骨的營養來源</b></td></tr>
+</tbody></table>
+<h3>三種漿膜</h3>
+<table class="tbl">
+<thead><tr><th>漿膜</th><th>位置</th></tr></thead>
+<tbody>
+<tr><td><span class="term">胸膜<i>pleura</i></span></td><td>襯於胸腔並包覆肺</td></tr>
+<tr><td><span class="term">腹膜<i>peritoneum</i></span></td><td>襯於腹腔並包覆腹腔器官及部分骨盆腔器官；<b>體內最大的漿膜</b></td></tr>
+<tr><td><span class="term">心包膜<i>pericardium</i></span></td><td>襯於心包腔並覆蓋心臟</td></tr>
+</tbody></table>
+<div class="trap"><p class="lbl">易混淆</p><ul>
+<li>黏膜（通向體外的管道、有杯狀細胞、有固有層）vs 漿膜（封閉體腔、有間皮、分泌漿液）。</li>
+<li>滑膜<b>不屬上皮膜</b>，無上皮層。</li>
+<li>皮膜＝皮膚，是上皮膜中唯一「乾」的。</li>
+</ul></div>
+<div class="mn"><p class="lbl">記憶口訣</p><p>上皮膜三兄弟「黏漿皮」；滑膜是沒有上皮的「關節專屬」膜。黏膜通外、漿膜封閉。</p></div>
+
+<h2>組織修復 tissue repair</h2>
+<p>新組織取代死亡或受傷細胞的過程。新細胞兩個來源：</p>
+<ol>
+<li>來自支持性結締組織（<b>基質細胞</b>複製）。</li>
+<li>來自器官功能部分的細胞（<b>實質細胞</b>複製，例：腸上皮細胞能分泌與吸收）。</li>
+</ol>
+<ul>
+<li>能否恢復正常構造與功能，取決於修復時活化的是<b>實質細胞</b>還是<b>基質細胞</b>。</li>
+<li>只靠實質細胞修復 → 良好修復。若<b>成纖維細胞</b>積極參與 → 被新結締組織<span class="term">疤痕組織<i>scar tissue</i></span>取代；疤痕組織<b>不能執行實質組織功能</b>，形成後無法恢復功能。</li>
+<li>修復好壞主要看實質組織的再生能力（需實質細胞快速複製）。</li>
+</ul>
+<h3>修復過程</h3>
+<ul>
+<li><b>輕微受傷</b>：膿液流掉或再吸收，實質組織再生即完成修復。</li>
+<li><b>皮膚大面積受傷</b>：液體自微血管流失使區域變乾；血塊中纖維蛋白變硬成<span class="term">痂<i>scab</i></span>封住傷口。</li>
+<li><b>大而嚴重的傷口</b>：基質與實質細胞都主動修復：
+<ul>
+<li>許多成纖維細胞快速分裂、產生新膠原纖維提供強度，並增加小血管數量。</li>
+<li>形成活化生長的結締組織＝<span class="term">顆粒組織<i>granulation tissue</i></span>；跨過整個傷口作支架，支持上皮細胞移入並填滿，且分泌<b>殺菌液體</b>。</li>
+</ul></li>
+</ul>
+<h3>影響修復的三因素</h3>
+<ol>
+<li><b>營養</b>（最重要）：細胞多為蛋白質，需富含蛋白質食物；維生素有直接功用。</li>
+<li><b>血液循環</b>：運送氧、養分、抗體、防禦細胞到傷處，並運走體液、缺氧血球、細菌、異物與細胞殘餘物。</li>
+<li><b>年齡</b>：年輕者癒合較快、疤痕較小（營養較佳、血供較好、代謝率快、細胞分裂快）。</li>
+</ol>
+<h3>與修復有關的維生素</h3>
+<table class="tbl">
+<thead><tr><th>維生素</th><th>角色</th></tr></thead>
+<tbody>
+<tr><td>維生素 A</td><td>對<b>上皮組織</b>替換重要，特別是<b>呼吸道上皮</b></td></tr>
+<tr><td>維生素 B 群</td><td>細胞中許多酶系統的<b>輔酶</b>，特別是葡萄糖分解成CO<sub>2</sub>和水的酶，對心臟與神經系統重要</td></tr>
+<tr><td>維生素 C</td><td>直接影響<b>細胞間質</b>的生產與維持；結締組織製造<b>膠原纖維</b>需要；強化並促進新血管形成。缺乏時連表面傷口都不會好、血管壁變脆易破裂</td></tr>
+<tr><td>維生素 D</td><td>腸道正常<b>吸收鈣</b>所必需；鈣使骨骼硬、為骨折復原所需</td></tr>
+<tr><td>維生素 E</td><td>一般認為促進受傷組織癒合、<b>防止疤痕形成</b></td></tr>
+<tr><td>維生素 K</td><td>協助<b>血液凝固</b>，防止出血不止</td></tr>
+</tbody></table>
+<div class="mn"><p class="lbl">記憶口訣</p><p>A＝上皮（呼吸道）；B＝酶的輔酶（心與神經）；C＝膠原、血管；D＝吸鈣；E＝防疤；K＝凝血（K 像 Koagulation）。</p></div>
+<div class="trap"><p class="lbl">易混淆</p><p>實質細胞修復＝功能恢復（如腸上皮再生）；基質細胞（成纖維細胞）修復＝疤痕、功能喪失。痂 scab（表面纖維蛋白硬化）vs 顆粒組織 granulation tissue（深層新生結締組織）。</p></div>
+</section>
+
+<!-- ===== L2 ===== -->
+<section class="page" id="p-L2-a" data-title="骨骼總論與分類" data-group="第2講 骨骼系統（中軸骨・上肢）">
+<h2>骨骼系統總論</h2>
+<p><span class="term">骨骼系統<i>skeletal system</i></span>由<span class="term">骨骼組織<i>osseous tissue</i></span>與<span class="term">軟骨<i>cartilage</i></span>共同組成；構成人體基本形狀、形成支架並保護內臟，並與肌肉配合形成關節、產生運動。</p>
+
+<h3>骨骼的五大功能</h3>
+<div class="key"><p class="lbl">必背重點</p>
+<ol>
+<li><b>支持 support</b>：身體支架，支撐軟組織與器官，提供肌肉附著點；下肢骨支撐體重。</li>
+<li><b>保護 protect</b>：頭顱骨→腦；脊椎骨→脊髓；胸廓→心、肺、大血管；骨盆→內部生殖器官。</li>
+<li><b>運動 movement</b>：骨骼肌經肌腱或腱膜附著於骨；<b>骨＝槓桿、關節＝支點</b>，肌肉收縮產生運動（走路、抓握、轉頭）。</li>
+<li><b>儲存 storage</b>：(1)礦物質：鈣、磷（需要時釋放入血）；(2)脂肪：<span class="term">黃骨髓<i>yellow bone marrow</i></span>（由紅骨髓被脂肪取代而成，含脂肪細胞及少量血球，為化學能源儲存處）。</li>
+<li><b>造血 hematopoiesis</b>：<span class="term">紅骨髓<i>red bone marrow</i></span>製造紅血球、某些白血球、血小板。</li>
+</ol></div>
+<div class="mn"><p class="lbl">記憶口訣</p><p>「支保運儲血」＝支持、保護、運動、儲存、造血。</p></div>
+
+<h3>造血部位</h3>
+<ul>
+<li>紅骨髓位於<b>扁平骨的板障</b>（<span class="term">板障<i>diploe</i></span>）及長骨的海綿骨空腔內。</li>
+<li><b>新生兒</b>：骨髓腔及海綿骨空腔都是紅骨髓。</li>
+<li><b>成人</b>：大部分長骨黃骨髓延伸到骨骺，長骨僅剩<b>肱骨及股骨的頭部</b>仍造血；主要造血構造是<b>扁平骨（如胸骨）的板障</b>及<b>不規則骨（如髖骨）</b>。</li>
+</ul>
+<div class="trap"><p class="lbl">易混淆</p><p><b>紅骨髓</b>＝造血；<b>黃骨髓</b>＝脂肪儲存（成人骨髓腔內）。新生兒幾乎全是紅骨髓，成人長骨髓腔內主要是黃骨髓。</p></div>
+
+<h3>骨骼組織成分</h3>
+<ul>
+<li>骨與軟骨是兩種結締組織，含大量細胞間質與散布的細胞。</li>
+<li>細胞間質富含鹽類（主要<b>磷酸鈣</b>，部分碳酸鈣），形成<span class="term">氫氧磷灰質<i>hydroxyapatites</i></span>，約占骨總重<b>67%</b>；其餘<b>33%</b>為細胞、纖維（以<b>膠原纖維</b>為主）與基質。</li>
+<li>細胞：<span class="term">造骨細胞<i>osteoblast</i></span>、<span class="term">骨細胞<i>osteocyte</i></span>、<span class="term">蝕骨細胞<i>osteoclast</i></span>。</li>
+<li>鹽類堆積在膠原纖維上使骨變硬＝<span class="term">鈣化<i>calcification</i></span>。</li>
+</ul>
+
+<h2>骨骼的分類</h2>
+<h3>一、依部位分類（成人共 206 塊）</h3>
+<table class="tbl">
+<thead><tr><th>分類</th><th>塊數</th><th>包含</th></tr></thead>
+<tbody>
+<tr><td><span class="term">中軸骨骼<i>axial skeleton</i></span></td><td><b>80</b></td><td>頭顱骨 22（腦顱 8＋顏面 14）、附屬骨 7（舌骨 1＋聽小骨 6）、脊柱 26、胸廓 25（胸骨 1＋肋骨 24）</td></tr>
+<tr><td><span class="term">附肢骨骼<i>appendicular skeleton</i></span></td><td><b>126</b></td><td>上肢 60、下肢 60、肩帶 4（鎖骨 2＋肩胛骨 2）、骨盆帶 2（髖骨 2）</td></tr>
+</tbody></table>
+<p>上肢 60＝肱骨 2＋尺骨 2＋橈骨 2＋腕骨 16＋掌骨 10＋指骨 28；下肢 60＝股骨 2＋腓骨 2＋脛骨 2＋髕骨 2＋跗骨 14＋蹠骨 10＋趾骨 28。</p>
+<div class="key"><p class="lbl">必背重點</p><p>206＝80＋126。聽小骨（每側 3 塊，共 6 塊）依講義歸於中軸骨骼介紹；其中<b>鐙骨是人體最小的骨骼</b>。</p></div>
+<figure class="fig"><img src="figs/L2-p010.jpg" alt="表5-1 骨骼系統的區分"><figcaption>表5-1 骨骼系統的區分（講義 p.10）</figcaption></figure>
+
+<h3>二、依外形分類（五類）</h3>
+<table class="tbl">
+<thead><tr><th>類別</th><th>特徵</th><th>例子</th></tr></thead>
+<tbody>
+<tr><td><span class="term">長骨<i>long bone</i></span></td><td>長度遠大於寬度；一個骨幹＋二個骨端；長軸稍彎曲，使體重壓力由各部分吸收</td><td>肱骨、尺骨、橈骨、掌骨、指骨、股骨、脛骨、腓骨、蹠骨、趾骨</td></tr>
+<tr><td><span class="term">短骨<i>short bone</i></span></td><td>長寬相似，略呈立方形</td><td>上肢腕骨、下肢跗骨</td></tr>
+<tr><td><span class="term">扁平骨<i>flat bone</i></span></td><td>薄；兩層平行緻密骨板夾一層海綿骨；保護並提供肌肉附著大面積</td><td>頂骨、胸骨、肋骨、肩胛骨</td></tr>
+<tr><td><span class="term">不規則骨<i>irregular bone</i></span></td><td>形狀複雜</td><td>脊椎骨、蝶骨、部分顏面骨</td></tr>
+<tr><td><span class="term">種子骨<i>sesamoid bone</i></span></td><td>位於肌腱或韌帶內的小骨，常在手腕或膝蓋</td><td>豆狀骨（尺側屈腕肌腱）；<b>髕骨＝人體最大種子骨</b>（股四頭肌腱）</td></tr>
+</tbody></table>
+<div class="mn"><p class="lbl">記憶口訣</p><p>「長短扁不種」＝長骨、短骨、扁平骨、不規則骨、種子骨。</p></div>
+<p><i>（講義 p.12 誤植：「肢的腕骨」應為「上肢的腕骨」。）</i></p>
+</section>
+
+<section class="page" id="p-L2-b" data-title="骨的構造・發育・恆定" data-group="第2講 骨骼系統（中軸骨・上肢）">
+<h2>骨骼的巨觀構造（以長骨／肱骨為例）</h2>
+<figure class="fig"><img src="figs/L2-p015.jpg" alt="長骨構造圖"><figcaption>圖5-2 骨骼的構造（講義 p.15）</figcaption></figure>
+<table class="tbl">
+<thead><tr><th>構造</th><th>說明</th></tr></thead>
+<tbody>
+<tr><td><span class="term">骨幹<i>diaphysis</i></span></td><td>長軸主要部分。由外而內：骨外膜→緻密骨→骨內膜→海綿骨→骨髓腔</td></tr>
+<tr><td><span class="term">骨骺<i>epiphysis</i></span></td><td>兩端，通常比骨幹寬；外層薄緻密骨，中間疏鬆海綿骨</td></tr>
+<tr><td><span class="term">幹骺端<i>metaphysis</i></span></td><td>骨幹與骨骺之間；含<span class="term">骨骺板<i>epiphyseal plate</i></span>（使骨變長）；骨化成<span class="term">骨骺線<i>epiphyseal line</i></span>後，長度生長停止</td></tr>
+<tr><td><span class="term">關節軟骨<i>articular cartilage</i></span></td><td>覆蓋關節面的薄層透明軟骨；<b>此處沒有骨外膜</b></td></tr>
+<tr><td><span class="term">骨外膜<i>periosteum</i></span></td><td>覆於骨表面的緻密白纖維（關節軟骨除外）。外層<b>纖維層</b>（結締組織，含進入骨的血管、淋巴管、神經）；內層<b>生骨層</b>（彈性纖維、血管、造骨細胞、蝕骨細胞）。對骨的<b>生長、修復、營養</b>很重要，是韌帶與肌腱附著處。<span class="term">夏氏纖維<i>Sharpey's fiber</i></span>延伸進骨基質使其附著</td></tr>
+<tr><td><span class="term">骨內膜<i>endosteum</i></span></td><td>襯於骨髓腔的一層造骨細胞，散布蝕骨細胞</td></tr>
+<tr><td><span class="term">骨髓腔<i>marrow cavity</i></span></td><td>骨幹中的空腔；成人內含脂肪＝黃骨髓，散布少許血球</td></tr>
+</tbody></table>
+<p><b>扁平骨</b>：兩面薄層緻密骨板，中間夾海綿骨＝<b>板障 diploe</b>（如頂骨、額骨）；表面有骨外膜，空腔襯骨內膜。</p>
+<div class="trap"><p class="lbl">易混淆</p><p>骨外膜（外表面，含生骨層）vs 骨內膜（襯骨髓腔）；骨骺板（生長中，軟骨）vs 骨骺線（成年後骨化的殘跡，不再長高）。</p></div>
+
+<h2>骨骼的微觀構造</h2>
+<figure class="fig"><img src="figs/L2-p021.jpg" alt="圖5-3 典型骨骼組織結構"><figcaption>圖5-3 典型骨骼組織的結構（講義 p.21）</figcaption></figure>
+<p>鈣化的細胞間質＝骨質，呈板層狀＝<span class="term">骨板<i>lamella</i></span>。骨內的空間供血管通過、供應營養並減輕重量。</p>
+<h3>緻密骨 compact bone</h3>
+<ul>
+<li>分布於長骨骨幹與扁平骨表層；保護、支持、承受壓力。</li>
+<li>基本單位：<span class="term">哈氏系統<i>Haversian system</i></span>＝<span class="term">骨元<i>osteon</i></span>。</li>
+<li><span class="term">哈氏管<i>Haversian canal</i></span>（中央管 central canal）：與骨長軸<b>平行</b>，被同心圓骨板環繞，內有神經、血管。</li>
+<li><span class="term">佛氏管<i>Volkmann's canal</i></span>（穿通管 perforating canal）：與長軸<b>垂直</b>，連通骨外膜的血管神經與哈氏管、骨髓腔。</li>
+<li><span class="term">陷窩<i>lacunae</i></span>（骨隙）：骨板間的小空隙，含成熟<b>骨細胞</b>；陷窩間以<span class="term">骨小管<i>canaliculi</i></span>（含骨細胞突起）相連，並通到哈氏管，使營養進入、廢物排出。</li>
+<li><span class="term">間骨板<i>interstitial lamella</i></span>：骨元之間不完整的骨板，是重塑時舊骨元被破壞後的殘片；含陷窩、骨細胞、骨小管，但通常與骨元不相通。</li>
+</ul>
+<div class="trap"><p class="lbl">易混淆</p><p>哈氏管＝縱向（平行長軸）；佛氏管＝橫向（垂直長軸）。</p></div>
+<h3>海綿骨 spongy bone</h3>
+<ul>
+<li>疏鬆多孔，由不規則的<span class="term">骨小樑<i>trabecula</i></span>構成；骨小樑內有陷窩、骨細胞、骨小管。</li>
+<li>某些骨的骨小樑間隙充滿<b>紅骨髓</b>。</li>
+<li>血管自骨外膜穿入；骨小樑內骨細胞<b>直接從骨髓腔循環血液獲得營養</b>（不靠哈氏管）。</li>
+</ul>
+
+<h2>骨骼的發育與生長</h2>
+<h3>骨化 ossification</h3>
+<ul>
+<li>骨組織源自<span class="term">間葉細胞<i>mesenchymal cell</i></span>（胚胎結締組織細胞）。</li>
+<li>胚胎<b>第 6 週</b>時骨骼完全由纖維膜與透明軟骨構成，之後開始骨化。</li>
+<li>無血管區：間葉細胞→<span class="term">軟骨母細胞<i>chondroblast</i></span>（形成軟骨）；有血管處→造骨細胞（形成硬骨）。</li>
+<li>膜內與軟骨內骨化產生的都是硬骨，只是形成過程與形狀不同。</li>
+</ul>
+<table class="tbl">
+<thead><tr><th>類型</th><th>特點</th><th>例子</th></tr></thead>
+<tbody>
+<tr><td><span class="term">膜內骨化<i>intramembranous ossification</i></span></td><td>在<b>纖維膜上或膜內</b>形成，較單純直接。過程：形成骨化中心→形成骨基質（類骨質）→形成海綿骨（骨小樑）→形成緻密骨板</td><td>頭顱的扁平骨（如頂骨）、<b>鎖骨</b></td></tr>
+<tr><td><span class="term">軟骨內骨化<i>endochondral ossification</i></span></td><td>透明軟骨被骨組織取代；<b>人體大多數骨骼</b>（含部分頭顱骨）的形成方式</td><td>脛骨（講義範例）</td></tr>
+</tbody></table>
+<figure class="fig two"><img src="figs/L2-p026.jpg" alt="圖5-4 膜內骨化"><img src="figs/L2-p027.jpg" alt="圖5-5 軟骨內骨化（脛骨）"><figcaption>左：膜內骨化（講義 p.26）；右：軟骨內骨化，以脛骨為例（講義 p.27）</figcaption></figure>
+<div class="key"><p class="lbl">必背重點</p><p>軟骨內骨化九步（圖5-5）：①軟骨模子→②硬骨環形成→③初級骨化中心→④血管進入→⑤骨髓腔形成→⑥硬骨環加厚→⑦次級骨化中心形成→⑧殘留軟骨形成骨骺板與關節軟骨→⑨骨骺線形成。</p></div>
+
+<h3>骨的生長（骨骺板的四區）</h3>
+<figure class="fig"><img src="figs/L2-p028.jpg" alt="圖5-6 骨骺板構造"><figcaption>圖5-6 骨骺板的構造（講義 p.28）</figcaption></figure>
+<ol>
+<li><span class="term">靜止軟骨區<i>zone of resting cartilage</i></span>：緊鄰骨骺，基質中小軟骨細胞不規則排列。</li>
+<li><span class="term">增生軟骨區<i>zone of proliferating cartilage</i></span>：較大軟骨細胞排成疊硬幣狀。</li>
+<li><span class="term">肥大軟骨區<i>zone of hypertrophying cartilage</i></span>：大小一致、排成柱狀的較大軟骨細胞，愈成熟愈靠近骨幹。</li>
+<li><span class="term">鈣化軟骨區<i>zone of calcifying cartilage</i></span>：細胞大多死亡，基質鈣化，被蝕骨細胞佔據；造骨細胞與微血管自骨幹侵入，使骨骺板牢固接於骨幹。</li>
+</ol>
+<div class="mn"><p class="lbl">記憶口訣</p><p>由骨骺往骨幹：「靜、增、肥、鈣」。</p></div>
+<ul>
+<li><b>骨幹增長的唯一機轉＝骨骺板的活性。</b></li>
+<li>直徑與長度同時增長：骨髓腔表面硬骨被破壞，髓腔變大；同時骨外膜造骨細胞在外表面加入新硬骨。</li>
+<li>骨骺板在<b>女性約 18 歲、男性約 20 歲</b>停止分裂並被硬骨取代成骨骺線；骨骺線一出現，長度生長即停止。</li>
+<li>多數硬骨約 <b>25 歲</b>完成骨化；<b>鎖骨是最後停止生長的硬骨</b>。</li>
+</ul>
+
+<h2>骨骼的恆定與重塑</h2>
+<ul>
+<li><span class="term">骨骼重塑<i>remodeling</i></span>：新骨基質（主要為鈣質）不斷堆積，同時舊骨基質被再吸收入血。正常時兩者速率相當，維持<span class="term">骨骼恆定<i>bone homeostasis</i></span>。</li>
+<li><b>造骨細胞＝堆積新骨；蝕骨細胞＝分解舊骨</b>，兩者活性平衡。</li>
+<li>蝕骨細胞產生突起，分泌來自<b>溶小體</b>的蛋白質水解酶，以及<b>乳酸與枸櫞酸</b>：酶消化膠原蛋白及有機物，酸溶解礦物鹽。</li>
+<li>每年約 <b>18%</b> 的骨礦物質被重塑；股骨遠端舊基質約 <b>5 個月</b>更換一次，骨幹慢得多，有些骨終生不會完全替換。</li>
+</ul>
+<h3>影響骨重塑的因素（表5-2）</h3>
+<figure class="fig"><img src="figs/L2-p033.jpg" alt="表5-2 影響骨骼重塑速率的因素"><figcaption>表5-2 影響人體骨骼重塑速率的因素（講義 p.33）</figcaption></figure>
+<table class="tbl">
+<thead><tr><th>因素</th><th>作用</th></tr></thead>
+<tbody>
+<tr><td>鈣、磷</td><td>使骨堅硬的主要鹽類，須由飲食攝取足量</td></tr>
+<tr><td>維生素 A</td><td>控制造骨細胞的活性</td></tr>
+<tr><td>維生素 C</td><td>造骨細胞合成骨質中膠原纖維所需</td></tr>
+<tr><td>維生素 D</td><td>控制消化道對鈣質的吸收</td></tr>
+<tr><td>生長激素 GH</td><td>腦下垂體前葉分泌，負責骨骼一般生長</td></tr>
+<tr><td>降鈣素 CT</td><td>甲狀腺分泌；抑制蝕骨細胞，鈣堆積於骨，<b>血鈣下降</b></td></tr>
+<tr><td>副甲狀腺素 PTH</td><td>副甲狀腺分泌；增加蝕骨細胞活性與數目，骨分解，<b>血鈣上升</b></td></tr>
+<tr><td>性激素</td><td>促進造骨細胞活性使骨生長；同時使骨骺板軟骨退化成骨骺線，故過早進入青春期會限制身高</td></tr>
+<tr><td>壓力與重力</td><td>受肌肉拉力與體重壓力大，重塑較快，運動足夠者骨較堅厚</td></tr>
+</tbody></table>
+<div class="trap"><p class="lbl">易混淆</p><p>降鈣素（甲狀腺，抑制蝕骨→血鈣降）vs 副甲狀腺素（副甲狀腺，活化蝕骨→血鈣升）；維生素 D 管腸道吸收鈣，維生素 C 管膠原合成，維生素 A 管造骨細胞活性。</p></div>
+
+<h3>骨折修復（講義 p.34）</h3>
+<figure class="fig"><img src="figs/L2-p034.jpg" alt="骨折修復步驟"><figcaption>骨折修復的步驟（講義 p.34）</figcaption></figure>
+<ol>
+<li>骨折後大量出血，數小時後形成血塊／<b>骨折血腫 fracture hematoma</b>。</li>
+<li>內側緣形成<b>骨內痂</b>（海綿骨網），同時外側形成<b>骨外痂</b>（軟骨→被硬骨穩固外側）。</li>
+<li>骨外痂軟骨被硬骨取代，海綿骨支柱連接斷骨兩端；碎片被移除。</li>
+<li>骨折處初看腫脹，經<b>重塑</b>後僅剩一點痕跡。</li>
+</ol>
+
+<h3>骨骼老化與骨質疏鬆</h3>
+<ul>
+<li><b>鈣自骨喪失</b>→<span class="term">骨質疏鬆症<i>osteoporosis</i></span>：女性約 40 歲起開始流失，70 歲約流失 70%（依講義）；男性約 60 歲後才開始。</li>
+<li><b>蛋白質合成率降低</b>→有機基質形成能力下降，骨變脆易折。</li>
+<li>骨質疏鬆（講義 p.36）：超過 45 歲女性約 <b>29%</b> 有骨質疏鬆，停經後加速，主要與<b>雌激素減少</b>有關；同齡男性約 18%。預防：補充雌激素、增加鈣質攝取、運動刺激骨細胞；只能減緩，不能完全避免。</li>
+</ul>
+
+<h2>骨骼的表面標記（表5-3）</h2>
+<p>長骨有大而圓的兩端形成強固關節，相關節的骨有凹陷；粗糙區供肌肉、肌腱、韌帶附著；溝供血管神經通過；裂、孔是血管神經通過的開口。</p>
+<figure class="fig two"><img src="figs/L2-p039.jpg" alt="表5-3 骨骼表面標記（凹陷及裂口）"><img src="figs/L2-p040.jpg" alt="表5-3 骨骼表面標記（關節突起、附著突起）"><figcaption>表5-3 骨骼的表面標記（講義 p.39–40）</figcaption></figure>
+<table class="tbl">
+<thead><tr><th>分類</th><th>標記</th><th>描述</th><th>例子</th></tr></thead>
+<tbody>
+<tr><td rowspan="7">凹陷及裂口</td><td>裂 fissure</td><td>相鄰骨間窄溝或小裂縫，有血管神經通過</td><td>蝶骨眶上裂</td></tr>
+<tr><td>孔 foramen</td><td>神經、血管或韌帶通過的開口</td><td>眶下孔、頦孔、枕骨大孔</td></tr>
+<tr><td>管道 meatus / canal</td><td>骨內管狀通道</td><td>顳骨外耳道</td></tr>
+<tr><td>竇 sinus</td><td>骨內含空氣與黏膜的空腔</td><td>額竇、蝶竇、篩竇、上頜竇</td></tr>
+<tr><td>溝 groove</td><td>溝狀構造，容納神經、血管、肌腱</td><td>肱骨結節間溝</td></tr>
+<tr><td>窩 fossa</td><td>骨內或表面的凹陷</td><td>下頜窩、髂窩</td></tr>
+<tr><td>切迹 notch</td><td>邊緣的深凹陷</td><td>尺骨橈骨切迹</td></tr>
+<tr><td rowspan="5">形成關節的突起</td><td>髁 condyle</td><td>大而圓的關節突起</td><td>股骨內髁</td></tr>
+<tr><td>頭 head</td><td>頸部所支撐的圓形關節突起</td><td>股骨頭、肱骨頭、橈骨頭</td></tr>
+<tr><td>小頭 capitulum</td><td>小的圓形關節突起</td><td>肱骨小頭</td></tr>
+<tr><td>小面 facet</td><td>光滑平坦表面</td><td>脊椎骨肋骨關節面</td></tr>
+<tr><td>滑車 trochlea</td><td>凹溝狀表面</td><td>肱骨滑車</td></tr>
+<tr><td rowspan="7">肌肉／韌帶附著的突起</td><td>結節 tubercle</td><td>小而圓的突起</td><td>肱骨大、小結節</td></tr>
+<tr><td>粗隆 tuberosity</td><td>大而圓的隆起，表面粗糙</td><td>髖骨坐骨粗隆</td></tr>
+<tr><td>轉子 trochanter</td><td>大而鈍的突起</td><td>股骨大、小轉子</td></tr>
+<tr><td>嵴 crest</td><td>明顯的邊緣或隆起線</td><td>髖骨髂嵴</td></tr>
+<tr><td>線 line</td><td>較不明顯的隆起線</td><td>股骨粗線</td></tr>
+<tr><td>棘 spine</td><td>尖而細的突起</td><td>脊椎棘突、肩胛棘</td></tr>
+<tr><td>上髁 epicondyle</td><td>髁上方的突起</td><td>股骨內上髁</td></tr>
+</tbody></table>
+<p>另：<b>突起 process</b>＝骨上任何明顯突出構造（例：顳骨乳突、莖突）。</p>
+<div class="trap"><p class="lbl">易混淆</p><p>髁（大圓，關節用）vs 上髁（髁上方，肌肉附著）；結節（小）vs 粗隆（大、粗糙）vs 轉子（大而鈍，股骨專用）；頭（有頸支撐）vs 小頭 capitulum。</p></div>
+</section>
+
+<section class="page" id="p-L2-c" data-title="頭顱骨" data-group="第2講 骨骼系統（中軸骨・上肢）">
+<h2>中軸骨骼與頭顱骨</h2>
+<p>中軸骨骼包括頭顱骨、胸骨、脊椎骨及一些軟骨構造，功能為支持並保護頭頸部與體幹內器官。<span class="term">頭顱骨<i>skull</i></span>位於脊柱上端，共 <b>22 塊</b>，分為<span class="term">腦顱骨<i>cranial bones</i></span>（8）與<span class="term">顏面骨<i>facial bones</i></span>（14）。</p>
+<table class="tbl">
+<thead><tr><th>腦顱骨（8）</th><th>塊數</th><th>顏面骨（14）</th><th>塊數</th></tr></thead>
+<tbody>
+<tr><td>額骨 frontal</td><td>1</td><td>鼻骨 nasal</td><td>2</td></tr>
+<tr><td>頂骨 parietal</td><td>2</td><td>上頜骨 maxilla</td><td>2</td></tr>
+<tr><td>顳骨 temporal</td><td>2</td><td>顴骨 zygomatic</td><td>2</td></tr>
+<tr><td>枕骨 occipital</td><td>1</td><td>下頜骨 mandible</td><td>1</td></tr>
+<tr><td>蝶骨 sphenoid</td><td>1</td><td>淚骨 lacrimal</td><td>2</td></tr>
+<tr><td>篩骨 ethmoid</td><td>1</td><td>腭骨 palatine</td><td>2</td></tr>
+<tr><td></td><td></td><td>下鼻甲 inferior nasal concha</td><td>2</td></tr>
+<tr><td></td><td></td><td>犁骨 vomer</td><td>1</td></tr>
+</tbody></table>
+<div class="mn"><p class="lbl">記憶口訣</p><p>腦顱「額頂顳枕蝶篩」＝1+2+2+1+1+1＝8；顏面「鼻上顴下淚腭下犁」＝2+2+2+1+2+2+2+1＝14。</p></div>
+<ul>
+<li>腦顱骨：包圍保護腦，提供頭頸肌肉附著。</li>
+<li>顏面骨：顏面支架、顏面肌附著、穩固牙齒；安置視覺、嗅覺、味覺器官；空氣與食物通道。</li>
+</ul>
+
+<h3>骨縫 suture 與囟門 fontanel</h3>
+<p><span class="term">骨縫<i>suture</i></span>是僅存在於頭顱骨間的<b>不動關節</b>，只含極少結締組織。</p>
+<table class="tbl">
+<thead><tr><th>骨縫</th><th>位置</th></tr></thead>
+<tbody>
+<tr><td>冠狀縫 coronal</td><td>額骨與頂骨之間</td></tr>
+<tr><td>矢狀縫 sagittal</td><td>兩塊頂骨之間</td></tr>
+<tr><td>人字縫 lambdoidal</td><td>頂骨與枕骨之間</td></tr>
+<tr><td>鱗縫 squamosal</td><td>頂骨與顳骨之間</td></tr>
+</tbody></table>
+<p><span class="term">囟門<i>fontanel</i></span>：初生嬰兒腦顱骨之間由膜填充的空間，是骨化尚未完成處，使頭顱在生產時可被壓縮通過產道。</p>
+<figure class="fig two"><img src="figs/L2-p054.jpg" alt="圖5-10 囟門（上面觀）"><img src="figs/L2-p055.jpg" alt="囟門整理表"><figcaption>囟門（講義 p.54–55）</figcaption></figure>
+<table class="tbl">
+<thead><tr><th>囟門</th><th>別名</th><th>位置與形狀</th><th>閉合時間</th></tr></thead>
+<tbody>
+<tr><td>前囟 anterior</td><td>額囟</td><td>兩頂骨與額骨、冠狀縫與矢狀縫交會處；<b>最大</b>、菱形</td><td>出生後 <b>12～18 個月</b></td></tr>
+<tr><td>後囟 posterior</td><td>枕囟</td><td>兩頂骨與枕骨、矢狀縫與人字縫之間；三角形、較小</td><td>出生後 <b>2～3 個月</b></td></tr>
+<tr><td>前外側囟 anterolateral</td><td>蝶囟</td><td>成對，額骨、頂骨、顳骨、蝶骨交會處；很小、不規則</td><td>出生後 <b>3 個月</b></td></tr>
+<tr><td>後外側囟 posterolateral</td><td>乳突囟</td><td>成對，頂骨、枕骨、顳骨交會處；不規則</td><td>出生後 <b>12 個月</b></td></tr>
+</tbody></table>
+<div class="trap"><p class="lbl">易混淆</p><p>前囟最大、閉合最晚（12–18 月）；後囟最小的單一囟、最早閉合（2–3 月）。外側囟成對：前外側＝蝶囟，後外側＝乳突囟。</p></div>
+
+<h3>頭顱骨的孔、裂、管（表5-4）</h3>
+<figure class="fig two"><img src="figs/L2-p058.jpg" alt="表5-4 頭顱骨孔裂管（上）"><img src="figs/L2-p059.jpg" alt="表5-4 頭顱骨孔裂管（下）"><figcaption>表5-4 頭顱骨的孔、裂、管構造摘要（講義 p.58–59）</figcaption></figure>
+<table class="tbl">
+<thead><tr><th>骨</th><th>孔／裂／管</th><th>位置</th><th>通過構造</th></tr></thead>
+<tbody>
+<tr><td>額骨</td><td>眶上孔 supraorbital foramen（或眶上切迹）</td><td>眼眶上緣</td><td>眶上神經及血管</td></tr>
+<tr><td rowspan="4">顳骨</td><td>頸動脈管 carotid canal</td><td>岩部</td><td>頸內動脈</td></tr>
+<tr><td>頸靜脈孔 jugular foramen</td><td>枕骨與顳骨岩部間</td><td>頸內靜脈、舌咽神經、迷走神經、脊副神經</td></tr>
+<tr><td>莖乳孔 stylomastoid foramen</td><td>莖突與乳突間</td><td>顏面神經</td></tr>
+<tr><td>內耳道 internal auditory meatus</td><td>顱底內岩部</td><td>顏面神經、前庭耳蝸神經、內耳動脈</td></tr>
+<tr><td rowspan="2">枕骨</td><td>枕骨大孔 foramen magnum</td><td>枕骨</td><td>延髓、副神經脊髓根、椎動脈、椎靜脈</td></tr>
+<tr><td>舌下神經管 hypoglossal canal</td><td>枕髁上方</td><td>舌下神經</td></tr>
+<tr><td rowspan="6">蝶骨</td><td>眶上裂 superior orbital fissure</td><td>大翼與小翼間</td><td>動眼神經、滑車神經、三叉神經眼枝、外展神經</td></tr>
+<tr><td>眶下裂 inferior orbital fissure</td><td>蝶骨大翼與上頜骨間</td><td>三叉神經上頜枝、眶下血管</td></tr>
+<tr><td>視神經孔 optic foramen</td><td>小翼</td><td>視神經及（眼）動脈</td></tr>
+<tr><td>卵圓孔 foramen ovale</td><td>大翼</td><td>三叉神經下頜枝</td></tr>
+<tr><td>圓孔 foramen rotundum</td><td>大翼</td><td>三叉神經上頜枝</td></tr>
+<tr><td>棘孔 foramen spinosum</td><td>大翼</td><td>腦膜中動脈</td></tr>
+<tr><td>篩骨</td><td>嗅孔（篩孔）olfactory foramina</td><td>篩板</td><td>嗅神經</td></tr>
+<tr><td rowspan="2">上頜骨</td><td>門齒孔 incisive foramen</td><td>上顎門齒後方</td><td>三叉神經上頜枝之分枝</td></tr>
+<tr><td>眶下孔 infraorbital foramen</td><td>眶下部位</td><td>眶下神經及血管</td></tr>
+<tr><td rowspan="2">下頜骨</td><td>下頜孔 mandibular foramen</td><td>下頜枝內側面</td><td>下齒槽神經及血管</td></tr>
+<tr><td>頦孔 mental foramen</td><td>第二前臼齒下方</td><td>頦神經及血管</td></tr>
+<tr><td rowspan="2">腭骨</td><td>腭大孔 greater palatine foramina</td><td>硬腭後部</td><td>腭大神經及血管</td></tr>
+<tr><td>腭小孔 lesser palatine foramina</td><td>硬腭後部、腭大孔後面</td><td>腭小神經及血管</td></tr>
+</tbody></table>
+<div class="mn"><p class="lbl">記憶口訣</p><p>蝶骨大翼由前到後「圓→卵→棘」：圓孔＝V2 上頜枝、卵圓孔＝V3 下頜枝、棘孔＝腦膜中動脈（三叉神經：眼枝 V1 走眶上裂）。</p></div>
+
+<h2>腦顱骨各論</h2>
+<h3>額骨 frontal bone</h3>
+<ul>
+<li>形成前額、眼眶頂及顱底前部大部分。出生時由<span class="term">額縫<i>metopic suture</i></span>分左右兩半，約 <b>6 歲</b>消失合為一塊。</li>
+<li>額隆凸 frontal eminence；<span class="term">眶上緣<i>supraorbital margin</i></span>，中點稍內側有眶上孔／眶上切迹（眶上神經、血管）。</li>
+<li><span class="term">眉間<i>glabella</i></span>：兩眼眶間平滑部分，其深部有骨性空腔＝<span class="term">額竇<i>frontal sinus</i></span>。</li>
+</ul>
+<h3>頂骨 parietal bone</h3>
+<p>兩塊構成顱腔兩側及頂部大部分；外側面有顳肌附著的上顳線與下顳線；內面有腦膜血管壓迹。</p>
+<h3>顳骨 temporal bone（四部分）</h3>
+<table class="tbl">
+<thead><tr><th>部分</th><th>重點構造</th></tr></thead>
+<tbody>
+<tr><td>鱗部 squamous</td><td>單薄廣大；<b>顴突</b>（與顴骨<b>顳突</b>共同形成<span class="term">顴弓<i>zygomatic arch</i></span>）；<b>下頜窩</b>與關節結節，與下頜骨髁突形成<span class="term">顳下頜關節<i>TMJ</i></span>（頭顱骨中唯一可動關節）</td></tr>
+<tr><td>鼓室部 tympanic</td><td>位於<b>外耳道</b>周圍；向下突出<b>莖突 styloid process</b>（肌肉韌帶附著）；內部有鼓室</td></tr>
+<tr><td>乳突部 mastoid</td><td>外耳道後下方，內有很多小氣室；乳突與莖突之間為<b>莖乳孔</b>（顏面神經主要分枝穿出，分布到表情肌）</td></tr>
+<tr><td>岩部 petrous</td><td>顱底內面；含<b>內耳</b>（聽覺器官主要部分）；<b>頸動脈管</b>（頸內動脈）；其上方<b>內耳道</b>；與枕骨相鄰處<b>頸靜脈孔</b></td></tr>
+</tbody></table>
+<h3>枕骨 occipital bone</h3>
+<ul>
+<li><span class="term">枕骨大孔<i>foramen magnum</i></span>：延髓與脊髓的分界處；外側有<b>舌下神經管</b>。</li>
+<li><span class="term">枕髁<i>occipital condyle</i></span>：枕骨大孔兩側橢圓突起，與第一頸椎（寰椎）上關節面形成<b>枕寰關節</b>（點頭）。</li>
+<li><span class="term">枕外粗隆<i>external occipital protuberance</i></span>：往下延伸成枕嵴（<b>項韌帶</b>附著）；向外側形成上項線（頸部上限）、下項線。<b>枕內粗隆</b>在內面後方。</li>
+</ul>
+<h3>蝶骨 sphenoid bone</h3>
+<p>位於顱底中央，形似展翅蝴蝶；參與形成前顱窩、中顱窩。</p>
+<ul>
+<li><b>蝶骨體</b>：位於篩骨與枕骨之間；內有一對<span class="term">蝶竇<i>sphenoidal sinus</i></span>（引流至鼻腔）；上面鞍狀凹陷＝<span class="term">蝶鞍<i>sella turcica</i></span>（<b>腦下垂體窩</b>）。</li>
+<li><b>大翼</b>：形成顱底前外側部及部分側壁；有<b>圓孔、卵圓孔、棘孔</b>。</li>
+<li><b>小翼</b>：形成部分顱底與眼眶後部；有<b>視神經孔</b>（視神經；視神經管有眼動脈）；小翼與大翼間三角形裂縫＝<b>眶上裂</b>。</li>
+<li><b>翼突</b>：蝶骨下部，形成鼻腔側壁一部分。</li>
+</ul>
+<h3>篩骨 ethmoid bone</h3>
+<p>位於顱底前部、左右眼眶間、鼻中隔上面的鬆質骨；前為鼻骨，後為蝶骨。</p>
+<ul>
+<li><b>水平板</b>：顱底前部一部分，並形成鼻腔頂；<span class="term">篩板<i>cribriform plate</i></span>有嗅孔（嗅神經）；<span class="term">雞冠<i>crista galli</i></span>有硬腦膜附著。</li>
+<li><b>垂直板</b>：構成鼻中隔上部。</li>
+<li><b>外側塊</b>：眼眶與鼻腔間主要分隔，含<b>篩竇</b>；有上鼻甲、中鼻甲（使空氣得到循流與過濾）；外側面為<b>眼眶板</b>。</li>
+</ul>
+
+<h2>顏面骨各論</h2>
+<table class="tbl">
+<thead><tr><th>骨</th><th>重點</th></tr></thead>
+<tbody>
+<tr><td>鼻骨</td><td>成對薄長小骨，構成鼻樑上半；下半主要由軟骨構成</td></tr>
+<tr><td>顴骨</td><td>形成臉頰突出部分與眼眶底一部分；其<b>顳突</b>＋顳骨<b>顴突</b>＝顴弓</td></tr>
+<tr><td>上頜骨</td><td>成對結合成上顎；構成眼眶底、口腔頂一部分、鼻腔底與側壁一部分；與<b>除下頜骨外</b>的顏面骨皆形成關節。與蝶骨大翼間有<b>眶下裂</b>，眶下部有<b>眶下孔</b>。五部分：①體部（含<b>上頜竇</b>，最大副鼻竇）②齒槽突（齒槽、齒槽弓）③腭突（形成硬腭前 <b>3/4</b>）④額突（伸向額骨）⑤顴突（伸向顴骨）</td></tr>
+<tr><td>腭骨</td><td>成對<b>L 字型</b>；水平板形成硬腭後 <b>1/4</b>；亦構成鼻腔外側壁與底、眼眶底一小部分</td></tr>
+<tr><td>下頜骨</td><td><b>顏面骨中最大最強壯，頭顱骨中唯一能動的骨</b>；水平的體部＋兩個垂直的下頜枝；體與枝交會＝下頜角；<b>髁突</b>（後，與下頜窩形成 TMJ）、<b>冠狀突</b>（前，顳肌附著），兩者間為下頜切迹；齒槽突容納下頜牙齒；<b>頦孔</b>（第二前臼齒下）；<b>下頜孔</b>（枝內側面）；兩孔間＝下頜管</td></tr>
+<tr><td>淚骨</td><td>成對、指甲大小，<b>顏面骨中最小</b>；位於鼻骨後外側，構成眼眶內側壁；淚溝與上頜骨形成<b>淚窩</b>（淚囊），鼻淚管通往<b>下鼻道</b></td></tr>
+<tr><td>下鼻甲</td><td>渦卷形、<b>獨立的骨</b>（非篩骨一部分），功能同上、中鼻甲</td></tr>
+<tr><td>犁骨</td><td>三角形，形成鼻中隔<b>後下部</b>；犁骨＋篩骨垂直板＋鼻中隔軟骨＝鼻中隔</td></tr>
+</tbody></table>
+<div class="trap"><p class="lbl">易混淆</p><p>顴弓＝顳骨的<b>顴突</b>＋顴骨的<b>顳突</b>（名稱互相交叉）。硬腭＝上頜骨腭突（前 3/4）＋腭骨水平板（後 1/4）。上、中鼻甲屬篩骨；下鼻甲是獨立骨。</p></div>
+
+<h3>其他：聽小骨與舌骨</h3>
+<ul>
+<li><span class="term">聽小骨<i>auditory ossicle</i></span>：位於顳骨鼓室，每側 3 塊共 6 塊：<b>鎚骨 malleus</b>（附鼓膜）、<b>砧骨 incus</b>、<b>鐙骨 stapes</b>（底部接<b>卵圓窗</b>，人體最小骨）。功能：把鼓膜聲波振動傳入內耳。</li>
+<li><span class="term">舌骨<i>hyoid bone</i></span>：位於下頜骨與喉之間，<b>不與其他骨形成關節</b>，以韌帶與肌肉懸於顳骨莖突；支持舌頭；含水平體部、一對小角、一對大角。</li>
+</ul>
+
+<h2>頭顱的相關結構</h2>
+<h3>眼眶 orbit</h3>
+<p>左右各一，由 <b>7 塊骨</b>圍成的錐形骨窩：額骨、上頜骨、顴骨、蝶骨、腭骨、淚骨、篩骨。有眶上裂、眶下裂、視神經孔；容納眼球、肌肉與腺體。</p>
+<h3>鼻腔 nasal cavity</h3>
+<ul>
+<li>位於顱腔與口腔間，由<b>鼻中隔</b>分左右；鼻中隔前部為軟骨，後部硬骨由篩骨垂直板與犁骨構成。</li>
+<li><b>頂</b>：篩骨篩板（與顱腔分界；撞擊破損時<b>腦脊髓液可能由鼻孔流出</b>）。</li>
+<li><b>底</b>：硬腭（上頜骨腭突＋腭骨水平板），與口腔分界。</li>
+<li><b>外側壁</b>：上、中、下鼻甲與上頜骨；各鼻甲下方為上、中、下<b>鼻道 meatus</b>。上、中鼻道有副鼻竇開口；<b>下鼻道有鼻淚管開口</b>。</li>
+</ul>
+<h3>副鼻竇 paranasal sinus</h3>
+<ul>
+<li>額骨、蝶骨、篩骨、上頜骨內的氣室，左右對稱：<b>額竇、蝶竇、篩竇、上頜竇</b>；功能：<b>減輕顱骨重量、作為聲音共鳴箱</b>。</li>
+<li>引流：<b>蝶竇、後篩竇→上鼻道</b>；<b>額竇、前篩竇、中篩竇、上頜竇→中鼻道</b>。</li>
+<li>黏膜與鼻腔相連，過敏或感染時可引起<span class="term">鼻竇炎<i>sinusitis</i></span>。</li>
+</ul>
+<div class="trap"><p class="lbl">易混淆</p><p>上頜竇是最大的副鼻竇，卻引流到<b>中</b>鼻道；蝶竇引流到<b>上</b>鼻道；鼻淚管開口在<b>下</b>鼻道（不是副鼻竇）。</p></div>
+</section>
+
+<section class="page" id="p-L2-d" data-title="脊柱與胸廓" data-group="第2講 骨骼系統（中軸骨・上肢）">
+<h2>脊柱 vertebral column</h2>
+<ul>
+<li>由一串<span class="term">脊椎骨<i>vertebra</i></span>組成，成人平均長約 <b>71 公分</b>；包圍保護脊髓、支持頭部，供肋骨與背肌附著。</li>
+<li>成人脊柱 <b>26 塊</b>：頸椎 7、胸椎 12、腰椎 5、<b>薦骨</b>（5 塊薦椎癒合成 1）、<b>尾骨</b>（3–5 塊尾椎癒合成 1）。</li>
+<li><span class="term">椎間孔<i>intervertebral foramen</i></span>：脊髓神經通過。</li>
+<li>第二頸椎到薦骨，相鄰椎骨間有纖維軟骨的<span class="term">椎間盤<i>intervertebral disc</i></span>：外圍<span class="term">纖維環<i>annulus fibrosus</i></span>、中間<span class="term">髓核<i>nucleus pulposus</i></span>；形成強韌關節，使脊柱能前後、兩側運動，並吸收垂直震動；受壓時變扁變寬並由椎間隙突出（椎間盤突出）。</li>
+</ul>
+<div class="mn"><p class="lbl">記憶口訣</p><p>脊椎「7、12、5、5、3–5」＝頸、胸、腰、薦、尾；早（7 點）中（12 點）晚（5 點）。</p></div>
+
+<h3>脊柱的四個彎曲</h3>
+<table class="tbl">
+<thead><tr><th>彎曲</th><th>方向</th><th>類型</th><th>形成</th></tr></thead>
+<tbody>
+<tr><td>頸彎曲 cervical</td><td>往前凸</td><td><b>次發性 secondary</b></td><td>出生後約第 3 個月抬頭</td></tr>
+<tr><td>胸彎曲 thoracic</td><td>往後凹</td><td><b>原發性 primary</b></td><td>胎兒時即存在</td></tr>
+<tr><td>腰彎曲 lumbar</td><td>往前凸</td><td><b>次發性 secondary</b></td><td>站立及走路時</td></tr>
+<tr><td>薦彎曲 sacral</td><td>往後凹</td><td><b>原發性 primary</b></td><td>胎兒時即存在</td></tr>
+</tbody></table>
+<p>兩個前凸、兩個後凹。彎曲增加強度、幫助站立平衡、吸收走路震動、避免骨折。胎兒時脊柱只有單一往後凹的彎曲。</p>
+<div class="mn"><p class="lbl">記憶口訣</p><p>「頸腰前凸後天形成，胸薦後凹先天就有」。</p></div>
+
+<h3>典型椎骨構造</h3>
+<ul>
+<li><span class="term">椎體<i>vertebral body</i></span>：前方粗厚圓盤形，承受體重；上下緣粗糙供椎間盤附著。</li>
+<li><span class="term">椎弓<i>vertebral arch</i></span>：由一對短粗的<b>椎弓根 pedicle</b>與兩個扁平的<b>椎板 lamina</b>構成；椎弓根上下緣有切迹，相鄰切迹形成椎間孔。</li>
+<li><span class="term">椎孔<i>vertebral foramen</i></span>：椎體與椎弓間的空間；各椎孔連成<b>椎管 vertebral canal</b>，脊髓位於其內。</li>
+<li>突起（4 種 7 個）：<b>橫突</b>（2）、<b>棘突</b>（1）、<b>上關節突</b>（2）、<b>下關節突</b>（2）。</li>
+</ul>
+
+<h3>各區椎骨比較（表5-5）</h3>
+<figure class="fig"><img src="figs/L2-p097.jpg" alt="表5-5 脊椎結構成分比較"><figcaption>表5-5 脊椎結構成分的比較（講義 p.97）</figcaption></figure>
+<table class="tbl">
+<thead><tr><th>特徵</th><th>頸椎 C3–C7</th><th>胸椎 T1–T12</th><th>腰椎 L1–L5</th><th>薦椎 S1–S5</th></tr></thead>
+<tbody>
+<tr><td>椎體</td><td>小</td><td>中，有肋關節面</td><td>大</td><td>由基底往下逐漸變小</td></tr>
+<tr><td>椎孔</td><td>大，三角形</td><td>小，圓形（T1 三角形）</td><td>中，三角形</td><td>薦管</td></tr>
+<tr><td>橫突</td><td>小，有<b>橫突孔</b>（C7 可能無）</td><td>大、強壯，長度由 T1–T12 漸減；T1–T10 有肋關節面；無橫突孔</td><td>長、纖細；無橫突孔、無肋關節面</td><td>融合成薦外側嵴</td></tr>
+<tr><td>棘突</td><td>短（C3–C5）、長（C7）、<b>C2–C6 分叉</b></td><td>長，往後下傾斜</td><td>短、寬、方形、不分叉</td><td>薦正中嵴</td></tr>
+</tbody></table>
+<div class="trap"><p class="lbl">易混淆</p><p>橫突孔（椎動脈、靜脈通過）只在<b>頸椎</b>；肋關節面只在<b>胸椎</b>；腰椎體最大、棘突方形朝正後、不易觸摸。</p></div>
+
+<h3>頸椎 cervical vertebra（7 塊）</h3>
+<ul>
+<li>承受頭重並活動頸部；椎體比胸椎小、椎弓較大；C2–C6 棘突分叉；橫突孔有椎動脈與靜脈通過。</li>
+<li><b>C1 寰椎 atlas</b>：直接支撐頭，頸椎中最寬；環狀，由前弓、後弓、外側塊構成；<b>無椎體、無棘突</b>；上關節面（凹）與枕髁形成<b>枕寰關節</b>（點頭）；下關節面與 C2 形成<b>寰軸關節</b>（搖頭）；橫突及橫突孔都很大。</li>
+<li><b>C2 軸椎 axis</b>：有椎體，其上木栓狀<span class="term">齒狀突<i>odontoid process</i></span>突穿寰椎環形構造，形成寰軸關節；搖頭時作為旋軸。</li>
+<li><b>C3–C6</b>：典型頸椎。</li>
+<li><b>C7 隆椎 vertebra prominens</b>：棘突大、<b>不分叉</b>、末端結節狀，頸基部可摸到；<span class="term">項韌帶<i>ligamentum nuchae</i></span>連接 C7 棘突與枕外粗隆，幫助頭部彎曲與挺立。</li>
+</ul>
+<div class="trap"><p class="lbl">易混淆</p><p>枕寰關節（枕髁＋寰椎）＝<b>點頭</b>；寰軸關節（寰椎＋軸椎齒狀突）＝<b>搖頭</b>。</p></div>
+
+<h3>胸椎 thoracic vertebra（12 塊）</h3>
+<ul>
+<li>比頸椎強大；椎體由上而下愈來愈大；椎孔圓形（T1 三角形）；橫突長而厚、無橫突孔；<b>棘突長且朝下</b>。</li>
+<li>椎體上有與<b>肋骨頭</b>相關節的<b>全關節面（whole facet）或半關節面（demifacet）</b>；T1–T10 橫突有與肋骨結節關節的關節面。</li>
+</ul>
+<table class="tbl">
+<thead><tr><th>椎骨</th><th>椎體肋關節面</th></tr></thead>
+<tbody>
+<tr><td>T1</td><td>兩側上方各 1 個<b>全</b>關節面（接第 1 肋）；下方各 1 個半關節面（與 T2 上半關節面共成全面，接第 2 肋）</td></tr>
+<tr><td>T2–T8</td><td>每側有較大朝上半關節面＋較小朝下半關節面</td></tr>
+<tr><td>T9</td><td>每側僅 1 個朝上半關節面</td></tr>
+<tr><td>T10–T12</td><td>每側各 1 個全關節面</td></tr>
+</tbody></table>
+
+<h3>腰椎 lumbar vertebra（5 塊）</h3>
+<ul>
+<li>承受體重最大，椎體最大；椎孔窄小三角形（脊髓終止於 <b>L1</b> 附近）；突起短而厚。</li>
+<li>上關節突又稱<b>乳突 mammillary process</b>，上關節面朝內側、下關節面朝外側；棘突方形、厚寬、不分叉，朝正後方，覆有背部大肌肉，不易觸摸。</li>
+<li>橫突較短、較水平，無橫突孔、無肋關節面。</li>
+</ul>
+
+<h3>薦骨 sacrum 與尾骨 coccyx</h3>
+<ul>
+<li>薦骨：5 塊薦椎融合成的<b>三角形</b>，位於骨盆腔後面、兩髖骨之間；上方基部與 L5 相關節，下方尖端與尾骨相關節。</li>
+<li><b>前面</b>凹陷平滑，有 4 條橫線（薦椎融合遺留），每線兩端有<b>前薦孔</b>（共 4 對）。</li>
+<li><b>後面</b>凸，中央<span class="term">薦正中嵴<i>median sacral crest</i></span>（棘突融合）、外側<span class="term">薦外側嵴<i>lateral sacral crest</i></span>（橫突融合）；有 4 對<b>後薦孔</b>（與前薦孔相通，神經血管通過）。</li>
+<li><span class="term">薦管<i>sacral canal</i></span>：脊椎管延續；第 5（甚至第 4）薦椎椎板未融合，下端留開口＝<span class="term">薦管裂孔<i>sacral hiatus</i></span>；兩側<b>薦角</b>以韌帶連尾骨的<b>尾骨角</b>。</li>
+<li><span class="term">薦岬<i>promontory</i></span>：薦骨上端突出前緣，產科測骨盆大小的標記；恥骨聯合上緣到薦岬的假想線＝腹腔與骨盆腔分界。</li>
+<li>外側<b>耳狀面 auricular surface</b>與髂骨關節＝<b>薦髂關節</b>；其背側粗糙面＝薦粗隆。</li>
+<li>尾骨：3–5 塊尾椎融合、倒三角形；與薦骨形成<b>薦尾關節</b>；尾骨角由第一尾椎椎弓根與上關節突組成。</li>
+</ul>
+
+<h2>胸廓 thoracic cage</h2>
+<ul>
+<li>由<b>胸骨、肋骨、肋軟骨、胸椎椎體</b>及附著胸壁肌構成；略呈圓錐狀，上窄下寬、前後扁；保護胸腔臟器並支持肩帶及上肢骨。</li>
+</ul>
+<h3>胸骨 sternum</h3>
+<p>位於前胸壁正中，扁平狹長，約 <b>15 公分</b>，由三部分構成：</p>
+<table class="tbl">
+<thead><tr><th>部分</th><th>重點</th></tr></thead>
+<tbody>
+<tr><td>胸骨柄 manubrium</td><td>上緣<b>頸靜脈切迹</b>；兩旁<b>鎖骨切迹</b>與鎖骨形成<b>胸鎖關節</b>；側面第 1、2 肋骨切迹與第 1、2 肋軟骨關節</td></tr>
+<tr><td>胸骨體 body</td><td>直接或間接與第 <b>2–10</b> 肋軟骨關節；與柄相連處稍突起＝<span class="term">胸骨角<i>sternal angle</i></span>：對應<b>第 2 肋軟骨</b>、<b>氣管分叉</b>高度、上下縱隔腔分界</td></tr>
+<tr><td>劍突 xiphoid process</td><td>無肋骨附著，為部分腹肌附著點；嬰兒兒童時為軟骨，約 <b>40 歲</b>才完全骨化</td></tr>
+</tbody></table>
+<h3>肋骨 rib（12 對）</h3>
+<table class="tbl">
+<thead><tr><th>分類</th><th>對數</th><th>說明</th></tr></thead>
+<tbody>
+<tr><td><span class="term">真肋<i>true rib</i></span>（椎骨胸骨肋）</td><td>1–7</td><td>直接以肋軟骨連胸骨</td></tr>
+<tr><td><span class="term">假肋<i>false rib</i></span></td><td>8–12</td><td>不直接連胸骨</td></tr>
+<tr><td>　椎骨軟骨肋 vertebrochondral</td><td>8–10</td><td>肋軟骨接上位肋軟骨，間接經<b>第 7 肋軟骨</b>連胸骨</td></tr>
+<tr><td>　<span class="term">懸肋<i>floating rib</i></span>（椎骨肋 vertebral rib）</td><td>11–12</td><td>前端游離</td></tr>
+</tbody></table>
+<ul>
+<li>肋骨長度第 1→7 對漸增，第 7→12 對漸減；後方均與對應胸椎相關節。</li>
+<li><b>典型肋骨（第 3–9 對）</b>：<b>頭部</b>（楔狀，關節面被關節間嵴分隔，與胸椎椎體關節）→<b>頸部</b>→<b>結節</b>（頸體交界；非關節部供韌帶附著，關節部與胸椎橫突關節）→<b>體部</b>（骨幹；轉彎處＝<b>肋骨角</b>）；下內側的<b>肋溝 costal groove</b>保護血管神經。</li>
+</ul>
+<div class="mn"><p class="lbl">記憶口訣</p><p>真肋 1–7（七真）、假肋 8–12、懸肋 11–12（最後兩對），其中 8–10 為「假但有間接連結」。</p></div>
+<div class="trap"><p class="lbl">易混淆</p><p>假肋（8–12）包含懸肋（11–12）；懸肋是假肋的一部分，且真肋＋假肋＝12 對，胸廓骨共 25 塊（胸骨 1＋肋骨 24）。</p></div>
+</section>
+
+<section class="page" id="p-L2-e" data-title="肩帶與上肢骨" data-group="第2講 骨骼系統（中軸骨・上肢）">
+<h2>附肢骨骼與肩帶</h2>
+<p>附肢骨骼＝附著於中軸骨骼的骨：肩帶、骨盆帶、上肢骨、下肢骨。（本講義只講到上肢，下肢未涵蓋。）</p>
+<h3>肩帶 shoulder girdle（胸帶 pectoral girdle）</h3>
+<ul>
+<li>使上肢連於中軸骨骼；每側含 1 鎖骨＋1 肩胛骨（共 4 塊）。</li>
+<li>鎖骨在前，內側與胸骨形成<span class="term">胸鎖關節<i>sternoclavicular joint</i></span>，外側與肩胛骨關節；肩胛骨在後，與鎖骨和肱骨關節，<b>但不與脊柱關節</b>。</li>
+</ul>
+<h3>鎖骨 clavicle</h3>
+<ul>
+<li>成對、細長、<b>雙彎曲</b>，中央 2/3 向前凸；水平排列於胸前上方、第 1 肋上方。</li>
+<li><b>胸骨端</b>（內側，圓錐形）：與胸骨柄鎖骨切迹形成胸鎖關節；下面<b>肋粗隆</b>供韌帶附著。</li>
+<li><b>體部</b>：下表面有鎖骨下肌附著。</li>
+<li><b>肩峰端</b>（外側，寬扁）：與肩胛骨肩峰形成<b>肩峰鎖關節</b>；下面<b>圓錐結節</b>有喙鎖韌帶附著。</li>
+<li>功能：連結胸部與肩胛骨、上肢，把上肢承受的力傳到體部；<b>跌倒時伸直手臂著地易骨折；出生時最易骨折的骨</b>。</li>
+<li>鎖骨以<b>膜內骨化</b>形成，也是<b>最後停止生長</b>的硬骨。</li>
+</ul>
+<h3>肩胛骨 scapula</h3>
+<ul>
+<li>倒三角形、扁平薄骨，位於胸背側約第 <b>2–7 肋</b>之間，內緣距脊柱約 5 公分。</li>
+<li><b>體部</b>背側尖銳的<span class="term">肩胛棘<i>spine of scapula</i></span>，上下方分別為<b>棘上窩、棘下窩</b>；腹面微凹＝<b>肩胛下窩</b>（肌肉附著）。</li>
+<li>肩胛棘末端扁寬＝<span class="term">肩峰<i>acromion</i></span>，與鎖骨形成肩峰鎖關節。</li>
+<li>肩峰下凹陷＝<span class="term">關節盂<i>glenoid cavity</i></span>，與肱骨頭形成<b>肩關節</b>。</li>
+<li>內側緣（椎骨緣，薄）／外側緣（腋窩緣，粗厚）；兩緣會合於<b>下角</b>；上緣與內側緣會合於<b>上角</b>。</li>
+<li><span class="term">喙突<i>coracoid process</i></span>：上緣外側端向前突出，肌肉附著；<b>肩胛上切迹</b>在上緣近喙突處，有肩胛上神經及血管通過。</li>
+</ul>
+
+<h2>上肢骨骼 upper extremity（共 60 塊）</h2>
+<p>上臂：肱骨；前臂：尺骨、橈骨；手部：腕骨、掌骨、指骨。</p>
+<h3>肱骨 humerus</h3>
+<p>上肢最長最大的骨；近端與肩胛骨形成<b>肩關節</b>，遠端與尺、橈骨形成<b>肘關節</b>。</p>
+<table class="tbl">
+<thead><tr><th>部位</th><th>構造與重點</th></tr></thead>
+<tbody>
+<tr><td rowspan="6">近端</td><td><b>肱骨頭 head</b>：圓滑，與關節盂形成肩關節</td></tr>
+<tr><td><b>解剖頸 anatomical neck</b>：頭部遠端的斜溝</td></tr>
+<tr><td><b>大結節 greater tubercle</b>：向外側突出，下延成大結節嵴</td></tr>
+<tr><td><b>小結節 lesser tubercle</b>：向前突出，下延成小結節嵴</td></tr>
+<tr><td><b>結節間溝 intertubercular sulcus</b>（二頭肌溝 bicipital groove）：大、小結節間</td></tr>
+<tr><td><b>外科頸 surgical neck</b>：結節遠端較狹窄處，<b>易骨折</b>而得名</td></tr>
+<tr><td>體部（骨幹）</td><td>近端圓錐形→三角形→遠端扁寬。中段外側 V 形粗糙區＝<b>三角肌粗隆 deltoid tuberosity</b>；後面螺旋走向的<b>橈神經溝</b>（橈神經通過）</td></tr>
+<tr><td rowspan="6">遠端</td><td><b>小頭 capitulum</b>：外側圓形結節，與<b>橈骨頭</b>關節；與滑車合稱<b>肱骨髁 condyle</b></td></tr>
+<tr><td><b>滑車 trochlea</b>：內側滑輪狀，與<b>尺骨滑車切迹</b>關節</td></tr>
+<tr><td><b>內上髁／外上髁</b>：粗糙突出，前臂與手指屈肌群、伸肌群的起始處</td></tr>
+<tr><td><b>橈骨窩 radial fossa</b>（前）：屈肘時容納橈骨頭</td></tr>
+<tr><td><b>冠狀窩 coronoid fossa</b>（前）：屈肘時容納尺骨冠狀突</td></tr>
+<tr><td><b>鷹嘴窩 olecranon fossa</b>（後）：伸肘時容納尺骨鷹嘴突</td></tr>
+</tbody></table>
+<div class="mn"><p class="lbl">記憶口訣</p><p>肱骨遠端窩：前面「橈、冠」（屈肘）、後面「鷹嘴」（伸肘）。小頭接橈骨、滑車接尺骨。</p></div>
+<div class="trap"><p class="lbl">易混淆</p><p>解剖頸（頭下斜溝，不常骨折）vs 外科頸（結節下較窄，常骨折）。</p></div>
+
+<h3>尺骨 ulna</h3>
+<p>位於前臂<b>內側（小指側）</b>，<b>近端大、遠端小</b>。</p>
+<ul>
+<li><b>近端</b>：<b>鷹嘴突 olecranon</b>（肘部巨大突起，伸肘入鷹嘴窩）；<b>冠狀突</b>（鷹嘴突前下方，屈肘入冠狀窩）；<b>滑車切迹 trochlear notch</b>（兩突間，與肱骨滑車關節）；<b>橈骨切迹</b>（容納橈骨頭）；<b>尺骨粗隆</b>（冠狀突下方，肱肌止點）；<b>旋後肌嵴</b>（橈骨切迹下方，旋後肌附著）。</li>
+<li><b>骨幹</b>：骨間緣朝向橈骨。</li>
+<li><b>遠端</b>：尺骨頭，以纖維軟骨盤與腕骨隔開；後內側有<b>莖突</b>。</li>
+</ul>
+<h3>橈骨 radius</h3>
+<p>位於前臂<b>外側（拇指側）</b>，<b>近端小、遠端大</b>。</p>
+<ul>
+<li><b>近端</b>：<b>頭部</b>盤狀，與肱骨小頭及尺骨橈骨切迹關節；<b>橈骨粗隆</b>（內側，肱二頭肌附著）。</li>
+<li><b>骨幹</b>：骨間緣明顯，朝向尺骨。</li>
+<li><b>遠端</b>：變寬；下方<b>腕骨關節面</b>與<b>舟狀骨、月狀骨</b>關節；外側<b>莖突</b>；內側<b>尺骨切迹</b>與尺骨頭關節。</li>
+</ul>
+<div class="trap"><p class="lbl">易混淆</p><p>尺骨：近端大（鷹嘴、肘）、遠端小；橈骨：近端小（頭）、遠端大（腕）。尺骨在小指側，橈骨在拇指側。尺骨切迹在橈骨遠端，橈骨切迹在尺骨近端。</p></div>
+
+<h3>腕骨 carpals（每側 8 塊短骨，兩排各 4）</h3>
+<table class="tbl">
+<thead><tr><th>排</th><th>由外（拇指側）而內</th></tr></thead>
+<tbody>
+<tr><td>近側排</td><td><b>舟狀骨 scaphoid</b>、<b>月狀骨 lunate</b>、<b>三角骨 triquetral</b>、<b>豆狀骨 pisiform</b></td></tr>
+<tr><td>遠側排</td><td><b>大多角骨 trapezium</b>、<b>小多角骨 trapezoid</b>、<b>頭狀骨 capitate</b>、<b>鈎狀骨 hamate</b></td></tr>
+</tbody></table>
+<ul>
+<li>約 <b>70%</b> 腕骨骨折發生於<b>舟狀骨</b>。</li>
+<li>兩排腕骨使手掌面凹陷，上跨<span class="term">屈肌支持帶<i>flexor retinaculum</i></span>形成<span class="term">腕隧道<i>carpal tunnel</i></span>：內有指深屈肌、指淺屈肌、拇長屈肌肌腱及<b>正中神經</b>。</li>
+<li>正中神經受壓→<span class="term">腕道症候群<i>carpal tunnel syndrome</i></span>：掌面外側三根半手指灼痛、<b>拇指球肌 thenar muscles</b> 萎縮麻痺、對掌運動困難。</li>
+</ul>
+<div class="mn"><p class="lbl">記憶口訣</p><p>近側排（外→內）「舟月三豆」；遠側排（外→內）「大小頭鈎」。</p></div>
+
+<h3>掌骨與指骨</h3>
+<ul>
+<li><b>掌骨 metacarpus</b>：每側 5 塊，由外而內稱第 1–5 掌骨；含基部、骨幹、頭部；基部與遠側排腕骨關節；握拳時掌骨頭明顯。</li>
+<li><b>指骨 phalanges</b>：每手 <b>14 塊</b>，各含基部、骨幹、頭部；<b>拇指只有近側、遠側 2 塊</b>（無中間指骨），其餘 4 指各 3 塊（近側、中間、遠側）。</li>
+<li>驗算：腕 8＋掌 5＋指 14＝27 塊/手；上肢 60 ＝（肱 1＋尺 1＋橈 1＋27）×2。</li>
+</ul>
+</section>
+
+<!-- ===== L3 ===== -->
+<section class="page" id="p-L3-a" data-title="骨盆帶與骨盆" data-group="第3講 骨盆・下肢・關節">
+<h2>骨盆帶與骨盆</h2>
+<h3>骨盆帶 pelvic girdle</h3>
+<ul>
+<li>由 <b>2 塊</b><span class="term">髖骨<i>hip bone</i></span>組成：前面以<span class="term">恥骨聯合<i>symphysis pubis</i></span>相連，後面與<b>薦骨</b>相連。</li>
+<li>功能：與脊柱相連，把上半身重量傳到下肢，提供堅強穩定的支持。</li>
+<li>因有強韌韌帶與較深的髖臼，比上肢帶（肩帶）穩定，但活動度較小。</li>
+<li>兩塊髖骨＋薦骨＋尾骨 → 盆狀的<span class="term">骨盆<i>pelvis</i></span>。</li>
+</ul>
+<figure class="fig"><img src="figs/L3-p003.jpg" alt="骨盆前面觀"><figcaption>圖5-38 骨盆（講義 p.3）</figcaption></figure>
+
+<h3>骨盆緣與大、小骨盆</h3>
+<p>骨盆由一假想斜面分成上、下兩部分；此斜面的邊緣＝<span class="term">骨盆緣<i>pelvic brim</i></span>：由後方<b>薦岬</b>→兩側<span class="term">弓狀線<i>arcuate line</i></span>→前方<b>恥骨聯合</b>。</p>
+<table class="tbl">
+<thead><tr><th>項目</th><th>大骨盆 <i>greater pelvis</i></th><th>小骨盆 <i>lesser pelvis</i></th></tr></thead>
+<tbody>
+<tr><td>別名</td><td>假骨盆 false pelvis</td><td>真骨盆 true pelvis</td></tr>
+<tr><td>位置</td><td>骨盆緣上方的寬廣部分</td><td>骨盆緣下後方</td></tr>
+<tr><td>組成</td><td>兩側髂骨上部、後面薦骨上部，前面由腹壁構成</td><td>髂骨與薦骨下部、尾骨及恥骨圍成</td></tr>
+</tbody>
+</table>
+<p>小骨盆上方開口＝<span class="term">骨盆入口<i>pelvic inlet</i></span>；下方開口＝<span class="term">骨盆出口<i>pelvic outlet</i></span>。</p>
+<div class="trap"><p class="lbl">易混淆</p><p>大骨盆＝<b>假</b>骨盆（在上）；小骨盆＝<b>真</b>骨盆（在下，與生產相關）。名稱「大／小」與「假／真」別配反。</p></div>
+
+<h3>髖骨的三部分</h3>
+<p>新生兒每一塊髖骨含三塊：上方<span class="term">髂骨<i>ilium</i></span>、前下方<span class="term">恥骨<i>pubis</i></span>、後下方<span class="term">坐骨<i>ischium</i></span>，後來融合成一塊。</p>
+<figure class="fig"><img src="figs/L3-p006.jpg" alt="髖骨三部分"><figcaption>圖5-39 髖骨（講義 p.6）</figcaption></figure>
+<div class="mn"><p class="lbl">記憶口訣</p><p>「髂在上、恥在前、坐在後」：髂骨（腸骨）上方最大，恥骨前下，坐骨後下（坐著用屁股坐骨粗隆）。</p></div>
+
+<table class="tbl">
+<thead><tr><th>骨</th><th>重要構造（中英）與重點</th></tr></thead>
+<tbody>
+<tr><td><b>髂骨</b> ilium（腸骨）<br>髖骨<b>最大</b>者</td><td>
+<span class="term">髂嵴<i>iliac crest</i></span>（上緣；<b>適合骨髓穿刺</b>）→ 前端<span class="term">髂前上棘<i>ASIS</i></span>、後端<span class="term">髂後上棘<i>PSIS</i></span>；其下各有髂前下棘 AIIS、髂後下棘 PIIS（腹、背肌肉附著）。<br>
+髂後下棘下方：<span class="term">坐骨大切迹<i>greater sciatic notch</i></span>，<b>坐骨神經</b>通過延伸至下肢。<br>
+內側面：<span class="term">髂窩<i>iliac fossa</i></span>（髂肌附著）；後方<span class="term">髂粗隆<i>iliac tuberosity</i></span>（薦髂韌帶附著）、<span class="term">耳狀面<i>auricular surface</i></span>（與薦骨關節形成<b>薦髂關節</b>）。<br>
+外側面：臀後線、臀前線、臀下線（<b>臀肌</b>附著）。</td></tr>
+<tr><td><b>坐骨</b> ischium<br>髖骨後下部</td><td>
+<span class="term">坐骨棘<i>ischial spine</i></span>；棘下方<span class="term">坐骨小切迹<i>lesser sciatic notch</i></span>（半圓凹陷，<b>會陰</b>的神經、血管通過）；<span class="term">坐骨粗隆<i>ischial tuberosity</i></span>（<b>坐姿時接觸椅面、支撐體重</b>，髖骨最強部分）。<br>
+<span class="term">坐骨枝<i>ramus</i></span>與恥骨接合，圍繞<span class="term">閉孔<i>obturator foramen</i></span>（閉孔神經、血管通過）。</td></tr>
+<tr><td><b>恥骨</b> pubis<br>前下部，呈「V」字形</td><td>
+分<b>體部 body、上枝 superior ramus、下枝 inferior ramus</b>三部分。<br>
+體部上緣增厚＝<span class="term">恥骨嵴<i>pubic crest</i></span>；其外側＝<span class="term">恥骨結節<i>pubic tubercle</i></span>；體部內側面＝恥骨聯合面 symphysial surface。<br>
+<span class="term">恥骨聯合<i>symphysis pubis</i></span>：兩恥骨間的<b>微動關節</b>，含<b>纖維軟骨</b>。</td></tr>
+</tbody>
+</table>
+<div class="key"><p class="lbl">必背重點</p>
+<ul>
+<li><span class="term">髖臼<i>acetabulum</i></span>由髂骨、坐骨、恥骨共同構成，容納股骨頭；髂骨與坐骨各佔 <b>2/5</b>，恥骨佔 <b>1/5</b>。</li>
+<li>坐骨大切迹→坐骨神經；坐骨小切迹→會陰神經血管；閉孔→閉孔神經血管。</li>
+<li>髂嵴＝骨髓穿刺部位；坐骨粗隆＝坐姿承重。</li>
+</ul></div>
+
+<h3>男女骨盆比較（表5-7）</h3>
+<table class="tbl">
+<thead><tr><th>比較項目</th><th>女性</th><th>男性</th></tr></thead>
+<tbody>
+<tr><td>一般構造</td><td>輕而薄</td><td>重而厚</td></tr>
+<tr><td>關節面</td><td>小</td><td>大</td></tr>
+<tr><td>肌肉附著處</td><td>較不明顯</td><td>很明顯</td></tr>
+<tr><td><b>大骨盆</b></td><td><b>淺</b></td><td><b>深</b></td></tr>
+<tr><td>骨盆入口</td><td>大而略呈卵圓形</td><td>呈心臟形</td></tr>
+<tr><td><b>骨盆出口</b></td><td><b>較大</b></td><td>較小</td></tr>
+<tr><td>第一薦椎</td><td>椎體上面寬度約為薦骨寬度的 1/3</td><td>椎體上面寬度幾乎達薦骨寬度的 1/2</td></tr>
+<tr><td>薦骨</td><td>短、寬、扁平，下部向前彎曲</td><td>長、窄</td></tr>
+<tr><td>薦骨關節面</td><td>僅及第三薦椎上緣</td><td>延伸至第三薦椎</td></tr>
+<tr><td><b>恥骨弓</b></td><td><b>大於 90°</b></td><td>小於 90°</td></tr>
+<tr><td>恥骨下枝</td><td>沒有外翻面</td><td>有強的外翻面（供陰莖腳附著）</td></tr>
+<tr><td>恥骨聯合</td><td>較淺</td><td>較深</td></tr>
+<tr><td>坐骨棘</td><td>內彎不明顯</td><td>內彎較明顯</td></tr>
+<tr><td>坐骨粗隆</td><td>外翻</td><td>內彎</td></tr>
+<tr><td>髂骨</td><td>較不垂直</td><td>較垂直</td></tr>
+<tr><td>髂窩</td><td>淺</td><td>深</td></tr>
+<tr><td><b>髂前上棘</b></td><td><b>兩邊相隔較遠</b></td><td>兩邊較接近</td></tr>
+<tr><td>髖臼</td><td>小</td><td>大</td></tr>
+<tr><td>閉孔</td><td>卵圓形</td><td>圓形</td></tr>
+<tr><td>坐骨大切迹</td><td>寬</td><td>窄</td></tr>
+</tbody>
+</table>
+<div class="mn"><p class="lbl">記憶口訣</p><p>女性為了生產：「<b>出口大、恥骨弓寬（&gt;90°）、入口卵圓、大骨盆淺、髂前上棘離得遠</b>」；男性則重、厚、深、窄、心臟形。</p></div>
+<p><i>備註：投影片 p.2 另說明男性骨骼一般較女性大且重，肌肉附著處（粗隆、骨線、嵴）也較粗大。</i></p>
+</section>
+
+<section class="page" id="p-L3-b" data-title="下肢骨骼" data-group="第3講 骨盆・下肢・關節">
+<h2>下肢骨骼 Lower Extremity</h2>
+<div class="key"><p class="lbl">必背重點</p>
+<ul>
+<li>兩側下肢骨共 <b>60 塊</b>（每側 30 塊）。</li>
+<li>組成：大腿<span class="term">股骨<i>femur</i></span>；膝蓋<span class="term">髕骨<i>patella</i></span>；小腿<span class="term">脛骨<i>tibia</i></span>、<span class="term">腓骨<i>fibula</i></span>；足部<span class="term">跗骨<i>tarsals</i></span>、<span class="term">蹠骨<i>metatarsals</i></span>、<span class="term">趾骨<i>phalanges</i></span>。</li>
+</ul></div>
+<table class="tbl">
+<thead><tr><th>部位</th><th>骨</th><th>每側數目</th></tr></thead>
+<tbody>
+<tr><td>大腿</td><td>股骨</td><td>1</td></tr>
+<tr><td>膝</td><td>髕骨</td><td>1</td></tr>
+<tr><td>小腿</td><td>脛骨、腓骨</td><td>2</td></tr>
+<tr><td>足</td><td>跗骨</td><td>7</td></tr>
+<tr><td>足</td><td>蹠骨</td><td>5</td></tr>
+<tr><td>足</td><td>趾骨（拇趾 2＋其餘四趾各 3＝14）</td><td>14</td></tr>
+<tr><td colspan="2"><b>合計</b></td><td><b>30</b></td></tr>
+</tbody>
+</table>
+
+<h3>股骨 Femur</h3>
+<p>又稱大腿骨，左右各一，是人體<b>最長、最重、最強壯</b>的骨骼；分近端、骨幹、遠端。</p>
+<figure class="fig"><img src="figs/L3-p017.jpg" alt="股骨"><figcaption>圖5-41 股骨（講義 p.17）</figcaption></figure>
+<table class="tbl">
+<thead><tr><th>部位</th><th>構造</th></tr></thead>
+<tbody>
+<tr><td><b>近端</b></td><td>
+圓形<b>頭部</b>與髖臼形成<span class="term">髖關節<i>hip joint</i></span>；頭上有<span class="term">股骨頭小凹<i>fovea</i></span>（圓韌帶附著）。<br>
+頭遠側狹窄處＝<b>頸部</b>（<b>易骨折</b>）。<br>
+<span class="term">大轉子<i>greater trochanter</i></span>、<span class="term">小轉子<i>lesser trochanter</i></span>：臀部與大腿肌肉附著；大轉子內側有轉子窩 trochanteric fossa。<br>
+後面（大、小轉子之間）＝<span class="term">轉子間嵴<i>intertrochanteric crest</i></span>；前面（頸與體之間）＝<span class="term">轉子間線<i>intertrochanteric line</i></span>。</td></tr>
+<tr><td><b>骨幹 shaft</b></td><td>
+平滑圓形、向內微彎，使一對股骨互相靠近，膝關節更接近身體重心線。<br>
+後面<span class="term">粗線<i>linea aspera</i></span>（分內唇 medial lip、外唇 lateral lip）；<span class="term">臀肌粗隆<i>gluteal tuberosity</i></span>、<span class="term">恥骨肌線<i>pectineal line</i></span>為肌肉附著處。</td></tr>
+<tr><td><b>遠端</b></td><td>
+<b>內髁、外髁</b>與脛骨相關節；後面較深的<span class="term">髁間窩<i>intercondylar fossa</i></span>；前面<span class="term">髕面<i>patellar surface</i></span>與髕骨相關節；另有內上髁、外上髁。</td></tr>
+</tbody>
+</table>
+<div class="trap"><p class="lbl">易混淆</p><p>轉子間<b>嵴</b>（intertrochanteric crest）在<b>後面</b>；轉子間<b>線</b>（line）在<b>前面</b>。髖關節的髂股韌帶即附著於轉子間線。</p></div>
+
+<h3>髕骨 Patella（膝蓋骨）</h3>
+<ul>
+<li>左右各一，位於膝關節前面，埋在<b>股四頭肌肌腱</b>內的三角形<span class="term">種子骨<i>sesamoid bone</i></span>，是<b>人體最大的種子骨</b>。</li>
+<li>寬廣上端＝<span class="term">基部<i>base</i></span>；尖銳下端＝<span class="term">尖<i>apex</i></span>；後面有兩個關節小面 articular facet，與股骨髕面相關節。</li>
+</ul>
+
+<h3>脛骨 Tibia 與腓骨 Fibula</h3>
+<figure class="fig"><img src="figs/L3-p022.jpg" alt="脛骨與腓骨"><figcaption>圖5-43 脛骨與腓骨（講義 p.22）</figcaption></figure>
+<table class="tbl">
+<thead><tr><th></th><th>脛骨 tibia</th><th>腓骨 fibula</th></tr></thead>
+<tbody>
+<tr><td>位置／大小</td><td>小腿<b>內側</b>、較大，承受小腿主要重量</td><td>小腿<b>外側</b>、與脛骨平行，比脛骨小得多</td></tr>
+<tr><td>近端</td><td>與股骨、腓骨相關節；<b>外髁</b>下方與腓骨頭相關節；兩髁間有向上突出的<span class="term">髁間隆起<i>intercondylar eminence</i></span>；前上方<span class="term">脛骨粗隆<i>tibial tuberosity</i></span>（膝韌帶／髕韌帶附著處）</td><td>近側端為<b>頭部</b></td></tr>
+<tr><td>遠端</td><td>與腓骨、距骨相關節；內側面＝<span class="term">內踝<i>medial malleolus</i></span>；外側面＝<span class="term">腓骨切迹<i>fibular notch</i></span>（與腓骨相關節）</td><td>突出構造＝<span class="term">外踝<i>lateral malleolus</i></span>，與距骨相關節；下部與脛骨腓骨切迹相關節</td></tr>
+<tr><td>其他</td><td>後面有<span class="term">比目魚肌線<i>soleal line</i></span></td><td>—</td></tr>
+</tbody>
+</table>
+<div class="mn"><p class="lbl">記憶口訣</p><p>「脛內腓外」：脛骨在內側、內踝；腓骨在外側、外踝。</p></div>
+
+<h3>足骨：跗骨、蹠骨、趾骨</h3>
+<figure class="fig"><img src="figs/L3-p025.jpg" alt="足骨"><figcaption>圖5-44 足骨（講義 p.25）</figcaption></figure>
+<ul>
+<li><span class="term">跗骨<i>tarsals</i></span>每側 <b>7 塊</b>：前面＝<span class="term">骰骨<i>cuboid</i></span>、<span class="term">舟狀骨<i>navicular</i></span>、<b>3 塊</b><span class="term">楔狀骨<i>cuneiform</i></span>；後面＝<span class="term">距骨<i>talus</i></span>、<span class="term">跟骨<i>calcaneus</i></span>。</li>
+<li><b>距骨</b>位於最上方，是足部<b>唯一</b>與脛骨及腓骨相關節的骨；走路時先承受全身重量，再約一半轉移到其他跗骨。</li>
+<li><b>跟骨</b>是跗骨中<b>最大、最強壯</b>的骨。</li>
+<li><span class="term">蹠骨<i>metatarsals</i></span>每側 <b>5 塊</b>，各有基部、骨幹、頭部；近側端與楔狀骨、骰骨相關節，遠側端與近側趾骨相關節；<b>第一蹠骨</b>承重較多，較粗厚。</li>
+<li><span class="term">趾骨<i>phalanges</i></span>：數目排列與指骨相似；<b>拇趾 great toe 只有近側、遠側 2 塊</b>（大而粗），其餘 4 趾各 3 塊（近、中、遠）。</li>
+</ul>
+
+<h3>足弓 Arches of the Foot</h3>
+<figure class="fig"><img src="figs/L3-p029.jpg" alt="足弓"><figcaption>圖5-45 足弓（講義 p.29）</figcaption></figure>
+<ul>
+<li>功能：支撐全身體重，並於走路時提供<b>槓桿作用</b>；承重時變平，重力除去後彈回。</li>
+<li>維繫足弓的主要有<span class="term">跟舟足底韌帶<i>plantar calcaneonavicular ligament</i></span>與肌腱；韌帶、肌腱變弱 → 內側縱弓變低 → <span class="term">扁平足<i>flat foot</i></span>。</li>
+</ul>
+<table class="tbl">
+<thead><tr><th>足弓</th><th>組成</th><th>基石</th></tr></thead>
+<tbody>
+<tr><td><b>內側縱弓</b></td><td>跟骨 → 上升至距骨 → 舟狀骨 → 三塊楔狀骨 → 三塊內側蹠骨</td><td><b>距骨</b></td></tr>
+<tr><td><b>外側縱弓</b></td><td>跟骨 → 骰骨（上升）→ 兩塊外側蹠骨</td><td><b>骰骨</b></td></tr>
+<tr><td><b>前橫弓</b></td><td>5 塊蹠骨基部</td><td>—</td></tr>
+<tr><td><b>中橫弓</b></td><td>骰骨與楔狀骨</td><td>—</td></tr>
+<tr><td><b>後橫弓</b></td><td>骰骨與舟狀骨</td><td>—</td></tr>
+</tbody>
+</table>
+<div class="trap"><p class="lbl">易混淆</p><p>縱弓有<b>2</b>個（內側、外側），橫弓有<b>3</b>個（前、中、後）。內側縱弓基石＝距骨；外側縱弓基石＝骰骨。扁平足是<b>內側</b>縱弓降低。</p></div>
+<p><i>備註：講義 p.30 原文「內側縱弓…下降至三塊內側蹠骨」「外側…兩塊外側蹠骨」，即 3＋2 ＝ 5 塊蹠骨。</i></p>
+</section>
+
+<section class="page" id="p-L3-c" data-title="關節分類與構造" data-group="第3講 骨盆・下肢・關節">
+<h2>關節（articulation／joint）總論</h2>
+<p><span class="term">關節<i>articulation, joint</i></span>：骨與骨、或骨與軟骨相接合的構造，使骨骼連接在一起並能運動。</p>
+<div class="key"><p class="lbl">必背重點</p>
+<ul>
+<li>構成關節的骨骼<b>越接近</b> → 關節越強固，但運動較受限。</li>
+<li>骨骼<b>相距越遠</b> → 運動性越大，但<b>容易脫臼</b>。</li>
+</ul></div>
+
+<h3>(一) 功能性分類（依運動程度）</h3>
+<table class="tbl">
+<thead><tr><th>分類</th><th>運動</th><th>例子</th></tr></thead>
+<tbody>
+<tr><td><span class="term">不動關節<i>synarthroses</i></span></td><td>不能運動</td><td>顱骨間骨縫、齒根與齒槽間、第一肋軟骨與胸骨</td></tr>
+<tr><td><span class="term">微動關節<i>amphiarthroses</i></span></td><td>有限運動</td><td>恥骨聯合、薦髂關節</td></tr>
+<tr><td><span class="term">可動關節<i>diarthroses</i></span></td><td>自由運動</td><td>肩關節、掌指關節、髖關節、膝關節</td></tr>
+</tbody>
+</table>
+
+<h3>(二) 構造性分類（依有無關節腔與連接組織）</h3>
+<table class="tbl">
+<thead><tr><th>分類</th><th>關節腔</th><th>接合方式</th><th>運動性</th><th>例子</th></tr></thead>
+<tbody>
+<tr><td><span class="term">纖維關節<i>fibrous joint</i></span></td><td>無</td><td>緻密纖維結締組織</td><td>無或非常有限</td><td>骨縫 suture</td></tr>
+<tr><td><span class="term">軟骨關節<i>cartilaginous joint</i></span></td><td>無</td><td>軟骨</td><td>無或輕微</td><td>恥骨聯合</td></tr>
+<tr><td><span class="term">滑膜關節<i>synovial joint</i></span></td><td><b>有</b></td><td>關節囊及附屬韌帶</td><td>可動</td><td>四肢大部分關節</td></tr>
+</tbody>
+</table>
+
+<h3>纖維關節（三類）</h3>
+<figure class="fig"><img src="figs/L3-p036.jpg" alt="纖維關節"><figcaption>圖6-1 纖維關節（講義 p.36）</figcaption></figure>
+<table class="tbl">
+<thead><tr><th>類型</th><th>特徵</th><th>功能分類／例子</th></tr></thead>
+<tbody>
+<tr><td><span class="term">骨縫<i>suture</i></span></td><td>見於頭顱骨，薄層緻密纖維結締組織；接合面不規則，更強固、減少骨折。成年後有些被骨組織取代＝<span class="term">骨性接合<i>synostoses</i></span>（如額縫 metopic suture 消失，左右額骨合為一塊）</td><td>不動關節</td></tr>
+<tr><td><span class="term">韌帶連結<i>syndesmosis</i></span></td><td>纖維組織比骨縫多，但結合較不緊密；形成片狀<b>骨間膜</b>或索狀韌帶</td><td>微動關節；脛腓遠側關節、橈尺骨幹間</td></tr>
+<tr><td><span class="term">嵌合關節<i>gomphosis</i></span><br>（釘狀縫合）</td><td>錐狀<b>齒根</b>嵌入上、下頜骨槽；接合物質＝<span class="term">牙周韌帶<i>periodontal ligament</i></span></td><td>不動關節</td></tr>
+</tbody>
+</table>
+
+<h3>軟骨關節（兩類）</h3>
+<table class="tbl">
+<thead><tr><th>類型</th><th>接合物質</th><th>例子</th></tr></thead>
+<tbody>
+<tr><td><span class="term">軟骨結合<i>synchondrosis</i></span></td><td><b>透明軟骨</b> hyaline cartilage</td><td><b>骨骺板</b> epiphyseal plate（最常見，發育完成後被硬骨取代＝暫時性關節）；第一肋骨與胸骨間</td></tr>
+<tr><td><span class="term">聯合<i>symphysis</i></span></td><td>寬廣扁平的<b>纖維軟骨盤</b></td><td>椎間盤 intervertebral disc、恥骨聯合；屬微動關節</td></tr>
+</tbody>
+</table>
+<div class="trap"><p class="lbl">易混淆</p><p>軟骨結合（透明軟骨，常為暫時性）vs. 聯合（纖維軟骨盤，微動）。第 1 肋軟骨—胸骨是軟骨結合（不動）；第 2–7 肋軟骨—胸骨是滑動關節（表6-1）。</p></div>
+
+<h3>滑膜關節 synovial joint 的構造</h3>
+<figure class="fig"><img src="figs/L3-p041.jpg" alt="滑膜關節構造"><figcaption>圖6-3 滑膜關節（講義 p.41）</figcaption></figure>
+<p>具含液體的空腔隔開骨骼，<b>活動性最大</b>，人體大部分關節屬此型。</p>
+<ol>
+<li><span class="term">關節腔<i>joint cavity</i></span>（滑液腔 synovial cavity）：此類關節的<b>特有特徵</b>。</li>
+<li><span class="term">關節軟骨<i>articular cartilage</i></span>：覆於骨表面的<b>透明軟骨</b>。</li>
+<li><span class="term">關節囊<i>articular capsule</i></span>：雙層。外層＝緻密結締組織（強韌）；內層＝<span class="term">滑膜<i>synovial membrane</i></span>（疏鬆結締組織薄膜，襯於整個滑膜腔，<b>不覆蓋關節軟骨</b>）。</li>
+<li><span class="term">滑液<i>synovial fluid</i></span>：由滑膜細胞分泌的<b>玻尿酸 hyaluronic acid</b> ＋血漿來的間質液；外觀、黏稠度似蛋白，<b>關節活動時黏稠度降低</b>。功能：(1) 使軟骨不相接觸；(2) 潤滑、減少摩擦；(3) <b>營養關節軟骨</b>；(4) 含<b>吞噬細胞</b>，移除微生物及碎片。</li>
+<li><span class="term">加強韌帶<i>reinforcing ligament</i></span>：①囊本身增厚（例：髖關節髂股韌帶）；②囊內但被滑膜包圍（例：膝<b>十字韌帶</b>）；③囊外（例：膝<b>腓側副韌帶</b>）。</li>
+</ol>
+<p><b>特別構造：</b>膝關節含<b>脂肪墊</b>與<span class="term">關節盤<i>articular disc</i></span>（增加穩定度）。<span class="term">黏液囊<i>bursa</i></span>與<span class="term">腱鞘<i>tendon sheath</i></span>減少摩擦：</p>
+<ul>
+<li>黏液囊：位於皮膚與骨、肌腱與骨、肌肉與骨、韌帶與骨之間摩擦處；壁為襯滑膜的結締組織，內含滑液。</li>
+<li>腱鞘：基本上是延長的滑膜囊，<b>完全包圍肌腱</b>。</li>
+</ul>
+
+<h3>滑膜關節穩定性的三因素</h3>
+<ol>
+<li><b>關節面</b>（大小、形狀、排列）：例，髖關節大股骨頭套入深髖臼，較穩定。</li>
+<li><b>韌帶</b>：引導運動、防止過度移動；足踝過度外翻可能傷到足踝內側韌帶。</li>
+<li><b>肌肉張力</b> muscle tone：增加穩定性。</li>
+</ol>
+<div class="mn"><p class="lbl">記憶口訣</p><p>穩定三要素「<b>面、韌、肌</b>」：關節面、韌帶、肌肉張力。滑膜關節五構造「<b>腔、軟、囊、液、韌</b>」。</p></div>
+</section>
+
+<section class="page" id="p-L3-d" data-title="滑膜關節類型與運動" data-group="第3講 骨盆・下肢・關節">
+<h2>滑膜關節的類型與運動</h2>
+<h3>六種類型</h3>
+<table class="tbl">
+<thead><tr><th>類型</th><th>別名</th><th>特徵／軸</th><th>例子</th></tr></thead>
+<tbody>
+<tr><td><span class="term">滑動關節<i>gliding joint</i></span></td><td>摩動關節 arthrodia、平面關節 plane joint</td><td>關節面平，左右、前後滑動，不能扭轉；多為<b>單軸</b>，也可<b>多軸</b></td><td>腕骨間、跗骨間、胸鎖、肩峰鎖、脊椎關節突間、肋椎、肋胸</td></tr>
+<tr><td><span class="term">屈戌關節<i>hinge joint</i></span></td><td>樞紐關節</td><td>凸面嵌入凹面，只能<b>屈曲、伸展</b>；<b>單軸</b></td><td>肘、膝、踝、指間、趾間</td></tr>
+<tr><td><span class="term">橢圓關節<i>ellipsoidal joint</i></span></td><td>髁狀關節</td><td>卵圓形骨髁嵌入橢圓腔；前後、左右運動；<b>雙軸</b>（屈、伸、內收、外展）</td><td>橈腕關節、掌指關節</td></tr>
+<tr><td><span class="term">車軸關節<i>pivot joint</i></span></td><td>—</td><td>圓（錐）面與骨＋韌帶形成的環相關節；主要為<b>旋轉</b>；<b>單軸</b></td><td>寰軸關節、上橈尺關節、下橈尺關節</td></tr>
+<tr><td><span class="term">鞍狀關節<i>saddle joint</i></span></td><td>—</td><td>兩邊關節面皆馬鞍狀（一向凹、一向凸）；特化的橢圓關節，範圍較大；<b>雙軸</b></td><td>大多角骨與第一掌骨間的腕掌關節</td></tr>
+<tr><td><span class="term">球窩關節<i>ball-and-socket joint</i></span></td><td>杵臼關節</td><td>球面嵌入杯狀凹；屈、伸、內收、外展、旋轉、迴旋；<b>多軸</b>，<b>活動性最大</b></td><td>肩關節、髖關節</td></tr>
+</tbody>
+</table>
+<div class="mn"><p class="lbl">記憶口訣</p><p>軸數：「<b>單</b>：滑、屈戌（樞紐）、車軸；<b>雙</b>：橢圓、鞍狀；<b>多</b>：球窩」。 想像：門鉸鏈（屈戌）只開關；轉頭搖「不」＝車軸；肩、髖＝球窩最自由。</p></div>
+<div class="trap"><p class="lbl">易混淆</p><p>橢圓關節（橈腕、掌指）vs. 鞍狀關節（拇指腕掌）：兩者都是<b>雙軸</b>，鞍狀是特化的橢圓關節，運動範圍較大。滑動關節通常單軸，但「可多軸」。</p></div>
+
+<h3>限制滑膜關節運動的因素</h3>
+<ol>
+<li><b>柔軟部位抵制</b>：例，肘屈曲時前臂與上臂前面互相擠壓。</li>
+<li><b>韌帶張力</b>：限制並引導運動；膝屈曲時主要韌帶鬆弛，伸展時變緊，骨間接觸最充分。</li>
+<li><b>肌肉張力</b>：加強韌帶限制；例，膝伸直抬大腿受腿後肌（hamstring）張力限制，膝屈曲時張力減小，大腿可抬更高。</li>
+<li><b>關節骨骼構造</b>。</li>
+</ol>
+
+<h3>滑膜關節的運動</h3>
+<table class="tbl">
+<thead><tr><th>類別</th><th>運動</th><th>定義／例子</th></tr></thead>
+<tbody>
+<tr><td><span class="term">滑動<i>gliding</i></span></td><td>—</td><td>最簡單；平坦面互相移動，無角度或旋轉。例：腕骨間、跗骨間，肋骨頭與結節在椎體與橫突的滑動</td></tr>
+<tr><td rowspan="4"><span class="term">角動<i>angular</i></span><br>增減骨間角度</td><td><span class="term">屈曲<i>flexion</i></span></td><td>關節<b>前面</b>角度變小（頭前屈、屈肘）。<b>例外：膝關節、趾間關節</b>——使關節骨<b>後面</b>角度變小</td></tr>
+<tr><td><span class="term">伸展<i>extension</i></span></td><td>關節前面角度變大（膝與趾間例外）；使屈曲部位回復解剖姿勢。超過解剖姿勢＝<span class="term">過度伸展<i>hyperextension</i></span>（如頭後仰）</td></tr>
+<tr><td><span class="term">外展<i>abduction</i></span></td><td>離開身體正中線。手指外展以<b>中指</b>假想線為基準；腳趾以<b>第二趾</b>假想線為基準</td></tr>
+<tr><td><span class="term">內收<i>adduction</i></span></td><td>移向正中線，與外展相反</td></tr>
+<tr><td><span class="term">旋轉<i>rotation</i></span></td><td>內旋 medial／外旋 lateral</td><td>骨沿本身長軸轉動，轉動時不能同時做其他動作；肩、髖、寰軸關節可旋轉。搖頭＝寰椎繞軸椎<b>齒狀突</b>轉動。內旋＝前面轉向中線；外旋＝前面轉離中線</td></tr>
+<tr><td><span class="term">迴旋<i>circumduction</i></span></td><td>—</td><td>遠側端作<b>360°</b>環形運動，近側端穩定，劃出圓錐；包含屈、伸、內收、外展。例：伸直手臂繞圈投球</td></tr>
+</tbody>
+</table>
+
+<h3>特殊運動 special movements（11 種）</h3>
+<table class="tbl">
+<thead><tr><th>#</th><th>運動</th><th>定義</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><span class="term">內翻<i>inversion</i></span></td><td>足底在踝關節朝<b>內</b></td></tr>
+<tr><td>2</td><td><span class="term">外翻<i>eversion</i></span></td><td>足底在踝關節朝<b>外</b></td></tr>
+<tr><td>3</td><td><span class="term">足背屈曲<i>dorsiflexion</i></span></td><td>踝關節彎曲，往足背方向</td></tr>
+<tr><td>4</td><td><span class="term">足底屈曲<i>plantar flexion</i></span></td><td>踝關節伸直，往足底方向</td></tr>
+<tr><td>5</td><td><span class="term">前引<i>protraction</i></span></td><td>下頜骨或鎖骨沿水平方向向前（下巴往外突）</td></tr>
+<tr><td>6</td><td><span class="term">後縮<i>retraction</i></span></td><td>沿水平方向將前引部位縮回</td></tr>
+<tr><td>7</td><td><span class="term">旋後<i>supination</i></span></td><td>前臂運動使手掌面轉向<b>前或向上</b></td></tr>
+<tr><td>8</td><td><span class="term">旋前<i>pronation</i></span></td><td>手掌面轉向<b>後或向下</b></td></tr>
+<tr><td>9</td><td><span class="term">上提<i>elevation</i></span></td><td>身體一部分向上（聳肩）</td></tr>
+<tr><td>10</td><td><span class="term">下壓<i>depression</i></span></td><td>身體一部分向下（肩下壓）</td></tr>
+<tr><td>11</td><td><span class="term">對掌<i>opposition</i></span></td><td>拇指與其他手指掌側末端彼此接近（握筆、拿筷子）</td></tr>
+</tbody>
+</table>
+<figure class="fig"><img src="figs/L3-p064.jpg" alt="圖6-9 特殊運動"><figcaption>圖6-9 特殊運動（講義 p.64）</figcaption></figure>
+<div class="mn"><p class="lbl">記憶口訣</p><p>旋<b>後</b>＝手心向<b>上</b>（像「捧湯」，soup 向上）；旋<b>前</b>＝手心向<b>下</b>。足背屈＝腳尖翹向小腿；足底屈＝踩油門。</p></div>
+<div class="trap"><p class="lbl">易混淆</p><p>內翻／外翻是<b>足底</b>方向；旋前／旋後是<b>前臂</b>（手掌）；前引／後縮看<b>水平前後</b>，上提／下壓看<b>垂直上下</b>。膝與趾間關節的屈、伸定義與一般相反（以後面角度為準）。</p></div>
+</section>
+
+<section class="page" id="p-L3-e" data-title="肩、肘、髖、膝關節" data-group="第3講 骨盆・下肢・關節">
+<h2>人體重要關節（表6-1 與四大關節）</h2>
+<h3>表6-1 人體個別關節摘要</h3>
+<table class="tbl">
+<thead><tr><th>部位</th><th>關節</th><th>關節骨</th><th>型式</th><th>主要運動</th></tr></thead>
+<tbody>
+<tr><td rowspan="3">頭顱骨</td><td>大多數關節</td><td>頭顱骨之間</td><td>骨縫</td><td>不動</td></tr>
+<tr><td>顳下頜關節 temporomandibular joint</td><td>下頜髁與顳骨下頜窩</td><td>屈戌及滑動關節</td><td>滑動、屈曲（下頜骨上提）、伸展（下頜骨下壓）</td></tr>
+<tr><td>齒頜骨關節</td><td>牙齒與上、下頜骨</td><td>嵌合關節</td><td>不動</td></tr>
+<tr><td rowspan="4">脊柱</td><td>枕寰關節 atlantooccipital</td><td>枕骨髁與寰椎</td><td>髁狀關節</td><td>屈曲、伸展</td></tr>
+<tr><td>寰軸關節 atlantoaxial</td><td>寰椎與軸椎</td><td>車軸關節</td><td>旋轉（單軸）</td></tr>
+<tr><td>椎間盤 intervertebral disc</td><td>相鄰椎體之間</td><td>聯合</td><td>整個脊柱可屈曲、伸展、旋轉</td></tr>
+<tr><td>椎間關節 intervertebral joint</td><td>上、下關節突之間</td><td>滑動關節</td><td>滑動</td></tr>
+<tr><td rowspan="3">胸廓</td><td rowspan="2">肋胸關節 sternocostal</td><td>第 1 肋軟骨與胸骨</td><td>軟骨結合</td><td>不動</td></tr>
+<tr><td>第 2–7 肋軟骨與胸骨</td><td>滑動關節</td><td>滑動</td></tr>
+<tr><td>肋椎關節 costovertebral</td><td>肋骨頭與椎體；肋結節與椎骨橫突</td><td>滑動關節</td><td>滑動</td></tr>
+<tr><td rowspan="2">肩帶</td><td>胸鎖關節 sternoclavicular</td><td>胸骨柄與鎖骨胸骨端</td><td>滑動關節</td><td>滑動</td></tr>
+<tr><td>肩峰鎖關節 acromioclavicular</td><td>肩胛骨肩峰與鎖骨肩峰端</td><td>滑動關節</td><td>滑動</td></tr>
+<tr><td rowspan="8">上肢</td><td>肩關節 shoulder</td><td>肩胛骨關節盂與肱骨頭</td><td>球窩關節</td><td>屈、伸、外展、內收、旋轉、迴旋</td></tr>
+<tr><td>肘關節 elbow</td><td>肱骨滑車與尺骨滑車切迹；肱骨小頭與橈骨頭</td><td>屈戌關節</td><td>屈曲、伸展</td></tr>
+<tr><td>上橈尺關節</td><td>橈骨頭與尺骨橈骨切迹</td><td>車軸關節</td><td>旋轉</td></tr>
+<tr><td>下橈尺關節</td><td>尺骨頭與橈骨尺骨切迹</td><td>韌帶聯合</td><td>微動</td></tr>
+<tr><td>橈腕關節 radiocarpal</td><td>橈骨與近側腕骨</td><td>髁狀關節</td><td>屈、伸、內收、外展</td></tr>
+<tr><td>腕骨間關節</td><td>腕骨之間</td><td>滑動關節</td><td>滑動</td></tr>
+<tr><td>腕掌關節 carpometacarpal</td><td>(a) 大多角骨與拇指掌骨<br>(b) 腕骨與其他掌骨</td><td>(a) 鞍狀關節<br>(b) 滑動關節</td><td>(a) 屈、伸、內收、外展<br>(b) 滑動</td></tr>
+<tr><td>掌指關節 / 指間關節</td><td>掌骨與指骨 / 指骨之間</td><td>髁狀關節 / 屈戌關節</td><td>屈、伸、內收、外展 / 屈、伸</td></tr>
+<tr><td rowspan="2">骨盆帶</td><td>薦髂關節 sacroiliac</td><td>薦骨耳狀面與髂骨</td><td>韌帶連結</td><td>微動</td></tr>
+<tr><td>恥骨聯合 pubic symphysis</td><td>恥骨之間</td><td>聯合</td><td>微動</td></tr>
+<tr><td rowspan="8">下肢</td><td>髖關節 hip</td><td>髖臼與股骨頭</td><td>球窩關節</td><td>屈、伸、內收、外展、旋轉、迴旋</td></tr>
+<tr><td>膝關節 knee</td><td>股骨髁與脛骨髁</td><td>屈戌關節</td><td>屈曲及伸展</td></tr>
+<tr><td>上脛腓關節</td><td>脛骨與腓骨近端</td><td>滑動關節</td><td>滑動</td></tr>
+<tr><td>下脛腓關節</td><td>脛骨與腓骨遠端</td><td>韌帶連結</td><td>微動</td></tr>
+<tr><td>踝關節 ankle</td><td>脛骨及腓骨與距骨</td><td>屈戌關節</td><td>足背屈曲、足底屈曲</td></tr>
+<tr><td>跗骨間關節 / 跗蹠關節</td><td>跗骨之間 / 跗骨與蹠骨</td><td>滑動關節</td><td>滑動</td></tr>
+<tr><td>蹠趾關節</td><td>蹠骨與趾骨</td><td>髁狀關節</td><td>屈、伸、外展、內收</td></tr>
+<tr><td>趾間關節</td><td>趾骨之間</td><td>屈戌關節</td><td>屈曲、伸展</td></tr>
+</tbody>
+</table>
+<div class="key"><p class="lbl">必背重點</p><ul>
+<li>球窩：肩、髖。屈戌：肘、膝、踝、指/趾間。車軸：寰軸、上橈尺。髁狀（橢圓）：橈腕、掌指、蹠趾、枕寰。鞍狀：拇指腕掌。</li>
+<li>微動：薦髂（韌帶連結）、恥骨聯合（聯合）、下橈尺／下脛腓（韌帶）、椎間盤（聯合）。</li>
+</ul></div>
+
+<h3>(一) 肩關節 Shoulder Joint</h3>
+<ul>
+<li>由<b>肱骨頭</b>與<b>肩胛骨關節盂</b>組成，又稱<span class="term">盂肱關節<i>glenohumeral joint</i></span>；<b>球窩關節</b>；<b>全身活動度最大，但穩定性較差</b>。</li>
+</ul>
+<figure class="fig"><img src="figs/L3-p074.jpg" alt="肩關節"><figcaption>圖6-11 肩關節（講義 p.74）</figcaption></figure>
+<table class="tbl">
+<thead><tr><th>構造</th><th>重點</th></tr></thead>
+<tbody>
+<tr><td>關節囊 articular capsule</td><td>由關節窩周圍延伸至肱骨<b>解剖頸</b></td></tr>
+<tr><td><span class="term">喙肱韌帶<i>coracohumeral lig.</i></span></td><td>肩胛骨<b>喙突</b>→肱骨<b>大結節</b>；強韌寬廣，支持上肢重量</td></tr>
+<tr><td><span class="term">盂肱韌帶<i>glenohumeral lig.</i></span></td><td>位於關節腹側，關節囊增厚部分</td></tr>
+<tr><td><span class="term">肱橫韌帶<i>transverse humeral lig.</i></span></td><td>肱骨大結節→小結節，跨過<b>結節間溝</b></td></tr>
+<tr><td><span class="term">盂緣<i>glenoid labrum</i></span></td><td>繞關節盂邊緣一圈狹窄<b>纖維軟骨</b></td></tr>
+<tr><td>黏液囊 bursa</td><td>肩胛下囊（肩胛下肌腱與關節囊間）、三角肌下囊（三角肌與關節囊間）、肩峰下囊（肩峰與關節囊間）、喙下囊（喙突與關節囊間）</td></tr>
+</tbody>
+</table>
+<p>肩關節靠橫過肩部的肌肉與肌腱強固，包括<b>肱二頭肌長頭肌腱</b>與<span class="term">肩旋轉套<i>rotator cuff</i></span>（幾乎完全包住肩關節，維持肱骨頭在關節盂內）：</p>
+<table class="tbl">
+<thead><tr><th>方位</th><th>肌肉</th></tr></thead>
+<tbody>
+<tr><td>上方</td><td>棘上肌 supraspinatus</td></tr>
+<tr><td>前方</td><td>肩胛下肌 subscapularis</td></tr>
+<tr><td>後方</td><td>棘下肌 infraspinatus、小圓肌 teres minor</td></tr>
+</tbody>
+</table>
+<div class="key"><p class="lbl">必背重點</p><p>肩旋轉套＝<b>4</b> 塊肌肉；<b>下方沒有肌肉保護</b>，因此肩關節<b>下方最易受損（脫臼）</b>。</p></div>
+<div class="mn"><p class="lbl">記憶口訣</p><p>旋轉套 SITS：<b>S</b>upraspinatus 上、<b>I</b>nfraspinatus 後、<b>T</b>eres minor 後、<b>S</b>ubscapularis 前。</p></div>
+
+<h3>(二) 肘關節 Elbow Joint</h3>
+<ul>
+<li><b>複合關節</b>、<b>屈戌關節</b>，由三個關節共包在一個關節囊：<span class="term">肱橈關節</span>（肱骨小頭—橈骨頭）、<span class="term">肱尺關節</span>（肱骨滑車—尺骨滑車切迹）、<span class="term">上橈尺關節</span>（橈骨—尺骨）。</li>
+<li>關節囊前後薄弱鬆弛，兩側增厚；由<b>尺側副韌帶、橈側副韌帶、橈骨環狀韌帶</b>加強。</li>
+<li>屈曲／伸展由<b>肱尺關節</b>進行；屈曲範圍約 <b>145°</b>，過度伸展約 <b>5°</b>。</li>
+<li>上橈尺關節是<b>車軸關節</b>，使前臂旋前、旋後。</li>
+<li>日常例：提物＝伸肘；洗臉＝屈肘；書寫打字＝內旋（旋前）；拿碗＝外旋（旋後）。</li>
+</ul>
+<figure class="fig"><img src="figs/L3-p079.jpg" alt="肘關節"><figcaption>圖6-12 肘關節（講義 p.79）</figcaption></figure>
+
+<h3>(三) 髖關節 Hip Joint</h3>
+<ul>
+<li>由<b>股骨頭</b>與<b>髖臼</b>組成，<b>球窩關節</b>。</li>
+<li>成人<b>很少脫臼</b>，原因：(1) 杵臼關節穩定；(2) 關節囊增厚強韌；(3) 有強韌囊內韌帶；(4) 周圍有廣大肌群；(5) <b>髖臼唇直徑比股骨頭小</b>。</li>
+</ul>
+<figure class="fig"><img src="figs/L3-p082.jpg" alt="髖關節"><figcaption>圖6-13 髖關節（講義 p.82）</figcaption></figure>
+<table class="tbl">
+<thead><tr><th>構造</th><th>起止／重點</th></tr></thead>
+<tbody>
+<tr><td>關節囊</td><td>髖臼唇→股骨頸；人體最強壯的韌帶之一，含環走與縱走纖維；環走纖維在股骨頭部形成環，縱走纖維有髂股、恥股、坐股韌帶加強</td></tr>
+<tr><td><span class="term">髂股韌帶<i>iliofemoral lig.</i></span></td><td>囊增厚部；<b>髂前下棘 → 股骨轉子間線</b></td></tr>
+<tr><td><span class="term">恥股韌帶<i>pubofemoral lig.</i></span></td><td>囊增厚部；髖臼唇恥骨部分 → 股骨頸</td></tr>
+<tr><td><span class="term">坐股韌帶<i>ischiofemoral lig.</i></span></td><td>囊增厚部；髖臼坐骨壁 → 股骨頸</td></tr>
+<tr><td><span class="term">圓韌帶<i>ligamentum teres</i></span></td><td>髖臼窩 → 股骨頭（頭小凹）；又稱股骨頭韌帶 capitate ligament；扁平三角帶狀，<b>內含血管，營養股骨頭</b></td></tr>
+<tr><td><span class="term">髖臼唇<i>acetabular labrum</i></span></td><td>附於髖臼邊緣的纖維軟骨，加深髖臼，直徑比股骨頭小</td></tr>
+<tr><td>髖臼橫韌帶</td><td>跨過髖臼切迹的強壯韌帶</td></tr>
+</tbody>
+</table>
+<div class="trap"><p class="lbl">易混淆</p><p>肩盂緣 glenoid labrum（肩）vs. 髖臼唇 acetabular labrum（髖），都是纖維軟骨。圓韌帶在<b>囊內</b>（髖臼窩→股骨頭小凹），其他三條韌帶是關節囊增厚。</p></div>
+
+<h3>(四) 膝關節 Knee Joint</h3>
+<p>人體<b>最大且構造最複雜</b>的關節，由三部分組成：</p>
+<table class="tbl">
+<thead><tr><th>部分</th><th>介於</th><th>型式</th></tr></thead>
+<tbody>
+<tr><td>中間：髕股關節（講義稱「膝股關節」）</td><td>髕骨與股骨髕面</td><td>滑動關節</td></tr>
+<tr><td>外側脛股關節</td><td>股骨外髁與外側半月板</td><td>屈戌關節</td></tr>
+<tr><td>內側脛股關節</td><td>股骨內髁與內側半月板</td><td>屈戌關節</td></tr>
+</tbody>
+</table>
+<figure class="fig"><img src="figs/L3-p086.jpg" alt="膝關節"><figcaption>圖6-14 膝關節（講義 p.86）</figcaption></figure>
+<table class="tbl">
+<thead><tr><th>構造</th><th>重點</th></tr></thead>
+<tbody>
+<tr><td>關節囊</td><td><b>不完整</b>；周圍韌帶鞘多由肌腱或其延伸構成</td></tr>
+<tr><td>內、外側膝支持帶 retinaculum</td><td>由股四頭肌終止肌腱與闊筋膜形成，強化前面</td></tr>
+<tr><td><span class="term">髕韌帶<i>patellar lig.</i></span></td><td>股四頭肌共同肌腱的中間部分，強化前面；深部以膝下脂肪墊與滑膜相隔</td></tr>
+<tr><td><span class="term">斜膕韌帶<i>oblique popliteal lig.</i></span></td><td>廣而扁；股骨髁間窩—脛骨頭；表面有半膜肌腱；強化後面</td></tr>
+<tr><td><span class="term">弓狀膕韌帶<i>arcuate popliteal lig.</i></span></td><td>股骨外髁 → 腓骨頭；強化後面下外側</td></tr>
+<tr><td><span class="term">脛側副韌帶<i>tibial collateral lig.</i></span></td><td>內側，寬而扁；股骨內髁 → 脛骨內髁；縫匠肌、股薄肌、半腱肌腱橫過而增強</td></tr>
+<tr><td><span class="term">腓側副韌帶<i>fibular collateral lig.</i></span></td><td>外側，強而圓；股骨外髁 → 腓骨頭外側；股二頭肌腱覆蓋，膕肌腱在深部；<b>位於囊外</b></td></tr>
+<tr><td><span class="term">十字韌帶<i>cruciate lig.</i></span>（前、後）</td><td><b>關節內韌帶</b>，連結股骨與脛骨，防止過度伸展及屈曲。<b>前十字韌帶</b>：脛骨前髁間 → 股骨外髁後端；過度伸展會損傷，導致<b>脛骨向前脫位</b></td></tr>
+<tr><td><span class="term">半月板<i>meniscus</i></span>（關節盤）</td><td>纖維軟骨；內側半月板、外側半月板；位於脛骨髁與股骨髁之間，防止骨向外脫位，但運動時<b>極易受傷</b></td></tr>
+<tr><td>主要滑液囊</td><td>前囊：<b>膝前囊</b>（髕骨與皮膚間）、<b>膝下囊</b>（脛骨上部與髕韌帶間）、<b>膝上囊</b>（股骨下部與股四頭肌間）；內側囊；外側囊</td></tr>
+</tbody>
+</table>
+<div class="trap"><p class="lbl">易混淆</p><p>脛側（內側）副韌帶＝<b>寬而扁</b>、連到脛骨；腓側（外側）副韌帶＝<b>強而圓</b>、連到腓骨頭，在囊外。十字韌帶在囊內（被滑膜包圍）。膝前囊（皮膚—髕骨）vs. 膝下囊（脛骨—髕韌帶）vs. 膝上囊（股骨—股四頭肌）。</p></div>
+<div class="mn"><p class="lbl">記憶口訣</p><p>膝關節「內脛外腓」：內側＝脛側副韌帶、外側＝腓側副韌帶；囊內有「十字」＋「半月」兩個盤韌；前囊由淺到深＝皮膚下（前）、髕韌帶下（下）、股四頭肌下（上）。</p></div>
+<p><i>備註：講義 p.85 將中間關節寫為「膝股關節／膝骨面」，實應為髕股關節／髕面，上表已更正。</i></p>
+</section>
+
+<!-- ===== L4 ===== -->
+<section class="page" id="p-L4-a" data-title="肌肉組織總論" data-group="第4講 肌肉系統">
+<h2>肌肉組織總論</h2>
+
+<h3>1. 基本概念</h3>
+<ul>
+<li><span class="term">肌肉組織<i>muscular tissue</i></span>：骨骼肌、心肌、平滑肌三類具收縮性的組織，約占體重 <b>40～50%</b>。</li>
+<li><span class="term">肌肉系統<i>muscular system</i></span>：一般專指<b>骨骼肌</b>系統。骨骼肌配合骨骼，由神經系統意識控制 → 隨意運動。</li>
+<li>人體約有 <b>700 條</b>骨骼肌，絕大部分左右成對。</li>
+</ul>
+
+<h3>2. 肌肉的四大特性</h3>
+<ol>
+<li><span class="term">興奮性<i>excitability</i></span>：接受刺激並產生反應的能力。</li>
+<li><span class="term">收縮性<i>contractility</i></span>：受到充分刺激時，能變短、變粗而收縮。</li>
+<li><span class="term">伸展性<i>extensibility</i></span>：受拉力時能伸展、延長。</li>
+<li><span class="term">彈性<i>elasticity</i></span>：收縮或伸展後能回復原來形狀。</li>
+</ol>
+<div class="mn"><p class="lbl">記憶口訣</p><p>「興、收、伸、彈」：興奮 → 收縮 → 伸展 → 彈回。</p></div>
+
+<h3>3. 肌肉的功能</h3>
+<p>肌肉收縮 → <b>1.運動</b>（走路、說話、寫字；心跳、消化道蠕動、膀胱排尿）、<b>2.維持身體姿勢</b>（站、坐）、<b>3.產生熱</b>（骨骼肌收縮產熱，<b>85%</b>用於維持正常體溫）。</p>
+
+<h3>4. 三種肌肉的種類</h3>
+<ul>
+<li><span class="term">骨骼肌<i>skeletal muscle</i></span>：附著骨骼、移動骨骼系統；有橫紋 → 又稱<b>橫紋肌</b>（striated muscle）；受意識控制 → <b>隨意肌</b>（voluntary muscle）。</li>
+<li><span class="term">心肌<i>cardiac muscle</i></span>：構成心臟壁；橫紋肌，但為<b>不隨意肌</b>（involuntary muscle）。</li>
+<li><span class="term">平滑肌<i>smooth muscle</i></span>：又稱<b>內臟肌</b>（visceral muscle），位於血管、胃、膽囊、腸道等中空內臟壁；無橫紋、不隨意。</li>
+</ul>
+
+<h3>表 7-1　骨骼肌、心肌、平滑肌的比較（重點考表）</h3>
+<table class="tbl">
+<thead><tr><th>項目</th><th>骨骼肌</th><th>心肌</th><th>平滑肌</th></tr></thead>
+<tbody>
+<tr><td>位置</td><td>主要附著於骨骼</td><td>心臟</td><td>中空內臟壁（胃、腸、膀胱、子宮、血管）、虹膜、豎毛肌</td></tr>
+<tr><td>神經控制 / 意識控制</td><td>隨意 / 是</td><td>不隨意 / 否</td><td>不隨意 / 否</td></tr>
+<tr><td>支配神經</td><td>體運動神經</td><td>自主神經</td><td>自主神經</td></tr>
+<tr><td>橫紋、肌節</td><td>有、有</td><td>有、有</td><td>無、無</td></tr>
+<tr><td>顯微構造</td><td>多核、未分支、長圓柱狀</td><td>單核、方形、具間盤的分叉肌纖維</td><td>單核、梭形</td></tr>
+<tr><td>橫小管（T 小管）</td><td>有</td><td>有</td><td>無</td></tr>
+<tr><td>鈣的來源</td><td>肌漿網</td><td>肌漿網及細胞外液</td><td>肌漿網及細胞外液</td></tr>
+<tr><td>鈣離子結合位置</td><td>旋轉素（troponin）</td><td>旋轉素</td><td>攜鈣素（calmodulin）</td></tr>
+<tr><td>粒線體</td><td>次多</td><td>最多</td><td>最少</td></tr>
+<tr><td>肌纖維長度</td><td>100 μm～30 cm</td><td>50～100 μm</td><td>30～200 μm</td></tr>
+<tr><td>靜止膜電位</td><td>−90 mV</td><td>−80 mV</td><td>−50 mV</td></tr>
+<tr><td>節律性收縮</td><td>無</td><td>有</td><td>有</td></tr>
+<tr><td>強直性收縮</td><td>有</td><td>無</td><td>無</td></tr>
+<tr><td>不反應期</td><td>5 msec</td><td>300 msec</td><td>50 msec</td></tr>
+<tr><td>切斷支配神經 → 肌萎縮</td><td>會</td><td>不會</td><td>不會</td></tr>
+<tr><td>切斷支配神經 → 過敏現象</td><td>會</td><td>不會</td><td>會</td></tr>
+<tr><td>收縮速度</td><td>快</td><td>中等</td><td>慢</td></tr>
+<tr><td>再生能力</td><td>有限</td><td>無</td><td>較好，但比上皮差</td></tr>
+</tbody></table>
+<div class="key"><p class="lbl">必背重點</p>
+<ul>
+<li>橫紋：骨骼肌 + 心肌有；平滑肌無。有 T 小管、肌節者亦同。</li>
+<li>粒線體：心肌最多、骨骼肌次之、平滑肌最少。</li>
+<li>不反應期：心肌 300 ＞ 平滑肌 50 ＞ 骨骼肌 5 msec（心肌不會發生強直收縮）。</li>
+<li>鈣結合蛋白：骨骼肌、心肌 = 旋轉素；平滑肌 = 攜鈣素。</li>
+<li>唯一切斷神經會萎縮的是骨骼肌；平滑肌與骨骼肌切斷神經會出現過敏現象。</li>
+</ul></div>
+<div class="mn"><p class="lbl">記憶口訣</p><p>橫紋肌＝「骨＋心」；神經 5 欄：骨骼＝體運動神經，心、平滑＝自主神經。</p></div>
+
+
+
+<h2>骨骼肌的構造</h2>
+<h3>1. 結締組織成分</h3>
+<p><span class="term">筋膜<i>fascia</i></span>：皮下或包住肌肉及其他器官的片狀、帶狀纖維結締組織。</p>
+<table class="tbl">
+<thead><tr><th>種類</th><th>組成</th><th>功能</th></tr></thead>
+<tbody>
+<tr><td><span class="term">淺層筋膜<i>superficial fascia</i></span></td><td>脂肪組織 + 疏鬆結締組織</td><td>(1)水與脂肪的倉庫 (2)絕緣層，防水分與熱量散失 (3)對重擊提供機械性保護 (4)神經與血管通路</td></tr>
+<tr><td><span class="term">深層筋膜<i>deep fascia</i></span></td><td>緻密、<b>不含脂肪</b>的結締組織，覆於體壁及四肢</td><td>(1)使肌肉自由運動 (2)神經血管通路 (3)填充肌肉間空隙 (4)有時作為肌肉起端附著點；將肌肉依功能群分開</td></tr>
+</tbody></table>
+
+<h3>2. 肌肉的三層膜（由外而內）</h3>
+<ol>
+<li><span class="term">肌外膜<i>epimysium</i></span>：由深層筋膜延伸而來，包覆<b>整條肌肉</b>。</li>
+<li><span class="term">肌束膜<i>perimysium</i></span>：伸入肌肉內，把肌肉分成多個<span class="term">肌束<i>fasciculus</i></span>，包住每一條肌束。</li>
+<li><span class="term">肌內膜<i>endomysium</i></span>：伸入肌束內，包住<b>每一條肌纖維（細胞）</b>；微血管分布於此。</li>
+</ol>
+<ul>
+<li>三層膜延伸到肌肉外 → <span class="term">肌腱<i>tendon</i></span>（附著於骨）；呈片狀者 → <span class="term">腱膜<i>aponeurosis</i></span>，如顱頂的<b>帽狀腱膜</b>。</li>
+<li>肌腱外的纖維性管狀鞘（手腕、足踝）→ <span class="term">腱鞘<i>tendon sheath</i></span>。</li>
+<li>神經血管：通常<b>一條動脈 + 一或兩條靜脈 + 一條神經</b>一起穿入一塊骨骼肌。</li>
+</ul>
+<div class="mn"><p class="lbl">記憶口訣</p><p>外→內：「外（epi）整條、束（peri）一束、內（endo）一根」。</p></div>
+<figure class="fig"><img src="figs/L4-p011.jpg" alt="圖7-1 結締組織與骨骼肌關係"><figcaption>圖 7-1 結締組織與骨骼肌的關係（講義 p.11）</figcaption></figure>
+
+<h3>3. 組織學（微細構造）</h3>
+<ul>
+<li>每條肌纖維 = 單一細胞，直徑 10～100 μm，長圓柱狀、平行排列；細胞間<b>無接合</b>。</li>
+<li><span class="term">肌漿膜<i>sarcolemma</i></span>（細胞膜）、<span class="term">肌漿<i>sarcoplasm</i></span>（細胞質）；多個細胞核位於肌漿膜附近 → <b>多核細胞</b>。</li>
+<li>肌漿內：<span class="term">肌原纖維<i>myofibril</i></span>、高能分子、酶、<span class="term">肌漿網<i>sarcoplasmic reticulum</i></span>（= 無顆粒內質網，貯存鈣）。</li>
+<li><span class="term">橫小管<i>T tubule</i></span>：由肌漿膜內陷，橫走並與肌漿網垂直；骨骼肌的 T 小管位於<b>明帶 I 與暗帶 A 交界處</b>，把細胞間液送入每個肌節。</li>
+<li><span class="term">三合體<i>triad</i></span> = <b>1 條橫小管 + 兩側肌漿網的終池（terminal cisternae）</b>；是神經刺激引發收縮的起點。</li>
+</ul>
+
+<h3>4. 肌節（sarcomere）</h3>
+<ul>
+<li>肌原纖維由<span class="term">粗肌絲<i>myosin filament</i></span>（肌凝蛋白絲）與<span class="term">細肌絲<i>actin filament</i></span>（肌動蛋白絲）排列而成。</li>
+<li>肌節 = <b>肌肉收縮的單位</b>；兩肌節以 <span class="term">Z 線<i>Z line</i></span> 分界。肌肉變長是增加肌節<b>數目</b>，不是增加肌節長度。</li>
+</ul>
+<table class="tbl">
+<thead><tr><th>構造</th><th>內容</th></tr></thead>
+<tbody>
+<tr><td><span class="term">A 帶（暗帶）<i>A band</i></span></td><td>暗色緻密區，代表<b>粗肌絲的長度</b>；兩側粗細肌絲重疊處更暗</td></tr>
+<tr><td><span class="term">I 帶（明帶）<i>I band</i></span></td><td>淺色，<b>只含細肌絲</b></td></tr>
+<tr><td><span class="term">H 區<i>H zone</i></span></td><td>A 帶中央較亮處，<b>只含粗肌絲</b></td></tr>
+<tr><td><span class="term">M 線<i>M line</i></span></td><td>H 區中央的細線，連繫相鄰粗肌絲中段</td></tr>
+<tr><td><span class="term">Z 線<i>Z line</i></span></td><td>肌節的邊界</td></tr>
+</tbody></table>
+<div class="mn"><p class="lbl">記憶口訣</p><p>I 帶＝「I」只有細（thIn）；H 區＝只有粗；A 帶＝整個粗肌絲長度。收縮時 I 帶、H 區變短，A 帶長度不變。（收縮時變化為老師常考補充）</p></div>
+<figure class="fig"><img src="figs/L4-p016.jpg" alt="圖7-2 骨骼肌纖維組織"><figcaption>圖 7-2 骨骼肌纖維的組織層次、肌節與肌絲（講義 p.16）</figcaption></figure>
+
+<h3>5. 骨骼肌纖維的種類（表 7-2）</h3>
+<table class="tbl">
+<thead><tr><th>項目</th><th>慢肌纖維</th><th>中等肌纖維</th><th>快肌纖維</th></tr></thead>
+<tbody>
+<tr><td>別名</td><td>氧化型慢肌（第一型，slow oxidative）</td><td>氧化–糖解型快肌（第二型-a）</td><td>糖解型快肌（第二型-b，fast glycolytic）</td></tr>
+<tr><td>肌原纖維含量</td><td>較少</td><td>中等</td><td>較多</td></tr>
+<tr><td>粒線體數目</td><td>很多</td><td>很多</td><td>很少</td></tr>
+<tr><td>肌紅蛋白</td><td>多（紅肌纖維）</td><td>多（紅肌纖維）</td><td>少（白肌纖維）</td></tr>
+<tr><td>神經纖維直徑</td><td>小</td><td>中等</td><td>大</td></tr>
+<tr><td>微血管數量</td><td>很多</td><td>很多</td><td>很少</td></tr>
+<tr><td>收縮特徵</td><td>較慢、較有力，最不易疲勞</td><td>較快，較不易疲勞</td><td>較快，張力大；長時間快速收縮，較易疲勞</td></tr>
+<tr><td>ATP 水解酶速率</td><td>慢</td><td>快</td><td>快</td></tr>
+<tr><td>ATP 主要來源</td><td>氧化磷酸化</td><td>氧化磷酸化</td><td>糖解作用</td></tr>
+<tr><td>肝糖含量</td><td>較少</td><td>中等</td><td>較多</td></tr>
+<tr><td>不反應期</td><td>長</td><td>中等</td><td>短</td></tr>
+<tr><td>功能</td><td>粗略動作，如維持姿勢的肌肉</td><td>移動身體，如下肢肌肉</td><td>精細動作，如上肢肌肉</td></tr>
+</tbody></table>
+<div class="trap"><p class="lbl">易混淆</p><p>講義「快肌纖維＝精細動作（上肢）」、「慢肌＝維持姿勢」。紅肌（慢、中等）肌紅蛋白多；白肌（快）肌紅蛋白少。注意「不反應期」慢肌長、快肌短。</p></div>
+
+
+<h2>心肌與平滑肌組織</h2>
+<h3>心肌組織（cardiac muscle）</h3>
+<ul>
+<li>橫紋、不隨意；纖維略呈方形，<b>單一中央細胞核</b>；肌漿較多，粒線體較大較多。</li>
+<li>T 小管比骨骼肌大，且位於 <b>Z 線</b>上（骨骼肌在 A–I 交界）。</li>
+<li>纖維有<b>分叉</b>並相互連接成網狀；連接處增厚的肌漿膜 = <span class="term">肌間盤<i>intercalated disc</i></span>。</li>
+<li>細胞膜間以<span class="term">間隙接合<i>gap junction</i></span>相連，離子可自由擴散 → 形成<span class="term">合胞體<i>syncytium</i></span>：<b>心房合胞體</b>與<b>心室合胞體</b>；動作電位經<span class="term">房室束<i>A-V bundle</i></span>由心房傳到心室。</li>
+<li>不需外在刺激即可每分鐘約 <b>75 次</b>規律收縮；刺激來自心臟本身<b>特化傳導組織</b>，外在神經只增減放電速率。</li>
+<li>鈣來自肌漿網與細胞外液，輸送慢 → 收縮持續時間比骨骼肌長 <b>10～15 倍</b>；不反應期比骨骼肌長 <b>60 倍</b>（300 vs 5 msec）→ 兩次收縮間可充分鬆弛。</li>
+</ul>
+<figure class="fig"><img src="figs/L4-p022.jpg" alt="圖7-3 心肌組織"><figcaption>圖 7-3 心肌組織（講義 p.22）</figcaption></figure>
+
+<h3>平滑肌組織（smooth muscle）</h3>
+<ul>
+<li>無橫紋、不隨意；中央一個<b>卵圓形核</b>；<b>無 T 小管</b>；大部分鈣來自<b>細胞外液</b>。</li>
+<li>含肌動蛋白、肌凝蛋白及<span class="term">緻密體<i>dense body</i></span>：功能像橫紋肌的 <b>Z 線</b>，供肌動蛋白附著。</li>
+</ul>
+<table class="tbl">
+<thead><tr><th>類型</th><th>單一單位平滑肌<i>single-unit</i></th><th>多單位平滑肌<i>multi-unit</i></th></tr></thead>
+<tbody>
+<tr><td>別名</td><td>內臟平滑肌（visceral）、合體平滑肌（syncytial）</td><td>—</td></tr>
+<tr><td>位置</td><td>中空內臟壁：子宮、膀胱、胃、腸、輸尿管、血管</td><td>眼球睫狀肌、虹膜括約肌、虹膜輻射肌、豎毛肌、大動脈管壁</td></tr>
+<tr><td>細胞連結</td><td>以<b>間隙接合</b>相連，形成大片內臟肌</td><td><b>無</b>細胞接合，纖維分離</td></tr>
+<tr><td>收縮</td><td>動作電位快速傳遞，數百至百萬條肌纖維如同單一單位一齊收縮</td><td>通常僅由一個自主神經末梢支配（類似骨骼肌）</td></tr>
+</tbody></table>
+<figure class="fig"><img src="figs/L4-p027.jpg" alt="圖7-4 平滑肌組織"><figcaption>圖 7-4 平滑肌組織（講義 p.27）</figcaption></figure>
+</section>
+
+<section class="page" id="p-L4-b" data-title="骨骼肌運動與命名" data-group="第4講 肌肉系統">
+<h2>骨骼肌與運動</h2>
+<h3>1. 起端與止端（origin &amp; insertion）</h3>
+<ul>
+<li>肌肉施力於肌腱拉動骨骼；大部分肌肉至少跨過一個關節。收縮時<b>可動骨移向固定骨</b>。</li>
+<li><span class="term">起端<i>origin</i></span>：肌腱附著於<b>固定骨</b>的一端，通常在<b>近側端</b>。</li>
+<li><span class="term">止端<i>insertion</i></span>：肌腱附著於<b>可動骨</b>的一端，通常在<b>遠側端</b>。</li>
+<li>運動時 <b>止端移向起端</b>。</li>
+</ul>
+<div class="mn"><p class="lbl">記憶口訣</p><p>起＝固定、近端（不動的老家）；止＝可動、遠端（跑去靠近老家）。</p></div>
+<figure class="fig"><img src="figs/L4-p031.jpg" alt="圖7-16 起端與止端"><figcaption>圖 7-16 起端與止端（講義 p.31）</figcaption></figure>
+
+<h3>2. 肌束的排列（四型）</h3>
+<table class="tbl">
+<thead><tr><th>型式</th><th>特徵</th><th>例子</th></tr></thead>
+<tbody>
+<tr><td><span class="term">平行<i>parallel</i></span></td><td>肌束與長軸平行；<b>運動範圍大、收縮力較小</b></td><td>扁平：顱頂肌、腹直肌；繩帶狀：縫匠肌；梭形：肱二頭肌</td></tr>
+<tr><td><span class="term">會聚式<i>convergent</i></span></td><td>廣闊肌束會聚成狹窄止端，呈三角形</td><td>胸大肌、顳肌</td></tr>
+<tr><td><span class="term">環狀<i>circular</i></span></td><td>肌束環繞開口（括約肌）</td><td>口輪匝肌、眼輪匝肌</td></tr>
+<tr><td><span class="term">羽狀<i>pennate</i></span></td><td>肌束與長軸成對角線；<b>較強而有力、運動範圍較小</b></td><td>單羽：伸趾長肌、脛肌；雙羽：股直肌；多羽：三角肌</td></tr>
+</tbody></table>
+<div class="trap"><p class="lbl">易混淆</p><p>平行＝範圍大、力量小；羽狀＝力量大、範圍小。單、雙、多羽：伸趾長肌／股直肌／三角肌。</p></div>
+<figure class="fig"><img src="figs/L4-p034.jpg" alt="圖7-17 肌束排列"><figcaption>圖 7-17 肌束的排列方式（講義 p.34）</figcaption></figure>
+
+<h3>3. 肌群的作用（Group Actions）</h3>
+<ul>
+<li><span class="term">作用肌／原動肌<i>agonist / prime mover</i></span>：產生意識性動作的肌肉。</li>
+<li><span class="term">拮抗肌<i>antagonist</i></span>：與作用肌相反，鬆弛的肌肉。兩者同時以相同力量收縮 → 無動作。</li>
+<li><span class="term">協同肌<i>synergist</i></span>：提高作用肌效率；例如前臂彎曲時，三角肌與胸大肌固定上臂與肩部。</li>
+</ul>
+<table class="tbl">
+<thead><tr><th>動作</th><th>作用肌</th><th>拮抗肌</th></tr></thead>
+<tbody>
+<tr><td>前臂彎曲</td><td>肱二頭肌收縮</td><td>肱三頭肌放鬆</td></tr>
+<tr><td>前臂伸直</td><td>肱三頭肌收縮</td><td>肱二頭肌鬆弛</td></tr>
+</tbody></table>
+
+<h3>4. 骨骼肌的命名依據（7 項）</h3>
+<ol>
+<li><b>位置</b>：顳肌、內／外肋間肌、脛前肌。</li>
+<li><b>形狀</b>：三角肌（三角形）、斜方肌（斜四方形）。</li>
+<li><b>大小</b>：臀大肌／臀小肌、長內收肌／短內收肌。</li>
+<li><b>肌纖維方向</b>：腹直肌、腹斜肌、腹橫肌。</li>
+<li><b>起端的數目</b>：肱二頭肌（2）、肱三頭肌（3）、股四頭肌（4）。</li>
+<li><b>起端及止端位置</b>：胸鎖乳突肌（起胸骨、鎖骨 → 止顳骨乳突）；莖突舌骨肌（起顳骨莖突 → 止舌骨）。</li>
+<li><b>作用</b>：很多四肢肌肉以作用命名（表 7-3）。</li>
+</ol>
+<div class="mn"><p class="lbl">記憶口訣</p><p>「位形大向，頭端作」：位置、形狀、大小、纖維方向、頭數、起止端、作用。</p></div>
+
+<h3>表 7-3　肌肉的主要作用（作用名稱）</h3>
+<table class="tbl">
+<thead><tr><th>作用</th><th>定義</th><th>例子</th></tr></thead>
+<tbody>
+<tr><td>屈肌 flexor</td><td>通常減少關節前面之角度（有些減少後面角度）</td><td>橈側腕屈肌</td></tr>
+<tr><td>伸肌 extensor</td><td>通常增加關節前面之角度</td><td>尺側腕伸肌</td></tr>
+<tr><td>外展肌 abductor</td><td>將骨骼移離中線</td><td>拇長外展肌</td></tr>
+<tr><td>內收肌 adductor</td><td>將骨骼移近中線</td><td>長內收肌</td></tr>
+<tr><td>提肌 levator</td><td>向上運動</td><td>提肩胛肌</td></tr>
+<tr><td>降肌 depressor</td><td>向下運動</td><td>降下唇肌</td></tr>
+<tr><td>旋後肌 supinator</td><td>使手掌轉向上或朝前</td><td>旋後肌</td></tr>
+<tr><td>旋前肌 pronator</td><td>使手掌轉向下或朝後</td><td>旋前圓肌</td></tr>
+<tr><td>足背屈肌 dorsiflexor</td><td>在踝關節處彎曲足部</td><td>脛前肌</td></tr>
+<tr><td>足底屈肌 plantar flexor</td><td>在踝關節處伸直足部</td><td>脛後肌</td></tr>
+<tr><td>內翻肌 invertor</td><td>使足底朝內</td><td>脛前肌</td></tr>
+<tr><td>外翻肌 evertor</td><td>使足底朝外</td><td>腓短肌</td></tr>
+<tr><td>括約肌 sphincter</td><td>縮小開口大小</td><td>肛門括約肌、尿道括約肌</td></tr>
+<tr><td>張肌 tensor</td><td>使身體某部位更僵硬</td><td>闊筋膜張肌</td></tr>
+<tr><td>旋轉肌 rotator</td><td>使骨骼沿長軸轉動</td><td>閉孔外肌</td></tr>
+</tbody></table>
+<div class="trap"><p class="lbl">易混淆</p><p>旋後 supination＝掌心朝上／前；旋前 pronation＝掌心朝下／後。足背屈＝抬腳尖；足底屈＝踮腳尖。</p></div>
+
+<h3>主要淺層肌肉總覽（全身）</h3>
+<figure class="fig two"><img src="figs/L4-p041.jpg" alt="圖7-18 人體前面淺層肌肉"><img src="figs/L4-p042.jpg" alt="圖7-19 人體後面淺層肌肉"><figcaption>圖 7-18、7-19 人體主要淺層肌肉前面觀與後面觀（講義 p.41–42）</figcaption></figure>
+</section>
+
+<section class="page" id="p-L4-c" data-title="頭頸部肌肉" data-group="第4講 肌肉系統">
+<h2>頭頸部的肌肉</h2>
+<p>包含：表情肌、咀嚼肌、眼球外在肌、舌外在肌、咽喉肌、移動頭部的肌肉。</p>
+
+<h3>1. 表情肌（表 7-4）</h3>
+<ul>
+<li>位於顏面及頭皮皮下；<b>起於頭顱骨或筋膜，止於皮膚</b>；收縮拉動皮膚 → 表情變化。肌纖維互相移行、缺乏筋膜包被，界線不明顯。</li>
+<li>幾乎都由<b>顏面神經</b>支配；例外：<b>提上瞼肌 → 動眼神經</b>。</li>
+</ul>
+<table class="tbl">
+<thead><tr><th>肌肉</th><th>起端</th><th>止端</th><th>作用</th><th>神經</th></tr></thead>
+<tbody>
+<tr><td>顱頂肌 epicranius：<b>額肌</b> frontalis + <b>枕肌</b> occipitalis（以<b>帽狀腱膜</b> galea aponeurotica 相連）</td><td>額肌：帽狀腱膜；枕肌：枕骨及顳骨乳突</td><td>額肌：眼眶上緣皮膚；枕肌：帽狀腱膜</td><td>額肌：揚眉、前額產生水平皺紋；枕肌：把頭皮往後拉</td><td>顏面神經</td></tr>
+<tr><td>眼輪匝肌 orbicularis oculi</td><td>額骨、上頜骨、內側瞼韌帶</td><td>眼眶周圍環形徑</td><td>閉眼</td><td>顏面神經</td></tr>
+<tr><td>皺眉肌 corrugator supercilii</td><td>額骨眉弓內側端</td><td>眉毛處皮膚</td><td>拉眉毛向內側</td><td>顏面神經</td></tr>
+<tr><td>提上瞼肌 levator palpebrae superioris</td><td>眼眶頂部蝶骨小翼</td><td>上眼瞼皮膚</td><td>上眼瞼上舉</td><td><b>動眼神經</b></td></tr>
+<tr><td>口輪匝肌 orbicularis oris</td><td>圍繞口裂之肌纖維</td><td>嘴角皮膚</td><td>閉口唇、使唇壓向牙齒、突出；說話時口唇成形</td><td>顏面神經</td></tr>
+<tr><td>顴大肌 zygomaticus major</td><td>顴骨</td><td>嘴角及口輪匝肌上皮膚</td><td>笑時使嘴角向上向外拉</td><td>顏面神經</td></tr>
+<tr><td>提上唇肌 levator labii superioris</td><td>上頜骨眶下孔上方</td><td>上唇</td><td>上唇上舉</td><td>顏面神經</td></tr>
+<tr><td>降下唇肌 depressor labii inferioris</td><td>下頜骨</td><td>下唇皮膚</td><td>下唇下壓</td><td>顏面神經</td></tr>
+<tr><td>頰肌 buccinator</td><td>上、下頜骨齒槽突及翼突下頜韌帶</td><td>口輪匝肌</td><td>吹氣時壓迫臉頰、吸吮；又稱<b>喇叭手肌</b></td><td>顏面神經</td></tr>
+<tr><td>頦肌 mentalis</td><td>下頜骨</td><td>頦部皮膚</td><td>上舉及突出下唇，噘嘴時把頦部皮膚上拉</td><td>顏面神經</td></tr>
+<tr><td>笑肌 risorius</td><td>嚼肌之筋膜</td><td>嘴角皮膚</td><td>將嘴角往外拉</td><td>顏面神經</td></tr>
+<tr><td>闊頸肌 platysma</td><td>三角肌及胸大肌之筋膜</td><td>下頜骨、嘴角肌肉、臉部下方皮膚</td><td>下唇外側向下及向後拉，下壓下頜骨</td><td>顏面神經</td></tr>
+</tbody></table>
+<div class="key"><p class="lbl">必背重點</p><p>表情肌：顏面神經（CN VII）；提上瞼肌：動眼神經（CN III）。頰肌＝喇叭手肌，笑肌往外、顴大肌往上外。</p></div>
+
+
+<h3>2. 咀嚼肌（表 7-5）</h3>
+<ul>
+<li>共 4 條：<b>嚼肌（咬肌）、顳肌、翼外肌、翼內肌</b>；<b>止端都在下頜骨</b>；<b>三叉神經下頜枝</b>支配。</li>
+<li>顳肌最結實；<b>嚼肌與顳肌</b>是主要有力的閉口肌；翼外、翼內肌位於下頜骨內側。</li>
+</ul>
+<table class="tbl">
+<thead><tr><th>肌肉</th><th>起端</th><th>止端</th><th>作用</th></tr></thead>
+<tbody>
+<tr><td>嚼肌 masseter（咀嚼肌最強大）</td><td>顴弓下緣與內側面</td><td>下頜角及下頜枝外側面</td><td>上提下頜骨使口閉合</td></tr>
+<tr><td>顳肌 temporalis</td><td>顳骨的顳窩</td><td>下頜骨冠狀突與下頜枝前緣</td><td>上提及縮回下頜骨，使牙關緊閉</td></tr>
+<tr><td>翼外肌 lateral pterygoid</td><td>上頭：蝶骨下表面與大翼顳下嵴；下頭：蝶骨外翼板外側</td><td>下頜骨髁狀突稍下方的翼小凹</td><td>下顎前突、移向對側、協助張口、稍微閉口</td></tr>
+<tr><td>翼內肌 medial pterygoid（2 個起端）</td><td>深層頭：蝶骨外翼板內側；淺層頭：上頜骨粗隆及腭骨錐狀突</td><td>下頜枝後下部與下頜角內側面</td><td>使下顎骨上提、前突、移向對側</td></tr>
+</tbody></table>
+<ul>
+<li><b>嚼肌</b>：淺層纖維走向近臼齒牙根，使下顎向前上；深層近垂直，使下顎向上，止端亦附著冠狀突。</li>
+<li><b>顳肌</b>：前部垂直（上提）；中部向後上（上提 + 後縮）；後部近水平（向後移動，並與對側翼外肌協調做側方運動）。</li>
+<li><b>翼外肌</b>：雙側同收 → 下頜前突；單側收縮 → 下顎往對側旋轉，配合翼內肌 → 研磨食物；上頭在閉口時穩定關節盤；功能紊亂可致顳下頜關節障礙。</li>
+<li><b>翼內肌</b>：與翼外肌協同前突；與嚼肌共同調節下顎垂直位置。</li>
+</ul>
+<div class="trap"><p class="lbl">易混淆</p><p>閉口（上提）：嚼肌、顳肌（強）；前突／側移（研磨）：翼外肌、翼內肌。翼外肌與張口有關。</p></div>
+
+
+<h3>3. 眼球外在肌（表 7-6）</h3>
+<ul>
+<li>起端在眼球以外構造，止端在眼球外表面；協調出問題 → <b>斜視</b>。</li>
+<li><span class="term">眼球內在肌<i>intrinsic</i></span>為平滑肌：<b>瞳孔括約肌</b>（sphincter pupillae）、<b>瞳孔放射狀肌／擴大肌</b>（dilator pupillae）、<b>睫狀肌</b>。</li>
+</ul>
+<table class="tbl">
+<thead><tr><th>肌肉</th><th>起端</th><th>止端</th><th>作用</th><th>神經</th></tr></thead>
+<tbody>
+<tr><td>上直肌 superior rectus</td><td>眼眶頂部之總腱環</td><td>眼球上面中央</td><td>向上內側看、向內旋轉</td><td>動眼 CN III</td></tr>
+<tr><td>下直肌 inferior rectus</td><td>同上</td><td>眼球下面中央</td><td>向下內側看、向外旋轉</td><td>動眼 CN III</td></tr>
+<tr><td>外直肌 lateral rectus</td><td>同上</td><td>眼球外側</td><td>向外側看</td><td><b>外旋神經 CN VI</b></td></tr>
+<tr><td>內直肌 medial rectus</td><td>同上</td><td>眼球內側</td><td>向內側看</td><td>動眼 CN III</td></tr>
+<tr><td>上斜肌 superior oblique</td><td>總腱環上方</td><td>上直肌與外直肌間之眼球</td><td>向下外側看、向內旋轉</td><td><b>滑車神經 CN IV</b></td></tr>
+<tr><td>下斜肌 inferior oblique</td><td>眼眶底部之前內側</td><td>下直肌與外直肌間之眼球</td><td>向上外側看、向外旋轉</td><td>動眼 CN III</td></tr>
+</tbody></table>
+<div class="mn"><p class="lbl">記憶口訣</p><p>「LR6 SO4」：Lateral Rectus = CN VI（外旋神經）、Superior Oblique = CN IV（滑車神經），其餘 4 條都是 CN III 動眼神經。</p></div>
+<figure class="fig"><img src="figs/L4-p056.jpg" alt="圖7-22 眼球外在肌"><figcaption>圖 7-22 眼球外在肌（講義 p.56）</figcaption></figure>
+
+<h3>4. 舌的肌肉</h3>
+<ul>
+<li><b>外在肌</b>：移動舌的位置（表 7-7，講義未附表）。</li>
+<li><b>內在肌</b>：含各種走向的骨骼肌纖維，使舌做靈巧運動（如捲舌）；<b>舌下神經</b>支配。</li>
+</ul>
+
+<h3>5. 咽的肌肉（表 7-8）</h3>
+<table class="tbl">
+<thead><tr><th>肌肉</th><th>起端</th><th>止端</th><th>作用</th><th>神經</th></tr></thead>
+<tbody>
+<tr><td>上咽縮肌 superior pharyngeal constrictor</td><td>翼突、翼突下頜縫、下頜骨下頜舌骨線</td><td>咽後正中縫</td><td>收縮咽上部，將食團送入食道</td><td>迷走神經</td></tr>
+<tr><td>中咽縮肌 middle</td><td>舌骨大角及小角、莖突舌骨韌帶</td><td>同上</td><td>收縮咽中部，送食團</td><td>迷走神經</td></tr>
+<tr><td>下咽縮肌 inferior</td><td>咽之環狀及甲狀軟骨</td><td>同上</td><td>收縮咽下部，送食團</td><td>迷走神經</td></tr>
+<tr><td>莖突咽肌 stylopharyngeus</td><td>莖突基部內側</td><td>甲狀軟骨及咽部外側</td><td>喉上提、咽擴張，協助食團下降</td><td>舌咽神經</td></tr>
+<tr><td>耳咽管咽肌 salpingopharyngeus</td><td>耳咽管下部</td><td>腭咽肌後部纖維</td><td>吞嚥時上提咽側壁；打開耳咽管開口</td><td>迷走神經</td></tr>
+<tr><td>腭咽肌 palatopharyngeus</td><td>軟腭</td><td>甲狀軟骨後緣及咽外側與後壁</td><td>吞嚥時上提咽與喉，協助關閉鼻咽</td><td>迷走神經</td></tr>
+</tbody></table>
+<h3>與吞嚥相關的肌肉</h3>
+<ol>
+<li><b>舌與頰肌</b>：擠壓食物沿口腔頂後移至咽。</li>
+<li><b>下頜舌骨肌、頦舌骨肌</b>：將喉頭向上向前拉起，使食道打開，會厭軟骨拉向下封閉喉開口。</li>
+<li><b>腭帆張肌、腭帆提肌</b>：上提軟腭，封閉後鼻孔。</li>
+<li><b>腭咽肌</b>：上提咽喉，關閉鼻咽。</li>
+<li><b>耳咽管咽肌</b>：上提咽部，打開耳咽管。</li>
+<li><b>咽縮肌（上、中、下）</b>：接受延髓訊息收縮，把食物送入食道。</li>
+</ol>
+
+
+<h3>6. 喉的肌肉</h3>
+<ul>
+<li><span class="term">喉的外在肌<i>extrinsic</i></span> = 終止於舌骨的肌肉：<b>舌骨上肌</b>（suprahyoid）與<b>舌骨下肌</b>（infrahyoid）；控制舌骨與喉位置，可下壓下頜骨、使口腔底變緊、穩固舌與咽。</li>
+<li><span class="term">喉的內在肌<i>intrinsic</i></span>：起止端均在喉軟骨；功能為改變<b>聲帶緊張度及聲門大小</b>（表 7-10，講義未附表）。</li>
+</ul>
+<table class="tbl">
+<thead><tr><th>群組</th><th>肌肉</th><th>起端</th><th>止端</th><th>作用</th><th>神經</th></tr></thead>
+<tbody>
+<tr><td rowspan="4">舌骨上肌</td><td>二腹肌 digastricus</td><td>前腹：下頜骨下緣內側；後腹：顳骨乳突</td><td>舌骨體</td><td>開口時上提舌骨、下壓下頜骨</td><td>前腹：三叉神經下頜枝；後腹：顏面神經</td></tr>
+<tr><td>莖突舌骨肌 stylohyoid</td><td>顳骨莖突</td><td>舌骨體</td><td>上提舌骨並拉向後</td><td>顏面神經</td></tr>
+<tr><td>下頜舌骨肌 mylohyoid</td><td>下頜骨內側面</td><td>舌骨體</td><td>上提舌骨及口腔底，下壓下頜骨</td><td>三叉神經下頜枝</td></tr>
+<tr><td>頦舌骨肌 geniohyoid</td><td>下頜骨內側面</td><td>舌骨體</td><td>上提舌骨，拉舌骨及舌頭向前，下壓下頜骨</td><td>舌下神經</td></tr>
+<tr><td rowspan="4">舌骨下肌</td><td>胸骨舌骨肌 sternohyoid</td><td>第一肋骨上緣、胸骨柄、鎖骨胸骨端內側</td><td>舌骨體下緣內側</td><td>下壓舌骨及喉</td><td>頸神經叢</td></tr>
+<tr><td>胸骨甲狀肌 sternothyroid</td><td>第一肋骨及胸骨柄內側</td><td>甲狀軟骨板外面斜線</td><td>同上</td><td>同上</td></tr>
+<tr><td>肩胛舌骨肌 omohyoid</td><td>肩胛骨上緣</td><td>舌骨體外側下緣</td><td>同上</td><td>同上</td></tr>
+<tr><td>甲狀舌骨肌 thyrohyoid</td><td>甲狀軟骨板外面斜線</td><td>舌骨體及舌骨大角</td><td>下壓舌骨及上提喉</td><td>同上</td></tr>
+</tbody></table>
+<div class="key"><p class="lbl">必背重點</p><p>下頜舌骨肌是形成<b>口腔底</b>的最主要肌肉。舌骨上肌（二腹肌、莖突舌骨肌、下頜舌骨肌、頦舌骨肌）＝上提舌骨；舌骨下肌（胸骨舌骨、胸骨甲狀、肩胛舌骨、甲狀舌骨）＝下壓舌骨。</p></div>
+
+
+<h3>7. 移動頭部的肌肉（表 7-11）</h3>
+<ul>
+<li>位於頸部；起端為頸椎、胸骨或鎖骨，止端為枕骨或顳骨。</li>
+<li><span class="term">胸鎖乳突肌<i>sternocleidomastoid</i></span>最重要，把頸部分成<b>前頸三角</b>（喉部肌肉）與<b>後頸三角</b>（與頭部及脊柱運動有關）。</li>
+</ul>
+<table class="tbl">
+<thead><tr><th>肌肉</th><th>起端</th><th>止端</th><th>作用</th><th>神經</th></tr></thead>
+<tbody>
+<tr><td>胸鎖乳突肌 sternocleidomastoid</td><td>胸骨及鎖骨</td><td>顳骨乳突</td><td>兩側同時：頸部向後伸展；單側：頸部向同側屈曲、臉轉向對側</td><td><b>副神經</b>及第 2、3 頸脊神經</td></tr>
+<tr><td>頭半棘肌 semispinalis capitis</td><td>第 7 頸椎關節突及上面 6 塊胸椎橫突</td><td>枕骨</td><td>兩側：伸展頭；單側：臉轉向對側</td><td>頸脊神經背側枝</td></tr>
+<tr><td>頭夾肌 splenius capitis</td><td>第 7 頸椎及上面 4 塊胸椎棘突及項韌帶</td><td>枕骨及顳骨乳突</td><td>兩側：伸展頭；單側：臉轉向同側</td><td>同上</td></tr>
+<tr><td>頭最長肌 longissimus capitis</td><td>第 4 頸椎至第 4 胸椎突起</td><td>顳骨乳突</td><td>同上</td><td>同上</td></tr>
+</tbody></table>
+<div class="trap"><p class="lbl">易混淆</p><p>胸鎖乳突肌單側收縮：臉轉向<b>對側</b>；頭夾肌單側收縮：臉轉向<b>同側</b>。</p></div>
+
+</section>
+
+<section class="page" id="p-L4-d" data-title="軀幹肌肉" data-group="第4講 肌肉系統">
+<h2>軀幹的肌肉</h2>
+
+<h3>1. 腹壁的肌肉（表 7-12）</h3>
+<ul>
+<li>腹前外側壁 = 皮膚、筋膜 + <b>四對片狀肌</b>：<span class="term">腹直肌<i>rectus abdominis</i></span>、<span class="term">腹外斜肌<i>external oblique</i></span>、<span class="term">腹內斜肌<i>internal oblique</i></span>、<span class="term">腹橫肌<i>transversus abdominis</i></span>。</li>
+<li>腹直肌前、後有<span class="term">腹直肌鞘<i>rectus sheath</i></span>包被；在中線交織成<span class="term">白線<i>linea alba</i></span>。</li>
+<li>腹壁肌收縮 → 腹壓增加，有助於<b>排便、用力呼吸、分娩</b>。</li>
+<li><span class="term">腹股溝韌帶<i>inguinal ligament</i></span>：腹外斜肌腱膜在下緣增厚而成，位於<b>髂前上棘與恥骨結節</b>之間。</li>
+</ul>
+<table class="tbl">
+<thead><tr><th>肌肉</th><th>起端</th><th>止端</th><th>作用</th><th>神經</th></tr></thead>
+<tbody>
+<tr><td>腹直肌</td><td>恥骨嵴及恥骨聯合</td><td>第 5～7 肋軟骨及胸骨劍突</td><td>脊柱彎曲，壓縮腹部以助排便、排尿、用力呼氣及分娩</td><td>第 7～12 胸脊神經</td></tr>
+<tr><td>腹外斜肌</td><td>第 5～12 肋骨</td><td>髂嵴及白線</td><td>兩側：壓縮腹部；單側：脊柱側彎</td><td>第 7～12 胸脊神經及髂腹下神經</td></tr>
+<tr><td>腹內斜肌</td><td>髂嵴、腹股溝韌帶及胸腰筋膜</td><td>第 9～12 肋軟骨</td><td>同上</td><td>第 8～12 胸脊神經、髂腹下及髂腹股溝神經</td></tr>
+<tr><td>腹橫肌</td><td>髂嵴、腹股溝韌帶、腰筋膜及第 7～12 肋軟骨</td><td>劍突、白線及恥骨</td><td>壓縮腹部</td><td>同上</td></tr>
+</tbody></table>
+<figure class="fig"><img src="figs/L4-p075.jpg" alt="圖7-29 腹壁肌"><figcaption>圖 7-29 腹壁的肌肉（講義 p.75）</figcaption></figure>
+
+<h3>腹股溝管與疝氣</h3>
+<ul>
+<li>腹股溝管：<b>前下口 = 淺環</b>（superficial inguinal ring，開口於皮下）；<b>後上口 = 深環</b>（deep inguinal ring，開口於腹腔）。</li>
+<li>通過淺環：<b>男性精索</b>（spermatic cord，進入陰囊）、<b>女性子宮圓韌帶</b>。</li>
+<li>腹股溝管是腹壁較弱處，腹壓增加時腸子可進入其內，甚至進入陰囊 → <span class="term">腹股溝疝氣<i>inguinal hernia</i></span>；<b>男性較易發生</b>。</li>
+</ul>
+<figure class="fig"><img src="figs/L4-p077.jpg" alt="圖7-30 腹股溝管與疝氣"><figcaption>圖 7-30 腹股溝管及腹股溝疝氣（講義 p.77）</figcaption></figure>
+
+<h3>2. 背部的肌肉（淺層）</h3>
+<p>斜方肌、背闊肌、大菱形肌、小菱形肌、棘上肌、棘下肌、大圓肌、小圓肌（圖 7-40）。</p>
+
+<h3>3. 移動脊柱的肌肉（深層，表 7-20）</h3>
+<ul>
+<li><span class="term">豎脊肌<i>erector spinae</i></span>（= <span class="term">薦棘肌<i>sacrospinalis</i></span>）：<b>伸展背部最重要的肌肉</b>；由外而內三縱走肌群：<b>髂肋肌群（外側柱）→ 最長肌群（中柱）→ 棘肌群（內側柱）</b>。上端附著枕骨或顳骨乳突，可使頭、頸、軀幹伸展、側屈、旋轉。</li>
+<li>旋轉肌、棘間肌等為豎脊肌的協同肌，穩固脊柱；腹肌亦協助脊柱運動。</li>
+</ul>
+<div class="mn"><p class="lbl">記憶口訣</p><p>豎脊肌外→內：「髂（外）、最（中）、棘（內）」＝「髂最棘」。</p></div>
+<table class="tbl">
+<thead><tr><th>肌肉</th><th>起端</th><th>止端</th><th>作用</th><th>神經</th></tr></thead>
+<tbody>
+<tr><td>腰方肌 quadratus lumborum</td><td>髂骨嵴</td><td>第 12 肋骨及第 1～4 腰椎</td><td>脊柱外側彎</td><td>肋下及第 1 腰脊神經</td></tr>
+<tr><td>腰髂肋肌 iliocostalis lumborum</td><td>髂嵴</td><td>第 7～12 肋骨</td><td>腰部脊柱伸展</td><td>腰脊神經背側枝</td></tr>
+<tr><td>胸髂肋肌 iliocostalis thoracis</td><td>第 7～12 肋骨</td><td>第 1～6 肋骨</td><td>保持脊柱直立姿勢</td><td>胸脊神經背側枝</td></tr>
+<tr><td>頸髂肋肌 iliocostalis cervicis</td><td>第 1～6 肋骨</td><td>第 4～6 頸椎橫突</td><td>頸部脊柱伸展</td><td>頸脊神經背側枝</td></tr>
+<tr><td>胸最長肌 longissimus thoracis</td><td>腰椎橫突</td><td>胸椎及上位腰椎橫突、第 9–10 肋骨</td><td>胸部脊柱伸展</td><td>脊神經背側枝</td></tr>
+<tr><td>頸最長肌 longissimus cervicis</td><td>第 4–5 胸椎橫突</td><td>第 2～6 頸椎橫突</td><td>頸部脊柱伸展</td><td>同上</td></tr>
+<tr><td>頭最長肌 longissimus capitis</td><td>第 4 頸椎至第 4 胸椎突起</td><td>顳骨乳突</td><td>頭伸展及旋轉至同側</td><td>頸脊神經背側枝</td></tr>
+<tr><td>頸棘肌 spinalis cervicis</td><td>項韌帶及第 7 頸椎棘突</td><td>軸椎棘突</td><td>脊柱伸展</td><td>脊神經背側枝</td></tr>
+<tr><td>胸棘肌 spinalis thoracis</td><td>上位腰椎及下位胸椎棘突</td><td>上位胸椎棘突</td><td>脊柱伸展</td><td>同上</td></tr>
+<tr><td>多裂肌 multifidus</td><td>薦骨及髂骨，腰、胸及下位頸椎橫突</td><td>腰、胸、頸椎棘突</td><td>伸展脊柱，旋轉向對側</td><td>同上</td></tr>
+<tr><td>旋轉肌 rotatores</td><td>所有椎骨橫突</td><td>上面一個或上面第 2 個椎骨棘突</td><td>同上</td><td>同上</td></tr>
+<tr><td>棘間肌 interspinales</td><td>所有棘突上面</td><td>上位棘突下面</td><td>伸展脊柱</td><td>同上</td></tr>
+<tr><td>橫突間肌 intertransversarius</td><td>所有椎骨橫突</td><td>上位椎骨橫突</td><td>脊柱側屈</td><td>脊神經背側枝及腹側枝</td></tr>
+<tr><td>前斜角肌 anterior scalene</td><td>第 3～6 頸椎橫突</td><td>第 1 肋骨</td><td>屈曲及旋轉頸部，幫助吸氣</td><td>第 5、6 頸脊神經腹側枝</td></tr>
+<tr><td>中斜角肌 middle scalene</td><td>下位 6 塊頸椎橫突</td><td>同上</td><td>同上</td><td>第 3～8 頸脊神經腹側枝</td></tr>
+<tr><td>後斜角肌 posterior scalene</td><td>第 4～6 頸椎橫突</td><td>第 2 或 3 肋骨</td><td>同上</td><td>最後 2 對頸脊神經腹側枝</td></tr>
+<tr><td>半棘肌 semispinalis</td><td>胸椎及第 7 頸椎橫突</td><td>第 4 胸椎以上棘突及枕骨</td><td>頭及脊柱伸展、側屈、旋轉至對側</td><td>脊神經背側枝</td></tr>
+<tr><td>夾肌 splenius</td><td>第 7 頸椎至第 4 胸椎棘突及項韌帶</td><td>枕骨、顳骨乳突及上位頸椎橫突</td><td>頭及脊柱伸展、側屈、旋轉至同側</td><td>同上</td></tr>
+</tbody></table>
+
+
+<h3>4. 呼吸肌（表 7-13）</h3>
+<ul>
+<li>主要為胸部的<b>肋間肌</b>及<span class="term">橫膈<i>diaphragm</i></span>，可改變胸腔體積；起於頸椎、止於肋骨的<b>斜角肌</b>亦幫助吸氣。</li>
+</ul>
+<table class="tbl">
+<thead><tr><th>橫膈的開口</th><th>通過構造</th></tr></thead>
+<tbody>
+<tr><td><span class="term">主動脈裂孔<i>aortic hiatus</i></span></td><td>主動脈及胸管（thoracic duct）</td></tr>
+<tr><td><span class="term">食道裂孔<i>esophageal hiatus</i></span></td><td>食道及其上的迷走神經</td></tr>
+<tr><td><span class="term">腔靜脈孔<i>vena caval opening</i></span></td><td>下腔靜脈（位於中央腱的右後部分）</td></tr>
+</tbody></table>
+<div class="mn"><p class="lbl">記憶口訣</p><p>橫膈孔由高到低：腔靜脈孔 T8、食道裂孔 T10、主動脈裂孔 T12（「8-10-12：靜、食、動」，椎體水平為補充）。</p></div>
+<figure class="fig"><img src="figs/L4-p088.jpg" alt="圖7-31 呼吸肌"><figcaption>圖 7-31 用於呼吸的主要肌肉（講義 p.88）</figcaption></figure>
+
+<h3>5. 骨盆底與會陰部的肌肉（表 7-14）</h3>
+<ul>
+<li><span class="term">骨盆膈<i>pelvic diaphragm</i></span> = <b>提肛肌 + 尾骨肌</b>，骨盆腔最底層。</li>
+<li><span class="term">會陰部<i>perineum</i></span>：骨盆出口、骨盆膈以下，大腿與臀部之間的<b>菱形區</b>；前以<b>恥骨聯合</b>、外側以<b>坐骨粗隆</b>、後以<b>尾骨</b>為界。</li>
+<li>左右坐骨粗隆連線分成：<b>前 = 泌尿生殖三角</b>（urogenital triangle）；<b>後 = 肛門三角</b>（anal triangle）。</li>
+<li><span class="term">泌尿生殖膈<i>urogenital diaphragm</i></span>：由<b>會陰深橫肌、尿道外括約肌</b>及其上纖維膜構成，圍繞泌尿生殖道並加強骨盆底。</li>
+</ul>
+<table class="tbl">
+<thead><tr><th>肌肉</th><th>起端</th><th>止端</th><th>作用</th><th>神經</th></tr></thead>
+<tbody>
+<tr><td>提肛肌 levator ani</td><td>坐骨棘及恥骨</td><td>尾骨</td><td>支持骨盆腔內臟，幫助排便</td><td>陰部神經</td></tr>
+<tr><td>尾骨肌 coccygeus</td><td>坐骨棘</td><td>薦骨下半部及尾骨</td><td>同上</td><td>同上</td></tr>
+<tr><td>會陰橫肌 transversus perinei</td><td>坐骨粗隆及坐骨枝</td><td>會陰部中央腱</td><td>穩定會陰部中央腱</td><td>陰部神經之會陰枝</td></tr>
+<tr><td>球海綿體肌 bulbocavernosus</td><td>會陰部中央腱</td><td>泌尿生殖膈，男性陰莖或女性陰蒂基部</td><td>收縮尿道與陰道；壓迫尿道擠出殘留精液或尿液</td><td>同上</td></tr>
+<tr><td>坐骨海綿體肌 ischiocavernosus</td><td>坐骨及恥骨</td><td>男性陰莖海綿體或女性陰蒂</td><td>維持陰莖或陰蒂勃起</td><td>同上</td></tr>
+<tr><td>尿道外括約肌 external urethral sphincter</td><td>坐骨和恥骨枝</td><td>男性中間縫或女性陰道</td><td>關閉尿道，壓迫前列腺或前庭大腺</td><td>同上</td></tr>
+<tr><td>肛門外括約肌 external anal sphincter</td><td>肛尾縫</td><td>會陰部中央腱</td><td>使肛管及肛門縮緊</td><td>陰部神經之下直腸枝</td></tr>
+</tbody></table>
+<figure class="fig"><img src="figs/L4-p091.jpg" alt="圖7-32 骨盆底與會陰肌"><figcaption>圖 7-32 骨盆底與會陰部的肌肉（講義 p.91）</figcaption></figure>
+</section>
+
+<section class="page" id="p-L4-e" data-title="上肢肌肉" data-group="第4講 肌肉系統">
+<h2>上肢與肩帶的肌肉</h2>
+
+<h3>1. 移動肩帶的肌肉（表 7-15）</h3>
+<ul>
+<li>前面淺層：胸鎖乳突肌、三角肌、胸大肌、肱二頭肌；前面深層：鎖骨下肌、胸小肌、前鋸肌。</li>
+<li>背面淺層：斜方肌；背面深層：提肩胛肌、大菱形肌、小菱形肌。</li>
+</ul>
+<table class="tbl">
+<thead><tr><th>肌肉</th><th>起端</th><th>止端</th><th>作用</th><th>神經</th></tr></thead>
+<tbody>
+<tr><td>鎖骨下肌 subclavius</td><td>第一肋骨</td><td>鎖骨外側部下表面</td><td>下壓鎖骨</td><td>鎖骨下肌神經</td></tr>
+<tr><td>胸小肌 pectoralis minor</td><td>第 3～5 肋骨前面</td><td>肩胛骨喙突</td><td>下壓肩胛骨；肩胛骨固定時可上提肋骨</td><td>胸內側神經</td></tr>
+<tr><td>前鋸肌 serratus anterior</td><td>第 1～8（或 9）肋骨</td><td>肩胛骨內側緣及下角</td><td>固定肩胛骨，上提肋骨及前引肩胛骨</td><td>胸長神經</td></tr>
+<tr><td>斜方肌 trapezius</td><td>枕骨、項韌帶、頸椎及胸椎棘突</td><td>鎖骨、肩峰及肩胛棘</td><td>內收、上提或下壓肩胛骨及伸展頭部</td><td>脊副神經及第 3～5 頸脊神經</td></tr>
+<tr><td>提肩胛肌 levator scapulae</td><td>第 1～4 頸椎橫突</td><td>肩胛骨內側緣上部</td><td>上提肩胛骨</td><td>肩胛背神經</td></tr>
+<tr><td>大菱形肌 rhomboideus major</td><td>第 2～5 胸椎棘突</td><td>肩胛骨內側緣（肩胛棘以下）</td><td>牽引肩胛骨向內上方，內收肩胛骨</td><td>同上</td></tr>
+<tr><td>小菱形肌 rhomboideus minor</td><td>第 7 頸椎和第 1 胸椎棘突</td><td>肩胛骨內側緣（肩胛棘基部）</td><td>同上</td><td>同上</td></tr>
+</tbody></table>
+
+
+<h3>2. 上肢肌肉的分區</h3>
+<ul>
+<li><b>上臂</b>：三角肌（<b>肌肉注射部位</b>）、肱二頭肌、肱三頭肌、肱肌、喙肱肌。</li>
+<li><b>前臂</b>：肱橈肌、旋前圓肌、指伸肌、掌長肌、尺側腕屈肌、橈側腕屈肌、橈側腕長伸肌、橈側腕短伸肌。</li>
+<li>移動上臂的肌肉有些位於背部及肩胛部；移動前臂的肌肉有些位於上臂。</li>
+</ul>
+
+<h3>3. 移動上臂的肌肉（表 7-16）</h3>
+<p>所有移動上臂的肌肉收縮時都會牽動<b>肩關節</b>。胸大肌位於胸部淺層，喙肱肌、肱二頭肌、肱三頭肌位於上臂，其餘位於背部及肩胛部。</p>
+<table class="tbl">
+<thead><tr><th>肌肉</th><th>起端</th><th>止端</th><th>作用</th><th>神經</th></tr></thead>
+<tbody>
+<tr><td>胸大肌 pectoralis major</td><td>鎖骨、胸骨及第 2～6 肋軟骨</td><td>肱骨大結節嵴</td><td>上臂內收、屈曲與內旋</td><td>胸內側及外側神經</td></tr>
+<tr><td>三角肌 deltoid</td><td>鎖骨、肩峰及肩胛棘</td><td>肱骨三角肌粗隆</td><td>上臂外展、屈曲及伸展</td><td>腋神經</td></tr>
+<tr><td>肩胛下肌 subscapularis</td><td>肩胛下窩</td><td>肱骨小結節</td><td>上臂內收及內旋</td><td>肩胛下神經</td></tr>
+<tr><td>棘上肌 supraspinatus</td><td>肩胛骨棘上窩</td><td>肱骨大結節</td><td>外展上臂（棒球投手最易受傷）</td><td>肩胛上神經</td></tr>
+<tr><td>棘下肌 infraspinatus</td><td>肩胛骨棘下窩</td><td>肱骨大結節</td><td>外旋上臂</td><td>肩胛上神經</td></tr>
+<tr><td>背闊肌 latissimus dorsi</td><td>下位 6 塊胸椎及腰椎棘突</td><td>肱骨結節間溝</td><td>伸展、內收及內旋上臂</td><td>胸背神經</td></tr>
+<tr><td>大圓肌 teres major</td><td>肩胛骨下角</td><td>肱骨小結節</td><td>伸展、內收及內旋上臂</td><td>肩胛下神經</td></tr>
+<tr><td>小圓肌 teres minor</td><td>肩胛骨外緣</td><td>肱骨大結節</td><td>外旋上臂</td><td>腋神經</td></tr>
+<tr><td>喙肱肌 coracobrachialis</td><td>肩胛骨喙突</td><td>肱骨幹中段前內側</td><td>屈曲及內收上臂</td><td>肌皮神經</td></tr>
+</tbody></table>
+<div class="key"><p class="lbl">必背重點</p><p>旋轉袖（肩胛下肌、棘上肌、棘下肌、小圓肌）：棘上＝外展；棘下、小圓＝外旋；肩胛下＝內旋。腋神經＝三角肌 + 小圓肌。肌皮神經＝喙肱肌、肱二頭肌、肱肌。</p></div>
+<div class="trap"><p class="lbl">易混淆</p><p>大圓肌（內旋；肩胛下神經）vs 小圓肌（外旋；腋神經）。背闊肌與大圓肌皆為伸展、內收、內旋。</p></div>
+
+
+<h3>4. 移動前臂的肌肉（表 7-17）</h3>
+<p>主要為<b>屈肌</b>（肱二頭肌、肱肌、肱橈肌）、<b>伸肌</b>（肱三頭肌、肘肌）、<b>旋前肌</b>（旋前圓肌、旋前方肌）及<b>旋後肌</b>。</p>
+<table class="tbl">
+<thead><tr><th>肌肉</th><th>起端</th><th>止端</th><th>作用</th><th>神經</th></tr></thead>
+<tbody>
+<tr><td>肱二頭肌 biceps brachii</td><td>長頭：肩胛骨盂上結節；短頭：肩胛骨喙突</td><td>橈骨粗隆及肱二頭肌前臂腱膜</td><td>前臂屈曲及<b>旋後</b>，上臂屈曲</td><td>肌皮神經</td></tr>
+<tr><td>肱肌 brachialis</td><td>肱骨前面下半部</td><td>尺骨冠狀突及粗隆</td><td>前臂屈曲</td><td>肌皮神經及橈神經</td></tr>
+<tr><td>肱三頭肌 triceps brachii</td><td>長頭：肩胛骨盂下結節；外側頭：肱骨橈神經溝以上；內側頭：橈神經溝以下</td><td>尺骨鷹嘴突</td><td>伸展前臂，長頭亦可伸展上臂</td><td>橈神經</td></tr>
+<tr><td>肱橈肌 brachioradialis</td><td>肱骨髁上嵴</td><td>橈骨莖突</td><td>屈曲前臂</td><td>橈神經</td></tr>
+<tr><td>肘肌 anconeus</td><td>肱骨外側上髁</td><td>尺骨幹上部及鷹嘴突</td><td>伸展前臂</td><td>橈神經</td></tr>
+<tr><td>旋後肌 supinator</td><td>肱骨外側上髁及尺骨嵴</td><td>橈骨斜線</td><td>旋後前臂</td><td>橈神經</td></tr>
+<tr><td>旋前圓肌 pronator teres</td><td>肱骨內側上髁及尺骨冠狀突</td><td>橈骨幹中部外側面</td><td>旋前前臂</td><td>正中神經</td></tr>
+<tr><td>旋前方肌 pronator quadratus</td><td>尺骨幹遠側部分</td><td>橈骨幹遠側部分</td><td>旋前前臂</td><td>正中神經</td></tr>
+</tbody></table>
+<div class="mn"><p class="lbl">記憶口訣</p><p>橈神經＝「後面所有伸肌」（肱三頭肌、肘肌、肱橈肌、旋後肌、腕指伸肌）；正中神經＝旋前肌 + 腕指屈肌；肌皮神經＝上臂前面屈肌。</p></div>
+
+
+<h3>5. 移動手腕及手指的肌肉（表 7-18，手的外在肌）</h3>
+<ul>
+<li>起於上臂或前臂，止於手部；<b>前面 = 屈肌群，後面 = 伸肌群</b>；肌腹主要在前臂近端，肌腱很長，在手腕處被<span class="term">支持帶<i>retinaculum</i></span>覆蓋。</li>
+</ul>
+<table class="tbl">
+<thead><tr><th>肌肉</th><th>起端</th><th>止端</th><th>作用</th><th>神經</th></tr></thead>
+<tbody>
+<tr><td>橈側腕屈肌 flexor carpi radialis</td><td>肱骨內上髁</td><td>第 2、3 掌骨</td><td>手腕屈曲及外展</td><td>正中神經</td></tr>
+<tr><td>尺側腕屈肌 flexor carpi ulnaris</td><td>肱骨內上髁及尺骨後上緣</td><td>豆狀骨、鉤狀骨、第 5 掌骨</td><td>手腕屈曲及內收</td><td>尺神經</td></tr>
+<tr><td>掌長肌 palmaris longus</td><td>肱骨內上髁</td><td>腕骨橫韌帶及掌腱膜</td><td>手腕屈曲及掌腱膜拉緊</td><td>正中神經</td></tr>
+<tr><td>橈側腕長伸肌 extensor carpi radialis longus</td><td>肱骨外上髁</td><td>第 2 掌骨</td><td>伸展及外展手腕</td><td>橈神經</td></tr>
+<tr><td>橈側腕短伸肌 extensor carpi radialis brevis</td><td>肱骨外上髁</td><td>第 3 掌骨</td><td>伸展手腕</td><td>橈神經</td></tr>
+<tr><td>尺側腕伸肌 extensor carpi ulnaris</td><td>肱骨外上髁及尺骨後緣</td><td>第 5 掌骨</td><td>伸展及內收手腕</td><td>橈神經</td></tr>
+<tr><td>指淺屈肌 flexor digitorum superficialis</td><td>肱骨內上髁、尺骨冠狀突及橈骨斜線</td><td>中間指骨</td><td>屈曲手指</td><td>正中神經</td></tr>
+<tr><td>指深屈肌 flexor digitorum profundus</td><td>尺骨幹前內側面</td><td>遠側指骨基部</td><td>同上</td><td>正中神經及尺神經</td></tr>
+<tr><td>指伸肌 extensor digitorum</td><td>肱骨外上髁</td><td>中間及遠側指骨</td><td>伸展手指</td><td>橈神經</td></tr>
+<tr><td>食指伸肌 extensor indicis</td><td>尺骨後面</td><td>食指之指伸肌肌腱</td><td>伸展食指</td><td>橈神經</td></tr>
+</tbody></table>
+<div class="trap"><p class="lbl">易混淆</p><p>屈肌 → 起於內上髁，正中神經（除尺側腕屈肌 + 指深屈肌尺側半 → 尺神經）；伸肌 → 起於外上髁，橈神經。橈側 → 外展、尺側 → 內收。</p></div>
+
+
+<h3>6. 手部的內在肌（表 7-19）</h3>
+<ul>
+<li>起端與止端均在手部：<span class="term">拇指球肌<i>thenar</i></span>、<span class="term">小指球肌<i>hypothenar</i></span>、<span class="term">掌中間肌<i>midpalmar</i></span>；涉及手部<b>靈巧運動</b>。</li>
+<li>神經支配大部分來自<b>尺神經</b>（與靈巧運動最相關），少部分來自<b>正中神經</b>。</li>
+</ul>
+<table class="tbl">
+<thead><tr><th>群</th><th>肌肉</th><th>作用</th><th>神經</th></tr></thead>
+<tbody>
+<tr><td rowspan="4">拇指球肌</td><td>拇短外展肌 abductor pollicis brevis</td><td>外展拇指</td><td>正中神經</td></tr>
+<tr><td>拇對掌肌 opponens pollicis</td><td>拉拇指使與小指相對</td><td>正中神經</td></tr>
+<tr><td>拇短屈肌 flexor pollicis brevis</td><td>屈曲及內收拇指</td><td>正中神經與尺神經</td></tr>
+<tr><td>拇內收肌 adductor pollicis</td><td>內收拇指</td><td>尺神經</td></tr>
+<tr><td rowspan="2">小指球肌</td><td>掌短肌 palmaris brevis</td><td>拉皮膚向手掌中央</td><td>尺神經</td></tr>
+<tr><td>小指外展肌 abductor digiti minimi</td><td>外展小指</td><td>尺神經</td></tr>
+</tbody></table>
+
+</section>
+
+<section class="page" id="p-L4-f" data-title="下肢肌肉" data-group="第4講 肌肉系統">
+<h2>下肢的肌肉</h2>
+<ul>
+<li>下肢分<b>大腿（thigh）</b>與<b>小腿（leg）</b>。</li>
+<li>大腿肌：闊筋膜張肌、縫匠肌、股直肌、<b>外側廣肌（肌肉注射部位）</b>、內側廣肌、中間廣肌、內收長肌、股薄肌、內收大肌、半腱肌、半膜肌、股二頭肌；股三角。</li>
+<li>小腿肌：腓腸肌、比目魚肌、跟腱、脛前肌、腓骨長肌、腓骨短肌、趾長伸肌、趾長屈肌。</li>
+</ul>
+<figure class="fig"><img src="figs/L4-p118.jpg" alt="圖7-43 下肢淺層肌肉"><figcaption>圖 7-43 下肢肌肉（講義 p.118）</figcaption></figure>
+
+<h3>1. 移動大腿的肌肉（表 7-21）</h3>
+<p>起於髖骨，越過髖關節止於股骨。依通過髖關節位置判斷作用：<b>前面 → 屈</b>；<b>內側 → 內收、內旋</b>；<b>後面 → 伸</b>；<b>外側 → 外展、外旋</b>。</p>
+<table class="tbl">
+<thead><tr><th>肌肉</th><th>起端</th><th>止端</th><th>作用</th><th>神經</th></tr></thead>
+<tbody>
+<tr><td>腰大肌 psoas major（髂腰肌之一）</td><td>腰椎體部及橫突</td><td>股骨小轉子</td><td>屈曲及內旋大腿，屈曲脊柱</td><td>第 2、3 腰神經</td></tr>
+<tr><td>髂肌 iliacus（髂腰肌之一）</td><td>髂窩</td><td>腰大肌之肌腱</td><td>屈曲及內旋大腿</td><td>股神經</td></tr>
+<tr><td>臀大肌 gluteus maximus</td><td>髂嵴、薦骨、尾骨、薦棘肌腱膜</td><td>闊筋膜之髂脛束及股骨臀肌粗隆</td><td>伸展及外旋大腿</td><td>臀下神經</td></tr>
+<tr><td>臀中肌 gluteus medius</td><td>髂骨臀前線及臀下線之間</td><td>股骨大轉子</td><td>外展及內旋大腿</td><td>臀上神經</td></tr>
+<tr><td>臀小肌 gluteus minimus</td><td>髂骨臀後線及臀前線之間</td><td>股骨大轉子</td><td>外展及內旋大腿</td><td>臀上神經</td></tr>
+<tr><td>闊筋膜張肌 tensor fasciae latae</td><td>髂嵴</td><td><b>髂脛束</b></td><td>屈曲及外展大腿</td><td>臀上神經</td></tr>
+<tr><td>內收長肌 adductor longus</td><td>恥骨前方</td><td>股骨粗線內唇中部</td><td>內收、屈曲及內旋大腿</td><td>閉孔神經</td></tr>
+<tr><td>內收短肌 adductor brevis</td><td>恥骨下枝</td><td>股骨粗線內唇上部</td><td>內收、屈曲及內旋大腿</td><td>閉孔神經</td></tr>
+<tr><td>內收大肌 adductor magnus</td><td>恥骨及坐骨下枝，坐骨粗隆</td><td>股骨粗線內唇</td><td>內收大腿；前面屈、後面伸</td><td>閉孔神經及坐骨神經</td></tr>
+<tr><td>恥骨肌 pectineus</td><td>恥骨上枝</td><td>股骨小轉子下方之恥骨肌線</td><td>內收及屈曲大腿</td><td>股神經及閉孔神經</td></tr>
+<tr><td>股薄肌 gracilis</td><td>恥骨下枝</td><td>脛骨內側上方</td><td>內收及屈曲大腿，屈曲小腿</td><td>閉孔神經</td></tr>
+<tr><td>梨狀肌 piriformis</td><td>薦骨前外側</td><td>股骨大轉子</td><td>外展及外旋大腿</td><td>梨狀肌神經</td></tr>
+<tr><td>閉孔內肌 obturator internus</td><td>閉孔邊緣及閉孔膜內面</td><td>股骨大轉子</td><td>外展及外旋大腿</td><td>閉孔內肌神經</td></tr>
+<tr><td>上孖肌 / 下孖肌 gemellus</td><td>坐骨棘 / 坐骨粗隆</td><td>股骨大轉子</td><td>外展及外旋大腿</td><td>閉孔內肌神經 / 股方肌神經</td></tr>
+<tr><td>閉孔外肌 obturator externus</td><td>閉孔邊緣及閉孔膜外面</td><td>股骨轉子窩</td><td>外旋大腿</td><td>閉孔神經</td></tr>
+<tr><td>股方肌 quadratus femoris</td><td>坐骨粗隆</td><td>股骨大轉子下方</td><td>外旋大腿</td><td>股方肌神經</td></tr>
+</tbody></table>
+<div class="trap"><p class="lbl">易混淆</p><p>臀大肌＝伸 + 外旋（臀下神經）；臀中、小肌＝外展 + 內旋（臀上神經）。內收肌群＝閉孔神經。</p></div>
+
+
+<h3>2. 移動小腿的肌肉（表 7-22）</h3>
+<p>起於髖骨或股骨，止於脛骨或腓骨；除腓腸肌位於小腿外，其餘均位於大腿。大腿肌由深層筋膜分三群：</p>
+<table class="tbl">
+<thead><tr><th>肌群</th><th>作用</th><th>神經</th></tr></thead>
+<tbody>
+<tr><td>前面肌群（股四頭肌、縫匠肌等）</td><td>伸展小腿（伸肌群），有些亦屈大腿</td><td><b>股神經</b></td></tr>
+<tr><td>後面肌群（腿後肌群）</td><td>屈曲小腿，也伸展大腿（屈肌群）</td><td><b>坐骨神經</b></td></tr>
+<tr><td>內側肌群（內收肌群）</td><td>內收大腿</td><td><b>閉孔神經</b></td></tr>
+</tbody></table>
+<table class="tbl">
+<thead><tr><th>肌肉</th><th>起端</th><th>止端</th><th>作用</th><th>神經</th></tr></thead>
+<tbody>
+<tr><td colspan="5"><b>股四頭肌 quadriceps femoris</b>：四部分，有肌腱包住髕骨，終止於脛骨粗隆（稱<b>髕韌帶</b>），伸展膝關節</td></tr>
+<tr><td>1. 股直肌 rectus femoris</td><td>髂前下棘</td><td>髕骨上緣及兩側，再以髕韌帶止脛骨粗隆</td><td>伸展小腿及彎曲大腿</td><td>股神經</td></tr>
+<tr><td>2. 外側廣肌 vastus lateralis</td><td>股骨大轉子及粗線外唇</td><td>同上</td><td>伸展小腿</td><td>同上</td></tr>
+<tr><td>3. 中間廣肌 vastus intermedius</td><td>股骨幹前面</td><td>同上</td><td>同上</td><td>同上</td></tr>
+<tr><td>4. 內側廣肌 vastus medialis</td><td>股骨粗線內唇</td><td>同上</td><td>同上</td><td>同上</td></tr>
+<tr><td>股二頭肌 biceps femoris 長頭</td><td>坐骨粗隆</td><td>腓骨頭及脛骨外上髁</td><td>伸大腿及屈小腿</td><td>脛神經</td></tr>
+<tr><td>股二頭肌 短頭</td><td>股骨粗線</td><td>同上</td><td>屈小腿</td><td>腓總神經</td></tr>
+<tr><td>半腱肌 semitendinosus</td><td>坐骨粗隆</td><td>脛骨體內側上方</td><td>伸大腿及屈小腿</td><td>脛神經</td></tr>
+<tr><td>半膜肌 semimembranosus</td><td>同上</td><td>脛骨內髁</td><td>同上</td><td>同上</td></tr>
+<tr><td>縫匠肌 sartorius（<b>人體最長的肌肉</b>）</td><td>髂前上棘</td><td>脛骨體內側上方</td><td>屈小腿；屈曲及外展大腿</td><td>股神經</td></tr>
+</tbody></table>
+<div class="key"><p class="lbl">必背重點</p><p>股四頭肌＝股直肌 + 外側廣肌 + 中間廣肌 + 內側廣肌（股神經；只有股直肌起於髂骨，可屈大腿）。腿後肌群 <span class="term">hamstrings（腿筋肌）</span>＝股二頭肌 + 半腱肌 + 半膜肌。縫匠肌＝人體最長肌肉。</p></div>
+<div class="mn"><p class="lbl">記憶口訣</p><p>前＝股（股神經、伸小腿）；後＝坐（坐骨神經、屈小腿）；內＝閉（閉孔神經、內收）。</p></div>
+
+<h3>股三角與膕窩</h3>
+<ul>
+<li><span class="term">股三角<i>femoral triangle</i></span>：<b>上以鼠蹊（腹股溝）韌帶、內側以內收長肌、外側以縫匠肌</b>圍成；內有<b>股動脈、股靜脈、股神經、淋巴管</b>。</li>
+<li><span class="term">膕窩<i>popliteal fossa</i></span>：<b>股二頭肌、半腱肌、半膜肌、腓腸肌</b>在膝後圍成的菱形陷窩；內有<b>膕動脈、膕靜脈、脛神經、腓總神經</b>及脂肪。</li>
+</ul>
+
+
+<h3>3. 移動足部及腳趾的肌肉（表 7-23）</h3>
+<p>位於小腿，由深層筋膜分三群：</p>
+<table class="tbl">
+<thead><tr><th>肌群</th><th>作用</th><th>神經</th></tr></thead>
+<tbody>
+<tr><td>前面肌群</td><td><b>足背屈</b>（dorsiflexion）</td><td><b>腓深神經</b></td></tr>
+<tr><td>外側肌群</td><td><b>足底屈 + 外翻</b></td><td><b>腓淺神經</b></td></tr>
+<tr><td>後面肌群</td><td><b>足底屈</b>（plantar flexion）</td><td><b>脛神經</b></td></tr>
+</tbody></table>
+<p>小腿後面肌肉由表淺到深：<b>腓腸肌 → 比目魚肌 → 脛骨後肌</b>，對行走、跑、跳很重要。</p>
+<table class="tbl">
+<thead><tr><th>肌肉</th><th>起端</th><th>止端</th><th>作用</th><th>神經</th></tr></thead>
+<tbody>
+<tr><td>腓腸肌 gastrocnemius</td><td>股骨內上髁及外上髁</td><td>以跟腱附著於跟骨</td><td>足底屈曲及屈小腿</td><td>脛神經</td></tr>
+<tr><td>比目魚肌 soleus</td><td>腓骨頭及脛骨內緣</td><td>同上</td><td>足底屈曲</td><td>同上</td></tr>
+<tr><td>脛後肌 tibialis posterior</td><td>脛骨後面、脛骨內緣、骨間膜</td><td>舟狀骨、骰骨、楔狀骨、第 2～4 蹠骨底</td><td>足底屈曲及內翻</td><td>同上</td></tr>
+<tr><td>趾長屈肌 flexor digitorum longus</td><td>脛骨</td><td>第 2～5 末節趾骨底</td><td>腳趾及足底屈曲，足內翻</td><td>同上</td></tr>
+<tr><td>蹠長屈肌 flexor hallucis longus</td><td>腓骨後面及骨間膜</td><td>蹠趾末節趾骨底</td><td>屈蹠趾及足底屈曲</td><td>同上</td></tr>
+<tr><td>脛前肌 tibialis anterior</td><td>脛骨外髁及外側、骨間膜</td><td>第一楔狀骨內側及第一蹠骨底</td><td>足背屈曲及<b>內翻</b></td><td>腓深神經</td></tr>
+<tr><td>趾長伸肌 extensor digitorum longus</td><td>脛骨外髁、腓骨前緣、骨間膜</td><td>第 2～5 趾骨中節及末節</td><td>伸展腳趾及足背屈曲</td><td>同上</td></tr>
+<tr><td>蹠長伸肌 extensor hallucis longus</td><td>腓骨內側面、骨間膜</td><td>蹠趾末節趾骨底背面</td><td>伸展蹠趾</td><td>同上</td></tr>
+<tr><td>腓第三肌 peroneus tertius</td><td>腓骨前面下方 1/3</td><td>第 5 蹠骨底</td><td>足背屈曲及外翻</td><td>同上</td></tr>
+<tr><td>腓長肌 peroneus longus</td><td>腓骨頭及體部，脛骨外髁</td><td>第一楔狀骨及第一蹠骨</td><td>足底屈曲及外翻</td><td>腓淺神經</td></tr>
+<tr><td>腓短肌 peroneus brevis</td><td>腓骨體部</td><td>第 5 蹠骨</td><td>同上</td><td>同上</td></tr>
+</tbody></table>
+<div class="key"><p class="lbl">必背重點</p><p><span class="term">跟腱<i>calcaneal / Achilles tendon</i></span>：腓腸肌、比目魚肌及蹠肌的共同肌腱，<b>人體最強韌的肌腱</b>，但也較易受傷。</p></div>
+<div class="trap"><p class="lbl">易混淆</p><p>脛前肌＝足背屈 + 內翻（腓深神經）；腓長／短肌＝足底屈 + 外翻（腓淺神經）；脛後肌＝足底屈 + 內翻（脛神經）。表 7-3 的「外翻肌」例為腓短肌。</p></div>
+
+
+<h3>4. 足部的內在肌（表 7-24）</h3>
+<ul>
+<li>足背：趾短伸肌。</li>
+<li>足底分四層：<b>淺層</b>：蹠外展肌、小趾外展肌、趾短屈肌；<b>第二層</b>：足底方肌及蚓狀肌；<b>第三層</b>：蹠短屈肌、小趾短屈肌、蹠內收肌；<b>第四層</b>：骨間足底肌及骨間背側肌。</li>
+</ul>
+</section>
+
+
+</main>
+</div>
+<script id="quizdata" type="application/json">{"L1": {"cards": [{"f": "人體組成六階層（由小到大）", "b": "化學→細胞→組織→器官→系統→生物體"}, {"f": "human anatomy", "b": "人體解剖學：探討人體構造及構造間關係"}, {"f": "human physiology", "b": "人體生理學：探討人體各部分的功能"}, {"f": "解剖學姿勢", "b": "直立面對觀察者、上肢自然下垂於兩側、手掌朝前"}, {"f": "superior / cranial", "b": "上方（頭側）"}, {"f": "inferior / caudal", "b": "下方（尾側）"}, {"f": "anterior (ventral) / posterior (dorsal)", "b": "前面（腹面）／後面（背面）"}, {"f": "medial vs lateral", "b": "內側（靠近正中線）／外側（遠離正中線）"}, {"f": "ipsilateral vs contralateral", "b": "同側／對側（例：脾臟與降結腸同側；膽囊與降結腸對側）"}, {"f": "proximal vs distal", "b": "近側（靠近四肢附著於軀幹處）／遠側（遠離）"}, {"f": "矢狀切面 sagittal plane", "b": "前後方向切開，分左右兩半；通過正中線＝midsagittal，不通過＝parasagittal"}, {"f": "冠狀切面 coronal (frontal) plane", "b": "左右方向切開，分前後兩半"}, {"f": "水平切面 horizontal (transverse) plane", "b": "水平切開，分上下兩半"}, {"f": "背側體腔包含哪兩腔？", "b": "顱腔（含腦）、脊髓腔（含脊髓及脊神經根）"}, {"f": "顱腔與椎管相通的孔", "b": "枕骨大孔"}, {"f": "腹側體腔以什麼分成上下？", "b": "橫膈 diaphragm：上胸腔、下腹盆腔"}, {"f": "胸腔含哪三個腔？", "b": "胸膜腔、縱隔腔、心包腔"}, {"f": "pleural cavity 的特點", "b": "胸膜圍成的密閉腔，左右各一，不含器官，只有少量潤滑液；胸膜臟層蓋肺"}, {"f": "mediastinum 上、下縱隔的分界", "b": "胸骨角與第4胸椎(T4)的連線"}, {"f": "中縱隔含什麼？後縱隔含什麼？", "b": "中：心臟；後：食道、支氣管、胸管、降主動脈"}, {"f": "腹部九分法的線", "b": "兩條水平線（肋骨下緣、髂骨結節）＋兩條垂直線（髂前上棘與恥骨聯合連線中點）"}, {"f": "腹部四象限的分割線", "b": "通過肚臍的一條垂直線與一條水平線；RUQ/LUQ/RLQ/LLQ"}, {"f": "上皮組織特徵", "b": "有游離面與極性、細胞接合緊密、基底膜、無血管、快速再生"}, {"f": "偽複層柱狀纖毛上皮", "b": "只有單層細胞但看似多層；含纖毛與分泌黏液細胞；分布於氣管、男性尿道"}, {"f": "變形上皮 transitional epithelium", "b": "可擴張收縮；分布於膀胱與輸尿管"}, {"f": "結締組織三組成", "b": "細胞、基質 ground substance、纖維"}, {"f": "膠原纖維 collagenous fiber", "b": "白纖維，數量最多、強韌抗拉；骨、軟骨、肌腱、韌帶、硬腦膜"}, {"f": "網狀纖維 reticular fiber", "b": "細、分枝成網；脾臟與淋巴結"}, {"f": "緻密規則結締組織", "b": "膠原纖維平行排列；肌腱、腱膜、韌帶"}, {"f": "黃韌帶、項韌帶屬於", "b": "彈性結締組織"}, {"f": "脂肪組織的 signet ring 形態", "b": "大脂肪滴把細胞質與核擠到邊緣"}, {"f": "白色 vs 棕色脂肪", "b": "白：一個大脂滴、成人皮下；棕：多個小脂滴、微血管豐富、新生兒較多"}, {"f": "透明軟骨分布", "b": "關節軟骨、骨骺板、肋軟骨、鼻喉氣管支氣管；體內最多"}, {"f": "纖維軟骨分布", "b": "椎間盤、恥骨聯合；緩衝襯墊"}, {"f": "彈性軟骨分布", "b": "會厭、耳翼、耳咽管、鼻翼"}, {"f": "軟骨的血管與再生", "b": "無血管神經、靠擴散；再生慢"}, {"f": "osteon (Haversian system)", "b": "緻密骨基本單位：骨板、陷窩、骨小管、中央管"}, {"f": "骨骼肌 vs 心肌 vs 平滑肌（核與橫紋）", "b": "骨骼肌多核有橫紋；心肌單核有橫紋；平滑肌單核無橫紋"}, {"f": "dendrite vs axon", "b": "樹突傳向細胞體（多條）；軸突傳離細胞體（只有一條）"}, {"f": "lamina propria", "b": "固有層：黏膜的結締組織層"}, {"f": "漿膜三種及位置", "b": "胸膜（肺）、腹膜（腹腔，體內最大）、心包膜（心臟）"}, {"f": "granulation tissue", "b": "顆粒組織：成纖維細胞與新血管形成的活化結締組織，作支架並分泌殺菌液體"}, {"f": "影響組織修復三因素", "b": "營養（最重要）、血液循環、年齡"}, {"f": "維生素 C 與傷口癒合", "b": "膠原纖維合成必需；缺乏時血管脆、傷口不易癒合"}, {"f": "維生素 K / D / A", "b": "K：凝血；D：腸道吸鈣；A：上皮替換（呼吸道）"}], "mcq": [{"q": "下列何者為人體組成階層中，由「類似的細胞」組成的階層？", "o": ["器官階層", "系統階層", "組織階層", "細胞階層"], "a": 2, "e": "組織＝類似細胞組成；器官由數種組織組成。"}, {"q": "研究受精卵至第八週子宮內發育形成的學問稱為", "o": ["胚胎學", "病理解剖學", "發育解剖學", "組織學"], "a": 0, "e": "胚胎學 embryology 專指受精至第8週。"}, {"q": "耳位於眼的哪個方位？", "o": ["內側", "近側", "深層", "外側"], "a": 3, "e": "耳遠離正中線，故在眼的外側 lateral。"}, {"q": "脾臟與降結腸的位置關係為", "o": ["對側", "同側", "近側", "深層"], "a": 1, "e": "二者均在身體左側＝ipsilateral。"}, {"q": "將人體分成前、後兩半的剖面是", "o": ["矢狀切面", "冠狀切面", "水平切面", "正中矢狀切面"], "a": 1, "e": "冠狀（額）切面分前後；矢狀分左右；水平分上下。"}, {"q": "通過身體正中線的矢狀切面稱為", "o": ["矢狀旁面", "額切面", "橫切面", "正中矢狀切面"], "a": 3, "e": "midsagittal；不通過正中線者為 parasagittal。"}, {"q": "顱腔與脊髓腔相通的構造是", "o": ["枕骨大孔", "椎間孔", "圓孔", "橫突孔"], "a": 0, "e": "顱腔以枕骨大孔與椎管相通。"}, {"q": "下列何者位於後縱隔？", "o": ["胸腺", "心臟", "食道", "氣管"], "a": 2, "e": "後縱隔：食道、支氣管、胸管、降主動脈；心臟在中縱隔。"}, {"q": "關於胸膜腔，下列敘述何者正確？", "o": ["含有肺臟", "含有心臟", "為不含器官、僅含少量液體的密閉腔", "只有一個，位於縱隔內"], "a": 2, "e": "胸膜腔左右各一，不含器官，只有潤滑液。"}, {"q": "腹腔與骨盆腔的分界為", "o": ["薦岬與恥骨聯合上緣的連線", "橫膈", "肋骨下緣", "臍水平"], "a": 0, "e": "以薦岬及恥骨聯合上緣之假想連線分界。"}, {"q": "闌尾炎的疼痛通常位於腹部九分法的哪一區？", "o": ["左髂區", "腹上區", "右季肋區", "右髂區"], "a": 3, "e": "盲腸下半部與闌尾在右髂區（RLQ）。"}, {"q": "下列何者「不是」上皮組織的特徵？", "o": ["有極性", "富含血管", "具基底膜", "可快速再生"], "a": 1, "e": "上皮缺乏血管，養分由深層組織或游離面取得。"}, {"q": "氣管的內襯上皮為", "o": ["單層鱗狀上皮", "偽複層纖毛柱狀上皮", "變形上皮", "複層鱗狀上皮"], "a": 1, "e": "氣管與男性尿道：偽複層柱狀；氣管有纖毛排黏液。"}, {"q": "膀胱與輸尿管為了容許擴張與收縮，主要內襯為", "o": ["單層立方上皮", "複層立方上皮", "單層柱狀上皮", "變形上皮"], "a": 3, "e": "變形上皮 transitional epithelium。"}, {"q": "皮膚、口腔、食道、陰道、肛門的上皮屬於", "o": ["複層鱗狀", "單層鱗狀", "複層柱狀", "偽複層柱狀"], "a": 0, "e": "受摩擦處為複層鱗狀，功能為保護。"}, {"q": "下列何者為單式分支泡狀腺的例子？", "o": ["乳腺", "胰臟", "皮脂腺", "小腸腺"], "a": 2, "e": "皮脂腺＝單式分支泡狀；乳腺為複式泡狀；小腸腺為單式管狀。"}, {"q": "含有肝素與組織胺的結締組織細胞是", "o": ["漿細胞", "巨噬細胞", "肥胖細胞", "成纖維細胞"], "a": 2, "e": "mast cell 製造 heparin 與 histamine。"}, {"q": "脊椎的黃韌帶與項韌帶主要由何種組織組成？", "o": ["彈性結締組織", "緻密規則結締組織", "透明軟骨", "網狀結締組織"], "a": 0, "e": "以彈性纖維為主，呈黃色。"}, {"q": "脾臟與淋巴結內提供精緻支持基質的纖維是", "o": ["膠原纖維", "彈性纖維", "肌原纖維", "網狀纖維"], "a": 3, "e": "網狀纖維細且分枝成網，見於脾臟與淋巴結。"}, {"q": "椎間盤與恥骨聯合的軟骨屬於", "o": ["透明軟骨", "纖維軟骨", "彈性軟骨", "硬骨"], "a": 1, "e": "纖維軟骨含大量膠原，具緩衝功能。"}, {"q": "關於心肌的敘述何者正確？", "o": ["多核、無橫紋", "單核、有橫紋、不隨意", "多核、有橫紋、隨意", "單核、無橫紋、隨意"], "a": 1, "e": "心肌單核位中央、有橫紋、不隨意，並有肌間盤。"}, {"q": "下列何者為黏膜的結締組織層？", "o": ["間皮", "基底膜", "外膜", "固有層"], "a": 3, "e": "黏膜的結締組織層稱固有層 lamina propria。"}, {"q": "體內最大的漿膜是", "o": ["腹膜", "胸膜", "心包膜", "滑膜"], "a": 0, "e": "腹膜 peritoneum 為最大漿膜。"}, {"q": "組織修復中，若成纖維細胞積極參與，最後會形成", "o": ["良好再生", "上皮組織", "疤痕組織", "脂肪組織"], "a": 2, "e": "成纖維細胞修復→疤痕組織，無法執行實質組織功能。"}, {"q": "與膠原纖維合成及血管強化最有關的維生素為", "o": ["維生素A", "維生素D", "維生素C", "維生素K"], "a": 2, "e": "維生素C缺乏時傷口不易癒合、血管脆易破。"}]}, "L2": {"cards": [{"f": "骨骼系統五大功能", "b": "支持、保護、運動、儲存（鈣磷、脂肪）、造血"}, {"f": "黃骨髓 yellow bone marrow", "b": "紅骨髓被脂肪組織取代而成；含脂肪細胞，儲存化學能源"}, {"f": "紅骨髓 red bone marrow", "b": "造血（紅血球、某些白血球、血小板）；成人主要在扁平骨板障與不規則骨"}, {"f": "成人仍具造血功能的長骨部位", "b": "肱骨與股骨的頭部"}, {"f": "骨骼無機鹽與其他成分的比例", "b": "氫氧磷灰質約 67%；細胞、纖維（膠原）、基質約 33%"}, {"f": "成人骨骼總數；中軸／附肢", "b": "206 塊；中軸 80、附肢 126"}, {"f": "長骨 long bone 例子", "b": "肱、尺、橈、掌、指、股、脛、腓、蹠、趾骨"}, {"f": "人體最大的種子骨", "b": "髕骨 patella（包埋於股四頭肌腱）"}, {"f": "板障 diploe", "b": "扁平骨兩層緻密骨板間的海綿骨，內有紅骨髓"}, {"f": "骨骺板 epiphyseal plate", "b": "位於幹骺端的軟骨，使骨增長；骨化後成骨骺線"}, {"f": "骨外膜 periosteum", "b": "覆蓋骨表面（關節軟骨除外）；纖維層＋生骨層；生長、修復、營養；韌帶肌腱附著"}, {"f": "夏氏纖維 Sharpey's fiber", "b": "自骨外膜延伸入骨基質，使其附著於骨"}, {"f": "骨內膜 endosteum", "b": "襯於骨髓腔的造骨細胞層，散布蝕骨細胞"}, {"f": "哈氏管 Haversian canal", "b": "骨元中央管，平行骨長軸，含神經與血管"}, {"f": "佛氏管 Volkmann's canal", "b": "穿通管，垂直骨長軸，連通骨外膜血管與哈氏管、骨髓腔"}, {"f": "骨元 osteon", "b": "緻密骨的基本單位＝哈氏系統"}, {"f": "陷窩 lacunae／骨小管 canaliculi", "b": "陷窩含骨細胞；骨小管含骨細胞突起，連通陷窩與哈氏管"}, {"f": "間骨板 interstitial lamella", "b": "骨元間不完整骨板，為重塑時舊骨元的殘片"}, {"f": "骨小樑 trabecula", "b": "海綿骨的不規則骨片，間隙可充滿紅骨髓"}, {"f": "膜內骨化 vs 軟骨內骨化", "b": "膜內：纖維膜上形成（頂骨、鎖骨）；軟骨內：透明軟骨被取代（多數骨，如脛骨）"}, {"f": "骨骺板四區（由骨骺往骨幹）", "b": "靜止→增生→肥大→鈣化軟骨區"}, {"f": "骨骺線出現的年齡", "b": "女約 18 歲、男約 20 歲；多數骨 25 歲骨化完成；鎖骨最後停止生長"}, {"f": "造骨細胞 vs 蝕骨細胞", "b": "造骨：堆積新骨基質；蝕骨：分解舊骨（分泌水解酶、乳酸、枸櫞酸）"}, {"f": "降鈣素 vs 副甲狀腺素", "b": "降鈣素（甲狀腺）抑制蝕骨、血鈣降；PTH（副甲狀腺）活化蝕骨、血鈣升"}, {"f": "維生素 A／C／D 與骨", "b": "A：控制造骨細胞活性；C：膠原合成；D：腸道吸收鈣"}, {"f": "骨質疏鬆症 osteoporosis", "b": "鈣流失；停經後雌激素減少為主因；45 歲以上女性約 29%、男性約 18%"}, {"f": "孔 foramen／裂 fissure／竇 sinus", "b": "孔：神經血管通過開口；裂：相鄰骨間窄縫；竇：骨內含氣空腔"}, {"f": "頭顱骨總數與分組", "b": "22 塊：腦顱骨 8＋顏面骨 14"}, {"f": "腦顱骨（8）", "b": "額1、頂2、顳2、枕1、蝶1、篩1"}, {"f": "顏面骨（14）", "b": "鼻2、上頜2、顴2、下頜1、淚2、腭2、下鼻甲2、犁1"}, {"f": "冠狀縫／矢狀縫／人字縫／鱗縫", "b": "額-頂／兩頂骨間／頂-枕／頂-顳"}, {"f": "前囟 anterior fontanel", "b": "最大，菱形，12–18 個月閉合"}, {"f": "後囟 posterior fontanel", "b": "三角形、較小，2–3 個月閉合"}, {"f": "蝶囟與乳突囟", "b": "前外側囟（蝶囟）3 個月閉合；後外側囟（乳突囟）12 個月閉合"}, {"f": "額縫 metopic suture", "b": "出生時分隔左右額骨，約 6 歲消失"}, {"f": "顳下頜關節 TMJ", "b": "下頜窩（顳骨鱗部）＋下頜骨髁突；頭顱骨唯一可動關節"}, {"f": "莖乳孔 stylomastoid foramen", "b": "莖突與乳突之間，顏面神經穿出"}, {"f": "枕骨大孔 foramen magnum", "b": "延髓與脊髓分界；脊髓根、椎動脈、椎靜脈通過"}, {"f": "蝶鞍 sella turcica", "b": "蝶骨體上鞍狀凹陷，腦下垂體窩"}, {"f": "圓孔／卵圓孔／棘孔", "b": "三叉神經上頜枝／三叉神經下頜枝／腦膜中動脈（皆在蝶骨大翼）"}, {"f": "眶上裂 superior orbital fissure", "b": "蝶骨大小翼間；動眼、滑車、三叉眼枝、外展神經"}, {"f": "篩板 cribriform plate／雞冠 crista galli", "b": "篩板有嗅孔通過嗅神經；雞冠供硬腦膜附著"}, {"f": "下頜骨特點", "b": "顏面骨最大最強，頭顱骨唯一能動；髁突、冠狀突、頦孔、下頜孔"}, {"f": "最小的顏面骨；最小的人體骨", "b": "淚骨；鐙骨（聽小骨）"}, {"f": "鼻中隔組成", "b": "篩骨垂直板＋犁骨＋鼻中隔軟骨"}, {"f": "副鼻竇四個與引流", "b": "額、蝶、篩、上頜；蝶竇與後篩竇→上鼻道；其餘→中鼻道"}, {"f": "脊柱塊數", "b": "26 塊：頸7、胸12、腰5、薦1、尾1（長約 71 公分）"}, {"f": "原發性 vs 次發性彎曲", "b": "原發（胎兒就有、後凹）：胸、薦；次發（前凸）：頸、腰"}, {"f": "椎間盤 intervertebral disc", "b": "纖維環＋髓核；吸震、使脊柱活動；C2 到薦骨之間"}, {"f": "寰椎 atlas (C1)", "b": "無椎體無棘突；與枕髁形成枕寰關節（點頭）"}, {"f": "軸椎 axis (C2)", "b": "齒狀突為旋軸，寰軸關節（搖頭）"}, {"f": "隆椎 vertebra prominens", "b": "C7；棘突長、不分叉、可觸摸；項韌帶附著"}, {"f": "橫突孔 transverse foramen", "b": "頸椎特有；椎動脈與靜脈通過"}, {"f": "胸椎的肋關節面分布", "b": "T1 上全下半；T2–T8 上半下半；T9 上半；T10–T12 全"}, {"f": "薦管裂孔 sacral hiatus", "b": "第 5（或 4）薦椎椎板未融合的開口；薦管麻醉位置"}, {"f": "薦岬 promontory", "b": "薦骨上端突出前緣，產科測骨盆大小標記"}, {"f": "胸骨三部分與胸骨角", "b": "柄、體、劍突；胸骨角對第 2 肋軟骨、氣管分叉高度"}, {"f": "真肋／假肋／懸肋", "b": "1–7／8–12／11–12"}, {"f": "鎖骨特點", "b": "最易骨折（出生與跌倒）；膜內骨化；最後停止生長；與胸骨、肩峰關節"}, {"f": "肩胛骨重要構造", "b": "肩胛棘、肩峰、關節盂、喙突、上下角、肩胛上切迹"}, {"f": "肱骨遠端三窩", "b": "橈骨窩、冠狀窩（前，屈肘）；鷹嘴窩（後，伸肘）"}, {"f": "外科頸 surgical neck", "b": "肱骨結節遠端狹窄處，易骨折"}, {"f": "尺骨 vs 橈骨位置與大小", "b": "尺：內側、近端大；橈：外側、近端小遠端大"}, {"f": "腕骨八塊", "b": "近：舟、月、三角、豆；遠：大多角、小多角、頭狀、鈎狀；舟狀骨最易骨折（約 70%）"}, {"f": "腕道症候群 carpal tunnel syndrome", "b": "正中神經在腕隧道受壓；拇指球肌萎縮、對掌困難"}, {"f": "指骨數", "b": "每手 14 塊；拇指 2 塊、其餘 3 塊"}], "mcq": [{"q": "下列何者不是骨骼系統的功能？", "o": ["分泌胰島素", "儲存鈣磷", "支持身體", "製造血球"], "a": 0, "e": "骨骼五功能為支持、保護、運動、儲存、造血；胰島素由胰臟分泌。"}, {"q": "成人主要的造血構造是？", "o": ["股骨骨幹的髓腔", "扁平骨板障及髖骨等不規則骨", "指骨", "肋軟骨"], "a": 1, "e": "成人長骨髓腔多為黃骨髓，主要造血在扁平骨（胸骨）板障與不規則骨（髖骨）。"}, {"q": "成人骨骼共有幾塊，其中附肢骨骼有幾塊？", "o": ["206；80", "196；126", "206；126", "226；80"], "a": 2, "e": "206＝中軸 80＋附肢 126。"}, {"q": "髕骨屬於哪一類骨？", "o": ["短骨", "扁平骨", "不規則骨", "種子骨"], "a": 3, "e": "髕骨包埋於股四頭肌腱，是人體最大的種子骨。"}, {"q": "哈氏管與佛氏管的方向關係為何？", "o": ["哈氏管平行、佛氏管垂直長軸", "皆平行長軸", "哈氏管垂直、佛氏管平行", "皆垂直長軸"], "a": 0, "e": "哈氏管（中央管）平行長軸；佛氏管（穿通管）垂直。"}, {"q": "骨骺板中最靠近骨幹、細胞多已死亡且基質鈣化的是？", "o": ["靜止軟骨區", "鈣化軟骨區", "肥大軟骨區", "增生軟骨區"], "a": 1, "e": "由骨骺往骨幹依序：靜止、增生、肥大、鈣化。"}, {"q": "下列何者以膜內骨化形成？", "o": ["脛骨", "股骨", "鎖骨", "肱骨"], "a": 2, "e": "膜內骨化：頭顱扁平骨（頂骨）與鎖骨；長骨為軟骨內骨化。"}, {"q": "骨骼長度增加的唯一機轉是？", "o": ["骨外膜造骨細胞堆積", "骨內膜吸收", "間骨板形成", "骨骺板的活性"], "a": 3, "e": "骨幹增長只靠骨骺板；骨外膜負責增粗。"}, {"q": "能抑制蝕骨細胞、使血鈣下降的激素是？", "o": ["降鈣素", "副甲狀腺素", "生長激素", "雌激素"], "a": 0, "e": "降鈣素（甲狀腺）抑制蝕骨細胞；PTH 作用相反。"}, {"q": "控制腸道對鈣質吸收的維生素是？", "o": ["維生素 A", "維生素 D", "維生素 C", "維生素 B"], "a": 1, "e": "維生素 D 控制消化道吸收鈣；C 為膠原合成；A 為造骨細胞活性。"}, {"q": "最後停止生長的硬骨是？", "o": ["股骨", "肋骨", "鎖骨", "橈骨"], "a": 2, "e": "講義：鎖骨是最後停止生長的硬骨。"}, {"q": "前囟的特徵為何？", "o": ["三角形，2–3 個月閉合", "3 個月閉合的成對囟門", "位於頂枕之間", "菱形，12–18 個月閉合"], "a": 3, "e": "前囟最大、菱形，約 12–18 個月閉合；後囟三角形 2–3 個月。"}, {"q": "頂骨與顳骨之間的骨縫稱為？", "o": ["鱗縫", "矢狀縫", "人字縫", "冠狀縫"], "a": 0, "e": "冠狀＝額頂；矢狀＝兩頂；人字＝頂枕；鱗縫＝頂顳。"}, {"q": "通過卵圓孔的構造是？", "o": ["三叉神經上頜枝", "三叉神經下頜枝", "腦膜中動脈", "視神經"], "a": 1, "e": "圓孔＝上頜枝；卵圓孔＝下頜枝；棘孔＝腦膜中動脈。"}, {"q": "顏面神經由哪個孔穿出至顏面表情肌？", "o": ["頸靜脈孔", "眶下孔", "莖乳孔", "枕骨大孔"], "a": 2, "e": "莖突與乳突之間的莖乳孔供顏面神經主要分枝穿出。"}, {"q": "頭顱骨中唯一能動的骨是？", "o": ["上頜骨", "顴骨", "蝶骨", "下頜骨"], "a": 3, "e": "下頜骨與顳骨下頜窩形成 TMJ，是頭顱骨唯一可動的骨。"}, {"q": "嗅神經通過下列何處進入鼻腔？", "o": ["篩板的嗅孔", "蝶鞍", "圓孔", "視神經管"], "a": 0, "e": "篩骨水平板的篩板上有嗅孔供嗅神經通過。"}, {"q": "下列何者不是副鼻竇？", "o": ["額竇", "顳竇", "篩竇", "蝶竇"], "a": 1, "e": "副鼻竇為額、蝶、篩、上頜四種。"}, {"q": "鼻淚管開口於？", "o": ["上鼻道", "中鼻道", "下鼻道", "蝶篩隱窩"], "a": 2, "e": "下鼻道有鼻淚管開口；上、中鼻道有副鼻竇開口。"}, {"q": "脊柱的原發性彎曲為？", "o": ["頸、腰", "腰、薦", "頸、胸", "胸、薦"], "a": 3, "e": "胸、薦彎曲（後凹）胎兒期即存在；頸、腰為次發性（前凸）。"}, {"q": "成人脊柱共幾塊骨？", "o": ["26", "25", "24", "33"], "a": 0, "e": "頸7＋胸12＋腰5＋薦骨1＋尾骨1＝26。"}, {"q": "下列何者只出現在頸椎？", "o": ["肋關節面", "橫突孔", "椎體最大", "棘突朝正後方"], "a": 1, "e": "橫突孔（椎動脈通過）是頸椎特徵。"}, {"q": "搖頭動作主要發生於？", "o": ["枕寰關節", "顳下頜關節", "寰軸關節", "胸鎖關節"], "a": 2, "e": "寰椎繞軸椎齒狀突旋轉＝搖頭；枕寰關節為點頭。"}, {"q": "胸骨角位於何處，並對應哪一肋軟骨？", "o": ["劍突，第 7 肋", "胸骨體下端，第 10 肋", "頸靜脈切迹，第 1 肋", "胸骨柄與胸骨體交界，第 2 肋"], "a": 3, "e": "胸骨角為柄體交界，接第 2 肋軟骨，約氣管分叉高度。"}, {"q": "第 8–10 對肋骨屬於？", "o": ["假肋（椎骨軟骨肋）", "懸肋", "真肋", "浮肋"], "a": 0, "e": "8–10 肋軟骨連上位肋軟骨間接連胸骨，屬假肋；11–12 為懸肋。"}, {"q": "每側肩帶包含哪些骨？", "o": ["鎖骨與肱骨", "鎖骨與肩胛骨", "肩胛骨與肱骨", "胸骨與鎖骨"], "a": 1, "e": "肩帶＝鎖骨＋肩胛骨，每側 2、共 4 塊。"}, {"q": "屈肘時容納尺骨冠狀突的是肱骨的？", "o": ["鷹嘴窩", "橈骨窩", "冠狀窩", "結節間溝"], "a": 2, "e": "冠狀窩容納冠狀突；橈骨窩容納橈骨頭；鷹嘴窩容納鷹嘴突（伸肘）。"}, {"q": "腕骨中最容易骨折的是？", "o": ["月狀骨", "豆狀骨", "鈎狀骨", "舟狀骨"], "a": 3, "e": "約 70% 腕骨骨折發生於舟狀骨。"}, {"q": "腕道症候群受壓迫的神經是？", "o": ["正中神經", "橈神經", "尺神經", "腋神經"], "a": 0, "e": "正中神經通過腕隧道；受壓導致拇指球肌萎縮與對掌困難。"}]}, "L3": {"cards": [{"f": "髖骨由哪三塊骨融合而成？", "b": "髂骨 ilium、恥骨 pubis、坐骨 ischium"}, {"f": "pelvic brim（骨盆緣）", "b": "由薦岬→弓狀線→恥骨聯合構成；分隔大骨盆（上）與小骨盆（下）"}, {"f": "false pelvis vs true pelvis", "b": "大骨盆＝假骨盆（上）；小骨盆＝真骨盆（下）"}, {"f": "髖臼由哪些骨構成？比例？", "b": "髂骨 2/5、坐骨 2/5、恥骨 1/5"}, {"f": "髂骨最上緣 / 骨髓穿刺部位", "b": "髂嵴 iliac crest"}, {"f": "greater sciatic notch", "b": "坐骨大切迹；坐骨神經通過"}, {"f": "lesser sciatic notch", "b": "坐骨小切迹；會陰的神經、血管通過"}, {"f": "ischial tuberosity", "b": "坐骨粗隆；坐姿接觸椅面承重，髖骨最強部分"}, {"f": "obturator foramen 通過什麼？", "b": "閉孔神經與血管；由坐骨枝與恥骨圍繞"}, {"f": "耳狀面 auricular surface", "b": "髂骨後方，與薦骨形成薦髂關節"}, {"f": "女性骨盆特徵（出口、恥骨弓、入口）", "b": "出口較大、恥骨弓＞90°、入口大而略卵圓、大骨盆淺"}, {"f": "男性骨盆恥骨弓與入口形狀", "b": "恥骨弓＜90°；骨盆入口呈心臟形"}, {"f": "下肢骨共幾塊？", "b": "兩側共 60 塊（每側 30）"}, {"f": "人體最長、最重、最強壯的骨", "b": "股骨 femur"}, {"f": "股骨頸部臨床特點", "b": "狹窄，易骨折"}, {"f": "linea aspera", "b": "粗線；股骨後面骨幹，分內唇、外唇"}, {"f": "intertrochanteric crest vs line", "b": "嵴＝後面（大小轉子間）；線＝前面（頸與體間）"}, {"f": "人體最大的種子骨", "b": "髕骨 patella（在股四頭肌肌腱內）"}, {"f": "tibial tuberosity", "b": "脛骨粗隆；脛骨前上方，髕韌帶附著"}, {"f": "內踝 vs 外踝", "b": "內踝＝脛骨遠端；外踝＝腓骨遠端"}, {"f": "跗骨 tarsals 共幾塊？有哪些？", "b": "7 塊：距骨、跟骨、骰骨、舟狀骨、3 塊楔狀骨"}, {"f": "足部唯一與脛腓骨相關節的骨", "b": "距骨 talus"}, {"f": "跗骨中最大最強壯的骨", "b": "跟骨 calcaneus"}, {"f": "拇趾（great toe）有幾塊趾骨？", "b": "2 塊（近側、遠側）；其他四趾各 3 塊"}, {"f": "內側縱弓的基石", "b": "距骨；外側縱弓基石＝骰骨"}, {"f": "橫弓分哪三個？", "b": "前橫弓（5蹠骨基部）、中橫弓（骰骨+楔狀骨）、後橫弓（骰骨+舟狀骨）"}, {"f": "扁平足 flat foot 成因", "b": "跟舟足底韌帶與肌腱變弱，內側縱弓變低"}, {"f": "synarthroses / amphiarthroses / diarthroses", "b": "不動 / 微動 / 可動關節"}, {"f": "纖維關節三類", "b": "骨縫 suture、韌帶連結 syndesmosis、嵌合關節 gomphosis"}, {"f": "gomphosis 的接合物質", "b": "牙周韌帶 periodontal ligament；不動關節"}, {"f": "synchondrosis vs symphysis", "b": "軟骨結合＝透明軟骨（骨骺板、第1肋）；聯合＝纖維軟骨盤（椎間盤、恥骨聯合）"}, {"f": "滑膜關節的特有特徵", "b": "關節腔（滑液腔）"}, {"f": "滑液的成分與特性", "b": "玻尿酸＋間質液；似蛋白；活動時黏稠度降低"}, {"f": "滑膜關節穩定三因素", "b": "關節面、韌帶、肌肉張力"}, {"f": "bursa vs tendon sheath", "b": "黏液囊＝減少皮/肌/腱與骨摩擦；腱鞘＝延長滑膜囊，完全包圍肌腱"}, {"f": "單軸／雙軸／多軸關節各舉例", "b": "單軸：屈戌、車軸；雙軸：橢圓、鞍狀；多軸：球窩"}, {"f": "saddle joint 例子", "b": "大多角骨與第一掌骨的腕掌關節（拇指）"}, {"f": "活動性最大的關節類型", "b": "球窩關節（肩、髖）"}, {"f": "旋後 supination vs 旋前 pronation", "b": "旋後＝掌心向前/上；旋前＝掌心向後/下"}, {"f": "內翻 inversion", "b": "足底在踝關節朝內；外翻朝外"}, {"f": "circumduction", "b": "迴旋：遠端做 360° 圓周，劃出圓錐"}, {"f": "glenohumeral joint", "b": "盂肱關節＝肩關節（肱骨頭＋關節盂）"}, {"f": "rotator cuff 四肌", "b": "棘上肌、棘下肌、小圓肌、肩胛下肌；下方無保護"}, {"f": "ligamentum teres", "b": "圓韌帶；髖臼窩→股骨頭，含血管營養股骨頭"}, {"f": "髂股韌帶起止", "b": "髂前下棘 → 股骨轉子間線"}], "mcq": [{"q": "下列何者不是髖骨的組成？", "o": ["薦骨", "髂骨", "恥骨", "坐骨"], "a": 0, "e": "髖骨由髂、恥、坐骨融合；薦骨屬脊柱。"}, {"q": "骨盆緣不經過下列何處？", "o": ["弓狀線", "坐骨粗隆", "恥骨聯合", "薦岬"], "a": 1, "e": "骨盆緣＝薦岬、弓狀線、恥骨聯合。"}, {"q": "髖臼各由哪一骨佔多少？", "o": ["恥骨 2/5", "坐骨 1/5", "坐骨 2/5", "髂骨 1/5"], "a": 2, "e": "髂骨與坐骨各 2/5，恥骨 1/5。"}, {"q": "坐姿時主要承重的構造為", "o": ["髂嵴", "恥骨結節", "坐骨棘", "坐骨粗隆"], "a": 3, "e": "坐骨粗隆接觸椅面。"}, {"q": "坐骨神經經由何處通過至下肢？", "o": ["坐骨大切迹", "髖臼切迹", "坐骨小切迹", "閉孔"], "a": 0, "e": "坐骨大切迹通過坐骨神經。"}, {"q": "下列何者為女性骨盆特徵？", "o": ["恥骨弓小於 90°", "骨盆出口較大", "骨盆入口呈心臟形", "髂前上棘相距較近"], "a": 1, "e": "女性出口大、恥骨弓＞90°、髂前上棘距離較遠。"}, {"q": "兩側下肢骨共有幾塊？", "o": ["58", "50", "60", "62"], "a": 2, "e": "每側 30 塊，共 60 塊。"}, {"q": "人體最大的種子骨為", "o": ["舟狀骨", "豆狀骨", "距骨", "髕骨"], "a": 3, "e": "髕骨位於股四頭肌肌腱內。"}, {"q": "足部唯一與脛骨及腓骨相關節的骨是", "o": ["距骨", "舟狀骨", "骰骨", "跟骨"], "a": 0, "e": "距骨與脛、腓骨形成踝關節。"}, {"q": "拇趾含有幾塊趾骨？", "o": ["1", "2", "4", "3"], "a": 1, "e": "拇趾只有近側、遠側兩塊。"}, {"q": "內側縱弓的基石是", "o": ["骰骨", "跟骨", "距骨", "第一蹠骨"], "a": 2, "e": "內側縱弓基石為距骨，外側為骰骨。"}, {"q": "脛骨與腓骨的下列敘述何者正確？", "o": ["腓骨較大、位於內側", "腓骨承受主要重量", "外踝屬於脛骨", "內踝屬於脛骨"], "a": 3, "e": "內踝為脛骨遠端；外踝為腓骨。"}, {"q": "椎間盤與恥骨聯合的接合物質是", "o": ["纖維軟骨", "透明軟骨", "彈性軟骨", "緻密結締組織"], "a": 0, "e": "聯合 symphysis 含纖維軟骨盤。"}, {"q": "骨骺板是哪一類關節？", "o": ["骨縫", "軟骨結合", "嵌合關節", "聯合"], "a": 1, "e": "骨骺板為透明軟骨，屬軟骨結合。"}, {"q": "滑膜關節的特有特徵為", "o": ["骨間膜", "牙周韌帶", "關節腔", "纖維軟骨"], "a": 2, "e": "有滑液腔為滑膜關節特徵。"}, {"q": "滑液的功能不包括", "o": ["營養關節軟骨", "吞噬碎片", "潤滑", "產生紅血球"], "a": 3, "e": "滑液不造血。"}, {"q": "下列何者為屈戌關節？", "o": ["肘關節", "肩關節", "橈腕關節", "寰軸關節"], "a": 0, "e": "肘、膝、踝為屈戌關節。"}, {"q": "拇指腕掌關節為", "o": ["橢圓關節", "鞍狀關節", "滑動關節", "球窩關節"], "a": 1, "e": "大多角骨與第一掌骨為鞍狀關節。"}, {"q": "手掌轉向前或向上的前臂運動稱為", "o": ["內收", "對掌", "旋後", "旋前"], "a": 2, "e": "旋後掌心向前/上。"}, {"q": "肩旋轉套不包括下列哪一肌肉？", "o": ["小圓肌", "棘上肌", "肩胛下肌", "三角肌"], "a": 3, "e": "旋轉套為棘上、棘下、小圓、肩胛下。"}, {"q": "肩關節最易受損的方向為", "o": ["下方", "前方", "上方", "後方"], "a": 0, "e": "下方沒有旋轉套肌肉保護。"}, {"q": "髖關節很少脫臼的原因，下列何者錯誤？", "o": ["周圍肌群廣大", "關節囊薄弱", "囊內有強韌韌帶", "髖臼唇比股骨頭小"], "a": 1, "e": "髖關節囊增厚強韌。"}, {"q": "髂股韌帶由何處延伸至何處？", "o": ["坐骨→股骨頸", "髖臼窩→股骨頭", "髂前下棘→轉子間線", "恥骨→股骨頸"], "a": 2, "e": "髂前下棘→股骨轉子間線。"}, {"q": "前十字韌帶受損，常見脛骨", "o": ["向下移位", "向後脫位", "向外旋轉", "向前脫位"], "a": 3, "e": "過度伸展破壞前十字韌帶，脛骨向前脫位。"}, {"q": "位於髕骨與皮膚之間的滑液囊是", "o": ["膝前囊", "膝上囊", "膝下囊", "內側囊"], "a": 0, "e": "膝前囊介於髕骨與皮膚。"}]}, "L4": {"cards": [{"f": "骨骼肌約占體重多少？", "b": "約 40～50%（肌肉組織總計）"}, {"f": "肌肉的四大特性", "b": "興奮性 excitability、收縮性 contractility、伸展性 extensibility、彈性 elasticity"}, {"f": "骨骼肌收縮產生的熱量，約多少比例用於維持正常體溫？", "b": "85%"}, {"f": "肌外膜 epimysium", "b": "由深層筋膜延伸，包覆整條肌肉"}, {"f": "肌束膜 perimysium", "b": "包住每一條肌束 fasciculus"}, {"f": "肌內膜 endomysium", "b": "包住每一條肌纖維（細胞）；微血管分布於此"}, {"f": "腱膜 aponeurosis 的例子", "b": "顱頂的帽狀腱膜（片狀肌腱）"}, {"f": "淺層筋膜 vs 深層筋膜", "b": "淺層：脂肪 + 疏鬆結締組織（儲存、絕緣、保護）；深層：緻密、不含脂肪，將肌肉依功能群分開"}, {"f": "sarcolemma / sarcoplasm / sarcoplasmic reticulum", "b": "肌漿膜（細胞膜）／肌漿（細胞質）／肌漿網（無顆粒內質網，貯鈣）"}, {"f": "三合體 triad", "b": "1 條橫小管（T 小管）+ 兩側肌漿網終池 terminal cisternae"}, {"f": "骨骼肌 T 小管位於何處？心肌呢？", "b": "骨骼肌：A 帶與 I 帶交界；心肌：Z 線上（且較大）"}, {"f": "肌節 sarcomere", "b": "肌肉收縮的單位；兩 Z 線之間；肌肉增長是增加肌節數目"}, {"f": "A 帶（暗帶）代表什麼？", "b": "粗肌絲（myosin）的長度"}, {"f": "I 帶（明帶）含有什麼？", "b": "只含細肌絲（actin）"}, {"f": "H 區 / M 線", "b": "H 區：A 帶中央只含粗肌絲；M 線：H 區中央，連繫相鄰粗肌絲"}, {"f": "慢肌纖維（第一型）特徵", "b": "氧化型慢肌；粒線體多、肌紅蛋白多（紅肌）；最不易疲勞；ATP 來自氧化磷酸化；維持姿勢"}, {"f": "快肌纖維（第二型-b）特徵", "b": "糖解型；肌紅蛋白少（白肌）、粒線體少、肝糖多；易疲勞；精細動作（上肢）"}, {"f": "心肌的肌間盤 intercalated disc", "b": "心肌纖維分叉連接處增厚的肌漿膜，含間隙接合，形成合胞體"}, {"f": "心肌不反應期 vs 骨骼肌", "b": "心肌 300 msec，骨骼肌 5 msec（約 60 倍），故心肌不會強直收縮"}, {"f": "平滑肌的緻密體 dense body", "b": "功能像橫紋肌 Z 線，供肌動蛋白附著"}, {"f": "單一單位平滑肌 vs 多單位平滑肌", "b": "單一單位：間隙接合、一齊收縮（子宮、膀胱、胃腸、血管）；多單位：無細胞接合，個別由自主神經支配（睫狀肌、虹膜肌、豎毛肌、大動脈）"}, {"f": "平滑肌的鈣結合蛋白", "b": "攜鈣素 calmodulin（骨骼肌、心肌為旋轉素 troponin）"}, {"f": "origin 與 insertion", "b": "起端：固定骨、近側端；止端：可動骨、遠側端；止端移向起端"}, {"f": "羽狀肌 pennate：強或範圍大？", "b": "力量較強、運動範圍較小；平行肌則範圍大、力較小"}, {"f": "單羽、雙羽、多羽肌的例子", "b": "單羽：伸趾長肌；雙羽：股直肌；多羽：三角肌"}, {"f": "作用肌 agonist / 拮抗肌 antagonist / 協同肌 synergist", "b": "原動肌／相反作用肌／提高作用肌效率（固定關節）的肌肉"}, {"f": "骨骼肌命名的 7 種依據", "b": "位置、形狀、大小、纖維方向、起端數目、起止端位置、作用"}, {"f": "旋後 supination vs 旋前 pronation", "b": "旋後：手掌朝上或朝前；旋前：手掌朝下或朝後"}, {"f": "表情肌的神經支配（及例外）", "b": "顏面神經；例外：提上瞼肌 → 動眼神經"}, {"f": "咀嚼肌有哪四條？神經？", "b": "嚼肌、顳肌、翼外肌、翼內肌；三叉神經下頜枝"}, {"f": "眼外肌：外直肌、上斜肌的神經", "b": "外直肌 CN VI（外旋神經）；上斜肌 CN IV（滑車神經）；其餘 CN III"}, {"f": "胸鎖乳突肌", "b": "起胸骨、鎖骨 → 止顳骨乳突；副神經；將頸分成前、後頸三角"}, {"f": "腹壁四對肌肉", "b": "腹直肌、腹外斜肌、腹內斜肌、腹橫肌"}, {"f": "腹股溝管淺環通過什麼？", "b": "男：精索；女：子宮圓韌帶；腹壓高易疝氣（男性較易）"}, {"f": "豎脊肌三肌群（外→內）", "b": "髂肋肌群、最長肌群、棘肌群"}, {"f": "橫膈三個開口與通過物", "b": "主動脈裂孔：主動脈 + 胸管；食道裂孔：食道 + 迷走神經；腔靜脈孔：下腔靜脈"}, {"f": "骨盆膈由哪些肌肉構成？", "b": "提肛肌 + 尾骨肌"}, {"f": "泌尿生殖膈", "b": "會陰深橫肌 + 尿道外括約肌 + 其上纖維膜"}, {"f": "棘上肌的作用與神經", "b": "外展上臂（投手易傷）；肩胛上神經"}, {"f": "肱二頭肌 / 肱三頭肌 神經", "b": "肱二頭肌：肌皮神經（屈曲、旋後）；肱三頭肌：橈神經（伸前臂）"}, {"f": "股四頭肌包含哪四肌？神經？", "b": "股直肌、外側廣肌、中間廣肌、內側廣肌；股神經；止於脛骨粗隆（髕韌帶）"}, {"f": "hamstrings（腿筋肌）", "b": "股二頭肌、半腱肌、半膜肌；屈小腿、伸大腿；坐骨神經"}, {"f": "股三角 femoral triangle 邊界與內容", "b": "腹股溝韌帶、內收長肌、縫匠肌；股動脈、股靜脈、股神經、淋巴管"}, {"f": "膕窩 popliteal fossa 內容", "b": "膕動脈、膕靜脈、脛神經、腓總神經、脂肪"}, {"f": "小腿三肌群的作用與神經", "b": "前：足背屈、腓深神經；外側：足底屈 + 外翻、腓淺神經；後：足底屈、脛神經"}], "mcq": [{"q": "下列何者為骨骼肌與心肌皆有、而平滑肌沒有的構造？", "o": ["橫小管與肌節", "間隙接合", "緻密體", "攜鈣素"], "a": 0, "e": "骨骼肌、心肌有橫紋、肌節與 T 小管；平滑肌皆無。"}, {"q": "包住每一條肌纖維的結締組織膜為何？", "o": ["肌外膜", "肌束膜", "肌內膜", "腱鞘"], "a": 2, "e": "肌內膜 endomysium 包住單一肌纖維；肌束膜包肌束；肌外膜包整條肌肉。"}, {"q": "三合體（triad）的組成為何？", "o": ["兩條橫小管 + 一個終池", "一條橫小管 + 兩側肌漿網終池", "Z 線 + M 線 + H 區", "肌凝蛋白 + 肌動蛋白 + 旋轉素"], "a": 1, "e": "三合體 = 1 條 T 小管 + 兩旁肌漿網終池。"}, {"q": "肌節中只含有細肌絲的區域為何？", "o": ["A 帶", "H 區", "M 線", "I 帶"], "a": 3, "e": "I 帶只含細肌絲；H 區只含粗肌絲；A 帶代表粗肌絲長度。"}, {"q": "下列何者屬於慢肌纖維（第一型）的特徵？", "o": ["肌紅蛋白少、易疲勞", "ATP 主要來自糖解作用", "粒線體多、最不易疲勞", "肝糖含量最多"], "a": 2, "e": "慢肌：氧化磷酸化、粒線體與肌紅蛋白多、最不易疲勞，維持姿勢。"}, {"q": "下列哪一種肌肉的不反應期最長、因此不會發生強直收縮？", "o": ["心肌", "骨骼肌", "多單位平滑肌", "眼外肌"], "a": 0, "e": "心肌不反應期 300 msec，遠長於骨骼肌 5 msec。"}, {"q": "切斷支配神經後會發生肌肉萎縮的是哪一種肌肉？", "o": ["心肌", "單一單位平滑肌", "多單位平滑肌", "骨骼肌"], "a": 3, "e": "表 7-1：僅骨骼肌切斷神經會萎縮。"}, {"q": "平滑肌收縮時，鈣離子結合的蛋白質為：", "o": ["旋轉素 troponin", "攜鈣素 calmodulin", "肌凝蛋白", "緻密體"], "a": 1, "e": "平滑肌為攜鈣素；骨骼肌、心肌為旋轉素。"}, {"q": "下列何者屬於多單位平滑肌？", "o": ["虹膜括約肌", "胃", "子宮", "輸尿管"], "a": 0, "e": "多單位：睫狀肌、虹膜括約／輻射肌、豎毛肌、大動脈；子宮、胃、輸尿管為單一單位。"}, {"q": "關於起端與止端，下列何者正確？", "o": ["起端在可動骨遠側端", "止端在固定骨近側端", "收縮時止端移向起端", "收縮時起端移向止端"], "a": 2, "e": "起端：固定骨、近側；止端：可動骨、遠側；止端移向起端。"}, {"q": "運動範圍較小但力量強，肌束與長軸成對角線的排列為：", "o": ["平行", "羽狀", "環狀", "會聚"], "a": 1, "e": "羽狀肌較強而範圍小；平行肌範圍大、力較小。"}, {"q": "三角肌屬於哪一種肌束排列？", "o": ["單羽狀", "雙羽狀", "環狀", "多羽狀"], "a": 3, "e": "三角肌為多羽狀；股直肌雙羽；伸趾長肌單羽。"}, {"q": "前臂彎曲時，肱三頭肌屬於：", "o": ["作用肌", "協同肌", "拮抗肌", "固定肌"], "a": 2, "e": "屈前臂：肱二頭肌為作用肌，肱三頭肌放鬆為拮抗肌。"}, {"q": "「胸鎖乳突肌」是依據下列何者命名？", "o": ["起端及止端位置", "大小", "起端數目", "形狀"], "a": 0, "e": "起於胸骨、鎖骨，止於顳骨乳突，依起止端命名。"}, {"q": "提上瞼肌的神經支配為：", "o": ["顏面神經", "三叉神經", "滑車神經", "動眼神經"], "a": 3, "e": "表情肌多由顏面神經，但提上瞼肌由動眼神經支配。"}, {"q": "下列何者「不是」咀嚼肌？", "o": ["嚼肌", "頰肌", "顳肌", "翼內肌"], "a": 1, "e": "頰肌是表情肌（顏面神經）；咀嚼肌為嚼肌、顳肌、翼外肌、翼內肌。"}, {"q": "支配外直肌的神經為：", "o": ["外旋神經", "滑車神經", "動眼神經", "顏面神經"], "a": 0, "e": "外直肌 CN VI 外旋神經；上斜肌 CN IV 滑車神經；其餘動眼神經。"}, {"q": "形成口腔底最主要的肌肉是：", "o": ["二腹肌", "胸骨舌骨肌", "下頜舌骨肌", "莖突舌骨肌"], "a": 2, "e": "表 7-9 註：下頜舌骨肌是形成口腔底的最主要肌肉。"}, {"q": "單側收縮使臉轉向對側的肌肉為：", "o": ["頭夾肌", "胸鎖乳突肌", "斜方肌", "頭最長肌"], "a": 1, "e": "胸鎖乳突肌單側收縮：同側屈曲、臉轉向對側；頭夾肌轉向同側。"}, {"q": "腹股溝管淺環在女性有何構造通過？", "o": ["精索", "輸尿管", "輸卵管", "子宮圓韌帶"], "a": 3, "e": "男性精索、女性子宮圓韌帶通過淺環。"}, {"q": "豎脊肌由外向內的三肌群順序為：", "o": ["最長肌、髂肋肌、棘肌", "棘肌、最長肌、髂肋肌", "髂肋肌、最長肌、棘肌", "髂肋肌、棘肌、最長肌"], "a": 2, "e": "外側柱髂肋肌、中柱最長肌、內側柱棘肌。"}, {"q": "骨盆膈由下列哪兩條肌肉構成？", "o": ["提肛肌與尾骨肌", "會陰深橫肌與尿道外括約肌", "球海綿體肌與坐骨海綿體肌", "肛門外括約肌與尿道外括約肌"], "a": 0, "e": "骨盆膈 = 提肛肌 + 尾骨肌；會陰深橫肌 + 尿道外括約肌為泌尿生殖膈。"}, {"q": "屈曲前臂並使前臂旋後的肌肉為：", "o": ["肱肌", "肱橈肌", "旋前圓肌", "肱二頭肌"], "a": 3, "e": "肱二頭肌：前臂屈曲及旋後，肌皮神經。"}, {"q": "大腿前面肌群（股四頭肌）的神經支配為：", "o": ["閉孔神經", "股神經", "坐骨神經", "臀上神經"], "a": 1, "e": "前面伸肌群：股神經；後面：坐骨神經；內側：閉孔神經。"}, {"q": "跟腱是由下列哪些肌肉的肌腱匯合而成？", "o": ["腓腸肌、比目魚肌、蹠肌", "腓長肌、腓短肌", "脛前肌、脛後肌", "股二頭肌、半腱肌"], "a": 0, "e": "跟腱為腓腸肌、比目魚肌及蹠肌共同肌腱。"}]}}</script>
+<script>
+(function(){
+  var Q=JSON.parse(document.getElementById('quizdata').textContent);
+  var main=document.getElementById('main');
+  function store(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+
+  /* quiz pages: one after each lecture's last section, plus a mixed one */
+  var lecs=Object.keys(Q);
+  lecs.forEach(function(id){
+    var secs=[].slice.call(document.querySelectorAll('section.page[id^="p-'+id+'-"]'));
+    var s=document.createElement('section');s.className='page';s.id='q-'+id;s.dataset.title='自我測驗';s.dataset.group=secs.length?secs[0].dataset.group:id;s.dataset.quiz=id;
+    var last=secs[secs.length-1]||main.lastElementChild;last.after(s);
+  });
+  var mix=document.createElement('section');mix.className='page';mix.id='q-all';mix.dataset.title='全部章節混合測驗';mix.dataset.group='總複習';mix.dataset.quiz='all';main.appendChild(mix);
+
+  var pages=[].slice.call(document.querySelectorAll('section.page'));
+  /* tables scroll inside their own box */
+  document.querySelectorAll('table.tbl').forEach(function(t){var w=document.createElement('div');w.className='tblwrap';t.parentNode.insertBefore(w,t);w.appendChild(t)});
+
+  /* nav */
+  var nl=document.getElementById('navlist'),grp=null;
+  pages.forEach(function(p){
+    if(p.dataset.group!==grp){grp=p.dataset.group;var g=document.createElement('p');g.className='navgrp';g.textContent=grp;nl.appendChild(g)}
+    var a=document.createElement('a');a.href='#'+p.id;a.textContent=p.dataset.title;if(p.dataset.quiz)a.className='qz';a.dataset.for=p.id;nl.appendChild(a);
+    if(p.id!=='home'&&!p.dataset.quiz){var c=document.createElement('p');c.className='crumb';c.textContent=p.dataset.group;p.prepend(c)}
+  });
+  /* home lecture cards */
+  var hg=document.getElementById('lecgrid');
+  if(hg){var seen={};pages.forEach(function(p){var g=p.dataset.group;if(p.id==='home'||p.dataset.quiz==='all'||seen[g])return;seen[g]=1;
+    var n=pages.filter(function(x){return x.dataset.group===g&&!x.dataset.quiz}).length;
+    var a=document.createElement('a');a.className='lec';a.href='#'+p.id;
+    a.innerHTML='<span class="no">'+esc(g.split(' ')[0])+'</span><span class="nm">'+esc(g.split(' ').slice(1).join(' ')||g)+'</span><span class="ct">'+n+' 個主題 · 字卡與測驗</span>';hg.appendChild(a)})}
+
+  /* pager */
+  pages.forEach(function(p,i){
+    var d=document.createElement('div');d.className='pager';
+    if(i>0)d.innerHTML+='<a href="#'+pages[i-1].id+'"><small>← 上一頁</small>'+esc(pages[i-1].dataset.title)+'</a>';
+    if(i<pages.length-1)d.innerHTML+='<a class="nx" href="#'+pages[i+1].id+'"><small>下一頁 →</small>'+esc(pages[i+1].dataset.title)+'</a>';
+    p.appendChild(d);
+  });
+
+  var built={};
+  function show(id){
+    var p=document.getElementById(id);if(!p||!p.classList.contains('page'))p=pages[0];
+    pages.forEach(function(x){x.hidden=x!==p});
+    nl.querySelectorAll('a').forEach(function(a){if(a.dataset.for===p.id)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+    if(p.dataset.quiz&&!built[p.id]){built[p.id]=1;buildQuiz(p)}
+    document.body.classList.remove('navopen');
+    window.scrollTo(0,0);store('anat-last',p.id);
+  }
+  window.addEventListener('hashchange',function(){show(location.hash.slice(1))});
+  document.addEventListener('click',function(e){var a=e.target.closest('a[href^="#"]');if(a){e.preventDefault();var id=a.getAttribute('href').slice(1);try{history.replaceState(null,'','#'+id)}catch(_){}show(id)}});
+
+  /* quiz builder */
+  function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+  function buildQuiz(sec){
+    var id=sec.dataset.quiz,src=id==='all'?lecs.map(function(k){return Q[k]}):[Q[id]];
+    var cards=[],mcq=[];src.forEach(function(x){cards=cards.concat(x.cards||[]);mcq=mcq.concat(x.mcq||[])});
+    if(id==='all'){mcq=shuffle(mcq).slice(0,30)}
+    sec.insertAdjacentHTML('afterbegin','<p class="crumb">'+esc(sec.dataset.group)+'</p><h1>'+esc(sec.dataset.title)+'</h1>'+
+      '<div class="qtabs"><button class="btn primary" data-t="c">字卡 '+cards.length+' 張</button><button class="btn" data-t="m">選擇題 '+mcq.length+' 題</button></div><div class="qbody"></div>');
+    var body=sec.querySelector('.qbody'),tabs=[].slice.call(sec.querySelectorAll('.qtabs button'));
+    tabs.forEach(function(b){b.addEventListener('click',function(){tabs.forEach(function(x){x.classList.toggle('primary',x===b)});b.dataset.t==='c'?cardsUI():mcqUI()})});
+    function cardsUI(){
+      var deck=cards.slice(),i=0,flip=false,miss=[];
+      body.innerHTML='<div class="card" tabindex="0" role="button" aria-label="翻面"><p class="side-lbl"></p><p class="txt"></p></div>'+
+        '<div class="cardbar"><button class="btn" data-a="miss">不熟 ✗</button><button class="btn primary" data-a="know">會了 ✓</button></div>'+
+        '<div class="cardbar"><span class="count"></span><button class="btn" data-a="shuf">洗牌</button><button class="btn" data-a="rev">只看不熟的</button></div>';
+      var card=body.querySelector('.card');
+      function draw(){if(!deck.length){card.querySelector('.side-lbl').textContent='完成';card.querySelector('.txt').textContent=miss.length?'這輪有 '+miss.length+' 張不熟，按「只看不熟的」再練一次':'全部會了！';card.classList.remove('flipped');body.querySelector('.count').textContent='';return}
+        var c=deck[i];card.classList.toggle('flipped',flip);card.querySelector('.side-lbl').textContent=flip?'答案':'題目 · 點一下翻面';card.querySelector('.txt').textContent=flip?c.b:c.f;
+        body.querySelector('.count').textContent=(i+1)+' / '+deck.length}
+      function next(known){if(!deck.length)return;if(!known)miss.push(deck[i]);i++;flip=false;if(i>=deck.length){deck=[];}draw()}
+      card.addEventListener('click',function(){flip=!flip;draw()});
+      card.addEventListener('keydown',function(e){if(e.key===' '||e.key==='Enter'){e.preventDefault();flip=!flip;draw()}});
+      body.querySelector('[data-a=know]').onclick=function(){next(true)};
+      body.querySelector('[data-a=miss]').onclick=function(){next(false)};
+      body.querySelector('[data-a=shuf]').onclick=function(){deck=shuffle(cards);i=0;flip=false;miss=[];draw()};
+      body.querySelector('[data-a=rev]').onclick=function(){if(miss.length){deck=shuffle(miss);miss=[];i=0;flip=false;draw()}};
+      draw();
+    }
+    function mcqUI(){
+      var right=0,done=0,list=shuffle(mcq);
+      body.innerHTML='<p class="score"></p>'+list.map(function(q,n){
+        var order=shuffle([0,1,2,3].slice(0,q.o.length));
+        return '<div class="mcq" data-a="'+order.indexOf(q.a)+'"><p class="qn">第 '+(n+1)+' 題</p><p class="qt">'+esc(q.q)+'</p>'+
+          order.map(function(k,j){return '<button class="opt" data-j="'+j+'">'+'ABCD'[j]+'. '+esc(q.o[k])+'</button>'}).join('')+
+          '<p class="ex" hidden>'+esc(q.e||'')+'</p></div>'}).join('')+'<button class="btn" id="redo-'+sec.id+'">重新出題</button>';
+      function sc(){body.querySelector('.score').textContent='已作答 '+done+' / '+list.length+'　答對 '+right}
+      body.querySelectorAll('.mcq').forEach(function(m){m.addEventListener('click',function(e){var b=e.target.closest('button.opt');if(!b||b.disabled)return;
+        var ok=b.dataset.j===m.dataset.a;done++;if(ok)right++;
+        m.querySelectorAll('button.opt').forEach(function(x){x.disabled=true;if(x.dataset.j===m.dataset.a)x.classList.add('right')});
+        if(!ok)b.classList.add('wrong');m.querySelector('.ex').hidden=false;sc()})});
+      body.querySelector('#redo-'+sec.id).onclick=mcqUI;sc();
+    }
+    cardsUI();
+  }
+
+  /* tools */
+  var he=document.getElementById('hideEn');
+  function setHide(v){document.body.classList.toggle('hide-en',v);he.setAttribute('aria-pressed',String(v));store('anat-hide',v?'1':'0')}
+  he.onclick=function(){setHide(!document.body.classList.contains('hide-en'))};
+  document.addEventListener('click',function(e){var i=e.target.closest('.term i');if(i&&document.body.classList.contains('hide-en'))i.classList.toggle('peek')});
+  if(store('anat-hide')==='1')setHide(true);
+  document.getElementById('themeBtn').onclick=function(){var r=document.documentElement,dark=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;r.dataset.theme=dark?'light':'dark'};
+  document.getElementById('menuBtn').onclick=function(){document.body.classList.toggle('navopen')};
+  document.addEventListener('click',function(e){if(document.body.classList.contains('navopen')&&!e.target.closest('nav.side')&&!e.target.closest('#menuBtn'))document.body.classList.remove('navopen')});
+  /* image zoom */
+  document.addEventListener('click',function(e){var im=e.target.closest('figure.fig img');if(im){var z=document.createElement('div');z.className='zoom';z.innerHTML='<img alt="">';z.firstChild.src=im.src;z.onclick=function(){z.remove()};document.body.appendChild(z)}});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'){var z=document.querySelector('.zoom');if(z)z.remove()}});
+
+  show(location.hash.slice(1)||store('anat-last')||'home');
+})();
+</script>
