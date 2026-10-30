@@ -105,6 +105,27 @@ figcaption{font:13px/1.5 var(--body);color:var(--muted);margin-top:8px}
 .vz-read{font:500 14px/1.6 var(--body);margin:6px 0 2px;font-variant-numeric:tabular-nums}
 .vz-cap{font-size:13px;color:var(--muted);margin:4px 0 0}
 
+/* side-by-side compare (table ↔ handout figure) */
+section.page.wide{max-width:1280px}
+.jc{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:20px;align-items:start}
+.jc-r{position:sticky;top:calc(12px + env(safe-area-inset-top,0px))}
+.jc-h{font-weight:700;margin:0 0 6px}
+.jc-h small{font-weight:400;color:var(--muted)}
+.jc-t{font-size:13.5px}
+.jc-t th small{font-weight:400;color:var(--muted);white-space:normal}
+.jc-t tbody th{white-space:nowrap;text-align:left;padding:8px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+.jc-t tbody tr{cursor:pointer}
+.jc-t tbody tr.on{background:var(--plate-soft);box-shadow:inset 3px 0 0 var(--plate)}
+.jc-t mark,.jc mark{background:var(--ochre-soft);color:var(--ink);padding:0 2px;border-radius:2px}
+.jc-dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:1px}
+.jc-c0{background:var(--plate)}.jc-c1{background:var(--muscle)}.jc-c2{background:var(--ochre)}
+.jc-c3{background:var(--violet)}.jc-c4{background:var(--ok)}.jc-c5{background:var(--ink)}
+.jc-img{position:relative;background:#fff;border-radius:6px;overflow:hidden}
+.jc-img img{display:block;width:100%;height:auto}
+.jc-box{position:absolute;border:4px solid #d42a2a;outline:2px solid #fff;border-radius:6px;box-shadow:0 0 0 9999px rgba(0,0,0,.35);transition:opacity .2s}
+@media (max-width:1100px){.jc{grid-template-columns:minmax(0,1fr)}.jc-r{position:static}}
+@media (prefers-reduced-motion:reduce){.jc-box{transition:none}}
+
 .xref{font-size:14px;background:var(--plate-soft);border-radius:6px;padding:8px 12px;margin:0 0 18px}
 .xref a{font-weight:700;text-decoration:none;border-bottom:1px solid var(--plate)}
 
@@ -2339,10 +2360,10 @@ figcaption{font:13px/1.5 var(--body);color:var(--muted);margin-top:8px}
 </section>
 
 <!-- ===== J ===== -->
-<section class="page" id="p-J-a" data-title="全身關節地圖" data-group="跨科對照 全身關節地圖">
+<section class="page wide" id="p-J-a" data-title="全身關節地圖" data-group="跨科對照 全身關節地圖">
 <h2>全身滑膜關節地圖</h2>
-<p>把<b>解剖學 圖6-5（滑膜關節的類型）</b>和<b>肌動學「滑液關節的種類」表</b>放在同一張人體圖上。點關節看類型、構成骨、自由度與動作；切到「測驗」自己考自己。</p>
-<div class="viz" data-viz="jointmap"></div>
+<p>左邊是<b>肌動學「滑液關節的種類」表</b>，右邊是<b>解剖學圖6-5</b>，像把兩份講義並排看。點表格一列，右圖就框出同類關節；切到「互動地圖」可點關節看構成骨與動作，也能測驗。</p>
+<div class="viz" data-viz="jointcmp"></div><!-- uses data-viz="jointmap" -->
 <div class="trap"><p class="lbl">易混淆</p>
 <p><b>同一種關節，兩科叫法不同：</b>球窩關節＝杵臼關節、車軸關節＝樞軸關節、橢圓關節＝髁狀關節。</p>
 <p><b>胸鎖關節</b>：解剖學圖6-5 列為<b>滑動關節</b>，肌動學表列為<b>鞍狀關節</b>。考哪一科就依那一科講義作答，不確定請問老師。</p>
@@ -2430,6 +2451,79 @@ VIZ.bonegrowth = function (el) {
   el.querySelector('#bg-m1').onclick = function () { setMode('len'); };
   el.querySelector('#bg-m2').onclick = function () { setMode('w'); };
   draw();
+};
+
+/* 對照檢視：左＝肌動學「滑液關節的種類」表（加圖6-5 舉例欄），右＝解剖學圖6-5 原圖／互動地圖。點表格列 ↔ 圖上標示。 */
+VIZ.jointcmp = function (el) {
+  var T = [
+    ['滑動', '滑動關節', 'gliding', '關節面近扁平或略彎曲', '滑動或扭曲（非軸）', '腕、距下、脊椎小面關節', '胸鎖、肩峰鎖骨、肋胸、腕骨間'],
+    ['屈戍（鉸鏈）', '屈戍關節', 'hinge', '一骨凸面與另一骨凹面如鉸鏈', '屈曲與伸直（1 自由度）', '肘、指間關節', '肘、膝、踝、指間、趾間'],
+    ['橢圓（髁狀）', '橢圓關節', 'ellipsoidal', '橢圓形髁狀凸面嵌入另一骨橢圓凹面', '多方向，但無法旋轉（2 自由度）', '掌指、橈腕關節', '掌指、橈腕'],
+    ['車軸（樞軸）', '車軸關節', 'pivot', '一骨的圓柱形面被另一骨的韌帶／纖維組織形成的環包住', '只能旋轉（1 自由度）', '寰椎—樞椎（C1–C2）、橈尺近端', '寰軸、上橈尺、下橈尺'],
+    ['鞍狀', '鞍狀關節', 'saddle', '兩骨關節面各有凹面與凸面（互相咬合）', '多方向活動（2 自由度）', '第一腕掌關節、<mark>胸鎖關節</mark>', '大多角骨與第一掌骨間'],
+    ['球窩（杵臼）', '球窩關節', 'ball-and-socket', '一骨為圓形頭，另一骨為杯狀凹窩', '屈、伸、外展、內收、旋轉（3 自由度）', '肩、髖', '髖、肩']
+  ];
+  var KIN = ['滑動關節', '屈戍（鉸鏈）關節', '髁狀（橢圓）關節', '樞軸關節', '鞍狀關節', '杵臼關節'];
+  /* 圖6-5 原圖（裁切後 770×990）上六個類型方框的位置，百分比 */
+  var BOX = [[15, 20, 125, 125], [15, 295, 105, 143], [15, 595, 125, 83], [500, 37, 122, 103], [545, 550, 137, 85], [475, 690, 153, 85]];
+  var cur = -1, tab = 0, silent = false;
+  var rows = T.map(function (r, i) {
+    return '<tr data-i="' + i + '" tabindex="0"><th><span class="jc-dot jc-c' + i + '"></span>' + KIN[i] + '<br><small>' + r[1] + '・' + r[2] + '</small></th>' +
+      '<td>' + r[3] + '</td><td>' + r[4] + '</td><td>' + r[5] + '</td><td>' + r[6] + '</td></tr>';
+  }).join('');
+  el.innerHTML =
+    '<div class="jc">' +
+    '<div class="jc-l"><p class="jc-h">肌動學・滑液關節的種類 <small>＋ 解剖學圖6-5 舉例</small></p>' +
+    '<div class="tblwrap"><table class="tbl jc-t"><thead><tr><th>種類</th><th>結構</th><th>動作</th><th>肌動學舉例</th><th>圖6-5 舉例</th></tr></thead><tbody>' + rows + '</tbody></table></div>' +
+    '<p class="vz-cap">點一列 → 右邊圖上標出同類關節。<mark>黃底</mark>＝兩科分類不同（胸鎖關節：圖6-5 列滑動、肌動學列鞍狀）。</p></div>' +
+    '<div class="jc-r"><div class="vz-ctl"><button type="button" class="btn primary" data-tab="0">講義原圖 圖6-5</button><button type="button" class="btn" data-tab="1">互動地圖・測驗</button></div>' +
+    '<div class="jc-img" data-pane="0"><img src="figs/L3-p048c.jpg" alt="解剖學圖6-5 滑膜關節的類型"><div class="jc-box" hidden></div></div>' +
+    '<div data-pane="1" hidden><div class="jc-map"></div></div>' +
+    '<p class="vz-read jc-read">點左表任一列，或切到互動地圖點關節。</p></div></div>';
+  var img = el.querySelector('.jc-img'), box = el.querySelector('.jc-box'), read = el.querySelector('.jc-read');
+  var map = el.querySelector('.jc-map'), mapReady = false;
+  var trs = [].slice.call(el.querySelectorAll('tbody tr')), tabs = [].slice.call(el.querySelectorAll('[data-tab]'));
+  function mapBtn(text) {
+    return [].slice.call(map.querySelectorAll('button')).filter(function (b) { return b.textContent.trim() === text; })[0];
+  }
+  function mark(i, fromMap) {
+    cur = i;
+    trs.forEach(function (tr, k) { tr.classList.toggle('on', k === i); });
+    if (i < 0) { box.hidden = true; return; }
+    var b = BOX[i];
+    box.style.left = (b[0] / 770 * 100) + '%'; box.style.top = (b[1] / 990 * 100) + '%';
+    box.style.width = (b[2] / 770 * 100) + '%'; box.style.height = (b[3] / 990 * 100) + '%';
+    box.hidden = false;
+    read.innerHTML = '<b>' + KIN[i] + '＝' + T[i][1] + '</b>：' + T[i][4] + '。圖6-5：' + T[i][6] + '。';
+    if (tab === 1 && mapReady && !fromMap) {
+      silent = true;
+      var by = mapBtn('依類型'); if (by) by.click();
+      var chip = mapBtn(T[i][0]); if (chip) chip.click();
+      silent = false;
+    }
+  }
+  function setTab(t) {
+    tab = t;
+    tabs.forEach(function (b) { b.classList.toggle('primary', +b.dataset.tab === t); });
+    el.querySelector('[data-pane="0"]').hidden = t !== 0;
+    el.querySelector('[data-pane="1"]').hidden = t !== 1;
+    if (t === 1 && !mapReady && VIZ.jointmap) { VIZ.jointmap(map); mapReady = true; }
+    if (cur >= 0) mark(cur);
+  }
+  tabs.forEach(function (b) { b.addEventListener('click', function () { setTab(+b.dataset.tab); }); });
+  trs.forEach(function (tr, i) {
+    tr.addEventListener('click', function () { mark(cur === i ? -1 : i); });
+    tr.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); mark(cur === i ? -1 : i); } });
+  });
+  /* 地圖上點了關節 → 讀出它的類型，標亮左表那一列 */
+  map.addEventListener('click', function () {
+    if (silent) return;
+    setTimeout(function () {
+      var m = map.textContent.match(/類型：([^（(]+)/);
+      if (!m) return;
+      for (var i = 0; i < T.length; i++) if (T[i][0].indexOf(m[1].trim()) === 0) { mark(i, true); trs[i].scrollIntoView({ block: 'nearest' }); break; }
+    }, 0);
+  });
 };
 
 VIZ.jointmap = function (el) {
