@@ -96,6 +96,16 @@ figcaption{font:13px/1.5 var(--body);color:var(--muted);margin-top:8px}
 .pager .nx{text-align:right;margin-left:auto}
 .pager small{display:block;color:var(--muted);font:12px var(--mono)}
 
+/* exam pages */
+.exq{background:var(--sheet);border:1px solid var(--rule);border-radius:8px;padding:12px 16px;margin:16px 0}
+.exs{margin:0 0 6px}
+.exo{list-style:upper-alpha;margin:0 0 8px;padding-left:28px}.exo li{margin:2px 0}
+.exq:has(details[open]) .exo li.ok{font-weight:700;color:var(--muscle)}
+.exq summary{cursor:pointer;color:var(--violet);font-weight:600}
+.exa{font-weight:700;color:var(--muscle)}
+.exn{background:var(--violet-soft);border-left:4px solid var(--violet);padding:6px 10px;border-radius:4px}
+span.exn{padding:1px 6px}
+.exq figure.fig{max-width:600px}
 /* interactive figures */
 .viz{margin:22px 0;background:var(--sheet);border:1px solid var(--plate);border-radius:8px;padding:12px 14px}
 .viz::before{content:"互動圖";display:block;font:700 12px/1 var(--mono);letter-spacing:.12em;color:var(--plate);margin-bottom:8px}
