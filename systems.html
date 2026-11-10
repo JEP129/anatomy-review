@@ -1,0 +1,461 @@
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>解剖生理大系統複習</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;900&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: an anatomical-atlas study binder. Sidebar of lectures → topics (top drawer on phones); one topic sheet visible at a time;
+   each lecture ends with flashcards + a practice quiz. Ink = plate teal, muscle red = 必背, ochre = 易混淆, slate-violet = 口訣. */
+:root{
+  --paper:#eef1f0; --sheet:#fbfcfb; --ink:#17211f; --muted:#5a6866; --rule:#d5dcda;
+  --plate:#1d5c57; --plate-soft:#e2efed;
+  --muscle:#a8322d; --muscle-soft:#f7e7e5;
+  --ochre:#8a6410; --ochre-soft:#f6eedb;
+  --violet:#4f4a8c; --violet-soft:#ebeaf6;
+  --ok:#2c7a46; --bad:#b3362f;
+  --display:"Noto Serif TC","Songti TC",serif;
+  --body:"Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#101615; --sheet:#171f1e; --ink:#e2e9e7; --muted:#98a7a4; --rule:#2b3634;
+  --plate:#7cc7bd; --plate-soft:#173230; --muscle:#f08a80; --muscle-soft:#3a1d1b;
+  --ochre:#e2b85a; --ochre-soft:#33290f; --violet:#aaa5ef; --violet-soft:#25233f;
+  --ok:#6fcf8e; --bad:#f08a80; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#101615; --sheet:#171f1e; --ink:#e2e9e7; --muted:#98a7a4; --rule:#2b3634;
+  --plate:#7cc7bd; --plate-soft:#173230; --muscle:#f08a80; --muscle-soft:#3a1d1b;
+  --ochre:#e2b85a; --ochre-soft:#33290f; --violet:#aaa5ef; --violet-soft:#25233f;
+  --ok:#6fcf8e; --bad:#f08a80; color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{background:var(--paper);color:var(--ink)}
+body{font:16px/1.75 var(--body);padding-left:max(0px,env(safe-area-inset-left,0px));padding-right:max(0px,env(safe-area-inset-right,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--sheet)}
+a{color:var(--plate)}
+:focus-visible{outline:2px solid var(--plate);outline-offset:2px}
+
+.shell{display:grid;grid-template-columns:272px minmax(0,1fr);min-height:100vh}
+nav.side{position:sticky;top:env(safe-area-inset-top,0px);height:100vh;overflow:auto;background:var(--sheet);border-right:1px solid var(--rule);padding:20px 14px 40px 18px}
+.brand{font:900 1.2rem/1.3 var(--display);margin:0 0 2px;letter-spacing:.02em}
+.brand-sub{font:12px/1.4 var(--mono);color:var(--muted);margin:0 0 14px}
+.allsub{display:block;margin:0 0 12px;font-size:13px;font-weight:700;color:var(--violet);text-decoration:none}
+.tools{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.tools button,.btn{font:500 13px/1 var(--body);padding:7px 10px;border-radius:6px;border:1px solid var(--rule);background:var(--sheet);color:var(--ink);cursor:pointer}
+.tools button[aria-pressed="true"],.btn.primary{background:var(--plate);border-color:var(--plate);color:var(--sheet)}
+.navgrp{margin:14px 0 4px;font:600 12px/1.4 var(--mono);letter-spacing:.06em;color:var(--plate);text-transform:uppercase}
+nav.side a{display:block;text-decoration:none;color:var(--ink);font-size:14px;line-height:1.45;padding:6px 8px;border-radius:6px}
+nav.side a:hover{background:var(--plate-soft)}
+nav.side a[aria-current="page"]{background:var(--plate-soft);color:var(--plate);font-weight:700}
+nav.side a.qz{color:var(--muscle)}
+nav.side a.qz[aria-current="page"]{background:var(--muscle-soft);color:var(--muscle)}
+
+main{min-width:0;padding-block:36px 80px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+section.page{max-width:780px;margin:0 auto}
+.crumb{font:500 12px/1.4 var(--mono);letter-spacing:.08em;color:var(--plate);margin:0 0 6px;text-transform:uppercase}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.35}
+h1{font-size:2rem;font-weight:900;margin:0 0 18px}
+section.page>h2:first-of-type{margin-top:0}
+h2{font-size:1.5rem;font-weight:900;margin:44px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--ink)}
+h3{font-size:1.15rem;font-weight:600;margin:30px 0 8px;color:var(--plate)}
+p{margin:0 0 12px}
+ul,ol{margin:0 0 14px;padding-left:1.4em}
+li{margin:3px 0}
+b{font-weight:700}
+.term{white-space:normal;font-weight:700}
+.term i{font:italic 500 .92em var(--body);color:var(--plate);margin-left:.3em;font-style:italic}
+.term i::before{content:"("}.term i::after{content:")"}
+body.hide-en .term i{filter:blur(5px);cursor:pointer;user-select:none}
+body.hide-en .term i.peek{filter:none}
+
+.key,.trap,.mn{border-radius:8px;padding:14px 16px 4px;margin:18px 0}
+.key{background:var(--muscle-soft);border-left:4px solid var(--muscle)}
+.trap{background:var(--ochre-soft);border-left:4px solid var(--ochre)}
+.mn{background:var(--violet-soft);border-left:4px solid var(--violet)}
+.lbl{font:700 12px/1 var(--mono);letter-spacing:.12em;margin:0 0 10px}
+.key .lbl{color:var(--muscle)}.trap .lbl{color:var(--ochre)}.mn .lbl{color:var(--violet)}
+
+.tblwrap{overflow-x:auto;margin:14px 0 20px}
+table.tbl{border-collapse:collapse;width:100%;font-size:14.5px;line-height:1.55}
+table.tbl th{font-weight:700;text-align:left;border-bottom:2px solid var(--ink);padding:7px 10px;white-space:nowrap}
+table.tbl td{border-bottom:1px solid var(--rule);padding:7px 10px;vertical-align:top}
+table.tbl tbody tr:hover{background:var(--plate-soft)}
+
+figure.fig{margin:22px 0;background:var(--sheet);border:1px solid var(--rule);border-radius:8px;padding:10px}
+figure.fig img{display:block;width:100%;height:auto;border-radius:4px;background:#fff;cursor:zoom-in}
+figure.fig.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+figure.fig.two figcaption{grid-column:1/-1}
+figcaption{font:13px/1.5 var(--body);color:var(--muted);margin-top:8px}
+.zoom{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;padding:max(16px,env(safe-area-inset-top,0px)) 16px;cursor:zoom-out}
+.zoom img{max-width:100%;max-height:100%;background:#fff}
+
+.pager{display:flex;justify-content:space-between;gap:12px;margin-top:48px;padding-top:16px;border-top:1px solid var(--rule)}
+.pager a{text-decoration:none;font-size:14px;max-width:48%}
+.pager .nx{text-align:right;margin-left:auto}
+.pager small{display:block;color:var(--muted);font:12px var(--mono)}
+
+/* exam pages */
+.exq{background:var(--sheet);border:1px solid var(--rule);border-radius:8px;padding:12px 16px;margin:16px 0}
+.exs{margin:0 0 6px}
+.exo{list-style:upper-alpha;margin:0 0 8px;padding-left:28px}.exo li{margin:2px 0}
+.exq:has(details[open]) .exo li.ok{font-weight:700;color:var(--muscle)}
+.exq summary{cursor:pointer;color:var(--violet);font-weight:600}
+.exa{font-weight:700;color:var(--muscle)}
+.exn{background:var(--violet-soft);border-left:4px solid var(--violet);padding:6px 10px;border-radius:4px}
+span.exn{padding:1px 6px}
+.exq figure.fig{max-width:600px}
+.exw{background:var(--ochre-soft);border-left:4px solid var(--ochre);padding:6px 10px;border-radius:4px}
+span.exw{padding:1px 6px}
+.exh{font-weight:700;margin-bottom:2px}
+.exsrc{border-top:1px dashed var(--rule);padding-top:8px}
+/* interactive figures */
+.viz{margin:22px 0;background:var(--sheet);border:1px solid var(--plate);border-radius:8px;padding:12px 14px}
+.viz::before{content:"互動圖";display:block;font:700 12px/1 var(--mono);letter-spacing:.12em;color:var(--plate);margin-bottom:8px}
+.viz svg{display:block;width:100%;height:auto;max-width:min(100%,520px);margin:0 auto}
+.vz-ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0 4px;font-size:14px}
+.vz-ctl input[type=range]{flex:1 1 180px;min-width:0;accent-color:var(--plate)}
+.vz-read{font:500 14px/1.6 var(--body);margin:6px 0 2px;font-variant-numeric:tabular-nums}
+.vz-cap{font-size:13px;color:var(--muted);margin:4px 0 0}
+
+/* side-by-side compare (table ↔ handout figure) */
+section.page.wide{max-width:1280px}
+.jc{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:20px;align-items:start}
+.jc-r{position:sticky;top:calc(12px + env(safe-area-inset-top,0px))}
+.jc-h{font-weight:700;margin:0 0 6px}
+.jc-h small{font-weight:400;color:var(--muted)}
+.jc-t{font-size:13.5px}
+.jc-t th small{font-weight:400;color:var(--muted);white-space:normal}
+.jc-t tbody th{white-space:nowrap;text-align:left;padding:8px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+.jc-t tbody tr{cursor:pointer}
+.jc-t tbody tr.on{background:var(--plate-soft);box-shadow:inset 3px 0 0 var(--plate)}
+.jc-t mark,.jc mark{background:var(--ochre-soft);color:var(--ink);padding:0 2px;border-radius:2px}
+.jc-dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:1px}
+.jc-c0{background:var(--plate)}.jc-c1{background:var(--muscle)}.jc-c2{background:var(--ochre)}
+.jc-c3{background:var(--violet)}.jc-c4{background:var(--ok)}.jc-c5{background:var(--ink)}
+.jc-img{position:relative;background:#fff;border-radius:6px;overflow:hidden}
+.jc-img img{display:block;width:100%;height:auto}
+.jc-box{position:absolute;border:4px solid #d42a2a;outline:2px solid #fff;border-radius:6px;box-shadow:0 0 0 9999px rgba(0,0,0,.35);transition:opacity .2s}
+@media (max-width:1100px){.jc{grid-template-columns:minmax(0,1fr)}.jc-r{position:static}}
+@media (prefers-reduced-motion:reduce){.jc-box{transition:none}}
+
+.xref{font-size:14px;background:var(--plate-soft);border-radius:6px;padding:8px 12px;margin:0 0 18px}
+.xref a{font-weight:700;text-decoration:none;border-bottom:1px solid var(--plate)}
+
+/* home */
+.lecgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:12px;margin:16px 0 26px}
+.lec{background:var(--sheet);border:1px solid var(--rule);border-radius:8px;padding:14px 16px;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:4px}
+.lec:hover{border-color:var(--plate)}
+.lec .no{font:500 12px var(--mono);color:var(--plate)}
+.lec .nm{font:900 1.05rem/1.4 var(--display)}
+.lec .ct{font-size:13px;color:var(--muted)}
+
+/* quiz */
+.qtabs{display:flex;gap:6px;margin:0 0 18px;flex-wrap:wrap}
+.card{background:var(--sheet);border:1px solid var(--rule);border-radius:10px;min-height:190px;padding:28px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;cursor:pointer;user-select:none}
+.card .side-lbl{font:600 11px var(--mono);letter-spacing:.12em;color:var(--muted);margin-bottom:12px}
+.card .txt{font:600 1.25rem/1.6 var(--body);white-space:pre-line}
+.card.flipped{border-color:var(--plate);background:var(--plate-soft)}
+.cardbar{display:flex;gap:8px;justify-content:center;align-items:center;flex-wrap:wrap;margin:14px 0}
+.count{font:13px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.mcq{background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:16px 18px;margin:0 0 14px}
+.mcq .qn{font:600 12px var(--mono);color:var(--muted)}
+.mcq .qt{font-weight:500;margin:4px 0 10px}
+.mcq button.opt{display:block;width:100%;text-align:left;font:15px/1.5 var(--body);padding:9px 12px;margin:6px 0;border:1px solid var(--rule);border-radius:7px;background:var(--paper);color:var(--ink);cursor:pointer}
+.mcq button.opt:hover:not(:disabled){border-color:var(--plate)}
+.mcq button.opt.right{border-color:var(--ok);background:var(--plate-soft);color:var(--ok);font-weight:700}
+.mcq button.opt.wrong{border-color:var(--bad);background:var(--muscle-soft);color:var(--bad)}
+.mcq button.opt:disabled{cursor:default}
+.mcq .ex{font-size:14px;color:var(--muted);margin:8px 0 2px}
+.score{font:600 15px var(--mono);font-variant-numeric:tabular-nums;margin:0 0 14px}
+
+/* phone */
+.topbar{display:none}
+@media (max-width:860px){
+  .shell{grid-template-columns:1fr}
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--sheet);border-bottom:1px solid var(--rule);padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+  .topbar .brand{font-size:1rem;margin:0}
+  nav.side{position:fixed;top:0;left:0;bottom:0;width:min(300px,86vw);z-index:30;transform:translateX(-105%);transition:transform .2s;padding-top:calc(20px + env(safe-area-inset-top,0px));padding-left:max(18px,env(safe-area-inset-left,0px))}
+  body.navopen nav.side{transform:none;box-shadow:0 0 0 100vmax rgba(0,0,0,.35)}
+  main{padding-block:22px 60px}
+  h1{font-size:1.6rem}
+  figure.fig.two{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){nav.side{transition:none}}
+</style>
+
+<div class="topbar"><p class="brand">大系統複習</p><button class="btn" id="menuBtn" aria-label="開啟目錄">目錄</button></div>
+<div class="shell">
+<nav class="side" id="side" aria-label="章節">
+  <a class="allsub" id="allsub" href="index.html" hidden>← 所有科目（總首頁）</a>
+  <script>if(/github\.io|localhost/.test(location.host))document.getElementById('allsub').hidden=false</script>
+  <p class="brand">大系統複習</p>
+  <p class="brand-sub">Anatomy & Physiology Systems · 方妙君</p>
+  <div class="tools">
+    <button id="hideEn" aria-pressed="false" title="把術語的英文模糊起來，點一下才顯示">遮英文</button>
+    <button id="themeBtn">深淺色</button>
+  </div>
+  <div id="navlist"></div>
+</nav>
+<main id="main">
+
+<section class="page" id="home" data-title="首頁" data-group="開始">
+  <p class="crumb">Anatomy & Physiology Systems · 方妙君</p>
+  <h1>大系統複習 複習</h1>
+  <p>依方妙君老師《解剖生理大系統複習》投影片整理：心臟與漿膜、頸椎與自律神經、泌尿、消化、內分泌（血糖、血鈣）、呼吸，以及最後三頁的 30 題綜合題。每頁附投影片原頁，題目附答案與解析；投影片上的錯誤用 ⚠ 標出。</p><div class="lecgrid" id="lecgrid"></div>
+  <h2>怎麼用</h2>
+  <ul>
+    <li>左側目錄依講義分章，一次看一頁。每章最後一頁是<b style="color:var(--muscle)">自我測驗</b>（字卡＋選擇題）。</li>
+    <li><b>紅框 必背重點</b>：考前最後一天看這些就好。<b>黃框 易混淆</b>：常考的對比。<b>紫框 記憶口訣</b>。</li>
+    <li>按「<b>遮英文</b>」會把術語的英文模糊掉，自己先想英文，再點一下看答案。</li>
+    <li>講義圖片點一下可以放大。</li>
+  </ul>
+</section>
+
+<!-- ===== S ===== -->
+<section class="page" id="p-S-a" data-title="心臟與漿膜（腹膜）" data-group="大系統複習（方妙君）">
+<h2>心臟與漿膜（腹膜）</h2>
+
+<div class="key"><p class="lbl">重點</p>
+<p><b>房室瓣</b>（三尖瓣在右、二尖瓣在左）位於心房與心室之間，關閉時產生<b>第一心音</b>。乳頭肌從心室壁長出，頂端的<b>腱索</b>拉住房室瓣邊緣：乳頭肌收縮 → 腱索拉緊 → 瓣膜不會翻進心房。</p>
+<p><b>腹膜</b>：貼在腹壁的叫壁層腹膜，包在臟器表面的叫臟層腹膜，兩層之間的潛在空隙是腹膜腔。男性腹膜腔是封閉的；女性經輸卵管開口與外界相通。</p>
+</div>
+<table class="tbl"><thead><tr><th>分類</th><th>被腹膜包覆的程度</th><th>器官（投影片 p.3）</th></tr></thead><tbody>
+<tr><td>腹膜內器官</td><td>幾乎整個被包，活動度大</td><td>胃、十二指腸上部、空腸、回腸、盲腸、闌尾、橫結腸、乙狀結腸、脾、卵巢、輸卵管</td></tr>
+<tr><td>腹膜間器官</td><td>大部分被包</td><td>肝、膽、升結腸、降結腸、直腸上部、膀胱、子宮</td></tr>
+<tr><td>腹膜後器官</td><td>只有前面一面被包</td><td>十二指腸降部與水平部、腎上腺、腎、胰、輸尿管、直腸下部</td></tr>
+</tbody></table>
+<p class="mn">記法：腹膜後器官「腎、腎上腺、胰、輸尿管、十二指腸（大部分）」都貼在後腹壁上。</p>
+<figure class="fig"><img src="figs/S-p002.jpg" alt="投影片 p.2" loading="lazy"><figcaption>心臟瓣膜、腱索與乳頭肌（投影片 p.2）</figcaption></figure>
+<figure class="fig two"><img src="figs/S-p003.jpg" alt="投影片 p.3" loading="lazy"><img src="figs/S-p004.jpg" alt="投影片 p.4" loading="lazy"><figcaption>腹膜與腹膜器官分類；胸膜與腹膜（投影片 p.3–4）</figcaption></figure>
+<h3>題目</h3>
+<div class="exq"><p class="exs"><b>題 1</b>　有關心臟瓣膜的敘述，下列何者正確？</p><ol class="exo"><li class="ok">三尖瓣位右心房與右心室間</li><li>半月瓣位於主動脈及肺動脈幹的基部，由二片半月形瓣膜組成</li><li class="ok">腱索可連接房室瓣與乳頭肌</li><li>腱索、乳頭肌位心房內可指引血流方向</li></ol><details><summary>看答案與解析</summary><p class="exa">答案：(A) 三尖瓣位右心房與右心室間、(C) 腱索可連接房室瓣與乳頭肌</p><p>② 半月瓣（主動脈瓣、肺動脈瓣）各由<b>三片</b>半月形瓣膜組成，不是二片；④ 腱索和乳頭肌在<b>心室</b>內，作用是防止房室瓣翻轉，不是指引血流。</p><p class="exsrc"><b>出處：</b>投影片 p.2</p></details></div>
+<div class="exq"><p class="exs"><b>題 2</b>　房室瓣是以下列何者連接到心室表面之乳頭肌？</p><ol class="exo"><li class="ok">腱索（Chordae tendineae）</li><li>蒲金氏纖維（Purkinje fibers）</li><li>心肉柱（Trabeculae carneae）</li><li>終嵴（Crista terminalis）</li></ol><details><summary>看答案與解析</summary><p class="exa">答案：(A) 腱索（Chordae tendineae）</p><p>腱索像降落傘的繩子，一端接房室瓣邊緣，另一端接乳頭肌。蒲金氏纖維是傳導系統；心肉柱是心室壁上的肌肉嵴；終嵴在右心房。</p><p class="exsrc"><b>出處：</b>投影片 p.2</p></details></div>
+<div class="exq"><p class="exs"><b>題 3</b>　有關胸膜與腹膜的敘述，下列何者錯誤？</p><ol class="exo"><li>皆屬於漿膜（serosa）</li><li>皆有壁層與臟層之分</li><li>皆具有單層上皮</li><li class="ok">前者包覆所有胸腔的臟器，後者包覆所有腹腔的臟器</li></ol><details><summary>看答案與解析</summary><p class="exa">答案：(D) 前者包覆所有胸腔的臟器，後者包覆所有腹腔的臟器</p><p>兩者都是漿膜，都分壁層與臟層，表面都是單層扁平上皮（間皮）。但胸膜只包肺，心臟包在心包裡；腹膜也沒有包住所有腹腔臟器，腎、胰、輸尿管都是腹膜後器官。</p><p class="exsrc"><b>出處：</b>投影片 p.3–4</p></details></div>
+
+</section>
+<section class="page" id="p-S-b" data-title="頸椎與自律神經、突觸" data-group="大系統複習（方妙君）">
+<h2>頸椎與自律神經、突觸</h2>
+
+<div class="key"><p class="lbl">頸椎（投影片 p.5）</p>
+<p>共 7 塊：C1 寰椎、C2 樞椎、C7 隆椎。頸椎的三個特徵：<b>橫突孔</b>（每一塊都有，椎動脈從這裡通過）、椎孔大而呈三角形、棘突短而分叉（雙歧）。C1–C2 之間沒有椎間盤。</p></div>
+<div class="key"><p class="lbl">自律神經（投影片 p.6、8、9）</p>
+<p>控制中樞在<b>下視丘</b>。交感神經從脊髓的<b>胸、腰段</b>出來；副交感神經從<b>腦幹</b>和<b>薦髓 S2–S4</b> 出來。大部分血管、汗腺、豎毛肌、腎上腺髓質只有交感神經支配。</p>
+<p>自律神經由兩個神經元接力：<b>節前神經元</b>細胞體在腦或脊髓，有髓鞘、傳得快；<b>節後神經元</b>細胞體在神經節，無髓鞘、傳得慢。</p></div>
+<table class="tbl"><thead><tr><th>器官</th><th>交感（戰或逃）</th><th>副交感（休息消化）</th></tr></thead><tbody>
+<tr><td>瞳孔</td><td>散瞳</td><td>縮瞳</td></tr><tr><td>心臟</td><td>心跳↑、收縮力↑</td><td>心跳↓</td></tr>
+<tr><td>支氣管平滑肌</td><td>舒張</td><td>收縮</td></tr><tr><td>腸胃</td><td>蠕動、分泌↓</td><td>蠕動、分泌↑</td></tr>
+<tr><td>膀胱</td><td>逼尿肌舒張（憋尿）</td><td>逼尿肌收縮（排尿）</td></tr></tbody></table>
+<div class="key"><p class="lbl">突觸（投影片 p.7）</p>
+<p>化學突觸靠神經傳遞物質傳訊息：動作電位到達末梢 → 電壓控制的<b>鈣離子通道</b>打開 → Ca²⁺ 流入 → 小泡釋出神經傳遞物質。電性突觸（常見於心肌、平滑肌）以連接素形成的通道直接讓離子流過。</p></div>
+<figure class="fig"><img src="figs/S-p005.jpg" alt="投影片 p.5" loading="lazy"><figcaption>頸椎（投影片 p.5）</figcaption></figure>
+<figure class="fig two"><img src="figs/S-p006.jpg" alt="投影片 p.6" loading="lazy"><img src="figs/S-p008.jpg" alt="投影片 p.8" loading="lazy"><figcaption>自律神經分布；節前與節後神經元（投影片 p.6、8）</figcaption></figure>
+<figure class="fig two"><img src="figs/S-p009.jpg" alt="投影片 p.9" loading="lazy"><img src="figs/S-p007.jpg" alt="投影片 p.7" loading="lazy"><figcaption>交感與副交感作用對照；突觸與鈣離子（投影片 p.9、7）</figcaption></figure>
+<h3>題目</h3>
+<div class="exq"><p class="exs"><b>題 4</b>　有關頸椎，下列何者有誤？</p><ol class="exo"><li>共有七塊</li><li>頸椎的椎體較胸椎最小</li><li>椎孔是脊椎骨中最大者</li><li class="ok">除第一頸椎外，其他頸椎皆具橫突孔</li></ol><details><summary>看答案與解析</summary><p class="exa">答案：(D) 除第一頸椎外，其他頸椎皆具橫突孔</p><p>所有頸椎都有橫突孔，第一頸椎也不例外，所以 (D) 錯。頸椎椎體最小、椎孔最大，都正確。</p><p class="exsrc"><b>出處：</b>投影片 p.5</p></details></div>
+<div class="exq"><p class="exs"><b>題 5</b>　當突觸前神經末梢（presynaptic nerve terminal）釋放神經傳遞物質時，必須有那一種離子流入細胞內（influx）？（投影片沒有列選項，此處補上）</p><ol class="exo"><li>鈉離子（Na⁺）</li><li>鉀離子（K⁺）</li><li class="ok">鈣離子（Ca²⁺）</li><li>氯離子（Cl⁻）</li></ol><details><summary>看答案與解析</summary><p class="exa">答案：(C) 鈣離子（Ca²⁺）</p><p>投影片 p.7：動作電位使電壓控制的鈣離子通道打開，大量 Ca²⁺ 進入突觸前區域，促使小泡釋出神經傳遞物質。</p><p class="exsrc"><b>出處：</b>投影片 p.7</p></details></div>
+
+</section>
+<section class="page" id="p-S-c" data-title="泌尿系統" data-group="大系統複習（方妙君）">
+<h2>泌尿系統</h2>
+
+<div class="key"><p class="lbl">腎臟的功能（投影片 p.10）</p>
+<p>清除廢物；調節水分、電解質、酸鹼平衡；分泌<b>紅血球生成素</b>和<b>腎素</b>；活化維生素 D，調節鈣磷平衡。</p></div>
+<div class="key"><p class="lbl">腎絲球過濾率 GFR（投影片 p.12–13）</p>
+<p>交感神經使<b>入球</b>小動脈收縮 → 進來的血少 → 過濾力下降。血管收縮素 II 使<b>出球</b>小動脈收縮 → 出口變窄、壓力堆積 → 過濾力上升。GFR 越小代表腎功能越差；肌酸酐正常值男性 ≤1.3 mg/dL、女性 ≤1.0 mg/dL。</p></div>
+<p class="mn">記法：入口縮（交感）→ GFR↓；出口縮（血管收縮素 II）→ GFR↑。</p>
+<div class="key"><p class="lbl">腎臟構造（投影片 p.11）</p>
+<p><b>緻密斑</b>是遠曲小管的特化上皮，偵測到血鈉降低時，會讓近腎絲球細胞分泌腎素。髓質由 8–18 個腎錐體組成，尖端是腎乳頭，伸入腎盞。</p></div>
+<div class="key"><p class="lbl">膀胱與尿道（投影片 p.21、33）</p>
+<p>膀胱位於恥骨聯合後方，成人約可容納 500 mL。膀胱壁的平滑肌統稱<b>逼尿肌</b>。<b>副交感神經（薦髓 S2–S4）</b>使膀胱收縮排尿；交感神經來自 T10–L2。女性尿道約 3–4 cm，男性約 18–20 cm。</p></div>
+<p class="exw">⚠ 投影片 p.33 寫「尺骨聯合（Symphysis pubis）」，應為<b>恥骨聯合</b>。骨盆膈投影片寫「提肛肌、骶骨肌、內閉孔肌、梨狀肌」；骨盆膈其實是<b>提肛肌＋尾骨肌（coccygeus）</b>，內閉孔肌、梨狀肌構成的是骨盆側壁和後壁。</p>
+<figure class="fig two"><img src="figs/S-p010.jpg" alt="投影片 p.10" loading="lazy"><img src="figs/S-p011.jpg" alt="投影片 p.11" loading="lazy"><figcaption>腎臟的功能；腎元與緻密斑（投影片 p.10–11）</figcaption></figure>
+<figure class="fig two"><img src="figs/S-p012.jpg" alt="投影片 p.12" loading="lazy"><img src="figs/S-p013.jpg" alt="投影片 p.13" loading="lazy"><figcaption>影響 GFR 的因素（投影片 p.12–13）</figcaption></figure>
+<figure class="fig two"><img src="figs/S-p014.jpg" alt="投影片 p.14" loading="lazy"><img src="figs/S-p021.jpg" alt="投影片 p.21" loading="lazy"><figcaption>休克時的荷爾蒙代償；膀胱的神經支配（投影片 p.14、21）</figcaption></figure>
+<h3>題目</h3>
+<div class="exq"><p class="exs"><b>題 6</b>　下列有關腎臟的敘述，何者正確？</p><ol class="exo"><li>每個腎臟約有一萬個腎元</li><li class="ok">近髓質腎元較皮質腎元的數量少</li><li>腎臟為腹膜內器官（intraperitoneal organs）</li><li>緻密斑（macula densa）是入球小動脈的特化細胞</li></ol><details><summary>看答案與解析</summary><p class="exa">答案：(B) 近髓質腎元較皮質腎元的數量少</p><p>(A) 每個腎約有<b>一百萬</b>個腎元；(B) 近髓質腎元約占 15%，比皮質腎元少 ✔；(C) 腎臟是<b>腹膜後</b>器官；(D) 緻密斑是<b>遠曲小管</b>的特化細胞，入球小動脈特化出來的是近腎絲球細胞。</p><p class="exsrc"><b>出處：</b>投影片 p.11、p.3</p></details></div>
+<div class="exq"><p class="exs"><b>題 7</b>　有關血中賀爾蒙於休克代償機轉中之變化，下列何者錯誤？</p><ol class="exo"><li>醛固酮（aldosterone）上升</li><li>促腎上腺皮質激素（ACTH）上升</li><li class="ok">腎素（renin）下降</li><li>抗利尿激素（ADH）上升</li></ol><details><summary>看答案與解析</summary><p class="exa">答案：(C) 腎素（renin）下降</p><p>休克 → 血壓、腎血流下降 → 腎素<b>上升</b> → 血管收縮素 II、醛固酮上升，ADH 與 ACTH 也上升，一起把血壓和血量拉回來。所以「腎素下降」是錯的。</p><p class="exsrc"><b>出處：</b>投影片 p.14</p></details></div>
+
+</section>
+<section class="page" id="p-S-d" data-title="消化系統" data-group="大系統複習（方妙君）">
+<h2>消化系統</h2>
+
+<div class="key"><p class="lbl">食道與胃（投影片 p.16）</p>
+<p>食道上段是橫紋肌，下 1/3 是平滑肌，中段兩種混合。胃液含：胃蛋白酶（消化蛋白質）、鹽酸（殺菌）、<b>內在因子</b>（幫助吸收維生素 B12，B12 是造紅血球的原料）。腸胃道是人體最大的免疫器官。</p></div>
+<div class="key"><p class="lbl">肝臟（投影片 p.17）</p>
+<p>位於右上腹、橫膈下方，由右側第 6–11 肋保護。右葉比左葉大，兩葉以<b>鐮狀韌帶</b>分隔；下緣的肝圓韌帶是胎兒時期的臍靜脈。背面的 H 形裂隙把肝分成右葉、左葉、尾葉、方葉，中間一橫是<b>肝門</b>。肝由約 50 萬個六角形的肝小葉構成。HDL 把膽固醇送回肝臟代謝；膽紅素隨膽汁排入腸道，最後從糞便排出。</p></div>
+<div class="key"><p class="lbl">胰臟（投影片 p.18、26）</p>
+<p>位於胃的後方、L1–L2 前方，屬<b>腹膜後器官</b>；分為頭、體、尾，頭部貼十二指腸，尾部靠近脾臟。同時是<b>外分泌腺</b>（胰液：澱粉酶、脂肪酶、胰蛋白酶、胰凝乳蛋白酶、核酸酶）和<b>內分泌腺</b>（胰島素、昇糖素）。</p></div>
+<figure class="fig two"><img src="figs/S-p016.jpg" alt="投影片 p.16" loading="lazy"><img src="figs/S-p017.jpg" alt="投影片 p.17" loading="lazy"><figcaption>消化系重點；肝臟（投影片 p.16–17）</figcaption></figure>
+<figure class="fig two"><img src="figs/S-p018.jpg" alt="投影片 p.18" loading="lazy"><img src="figs/S-p026.jpg" alt="投影片 p.26" loading="lazy"><figcaption>胰臟的位置與功能（投影片 p.18、26）</figcaption></figure>
+
+</section>
+<section class="page" id="p-S-e" data-title="內分泌：血糖與血鈣" data-group="大系統複習（方妙君）">
+<h2>內分泌：血糖與血鈣</h2>
+
+<div class="key"><p class="lbl">血糖調節（投影片 p.19）</p>
+<p>胰島 <b>β 細胞</b>分泌胰島素 → 降血糖；<b>α 細胞</b>分泌昇糖素 → 升血糖。進食後血糖上升 → 胰島素增加，同時抑制昇糖素。需要葡萄糖時，肝臟靠<b>肝醣分解</b>或<b>糖質新生</b>補充。糖質新生是用非碳水化合物（乳酸、丙酮酸、甘油、生糖性胺基酸）做葡萄糖，主要在肝臟，少量在腎臟。</p></div>
+<table class="tbl"><thead><tr><th>激素</th><th>來源</th><th>對血鈣</th><th>怎麼做到（投影片 p.22、28）</th></tr></thead><tbody>
+<tr><td>副甲狀腺素 PTH</td><td>副甲狀腺</td><td>↑</td><td>促進蝕骨（骨鈣釋出）、腎臟再吸收鈣、促進活性維生素 D 生成；增加尿磷排出</td></tr>
+<tr><td>降鈣素 calcitonin</td><td>甲狀腺濾泡旁細胞（C 細胞）</td><td>↓</td><td>抑制蝕骨、增加腎臟排出鈣與磷酸鹽</td></tr>
+<tr><td>活性維生素 D（1,25-(OH)₂D₃）</td><td>腎臟活化</td><td>↑</td><td>增加腸道吸收鈣與磷酸鹽</td></tr></tbody></table>
+<div class="key"><p class="lbl">鈣的分布與異常（投影片 p.22、27、30）</p>
+<p>成人體內約 1 kg 鈣，99% 在骨骼，1% 在細胞外液與軟組織，負責神經傳導與肌肉收縮。正常血鈣 9.0–10.0 mg/dL。游離鈣低於 4.3 mg/dL 會出現痙攣、抽搐、手指與嘴唇周圍麻木、心律不整。PTH 過多 → 骨質疏鬆、尿路結石、血磷降低。慢性腎病（GFR &lt; 30）→ 活性維生素 D 減少、血磷升高 → 低血鈣。</p></div>
+<p class="exw">⚠ 投影片 p.29 寫「維生素 D3（骨化三醇；1,25-(OH)₂-D）」，把兩種東西寫在一起了：皮膚經紫外線照射產生的是<b>維生素 D3（膽鈣化醇）</b>，它要先在肝臟、再在腎臟各加一個 –OH，才變成有活性的<b>骨化三醇 1,25-(OH)₂D₃</b>。</p>
+<figure class="fig two"><img src="figs/S-p019.jpg" alt="投影片 p.19" loading="lazy"><img src="figs/S-p022.jpg" alt="投影片 p.22" loading="lazy"><figcaption>血糖調節；血鈣上升時的反應（投影片 p.19、22）</figcaption></figure>
+<figure class="fig two"><img src="figs/S-p027.jpg" alt="投影片 p.27" loading="lazy"><img src="figs/S-p028.jpg" alt="投影片 p.28" loading="lazy"><figcaption>正常血鈣；血鈣的調節（投影片 p.27–28）</figcaption></figure>
+<figure class="fig two"><img src="figs/S-p029.jpg" alt="投影片 p.29" loading="lazy"><img src="figs/S-p030.jpg" alt="投影片 p.30" loading="lazy"><figcaption>維生素 D3；低血鈣（投影片 p.29–30）</figcaption></figure>
+<h3>題目</h3>
+<div class="exq"><p class="exs"><b>題 8</b>　當血鈣濃度上升時，生理調節的反應不包括下列何者？</p><ol class="exo"><li>副甲狀腺素分泌減少</li><li>降鈣素（calcitonin）分泌增加</li><li>腎臟鈣離子的再吸收作用減少</li><li class="ok">1,25 雙羥維生素 D（1,25-(OH)₂-D）分泌增加</li></ol><details><summary>看答案與解析</summary><p class="exa">答案：(D) 1,25 雙羥維生素 D（1,25-(OH)₂-D）分泌增加</p><p>血鈣太高要往下調：PTH 減少、降鈣素增加、腎臟少回收鈣，都會讓血鈣下降。活性維生素 D 會增加腸道吸收鈣、讓血鈣上升，所以這時應該<b>減少</b>，(D) 不是正確的反應。</p><p class="exsrc"><b>出處：</b>投影片 p.22、28</p></details></div>
+
+</section>
+<section class="page" id="p-S-f" data-title="呼吸系統" data-group="大系統複習（方妙君）">
+<h2>呼吸系統</h2>
+
+<div class="key"><p class="lbl">重點（投影片 p.23–24、33）</p>
+<p><b>肺門</b>是支氣管、肺動脈、肺靜脈、淋巴管和神經進出肺的地方，位在肺的內側面（靠心臟那側）。呼吸中樞位於腦幹的<b>延髓</b>和<b>橋腦</b>。</p>
+<p>CO₂ 的運送：CO₂ + H₂O ⇌ H₂CO₃ ⇌ H⁺ + HCO₃⁻。組織產生的 CO₂ 大部分在紅血球裡變成 HCO₃⁻ 運到肺，在肺部再變回 CO₂ 呼出。</p>
+<p>最主要的呼吸肌是<b>橫膈膜</b>（骨骼肌）。吸氣輔助肌：外肋間肌、胸大肌、斜方肌、胸鎖乳突肌。胸骨柄和胸骨體交接處是<b>胸骨角</b>，第 2 肋在這裡接胸骨。</p></div>
+<figure class="fig two"><img src="figs/S-p023.jpg" alt="投影片 p.23" loading="lazy"><img src="figs/S-p024.jpg" alt="投影片 p.24" loading="lazy"><figcaption>肺門；呼吸中樞與 CO₂ 運送（投影片 p.23–24）</figcaption></figure>
+
+</section>
+<section class="page" id="p-S-g" data-title="綜合題 30 題（p.31–33）" data-group="大系統複習（方妙君）">
+<h2>綜合題 30 題（p.31–33）</h2>
+<p>投影片最後三頁的基本題，每題前面的數字是答案。這裡改成選擇題，附一句解析。</p><figure class="fig two"><img src="figs/S-p031.jpg" alt="投影片 p.31" loading="lazy"><img src="figs/S-p032.jpg" alt="投影片 p.32" loading="lazy"><img src="figs/S-p033.jpg" alt="投影片 p.33" loading="lazy"><figcaption>綜合題原頁（投影片 p.31–33）</figcaption></figure><div class="exq"><p class="exs"><b>綜合 1</b>　人體脊椎脊髓神經共有：</p><ol class="exo"><li class="ok">31對</li><li>32對</li><li>33對</li><li>34對</li></ol><details><summary>看答案與解析</summary><p class="exa">答案：(A) 31對</p><p>頸 8＋胸 12＋腰 5＋薦 5＋尾 1＝31 對。</p><p class="exsrc"><b>出處：</b>投影片 p.31–33</p></details></div><div class="exq"><p class="exs"><b>綜合 2</b>　人體背部的淺層肌肉與何者有關？</p><ol class="exo"><li>呼吸</li><li>脊柱運動（角動、旋轉）</li><li class="ok">肩胛骨活動</li><li>排泄</li></ol><details><summary>看答案與解析</summary><p class="exa">答案：(C) 肩胛骨活動</p><p>背部淺層肌（斜方肌、闊背肌、菱形肌、提肩胛肌）都連到肩胛骨或肱骨，負責上肢與肩胛活動。</p><p class="exsrc"><b>出處：</b>投影片 p.31–33</p></details></div><div class="exq"><p class="exs"><b>綜合 3</b>　依照解剖學姿勢，小指是位於手拇指的：</p><ol class="exo"><li>近端</li><li class="ok">內側</li><li>外側</li><li>遠端</li></ol><details><summary>看答案與解析</summary><p class="exa">答案：(B) 內側</p><p>解剖學姿勢掌心朝前，拇指在外側、小指在內側。</p><p class="exsrc"><b>出處：</b>投影片 p.31–33</p></details></div><div class="exq"><p class="exs"><b>綜合 4</b>　人體背部的深層肌肉與何者有關？</p><ol class="exo"><li>呼吸</li><li class="ok">脊柱運動（活動）</li><li>肩關節活動</li><li>排泄</li></ol><details><summary>看答案與解析</summary><p class="exa">答案：(B) 脊柱運動（活動）</p><p>深層的豎脊肌群沿脊柱分布，負責脊柱伸直與旋轉。</p><p class="exsrc"><b>出處：</b>投影片 p.31–33</p></details></div><div class="exq"><p class="exs"><b>綜合 5</b>　依照解剖學姿勢，上臂是位於前臂的：</p><ol class="exo"><li class="ok">近端</li><li>內側</li><li>外側</li><li>遠端</li></ol><details><summary>看答案與解析</summary><p class="exa">答案：(A) 近端</p><p>四肢上離軀幹較近的叫近端。</p><p class="exsrc"><b>出處：</b>投影片 p.31–33</p></details></div><div class="exq"><p class="exs"><b>綜合 6</b>　下列敍述何者錯誤？</p><ol class="exo"><li>胸廓是由胸椎、胸骨、肋軟骨、肋骨構成</li><li class="ok">胸椎是由胸骨柄、胸骨體、劍突構成</li><li>肋骨分為12對</li><li>第1至第7肋骨又稱真肋</li></ol><details><summary>看答案與解析</summary><p class="exa">答案：(B) 胸椎是由胸骨柄、胸骨體、劍突構成</p><p>由胸骨柄、胸骨體、劍突構成的是<b>胸骨</b>，不是胸椎。</p><p class="exsrc"><b>出處：</b>投影片 p.31–33</p></details></div><div class="exq"><p class="exs"><b>綜合 7</b>　四肢向軀體中線移近時，叫做：</p><ol class="exo"><li class="ok">內收</li><li>旋後</li><li>外展</li><li>外翻</li></ol><details><summary>看答案與解析</summary><p class="exa">答案：(A) 內收</p><p>靠近中線＝內收；遠離中線＝外展。</p><p class="exsrc"><b>出處：</b>投影片 p.31–33</p></details></div><div class="exq"><p class="exs"><b>綜合 8</b>　胸腔內的器官是：</p><ol class="exo"><li>肝臟和膽囊</li><li class="ok">心臟和肺臟</li><li>胃和胰臟</li><li>腎臟和膀胱</li></ol><details><summary>看答案與解析</summary><p class="exa">答案：(B) 心臟和肺臟</p><p>橫膈以上是胸腔：心、肺。</p><p class="exsrc"><b>出處：</b>投影片 p.31–33</p></details></div><div class="exq"><p class="exs"><b>綜合 9</b>　在解剖學上，人體的直立位，手掌心應該是朝向：</p><ol class="exo"><li class="ok">前</li><li>內</li><li>後</li><li>下</li></ol><details><summary>看答案與解析</summary><p class="exa">答案：(A) 前</p><p>解剖學姿勢：直立、面向前、雙臂下垂、掌心朝前。</p><p class="exsrc"><b>出處：</b>投影片 p.31–33</p></details></div><div class="exq"><p class="exs"><b>綜合 10</b>　（大）腸的走向是：</p><ol class="exo"><li>由上而下</li><li>由下而上</li><li>逆時針</li><li class="ok">順時針</li></ol><details><summary>看答案與解析</summary><p class="exa">答案：(D) 順時針</p><p>從正面看：升結腸在右側往上、橫結腸由右往左、降結腸在左側往下，看起來是順時針；腹部按摩也順著這個方向。</p><p class="exsrc"><b>出處：</b>投影片 p.31–33</p></details></div><div class="exq"><p class="exs"><b>綜合 11</b>　分佈在體表和體內各種管腔的表面，稱為：</p><ol class="exo"><li>結締組織</li><li class="ok">上皮組織</li><li>肌肉組織</li><li>神經組織</li></ol><details><summary>看答案與解析</summary><p class="exa">答案：(B) 上皮組織</p><p>覆蓋體表、襯在管腔內面的是上皮組織。</p><p class="exsrc"><b>出處：</b>投影片 p.31–33</p></details></div><div class="exq"><p class="exs"><b>綜合 12</b>　脊柱中的胸椎，共有：</p><ol class="exo"><li>十塊</li><li>十一塊</li><li class="ok">十二塊</li><li>十三塊</li></ol><details><summary>看答案與解析</summary><p class="exa">答案：(C) 十二塊</p><p>頸 7、胸 12、腰 5。</p><p class="exsrc"><b>出處：</b>投影片 p.31–33</p></details></div><div class="exq"><p class="exs"><b>綜合 13</b>　腰部可以觸摸到肋骨尖端的肋骨是：</p><ol class="exo"><li>第九對</li><li>第十對</li><li>第十一對</li><li class="ok">第十二對</li></ol><details><summary>看答案與解析</summary><p class="exa">答案：(D) 第十二對</p><p>第 11、12 對是浮肋，尖端游離；在腰部摸到的是第 12 對。</p><p class="exsrc"><b>出處：</b>投影片 p.31–33</p></details></div><div class="exq"><p class="exs"><b>綜合 14</b>　腋窩正下方的外側腰部上，可以觸摸到肋骨尖端的肋骨是：</p><ol class="exo"><li>第九對</li><li>第十對</li><li class="ok">第十一對</li><li>第十二對</li></ol><details><summary>看答案與解析</summary><p class="exa">答案：(C) 第十一對</p><p>側腰（腋中線往下）摸到的浮肋尖端是第 11 對。</p><p class="exsrc"><b>出處：</b>投影片 p.31–33</p></details></div><div class="exq"><p class="exs"><b>綜合 15</b>　左右兩塊髖骨和中間的薦骨，構成：</p><ol class="exo"><li>髖關節</li><li class="ok">骨盆</li><li>大轉子</li><li>聯合</li></ol><details><summary>看答案與解析</summary><p class="exa">答案：(B) 骨盆</p><p>兩塊髖骨＋薦骨（＋尾骨）＝骨盆。</p><p class="exsrc"><b>出處：</b>投影片 p.31–33</p></details></div><div class="exq"><p class="exs"><b>綜合 16</b>　位於腹腔和胸腔之間的強韌組織，且有控制胸腔容量大小之功能的是：</p><ol class="exo"><li>心內膜</li><li>腹膜</li><li class="ok">橫膈膜</li><li>胸膜</li></ol><details><summary>看答案與解析</summary><p class="exa">答案：(C) 橫膈膜</p><p>橫膈收縮下降 → 胸腔變大 → 吸氣。</p><p class="exsrc"><b>出處：</b>投影片 p.31–33</p></details></div><div class="exq"><p class="exs"><b>綜合 17</b>　下列何者屬於大腸？</p><ol class="exo"><li>十二指腸</li><li>空腸</li><li class="ok">盲腸</li><li>迴腸</li></ol><details><summary>看答案與解析</summary><p class="exa">答案：(C) 盲腸</p><p>小腸＝十二指腸、空腸、迴腸；大腸＝盲腸、結腸、直腸。</p><p class="exsrc"><b>出處：</b>投影片 p.31–33</p></details></div><div class="exq"><p class="exs"><b>綜合 18</b>　下列何者不屬於消化腺？</p><ol class="exo"><li class="ok">扁桃腺</li><li>唾腺</li><li>胰腺</li><li>小腸腺</li></ol><details><summary>看答案與解析</summary><p class="exa">答案：(A) 扁桃腺</p><p class="exw">⚠ 投影片 p.32 標的答案是 3（胰腺），應該是標錯了：胰腺分泌胰液，是重要的消化腺。正確答案是 (1) 扁桃腺。</p><p>扁桃腺是淋巴組織，屬於免疫系統，不分泌消化液。</p><p class="exsrc"><b>出處：</b>投影片 p.31–33</p></details></div><div class="exq"><p class="exs"><b>綜合 19</b>　具內分泌腺與外分泌腺的是：</p><ol class="exo"><li>肝臟</li><li class="ok">胰臟</li><li>腎臟</li><li>甲狀腺</li></ol><details><summary>看答案與解析</summary><p class="exa">答案：(B) 胰臟</p><p>胰臟：外分泌胰液、內分泌胰島素和昇糖素。</p><p class="exsrc"><b>出處：</b>投影片 p.31–33</p></details></div><div class="exq"><p class="exs"><b>綜合 20</b>　胰臟所分泌的胰液，是注入消化管的那一部份：</p><ol class="exo"><li>胃</li><li class="ok">十二指腸</li><li>空腸</li><li>迴腸</li></ol><details><summary>看答案與解析</summary><p class="exa">答案：(B) 十二指腸</p><p>胰管和總膽管一起開口在十二指腸。</p><p class="exsrc"><b>出處：</b>投影片 p.31–33</p></details></div><div class="exq"><p class="exs"><b>綜合 21</b>　闌尾是一條細管，起始處附著於：</p><ol class="exo"><li>小腸</li><li>升結腸</li><li>橫結腸</li><li class="ok">盲腸</li></ol><details><summary>看答案與解析</summary><p class="exa">答案：(D) 盲腸</p><p>闌尾接在盲腸下端。</p><p class="exsrc"><b>出處：</b>投影片 p.31–33</p></details></div><div class="exq"><p class="exs"><b>綜合 22</b>　食物中的營養素，主要是靠何者來吸收？</p><ol class="exo"><li>胃</li><li class="ok">小腸</li><li>大腸</li><li>盲腸</li></ol><details><summary>看答案與解析</summary><p class="exa">答案：(B) 小腸</p><p>小腸有絨毛、微絨毛，吸收面積最大。</p><p class="exsrc"><b>出處：</b>投影片 p.31–33</p></details></div><div class="exq"><p class="exs"><b>綜合 23</b>　入口有賁門和幽門的消化器官是：</p><ol class="exo"><li>小腸</li><li>大腸</li><li class="ok">胃</li><li>十二指腸</li></ol><details><summary>看答案與解析</summary><p class="exa">答案：(C) 胃</p><p>胃的入口是賁門、出口是幽門。</p><p class="exsrc"><b>出處：</b>投影片 p.31–33</p></details></div><div class="exq"><p class="exs"><b>綜合 24</b>　膽汁濃縮後，經膽管注入：</p><ol class="exo"><li>胃</li><li class="ok">十二指腸</li><li>膽囊</li><li>肝臟</li></ol><details><summary>看答案與解析</summary><p class="exa">答案：(B) 十二指腸</p><p>肝製造膽汁 → 膽囊濃縮儲存 → 經總膽管注入十二指腸。</p><p class="exsrc"><b>出處：</b>投影片 p.31–33</p></details></div><div class="exq"><p class="exs"><b>綜合 25</b>　肺靜脈而來的血液注入心臟的：</p><ol class="exo"><li>右心房</li><li>右心室</li><li>左心室</li><li class="ok">左心房</li></ol><details><summary>看答案與解析</summary><p class="exa">答案：(D) 左心房</p><p>肺靜脈把含氧血送回左心房。</p><p class="exsrc"><b>出處：</b>投影片 p.31–33</p></details></div><div class="exq"><p class="exs"><b>綜合 26</b>　能維持人體內水分和血液酸鹼度平衡的器官是：</p><ol class="exo"><li>脾臟</li><li class="ok">腎臟</li><li>胰臟</li><li>肝臟</li></ol><details><summary>看答案與解析</summary><p class="exa">答案：(B) 腎臟</p><p>見投影片 p.10 腎臟的功能。</p><p class="exsrc"><b>出處：</b>投影片 p.31–33</p></details></div><div class="exq"><p class="exs"><b>綜合 27</b>　產生尿液的器官是：</p><ol class="exo"><li>大腸</li><li>膀胱</li><li>輸尿管</li><li class="ok">腎臟</li></ol><details><summary>看答案與解析</summary><p class="exa">答案：(D) 腎臟</p><p>腎臟產生尿液；輸尿管運送；膀胱儲存。</p><p class="exsrc"><b>出處：</b>投影片 p.31–33</p></details></div><div class="exq"><p class="exs"><b>綜合 28</b>　正常血液 pH 值是多少？</p><ol class="exo"><li>7.2</li><li>7.6</li><li class="ok">7.4</li><li>7.0</li></ol><details><summary>看答案與解析</summary><p class="exa">答案：(C) 7.4</p><p>正常 7.35–7.45。</p><p class="exsrc"><b>出處：</b>投影片 p.31–33</p></details></div><div class="exq"><p class="exs"><b>綜合 29</b>　供應心臟血液營養的動脈是：</p><ol class="exo"><li>肺靜脈</li><li class="ok">冠狀動脈</li><li>肺動脈</li><li>主動脈</li></ol><details><summary>看答案與解析</summary><p class="exa">答案：(B) 冠狀動脈</p><p>冠狀動脈從主動脈根部分出，供應心肌。</p><p class="exsrc"><b>出處：</b>投影片 p.31–33</p></details></div><div class="exq"><p class="exs"><b>綜合 30</b>　成人每分鐘脈搏，下列何者異常？</p><ol class="exo"><li class="ok">五十二次</li><li>六十二次</li><li>七十二次</li><li>八十二次</li></ol><details><summary>看答案與解析</summary><p class="exa">答案：(A) 五十二次</p><p>成人正常 60–100 次/分；低於 60 為心搏過緩。</p><p class="exsrc"><b>出處：</b>投影片 p.31–33</p></details></div>
+</section>
+
+
+</main>
+</div>
+<script id="quizdata" type="application/json">{"S": {"cards": [{"f": "房室瓣關閉產生第幾心音？", "b": "第一心音"}, {"f": "連接房室瓣與乳頭肌的構造", "b": "腱索"}, {"f": "腹膜後器官（舉例）", "b": "腎、腎上腺、胰、輸尿管、十二指腸降部與水平部、直腸下部"}, {"f": "所有頸椎共同的特徵", "b": "橫突孔（C1 也有）"}, {"f": "自律神經的控制中樞", "b": "下視丘"}, {"f": "副交感神經從哪裡發出", "b": "腦幹與薦髓 S2–S4"}, {"f": "節前神經元有無髓鞘？", "b": "有（傳得快）；節後神經元無"}, {"f": "釋放神經傳遞物質需要哪種離子流入", "b": "Ca²⁺"}, {"f": "緻密斑由哪裡特化而來", "b": "遠曲小管上皮"}, {"f": "入球小動脈收縮 → GFR？", "b": "下降（交感神經）"}, {"f": "出球小動脈收縮 → GFR？", "b": "上升（血管收縮素 II）"}, {"f": "休克時腎素", "b": "上升"}, {"f": "內在因子的功能", "b": "幫助吸收維生素 B12"}, {"f": "分隔肝左右葉的韌帶", "b": "鐮狀韌帶"}, {"f": "胰島 α／β 細胞", "b": "α：昇糖素（升血糖）；β：胰島素（降血糖）"}, {"f": "糖質新生的四種原料", "b": "乳酸、丙酮酸、甘油、生糖性胺基酸"}, {"f": "PTH 對血鈣", "b": "升高（蝕骨、腎回收、活化維生素 D）"}, {"f": "降鈣素由哪裡分泌", "b": "甲狀腺濾泡旁細胞（C 細胞）"}, {"f": "正常血鈣", "b": "9.0–10.0 mg/dL"}, {"f": "呼吸中樞位置", "b": "延髓與橋腦"}, {"f": "最主要的呼吸肌", "b": "橫膈膜"}, {"f": "第 2 肋接胸骨的位置", "b": "胸骨角"}, {"f": "支配膀胱收縮（排尿）的神經", "b": "副交感神經（S2–S4）"}, {"f": "女性／男性尿道長度", "b": "3–4 cm／18–20 cm"}], "mcq": [{"q": "有關心臟瓣膜的敘述，下列何者正確？（投影片打勾兩項，此處以①為準）", "o": ["三尖瓣位右心房與右心室間", "半月瓣位於主動脈及肺動脈幹的基部，由二片半月形瓣膜組成", "腱索可連接房室瓣與乳頭肌", "腱索、乳頭肌位心房內可指引血流方向"], "a": 0, "e": "①③正確。半月瓣是三片；腱索、乳頭肌在心室內。"}, {"q": "房室瓣是以下列何者連接到心室表面之乳頭肌？", "o": ["腱索（Chordae tendineae）", "蒲金氏纖維（Purkinje fibers）", "心肉柱（Trabeculae carneae）", "終嵴（Crista terminalis）"], "a": 0, "e": "腱索把房室瓣邊緣連到乳頭肌；乳頭肌收縮→腱索拉緊→房室瓣關閉。"}, {"q": "有關胸膜與腹膜的敘述，下列何者錯誤？", "o": ["皆屬於漿膜（serosa）", "皆有壁層與臟層之分", "皆具有單層上皮", "前者包覆所有胸腔的臟器，後者包覆所有腹腔的臟器"], "a": 3, "e": "胸膜只包肺（心臟在心包內）；腎臟、胰臟等是腹膜後器官，並沒有被腹膜整個包住。"}, {"q": "有關頸椎，下列何者有誤？", "o": ["共有七塊", "頸椎的椎體較胸椎最小", "椎孔是脊椎骨中最大者", "除第一頸椎外，其他頸椎皆具橫突孔"], "a": 3, "e": "所有頸椎（包括 C1）都有橫突孔，這是頸椎的特徵。"}, {"q": "突觸前神經末梢釋放神經傳遞物質時，必須有那一種離子流入細胞內？", "o": ["鈉離子（Na⁺）", "鉀離子（K⁺）", "鈣離子（Ca²⁺）", "氯離子（Cl⁻）"], "a": 2, "e": "動作電位打開電壓控制的鈣離子通道，Ca²⁺ 流入，促使小泡釋出神經傳遞物質。"}, {"q": "下列有關腎臟的敘述，何者正確？", "o": ["每個腎臟約有一萬個腎元", "近髓質腎元較皮質腎元的數量少", "腎臟為腹膜內器官（intraperitoneal organs）", "緻密斑（macula densa）是入球小動脈的特化細胞"], "a": 1, "e": "近髓質腎元約占 15%，比皮質腎元少。每腎約一百萬個腎元；腎臟是腹膜後器官；緻密斑來自遠曲小管。"}, {"q": "有關血中賀爾蒙於休克代償機轉中之變化，下列何者錯誤？", "o": ["醛固酮（aldosterone）上升", "促腎上腺皮質激素（ACTH）上升", "腎素（renin）下降", "抗利尿激素（ADH）上升"], "a": 2, "e": "休克時血壓下降，腎素應該上升，啟動 RAA 系統把血壓拉回來。"}, {"q": "當血鈣濃度上升時，生理調節的反應不包括下列何者？", "o": ["副甲狀腺素分泌減少", "降鈣素（calcitonin）分泌增加", "腎臟鈣離子的再吸收作用減少", "1,25 雙羥維生素 D（1,25-(OH)₂-D）分泌增加"], "a": 3, "e": "血鈣高時要把鈣降下來，活性維生素 D 會增加腸道吸收鈣，所以應該減少，不會增加。"}, {"q": "人體脊椎脊髓神經共有：", "o": ["31對", "32對", "33對", "34對"], "a": 0, "e": "頸 8＋胸 12＋腰 5＋薦 5＋尾 1＝31 對。"}, {"q": "人體背部的淺層肌肉與何者有關？", "o": ["呼吸", "脊柱運動（角動、旋轉）", "肩胛骨活動", "排泄"], "a": 2, "e": "背部淺層肌（斜方肌、闊背肌、菱形肌、提肩胛肌）都連到肩胛骨或肱骨，負責上肢與肩胛活動。"}, {"q": "依照解剖學姿勢，小指是位於手拇指的：", "o": ["近端", "內側", "外側", "遠端"], "a": 1, "e": "解剖學姿勢掌心朝前，拇指在外側、小指在內側。"}, {"q": "人體背部的深層肌肉與何者有關？", "o": ["呼吸", "脊柱運動（活動）", "肩關節活動", "排泄"], "a": 1, "e": "深層的豎脊肌群沿脊柱分布，負責脊柱伸直與旋轉。"}, {"q": "依照解剖學姿勢，上臂是位於前臂的：", "o": ["近端", "內側", "外側", "遠端"], "a": 0, "e": "四肢上離軀幹較近的叫近端。"}, {"q": "下列敍述何者錯誤？", "o": ["胸廓是由胸椎、胸骨、肋軟骨、肋骨構成", "胸椎是由胸骨柄、胸骨體、劍突構成", "肋骨分為12對", "第1至第7肋骨又稱真肋"], "a": 1, "e": "由胸骨柄、胸骨體、劍突構成的是<b>胸骨<\/b>，不是胸椎。"}, {"q": "四肢向軀體中線移近時，叫做：", "o": ["內收", "旋後", "外展", "外翻"], "a": 0, "e": "靠近中線＝內收；遠離中線＝外展。"}, {"q": "胸腔內的器官是：", "o": ["肝臟和膽囊", "心臟和肺臟", "胃和胰臟", "腎臟和膀胱"], "a": 1, "e": "橫膈以上是胸腔：心、肺。"}, {"q": "在解剖學上，人體的直立位，手掌心應該是朝向：", "o": ["前", "內", "後", "下"], "a": 0, "e": "解剖學姿勢：直立、面向前、雙臂下垂、掌心朝前。"}, {"q": "（大）腸的走向是：", "o": ["由上而下", "由下而上", "逆時針", "順時針"], "a": 3, "e": "從正面看：升結腸在右側往上、橫結腸由右往左、降結腸在左側往下，看起來是順時針；腹部按摩也順著這個方向。"}, {"q": "分佈在體表和體內各種管腔的表面，稱為：", "o": ["結締組織", "上皮組織", "肌肉組織", "神經組織"], "a": 1, "e": "覆蓋體表、襯在管腔內面的是上皮組織。"}, {"q": "脊柱中的胸椎，共有：", "o": ["十塊", "十一塊", "十二塊", "十三塊"], "a": 2, "e": "頸 7、胸 12、腰 5。"}, {"q": "腰部可以觸摸到肋骨尖端的肋骨是：", "o": ["第九對", "第十對", "第十一對", "第十二對"], "a": 3, "e": "第 11、12 對是浮肋，尖端游離；在腰部摸到的是第 12 對。"}, {"q": "腋窩正下方的外側腰部上，可以觸摸到肋骨尖端的肋骨是：", "o": ["第九對", "第十對", "第十一對", "第十二對"], "a": 2, "e": "側腰（腋中線往下）摸到的浮肋尖端是第 11 對。"}, {"q": "左右兩塊髖骨和中間的薦骨，構成：", "o": ["髖關節", "骨盆", "大轉子", "聯合"], "a": 1, "e": "兩塊髖骨＋薦骨（＋尾骨）＝骨盆。"}, {"q": "位於腹腔和胸腔之間的強韌組織，且有控制胸腔容量大小之功能的是：", "o": ["心內膜", "腹膜", "橫膈膜", "胸膜"], "a": 2, "e": "橫膈收縮下降 → 胸腔變大 → 吸氣。"}, {"q": "下列何者屬於大腸？", "o": ["十二指腸", "空腸", "盲腸", "迴腸"], "a": 2, "e": "小腸＝十二指腸、空腸、迴腸；大腸＝盲腸、結腸、直腸。"}, {"q": "下列何者不屬於消化腺？", "o": ["扁桃腺", "唾腺", "胰腺", "小腸腺"], "a": 0, "e": "扁桃腺是淋巴組織，屬於免疫系統，不分泌消化液。"}, {"q": "具內分泌腺與外分泌腺的是：", "o": ["肝臟", "胰臟", "腎臟", "甲狀腺"], "a": 1, "e": "胰臟：外分泌胰液、內分泌胰島素和昇糖素。"}, {"q": "胰臟所分泌的胰液，是注入消化管的那一部份：", "o": ["胃", "十二指腸", "空腸", "迴腸"], "a": 1, "e": "胰管和總膽管一起開口在十二指腸。"}, {"q": "闌尾是一條細管，起始處附著於：", "o": ["小腸", "升結腸", "橫結腸", "盲腸"], "a": 3, "e": "闌尾接在盲腸下端。"}, {"q": "食物中的營養素，主要是靠何者來吸收？", "o": ["胃", "小腸", "大腸", "盲腸"], "a": 1, "e": "小腸有絨毛、微絨毛，吸收面積最大。"}, {"q": "入口有賁門和幽門的消化器官是：", "o": ["小腸", "大腸", "胃", "十二指腸"], "a": 2, "e": "胃的入口是賁門、出口是幽門。"}, {"q": "膽汁濃縮後，經膽管注入：", "o": ["胃", "十二指腸", "膽囊", "肝臟"], "a": 1, "e": "肝製造膽汁 → 膽囊濃縮儲存 → 經總膽管注入十二指腸。"}, {"q": "肺靜脈而來的血液注入心臟的：", "o": ["右心房", "右心室", "左心室", "左心房"], "a": 3, "e": "肺靜脈把含氧血送回左心房。"}, {"q": "能維持人體內水分和血液酸鹼度平衡的器官是：", "o": ["脾臟", "腎臟", "胰臟", "肝臟"], "a": 1, "e": "見投影片 p.10 腎臟的功能。"}, {"q": "產生尿液的器官是：", "o": ["大腸", "膀胱", "輸尿管", "腎臟"], "a": 3, "e": "腎臟產生尿液；輸尿管運送；膀胱儲存。"}, {"q": "正常血液 pH 值是多少？", "o": ["7.2", "7.6", "7.4", "7.0"], "a": 2, "e": "正常 7.35–7.45。"}, {"q": "供應心臟血液營養的動脈是：", "o": ["肺靜脈", "冠狀動脈", "肺動脈", "主動脈"], "a": 1, "e": "冠狀動脈從主動脈根部分出，供應心肌。"}, {"q": "成人每分鐘脈搏，下列何者異常？", "o": ["五十二次", "六十二次", "七十二次", "八十二次"], "a": 0, "e": "成人正常 60–100 次/分；低於 60 為心搏過緩。"}]}}</script>
+<script>
+window.VIZ={};
+/* links to the other subject's site: relative on GitHub Pages / local, artifact URL inside claude.ai */
+window.XS={"self": "sys", "sites": {"anat": {"rel": "anatomy-physiology.html", "art": "https://claude.ai/artifact/1tcWFZqsgAsraZ6xMhigv4", "name": "解剖生理"}, "kin": {"rel": "kinesiology.html", "art": "https://claude.ai/artifact/CCZwhhnsQQXYZxoaSSSKDH", "name": "肌動學"}}};
+window.XLINK=function(site,id){
+  if(site===XS.self)return '#'+id;
+  var s=XS.sites[site];if(!s)return '#'+id;
+  var h=location.hostname,local=location.protocol==='file:'||/github\.io$|localhost|127\.0\.0\.1/.test(h);
+  return (local?s.rel:s.art)+'#'+id;
+};
+
+</script>
+<script>
+(function(){
+  var Q=JSON.parse(document.getElementById('quizdata').textContent);
+  var main=document.getElementById('main');
+  function store(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+
+  /* quiz pages: one after each lecture's last section, plus a mixed one */
+  var lecs=Object.keys(Q);
+  lecs.forEach(function(id){
+    var secs=[].slice.call(document.querySelectorAll('section.page[id^="p-'+id+'-"]'));
+    var s=document.createElement('section');s.className='page';s.id='q-'+id;s.dataset.title='自我測驗';s.dataset.group=secs.length?secs[0].dataset.group:id;s.dataset.quiz=id;
+    var last=secs[secs.length-1]||main.lastElementChild;last.after(s);
+  });
+  var mix=document.createElement('section');mix.className='page';mix.id='q-all';mix.dataset.title='全部章節混合測驗';mix.dataset.group='總複習';mix.dataset.quiz='all';main.appendChild(mix);
+
+  var pages=[].slice.call(document.querySelectorAll('section.page'));
+  document.querySelectorAll('a.xl').forEach(function(a){a.href=XLINK(a.dataset.site,a.dataset.id)});
+  /* tables scroll inside their own box */
+  document.querySelectorAll('table.tbl').forEach(function(t){var w=document.createElement('div');w.className='tblwrap';t.parentNode.insertBefore(w,t);w.appendChild(t)});
+
+  /* nav */
+  var nl=document.getElementById('navlist'),grp=null;
+  pages.forEach(function(p){
+    if(p.dataset.group!==grp){grp=p.dataset.group;var g=document.createElement('p');g.className='navgrp';g.textContent=grp;nl.appendChild(g)}
+    var a=document.createElement('a');a.href='#'+p.id;a.textContent=p.dataset.title;if(p.dataset.quiz)a.className='qz';a.dataset.for=p.id;nl.appendChild(a);
+    if(p.id!=='home'&&!p.dataset.quiz){var c=document.createElement('p');c.className='crumb';c.textContent=p.dataset.group;p.prepend(c)}
+  });
+  /* home lecture cards */
+  var hg=document.getElementById('lecgrid');
+  if(hg){var seen={};pages.forEach(function(p){var g=p.dataset.group;if(p.id==='home'||p.dataset.quiz==='all'||seen[g])return;seen[g]=1;
+    var n=pages.filter(function(x){return x.dataset.group===g&&!x.dataset.quiz}).length;
+    var a=document.createElement('a');a.className='lec';a.href='#'+p.id;
+    a.innerHTML='<span class="no">'+esc(g.split(' ')[0])+'</span><span class="nm">'+esc(g.split(' ').slice(1).join(' ')||g)+'</span><span class="ct">'+n+' 個主題 · 字卡與測驗</span>';hg.appendChild(a)})}
+
+  /* pager */
+  pages.forEach(function(p,i){
+    var d=document.createElement('div');d.className='pager';
+    if(i>0)d.innerHTML+='<a href="#'+pages[i-1].id+'"><small>← 上一頁</small>'+esc(pages[i-1].dataset.title)+'</a>';
+    if(i<pages.length-1)d.innerHTML+='<a class="nx" href="#'+pages[i+1].id+'"><small>下一頁 →</small>'+esc(pages[i+1].dataset.title)+'</a>';
+    p.appendChild(d);
+  });
+
+  var built={};
+  function show(id){
+    var p=document.getElementById(id);if(!p||!p.classList.contains('page'))p=pages[0];
+    pages.forEach(function(x){x.hidden=x!==p});
+    nl.querySelectorAll('a').forEach(function(a){if(a.dataset.for===p.id)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+    if(p.dataset.quiz&&!built[p.id]){built[p.id]=1;buildQuiz(p)}
+    p.querySelectorAll('.viz[data-viz]:not([data-ready])').forEach(function(el){el.dataset.ready='1';var f=window.VIZ[el.dataset.viz];if(f){try{f(el)}catch(err){el.remove();console.error(err)}}else el.remove()});
+    document.body.classList.remove('navopen');
+    window.scrollTo(0,0);store('anat-last',p.id);
+  }
+  window.addEventListener('hashchange',function(){show(location.hash.slice(1))});
+  document.addEventListener('click',function(e){var a=e.target.closest('a[href^="#"]');if(a){e.preventDefault();var id=a.getAttribute('href').slice(1);try{history.replaceState(null,'','#'+id)}catch(_){}show(id)}});
+
+  /* quiz builder */
+  function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+  function buildQuiz(sec){
+    var id=sec.dataset.quiz,src=id==='all'?lecs.map(function(k){return Q[k]}):[Q[id]];
+    var cards=[],mcq=[];src.forEach(function(x){cards=cards.concat(x.cards||[]);mcq=mcq.concat(x.mcq||[])});
+    if(id==='all'){mcq=shuffle(mcq).slice(0,30)}
+    sec.insertAdjacentHTML('afterbegin','<p class="crumb">'+esc(sec.dataset.group)+'</p><h1>'+esc(sec.dataset.title)+'</h1>'+
+      '<div class="qtabs"><button class="btn primary" data-t="c">字卡 '+cards.length+' 張</button><button class="btn" data-t="m">選擇題 '+mcq.length+' 題</button></div><div class="qbody"></div>');
+    var body=sec.querySelector('.qbody'),tabs=[].slice.call(sec.querySelectorAll('.qtabs button'));
+    tabs.forEach(function(b){b.addEventListener('click',function(){tabs.forEach(function(x){x.classList.toggle('primary',x===b)});b.dataset.t==='c'?cardsUI():mcqUI()})});
+    function cardsUI(){
+      var deck=cards.slice(),i=0,flip=false,miss=[];
+      body.innerHTML='<div class="card" tabindex="0" role="button" aria-label="翻面"><p class="side-lbl"></p><p class="txt"></p></div>'+
+        '<div class="cardbar"><button class="btn" data-a="miss">不熟 ✗</button><button class="btn primary" data-a="know">會了 ✓</button></div>'+
+        '<div class="cardbar"><span class="count"></span><button class="btn" data-a="shuf">洗牌</button><button class="btn" data-a="rev">只看不熟的</button></div>';
+      var card=body.querySelector('.card');
+      function draw(){if(!deck.length){card.querySelector('.side-lbl').textContent='完成';card.querySelector('.txt').textContent=miss.length?'這輪有 '+miss.length+' 張不熟，按「只看不熟的」再練一次':'全部會了！';card.classList.remove('flipped');body.querySelector('.count').textContent='';return}
+        var c=deck[i];card.classList.toggle('flipped',flip);card.querySelector('.side-lbl').textContent=flip?'答案':'題目 · 點一下翻面';card.querySelector('.txt').textContent=flip?c.b:c.f;
+        body.querySelector('.count').textContent=(i+1)+' / '+deck.length}
+      function next(known){if(!deck.length)return;if(!known)miss.push(deck[i]);i++;flip=false;if(i>=deck.length){deck=[];}draw()}
+      card.addEventListener('click',function(){flip=!flip;draw()});
+      card.addEventListener('keydown',function(e){if(e.key===' '||e.key==='Enter'){e.preventDefault();flip=!flip;draw()}});
+      body.querySelector('[data-a=know]').onclick=function(){next(true)};
+      body.querySelector('[data-a=miss]').onclick=function(){next(false)};
+      body.querySelector('[data-a=shuf]').onclick=function(){deck=shuffle(cards);i=0;flip=false;miss=[];draw()};
+      body.querySelector('[data-a=rev]').onclick=function(){if(miss.length){deck=shuffle(miss);miss=[];i=0;flip=false;draw()}};
+      draw();
+    }
+    function mcqUI(){
+      var right=0,done=0,list=shuffle(mcq);
+      body.innerHTML='<p class="score"></p>'+list.map(function(q,n){
+        var order=shuffle([0,1,2,3].slice(0,q.o.length));
+        return '<div class="mcq" data-a="'+order.indexOf(q.a)+'"><p class="qn">第 '+(n+1)+' 題</p><p class="qt">'+esc(q.q)+'</p>'+
+          order.map(function(k,j){return '<button class="opt" data-j="'+j+'">'+'ABCD'[j]+'. '+esc(q.o[k])+'</button>'}).join('')+
+          '<p class="ex" hidden>'+esc(q.e||'')+'</p></div>'}).join('')+'<button class="btn" id="redo-'+sec.id+'">重新出題</button>';
+      function sc(){body.querySelector('.score').textContent='已作答 '+done+' / '+list.length+'　答對 '+right}
+      body.querySelectorAll('.mcq').forEach(function(m){m.addEventListener('click',function(e){var b=e.target.closest('button.opt');if(!b||b.disabled)return;
+        var ok=b.dataset.j===m.dataset.a;done++;if(ok)right++;
+        m.querySelectorAll('button.opt').forEach(function(x){x.disabled=true;if(x.dataset.j===m.dataset.a)x.classList.add('right')});
+        if(!ok)b.classList.add('wrong');m.querySelector('.ex').hidden=false;sc()})});
+      body.querySelector('#redo-'+sec.id).onclick=mcqUI;sc();
+    }
+    cardsUI();
+  }
+
+  /* tools */
+  var he=document.getElementById('hideEn');
+  function setHide(v){document.body.classList.toggle('hide-en',v);he.setAttribute('aria-pressed',String(v));store('anat-hide',v?'1':'0')}
+  he.onclick=function(){setHide(!document.body.classList.contains('hide-en'))};
+  document.addEventListener('click',function(e){var i=e.target.closest('.term i');if(i&&document.body.classList.contains('hide-en'))i.classList.toggle('peek')});
+  if(store('anat-hide')==='1')setHide(true);
+  document.getElementById('themeBtn').onclick=function(){var r=document.documentElement,dark=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;r.dataset.theme=dark?'light':'dark'};
+  document.getElementById('menuBtn').onclick=function(){document.body.classList.toggle('navopen')};
+  document.addEventListener('click',function(e){if(document.body.classList.contains('navopen')&&!e.target.closest('nav.side')&&!e.target.closest('#menuBtn'))document.body.classList.remove('navopen')});
+  /* image zoom */
+  document.addEventListener('click',function(e){var im=e.target.closest('figure.fig img');if(im){var z=document.createElement('div');z.className='zoom';z.innerHTML='<img alt="">';z.firstChild.src=im.src;z.onclick=function(){z.remove()};document.body.appendChild(z)}});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'){var z=document.querySelector('.zoom');if(z)z.remove()}});
+
+  show(location.hash.slice(1)||store('anat-last')||'home');
+})();
+</script>
