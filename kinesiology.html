@@ -189,6 +189,281 @@ section.page.wide{max-width:1280px}
   figure.fig.two{grid-template-columns:1fr}
 }
 @media (prefers-reduced-motion:reduce){nav.side{transition:none}}
+
+/* ===== 易讀版（給 45–50 歲讀者）：字放大、對比加深、按鈕加大；字級可在側欄切換 ===== */
+:root{--fs:18px;--muted:#46524f}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--muted:#b3c0bd}}
+:root[data-theme="dark"]{--muted:#b3c0bd}
+body.fs-l{--fs:20px} body.fs-xl{--fs:22px}
+body{font-size:var(--fs);line-height:1.85;letter-spacing:.01em}
+main{font-size:var(--fs)}
+section.page{max-width:820px}
+li{margin:6px 0}
+h1{font-size:2.1em} h2{font-size:1.5em} h3{font-size:1.2em}
+.crumb{font:700 .78em/1.4 var(--body);letter-spacing:.04em;text-transform:none}
+.lbl{font:700 .85em/1 var(--body);letter-spacing:.08em}
+.key,.trap,.mn{padding:16px 20px 6px;border-left-width:6px}
+table.tbl{font-size:.92em;line-height:1.65}
+table.tbl th,table.tbl td{padding:10px 12px}
+table.tbl th{white-space:normal;background:var(--plate-soft)}
+figcaption{font-size:.85em;line-height:1.6}
+.xref{font-size:.88em}
+.term i{font-size:.95em}
+/* 側欄：字大、行距寬、好點 */
+nav.side{padding:22px 16px 48px 20px}
+.brand{font-size:1.35rem}
+.brand-sub{font:14px/1.5 var(--body)}
+.allsub{font-size:16px}
+.navgrp{font:700 15px/1.4 var(--body);letter-spacing:.02em;text-transform:none;margin:20px 0 6px;padding-top:12px;border-top:1px solid var(--rule)}
+nav.side a{font-size:16.5px;line-height:1.5;padding:9px 10px;border-radius:8px}
+nav.side a.seen::after{content:" ✓";color:var(--ok);font-weight:700}
+.tools{gap:8px}
+.tools button,.btn{font:600 16px/1.2 var(--body);padding:11px 16px;min-height:46px;border-radius:10px;border-width:1.5px}
+.tools button{flex:1 1 auto}
+.fsrow{display:flex;gap:6px;align-items:center;margin:0 0 16px;font-size:15px;color:var(--muted)}
+.fsrow button{font:700 15px/1 var(--body);min-width:46px;min-height:42px;padding:6px 8px;border:1.5px solid var(--rule);border-radius:10px;background:var(--sheet);color:var(--ink);cursor:pointer}
+.fsrow button[aria-pressed="true"]{background:var(--plate);border-color:var(--plate);color:var(--sheet)}
+/* 上一頁／下一頁：做成大按鈕 */
+.pager{gap:14px;margin-top:56px;padding-top:20px}
+.pager a{flex:1 1 0;max-width:none;font-size:1em;font-weight:700;padding:16px 18px;border:1.5px solid var(--rule);border-radius:12px;background:var(--sheet);color:var(--plate);line-height:1.45}
+.pager a:hover{border-color:var(--plate);background:var(--plate-soft)}
+.pager small{font:600 .8em var(--body);color:var(--muted);margin-bottom:4px}
+/* 首頁章節卡 */
+.lec{padding:18px 20px;border-width:1.5px;border-radius:12px}
+.lec .no{font:700 15px var(--body)}
+.lec .nm{font-size:1.2em}
+.lec .ct{font-size:15px}
+/* 測驗 */
+.card{min-height:230px;padding:32px 26px;border-width:1.5px}
+.card .side-lbl{font:700 15px var(--body);letter-spacing:.04em}
+.card .txt{font-size:1.4em}
+.count{font:600 16px var(--body)}
+.mcq{padding:18px 20px}
+.mcq .qn{font:700 15px var(--body)}
+.mcq .qt{font-weight:600;font-size:1.05em}
+.mcq button.opt{font:1em/1.55 var(--body);padding:13px 16px;margin:8px 0;border-width:1.5px;border-radius:10px}
+.mcq .ex{font-size:.95em;color:var(--ink);background:var(--violet-soft);padding:8px 12px;border-radius:8px}
+.score{font:700 17px var(--body)}
+.vz-ctl,.vz-read{font-size:16px} .vz-cap{font-size:15px}
+.viz::before{font:700 14px/1 var(--body)}
+.exq{padding:16px 20px}
+/* 回到頂端 */
+#toTop{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:max(18px,env(safe-area-inset-bottom,0px));z-index:15;font:700 16px/1 var(--body);padding:14px 16px;border-radius:999px;border:1.5px solid var(--plate);background:var(--sheet);color:var(--plate);box-shadow:0 2px 10px rgba(0,0,0,.15);cursor:pointer}
+@media (max-width:860px){
+  .topbar .brand{font-size:1.1rem}
+  #menuBtn{font-size:17px;padding:10px 18px}
+  .pager{flex-direction:column}
+  .pager .nx{text-align:left;margin-left:0}
+}
+
+/* ===== Codex 設計審查 2026-11-23（8 項）===== */
+/* Append inside the existing <style>, at the end of 易讀版. */
+
+/* 1. Keep phone deep links clear of the sticky toolbar. */
+body {
+  margin: 0;
+}
+@media (max-width: 860px) {
+  section.page[id] {
+    scroll-margin-block-start: calc(80px + env(safe-area-inset-top, 0px));
+  }
+}
+
+/* 2. Keep wide tables readable on phones. */
+table.tbl {
+  font-size: .98em;
+}
+@media (max-width: 520px) {
+  table.tbl:has(> thead > tr > th:nth-child(3)) {
+    min-inline-size: 29em;
+  }
+  table.tbl:has(> thead > tr > th:nth-child(4)) {
+    min-inline-size: 36em;
+  }
+  table.tbl:has(> thead > tr > th:nth-child(5)) {
+    min-inline-size: 46em;
+  }
+  table.tbl th,
+  table.tbl td {
+    padding: 8px 10px;
+    min-inline-size: 4.2em;
+  }
+  .tblwrap:has(> table.tbl > thead > tr > th:nth-child(3))::before {
+    content: "表格可左右滑動 →";
+    position: sticky;
+    inset-inline-start: 0;
+    display: block;
+    inline-size: fit-content;
+    margin-block-end: 6px;
+    color: var(--plate);
+    font: 600 max(1rem, .85em) / 1.4 var(--body);
+  }
+}
+
+/* 3. Scale navigation and study labels with 中／大／特大. */
+nav.side a {
+  font-size: max(1rem, .92em);
+  min-block-size: 44px;
+}
+@media (max-width: 860px) {
+  nav.side a {
+    min-block-size: 48px;
+  }
+}
+.navgrp,
+.brand-sub,
+.crumb,
+.lbl,
+figcaption,
+.pager small,
+.card .side-lbl,
+.count,
+.mcq .qn {
+  font-size: max(1rem, .86em);
+}
+.tools button,
+.fsrow button {
+  font-size: max(1rem, .9em);
+  min-block-size: 48px;
+}
+.fsrow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  font-size: var(--fs);
+}
+.fsrow > span {
+  grid-column: 1 / -1;
+  font-size: max(1rem, .9em);
+}
+#menuBtn,
+#toTop {
+  min-block-size: 48px;
+}
+
+/* 4. Strengthen control boundaries and small green marks. */
+:root {
+  --control-rule: #818987;
+  --ok-text: #24683b;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --control-rule: #626f6c;
+    --ok-text: var(--ok);
+  }
+}
+:root[data-theme="dark"] {
+  --control-rule: #626f6c;
+  --ok-text: var(--ok);
+}
+.tools button:not([aria-pressed="true"]),
+.fsrow button:not([aria-pressed="true"]),
+.btn:not(.primary),
+.mcq button.opt:not(:disabled) {
+  border-color: var(--control-rule);
+}
+nav.side a.seen::after,
+.mcq button.opt.right {
+  color: var(--ok-text);
+}
+
+/* 5. Show what can be tapped on the default flashcard view. */
+.card {
+  border-color: var(--control-rule);
+}
+.card:not(.flipped) .side-lbl {
+  padding: 4px 10px;
+  border: 1px solid var(--plate);
+  border-radius: 6px;
+  color: var(--plate);
+}
+.cardbar:has([data-a="know"]) > .btn {
+  min-inline-size: 7em;
+  min-block-size: 48px;
+}
+.cardbar > .btn[data-a="know"] {
+  border-color: var(--control-rule);
+  background: var(--sheet);
+  color: var(--ink);
+}
+
+/* 6. Make image zoom discoverable and soften dark-mode previews. */
+figure.fig:has(img) figcaption::after {
+  content: "點圖放大";
+  display: block;
+  margin-block-start: 4px;
+  color: var(--plate);
+  font-weight: 700;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) figure.fig img {
+    filter: brightness(.86);
+  }
+}
+:root[data-theme="dark"] figure.fig img {
+  filter: brightness(.86);
+}
+
+/* 7. Give headings priority over secondary links and rules. */
+.xref {
+  margin-block-end: 12px;
+  padding: 0;
+  background: transparent;
+  color: var(--muted);
+}
+.xref a {
+  display: inline-block;
+  max-inline-size: 100%;
+  border-bottom: 0;
+  text-decoration: underline;
+  text-underline-offset: .16em;
+}
+section.page > h2 {
+  border-bottom: 1px solid var(--rule);
+}
+h2 + h3 {
+  margin-block-start: 1rem;
+}
+.key,
+.trap,
+.mn {
+  border-left-width: 4px;
+}
+.lbl {
+  line-height: 1.3;
+  letter-spacing: .03em;
+}
+@media (max-width: 520px) {
+  .key,
+  .trap,
+  .mn {
+    padding-inline: 14px;
+  }
+}
+
+/* 8. Shorten home cards while making their links apparent. */
+#home .lec {
+  gap: 2px;
+}
+#home .lec .nm {
+  text-decoration: underline;
+  text-decoration-color: var(--plate);
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+#home .lec .no,
+#home .lec .ct {
+  font-size: max(1rem, .86em);
+  line-height: 1.5;
+}
+@media (max-width: 520px) {
+  #home .lecgrid {
+    gap: 8px;
+  }
+  #home .lec {
+    padding: 12px 16px;
+  }
+}
+
 </style>
 
 <div class="topbar"><p class="brand">肌肉動力學</p><button class="btn" id="menuBtn" aria-label="開啟目錄">目錄</button></div>
@@ -202,6 +477,7 @@ section.page.wide{max-width:1280px}
     <button id="hideEn" aria-pressed="false" title="把術語的英文模糊起來，點一下才顯示">遮英文</button>
     <button id="themeBtn">深淺色</button>
   </div>
+  <div class="fsrow" id="fsrow"><span>字的大小</span><button data-fs="">中</button><button data-fs="fs-l">大</button><button data-fs="fs-xl">特大</button></div>
   <div id="navlist"></div>
 </nav>
 <main id="main">
@@ -209,13 +485,15 @@ section.page.wide{max-width:1280px}
 <section class="page" id="home" data-title="首頁" data-group="開始">
   <p class="crumb">Kinesiology · 林逸鴻 · 中華醫事科技大學</p>
   <h1>肌肉動力學 複習</h1>
-  <p>依照三份講義整理：肌動學概論（平面與軸、運動學與動力學、槓桿）、肩關節複合體、肘關節。重點中文說明，術語保留英文。</p><div class="lecgrid" id="lecgrid"></div>
+  <p>依照七份講義整理：肌動學概論（平面與軸、運動學與動力學、槓桿）、肩關節複合體、肘關節、腕與手、骨盆與髖、膝關節、踝與足。重點中文說明，術語保留英文。</p><div class="lecgrid" id="lecgrid"></div>
   <h2>怎麼用</h2>
   <ul>
     <li>左側目錄依講義分章，一次看一頁。每章最後一頁是<b style="color:var(--muscle)">自我測驗</b>（字卡＋選擇題）。</li>
     <li><b>紅框 必背重點</b>：考前最後一天看這些就好。<b>黃框 易混淆</b>：常考的對比。<b>紫框 記憶口訣</b>。</li>
     <li>按「<b>遮英文</b>」會把術語的英文模糊掉，自己先想英文，再點一下看答案。</li>
-    <li>講義圖片點一下可以放大。</li>
+    <li>講義圖片點一下可以放大，再點一下關閉。</li>
+    <li>字太小：目錄上方「<b>字的大小</b>」選「大」或「特大」，下次打開會記得。</li>
+    <li>看過的頁面，目錄會打 <b style="color:var(--ok)">✓</b>；每頁最下面有大大的「下一頁」按鈕。</li>
   </ul>
 </section>
 
@@ -1115,6 +1393,1228 @@ section.page.wide{max-width:1280px}
 </table>
 </section>
 
+<!-- ===== K4 ===== -->
+<section class="page" id="p-K4-a" data-title="腕骨、腕關節與韌帶" data-group="第4講 腕與手">
+<h2>腕骨、腕關節與韌帶</h2>
+
+<h3>腕骨排列與手部骨骼</h3>
+<p><span class="term">腕骨<i>Carpal bones</i></span>共 8 塊，近端、遠端各 4 塊。表內由橈側排到尺側。</p>
+<table class="tbl">
+<thead><tr><th>腕骨排</th><th>排列</th><th>關節關係</th></tr></thead>
+<tbody>
+<tr><td>近端排</td><td><span class="term">舟狀骨<i>Scaphoid</i></span>、<span class="term">月狀骨<i>Lunate</i></span>、<span class="term">三角骨<i>Triquetrum</i></span>、<span class="term">豆狀骨<i>Pisiform</i></span></td><td>前三塊參與腕部近端關節面。豆狀骨只與三角骨形成關節。</td></tr>
+<tr><td>遠端排</td><td><span class="term">大多角骨（大梯形骨）<i>Trapezium</i></span>、<span class="term">小多角骨（小梯形骨）<i>Trapezoid</i></span>、<span class="term">頭狀骨<i>Capitate</i></span>、<span class="term">鉤狀骨<i>Hamate</i></span></td><td>與掌骨相接。</td></tr>
+</tbody>
+</table>
+<div class="mn"><p class="lbl">記憶口訣</p>
+<p>從拇指側念到小指側。近排「舟月三豆」，遠排「大小頭鉤」。</p>
+</div>
+<ul>
+<li>每手有 <b>5 塊</b><span class="term">掌骨<i>Metacarpals</i></span>，自拇指向小指編為第 1 至第 5。</li>
+<li>每手有 <b>14 塊</b><span class="term">指骨<i>Phalanges</i></span>。拇指有近、遠兩節。第 2–5 指各有近、中、遠三節。</li>
+</ul>
+<figure class="fig"><img src="figs/K4-p006.jpg" alt="右腕背面，標示八塊腕骨、橈骨結節與伸肌腱溝"><figcaption>圖 7-2 腕骨背面與伸肌附著（講義 p.6）</figcaption></figure>
+<figure class="fig"><img src="figs/K4-p009.jpg" alt="右手掌面，標示掌骨、指骨與屈肌附著"><figcaption>圖 8-4 掌面骨骼與肌肉附著（講義 p.9）</figcaption></figure>
+
+<h3>可摸到的骨性標誌</h3>
+<ul>
+<li>尺側靠手腕處可摸到<span class="term">尺骨頭<i>Head of ulna</i></span>與<span class="term">尺骨莖突<i>Ulnar styloid process</i></span>。尺骨莖突偏內後側。</li>
+<li>掌心朝前時，<span class="term">橈骨莖突<i>Radial styloid process</i></span>朝外側，比尺骨莖突更靠手端。</li>
+<li>從橈骨莖突往腕背約三分之一處，可摸到<span class="term">李氏結節（橈骨背側結節）<i>Lister’s tubercle</i></span>。再往手端摸，凹處是頭狀骨。</li>
+<li>遠端橈骨背面有伸肌腱溝。圖上可見兩條橈側伸腕肌腱及伸拇長肌腱的溝。</li>
+<li>手腕往尺側偏時，可在橈骨莖突下方摸舟狀骨。舟狀骨是講義指出最容易骨折的腕骨。</li>
+<li><span class="term">解剖鼻煙壺<i>Anatomical snuffbox</i></span>的底是<b>舟狀骨與大多角骨</b>。</li>
+<li>手腕在中立位時，李氏結節、月狀骨、頭狀骨與<b>第 3 掌骨</b>在一直線。屈伸時可感覺月狀骨與頭狀骨滑動。</li>
+<li>手腕往橈側偏時，三角骨可從尺骨莖突下方突出。豆狀骨位於三角骨的掌側，可摸到突起。</li>
+<li>手腕往尺側偏時，可找大多角骨與第 1 掌骨的接合處。</li>
+<li>從豆狀骨連到拇指與食指間的指蹼，鉤狀骨的鉤在這條連線下方。</li>
+</ul>
+<p>講義 p.5 的「第三指骨」依 p.16–17 改為第 3 掌骨。「投狀骨」應為頭狀骨。</p>
+
+<h3>腕關節與關節盤</h3>
+<table class="tbl">
+<thead><tr><th>關節</th><th>骨頭與構造</th><th>類型、動作或作用</th></tr></thead>
+<tbody>
+<tr><td><span class="term">橈腕關節<i>Radiocarpal joint</i></span></td><td>遠端橈骨對舟狀骨、月狀骨。p.2 的廣義清單也列三角骨。</td><td><span class="term">滑液髁狀關節<i>Synovial condyloid joint</i></span>。可屈伸、橈偏與尺偏。</td></tr>
+<tr><td><span class="term">尺腕關節<i>Ulnocarpal joint</i></span></td><td>尺骨遠端與尺側腕骨之間，有三角纖維軟骨複合體。</td><td>關節盤隔開尺骨與橈腕關節，也隔開遠端橈尺關節與橈腕關節。</td></tr>
+<tr><td><span class="term">中腕關節<i>Midcarpal joint</i></span></td><td>位於近端排與遠端排腕骨之間。</td><td>由多個<span class="term">滑液平面關節<i>Synovial plane joints</i></span>組成。參與屈伸與橈、尺偏。</td></tr>
+</tbody>
+</table>
+<ul>
+<li>橈腕關節主要靠<span class="term">掌側橈腕韌帶<i>Volar radiocarpal ligament</i></span>提供穩定。</li>
+<li><span class="term">三角纖維軟骨複合體<i>Triangular fibrocartilage complex, TFCC</i></span>位於腕尺側。講義列出遠端橈骨的尺側與尺骨莖突。p.2 還列第 5 掌骨基部，p.7、10 的圖未標明該附著點。</li>
+<li><span class="term">三角纖維軟骨盤<i>Triangular fibrocartilage disc</i></span>是複合體的一部分。軟骨盤連繫遠端橈骨和尺骨。</li>
+<li>其他組成包括<span class="term">尺側副韌帶<i>Ulnar collateral ligament</i></span>、<span class="term">掌側與背側橈尺韌帶<i>Volar and dorsal radioulnar ligaments</i></span>、<span class="term">半月板樣體<i>Meniscus homologue</i></span>。</li>
+<li>複合體也包括<span class="term">尺側伸腕肌腱鞘<i>Extensor carpi ulnaris sheath</i></span>、<span class="term">尺月韌帶<i>Ulnolunate ligament</i></span>及<span class="term">尺三角韌帶<i>Ulnotriquetral ligament</i></span>。</li>
+</ul>
+<figure class="fig"><img src="figs/K4-p007.jpg" alt="腕部額狀切面，標示關節盤、兩側副韌帶與尺骨莖突旁凹陷"><figcaption>圖 7-6 腕部額狀切面與尺側關節盤（講義 p.7）</figcaption></figure>
+
+<h3>腕韌帶與腕隧道</h3>
+<ul>
+<li>腕韌帶穩定關節，也引導骨頭沿適當方向移動。</li>
+<li>腕韌帶限制過度活動，並防止腕骨在動作時脫位。</li>
+<li>腕韌帶把手部承受的力量傳到前臂。</li>
+<li><span class="term">外在韌帶<i>Extrinsic ligaments</i></span>把橈骨、尺骨或掌骨連到腕骨。講義列<span class="term">橈側副韌帶<i>Radial collateral ligament</i></span>、<span class="term">橈舟頭韌帶<i>Radioscaphocapitate ligament</i></span>與<span class="term">橈月三角韌帶<i>Radiolunatotriquetral ligament</i></span>。</li>
+<li><span class="term">內在韌帶<i>Intrinsic ligaments</i></span>連接腕骨。講義 p.19 中譯誤寫「指骨」。</li>
+<li>腕背圖可見<span class="term">舟大多角骨韌帶<i>Scaphotrapezial ligament</i></span>、<span class="term">背側腕骨間韌帶<i>Dorsal intercarpal ligament</i></span>、<span class="term">背側橈腕韌帶<i>Dorsal radiocarpal ligament</i></span>及兩側副韌帶。</li>
+<li>關節外構造有<span class="term">伸肌支持帶<i>Extensor retinaculum</i></span>和<span class="term">屈肌支持帶<i>Flexor retinaculum</i></span>。</li>
+<li><span class="term">腕橫韌帶<i>Transverse carpal ligament</i></span>維持<span class="term">腕橫弓<i>Transverse carpal arch</i></span>，並形成<span class="term">腕隧道<i>Carpal tunnel</i></span>的頂。</li>
+</ul>
+<div class="key"><p class="lbl">必背重點</p>
+<ul>
+<li>腕隧道的橈側骨標誌是舟狀骨、大多角骨。尺側是豆狀骨、鉤骨鉤。</li>
+<li>管內有<span class="term">正中神經<i>Median nerve</i></span>和 <b>9 條肌腱</b>。</li>
+<li>9 條肌腱＝4 條<span class="term">屈指淺肌<i>Flexor digitorum superficialis, FDS</i></span>腱＋4 條<span class="term">屈指深肌<i>Flexor digitorum profundus, FDP</i></span>腱＋1 條<span class="term">屈拇長肌<i>Flexor pollicis longus, FPL</i></span>腱。</li>
+</ul>
+</div>
+<figure class="fig"><img src="figs/K4-p022.jpg" alt="腕隧道的腕骨、腕橫韌帶、屈肌腱與正中神經"><figcaption>腕隧道的邊界與內容物（講義 p.22）</figcaption></figure>
+
+<h3>手腕活動度、軸與終端感</h3>
+<table class="tbl">
+<thead><tr><th>動作</th><th>關節分工</th><th><span class="term">終端感<i>End-feel</i></span></th></tr></thead>
+<tbody>
+<tr><td><span class="term">屈曲<i>Flexion</i></span></td><td>橈腕 50°，中腕 35°</td><td>—</td></tr>
+<tr><td><span class="term">伸直<i>Extension</i></span></td><td>橈腕 35°，中腕 50°</td><td>—</td></tr>
+<tr><td><span class="term">橈側偏移<i>Radial deviation</i></span></td><td>橈腕、中腕各約 1/2</td><td><span class="term">硬<i>Hard</i></span></td></tr>
+<tr><td><span class="term">尺側偏移<i>Ulnar deviation</i></span></td><td>中腕約 1/3</td><td><span class="term">結實<i>Firm</i></span></td></tr>
+</tbody>
+</table>
+<ul>
+<li>橈偏、尺偏的運動軸通過<b>頭狀骨的頭</b>。屈伸軸也通過頭狀骨。</li>
+<li><span class="term">附屬動作<i>Accessory motions</i></span>有<span class="term">滑動<i>Glide</i></span>（背側、掌側、內側、外側）與<span class="term">牽引分離<i>Distraction</i></span>。</li>
+<li>腕關節的<span class="term">最緊密位置<i>Close-packed position</i></span>是<b>完全伸直</b>。</li>
+</ul>
+</section>
+
+<section class="page" id="p-K4-b" data-title="腕掌、掌指與指間關節" data-group="第4講 腕與手">
+<h2>腕掌、掌指與指間關節</h2>
+
+<h3>關節位置、類型與動作</h3>
+<table class="tbl">
+<thead><tr><th>關節</th><th>相接骨頭</th><th>類型與自由度</th><th>動作</th></tr></thead>
+<tbody>
+<tr><td>第 2–4 <span class="term">腕掌關節<i>Carpometacarpal joints, CMC</i></span></td><td>遠端腕骨排與第 2–4 掌骨基部</td><td>滑液平面關節</td><td>屈、伸。與掌部橫弓形狀有關。</td></tr>
+<tr><td>拇指腕掌關節</td><td><b>大多角骨與第 1 掌骨基部</b></td><td><span class="term">馬鞍關節<i>Sellar or saddle joint</i></span></td><td>屈、伸，<span class="term">外展<i>Abduction</i></span>、<span class="term">內收<i>Adduction</i></span>，<span class="term">對掌<i>Opposition</i></span>、<span class="term">復位<i>Reposition</i></span>。</td></tr>
+<tr><td><span class="term">掌指關節<i>Metacarpophalangeal joint, MCP</i></span></td><td>掌骨頭與近節指骨基部</td><td>滑液髁狀關節，2 個自由度</td><td>屈、伸、外展、內收。</td></tr>
+<tr><td><span class="term">指間關節<i>Interphalangeal joint, IP</i></span></td><td>相鄰的兩節指骨</td><td><span class="term">滑液樞紐關節<i>Synovial hinge joint</i></span>，1 個自由度</td><td>屈、伸。</td></tr>
+</tbody>
+</table>
+<ul>
+<li>第 2–5 指的<span class="term">近端指間關節<i>Proximal interphalangeal joint, PIP</i></span>在近節與中節之間。</li>
+<li>第 2–5 指的<span class="term">遠端指間關節<i>Distal interphalangeal joint, DIP</i></span>在中節與遠節之間。拇指只有一個指間關節。</li>
+</ul>
+<figure class="fig"><img src="figs/K4-p025.jpg" alt="掌指關節和近端、遠端指間關節的骨性位置"><figcaption>指骨與掌指、指間關節（講義 p.25）</figcaption></figure>
+
+<h3>掌側板與副韌帶</h3>
+<ul>
+<li><span class="term">掌側板<i>Volar plate</i></span>在關節掌側。靠這個構造，指骨關節面雖小，仍有較大的活動範圍。</li>
+<li><span class="term">附屬副韌帶<i>Accessory collateral ligaments</i></span>控制掌側板的移動。</li>
+<li>掌指關節的<span class="term">內、外側副韌帶<i>Medial and lateral collateral ligaments</i></span>在屈曲 90° 時拉緊，伸直時較鬆。</li>
+<li>掌指關節伸直時可以張開或併攏手指，屈曲 90° 時外展受限。</li>
+<li>指間關節的掌側板機轉與掌指關節類似。</li>
+<li>近端指間關節兩側的掌面有<span class="term">限制韌帶<i>Checkrein ligament</i></span>，可限制<span class="term">過度伸直<i>Hyperextension</i></span>。</li>
+</ul>
+<figure class="fig"><img src="figs/K4-p026.jpg" alt="關節的側面與掌面都可看到掌側板的位置"><figcaption>掌側板的位置與作用（講義 p.26）</figcaption></figure>
+
+<h3>手指活動度與最緊密位置</h3>
+<table class="tbl">
+<thead><tr><th>關節</th><th>屈曲</th><th>過伸</th><th>外展、內收</th></tr></thead>
+<tbody>
+<tr><td>第 2–5 指掌指關節</td><td>90°，終端感硬或結實</td><td>角度因人而異，終端感結實</td><td>講義列 20°</td></tr>
+<tr><td>拇指掌指關節</td><td>45–60°</td><td>0–20°</td><td>—</td></tr>
+</tbody>
+</table>
+<div class="trap"><p class="lbl">易混淆</p>
+<p>最緊密位置要分關節背。腕是完全伸直，手指掌指關節是屈曲 90°。</p>
+</div>
+<p>指關節的附屬動作包括背側、掌側及側向滑動、旋轉與牽引分離。</p>
+</section>
+
+<section class="page" id="p-K4-c" data-title="腕指肌肉與肌腱" data-group="第4講 腕與手">
+<h2>腕指肌肉與肌腱</h2>
+
+<h3>腕部主要肌肉</h3>
+<p>起點與止點列出講義圖可辨認的部位（p.6、9、12、33、64–65）。「附近」指圖上顯示的區域。</p>
+<table class="tbl">
+<thead><tr><th>肌肉</th><th>起點</th><th>止點</th><th>動作</th><th>神經</th></tr></thead>
+<tbody>
+<tr><td><span class="term">橈側伸腕長肌<i>Extensor carpi radialis longus, ECRL</i></span></td><td>肱骨外上髁近端</td><td>第 2 掌骨基部背側</td><td>伸腕、橈偏</td><td><span class="term">橈神經<i>Radial nerve</i></span></td></tr>
+<tr><td><span class="term">橈側伸腕短肌<i>Extensor carpi radialis brevis, ECRB</i></span></td><td>肱骨外上髁附近</td><td>第 3 掌骨基部背側</td><td>伸腕</td><td>橈神經</td></tr>
+<tr><td><span class="term">尺側伸腕肌<i>Extensor carpi ulnaris, ECU</i></span></td><td>肘外側至前臂背側</td><td>第 5 掌骨基部背側</td><td>伸腕、尺偏</td><td>橈神經</td></tr>
+<tr><td><span class="term">橈側屈腕肌<i>Flexor carpi radialis, FCR</i></span></td><td>肱骨內上髁附近</td><td>第 2 掌骨基部掌側</td><td>屈腕、橈偏</td><td>正中神經</td></tr>
+<tr><td><span class="term">掌長肌<i>Palmaris longus, PL</i></span></td><td>肱骨內上髁</td><td><span class="term">掌腱膜<i>Palmar aponeurosis</i></span></td><td>屈腕</td><td>正中神經</td></tr>
+<tr><td><span class="term">尺側屈腕肌<i>Flexor carpi ulnaris, FCU</i></span></td><td>肘內側至前臂掌側</td><td>豆狀骨。圖也標出第 5 掌骨基部。</td><td>屈腕、尺偏</td><td><span class="term">尺神經<i>Ulnar nerve</i></span></td></tr>
+</tbody>
+</table>
+<ul>
+<li><span class="term">伸指總肌<i>Extensor digitorum, ED / Extensor digitorum communis, EDC</i></span>可協助伸腕。</li>
+<li>屈指淺肌可協助屈腕。</li>
+<li>橈偏肌群另有<span class="term">拇長外展肌<i>Abductor pollicis longus, APL</i></span>與<span class="term">伸拇短肌<i>Extensor pollicis brevis, EPB</i></span>。</li>
+</ul>
+<div class="mn"><p class="lbl">記憶口訣</p>
+<p>伸腕記「橈長、橈短、尺伸」。屈腕記「橈屈、掌長、尺屈」。尺偏記「尺屈、尺伸」。</p>
+</div>
+<figure class="fig"><img src="figs/K4-p031.jpg" alt="前臂背側的腕、指與拇指伸肌"><figcaption>前臂背側肌群與伸肌腱（講義 p.31）</figcaption></figure>
+
+<h3>前臂掌側三層</h3>
+<ul>
+<li><b>淺層</b>有橈側屈腕肌、掌長肌、尺側屈腕肌及<span class="term">旋前圓肌<i>Pronator teres</i></span>。旋前圓肌做前臂旋前。</li>
+<li><b>中層</b>是屈指淺肌。</li>
+<li><b>深層</b>有屈指深肌、<span class="term">旋前方肌<i>Pronator quadratus</i></span>與屈拇長肌。p.36 把屈指深肌誤寫成「屈指伸肌」。</li>
+</ul>
+<p>p.65 的前臂圖把橈側屈腕肌標了兩次。尺側、走向豆狀骨的是尺側屈腕肌。</p>
+
+<h3>手指外在肌與內在肌</h3>
+<ul>
+<li><span class="term">外在肌<i>Extrinsic muscles</i></span>起於前臂或肱骨。肌腱延伸到手。</li>
+<li><span class="term">內在肌<i>Intrinsic muscles</i></span>的起點、止點都在手部。包括蚓狀肌、骨間肌及大、小魚際肌。</li>
+</ul>
+<table class="tbl">
+<thead><tr><th>肌肉</th><th>起點或近端關係</th><th>止點或遠端關係</th><th>動作</th><th>神經</th></tr></thead>
+<tbody>
+<tr><td>屈指淺肌（外在）</td><td>肘內側至前臂掌側</td><td>第 2–5 指中節指骨</td><td>屈指，參與用力握，也協助屈腕</td><td>正中神經</td></tr>
+<tr><td>屈指深肌（外在）</td><td>前臂掌側深層</td><td>第 2–5 指遠節指骨</td><td>屈指、參與用力握</td><td>食、中指側為正中。無名、小指側為尺神經。</td></tr>
+<tr><td>伸指總肌（外在）</td><td>肘外側至前臂背側</td><td>經伸肌裝置連到指骨</td><td>伸指，協助伸腕</td><td>橈神經</td></tr>
+<tr><td><span class="term">伸食指肌<i>Extensor indicis proprius, EIP</i></span>、<span class="term">伸小指肌<i>Extensor digiti minimi, EDM</i></span>（外在）</td><td>前臂背側</td><td>各接到對應手指的伸肌裝置</td><td>伸食指、伸小指</td><td>橈神經</td></tr>
+<tr><td><span class="term">蚓狀肌<i>Lumbricals</i></span>（內在）</td><td>屈指深肌腱</td><td>伸肌裝置</td><td><b>屈掌指、伸指間</b></td><td>第 1、2 條為正中。第 3、4 條為尺神經。</td></tr>
+<tr><td><span class="term">背側骨間肌<i>Dorsal interossei</i></span>（內在）</td><td>掌骨間</td><td>近節指骨基部與伸肌裝置</td><td>手指外展，參與捏與握</td><td>尺神經</td></tr>
+<tr><td><span class="term">掌側骨間肌<i>Palmar interossei</i></span>（內在）</td><td>掌骨</td><td>近節指骨基部與伸肌裝置</td><td>手指內收，協助伸遠端指間關節</td><td>尺神經</td></tr>
+</tbody>
+</table>
+<p>p.56 題目把「遠端指間關節」誤寫成「遠趾間關節」。p.61 圖例列背側與掌側骨間肌各 4 條，p.9 圖另標出靠拇指的第 1 掌側骨間肌。</p>
+<figure class="fig"><img src="figs/K4-p039.jpg" alt="四條蚓狀肌與屈指深肌腱的連接"><figcaption>蚓狀肌與屈指深肌腱（講義 p.39）</figcaption></figure>
+
+<h3>伸肌裝置與屈肌滑車</h3>
+<ul>
+<li><span class="term">伸肌裝置（伸肌束縛帶）<i>Extensor assembly</i></span>讓手指在不同屈曲位置都能伸直。</li>
+<li>它讓伸肌腱以較短路徑跨關節，也讓手指能充分屈曲。</li>
+<li><span class="term">肌腱系統<i>Tendinous system</i></span>包含長伸肌腱、骨間肌、蚓狀肌、伸食指肌及伸小指肌。</li>
+<li>長伸肌腱的<span class="term">中央束<i>Central band</i></span>附於中節指骨基部。兩條<span class="term">側束<i>Lateral bands</i></span>分別走在近端指間關節兩側。</li>
+<li>p.41 列出的骨間肌連接處有近節指骨基部、掌側板、側束及中節指骨基部。</li>
+<li><span class="term">支持帶系統<i>Retinacular system</i></span>包含筋膜與韌帶。</li>
+<li><span class="term">屈肌滑車<i>Flexor pulleys</i></span>形成有滑膜內襯的通道，使屈指淺、深肌腱貼著指骨。</li>
+<li>第 2–5 指圖上可見<span class="term">環狀滑車<i>Annular pulleys, A1–A5</i></span>與<span class="term">十字滑車<i>Cruciate pulleys, C1–C3</i></span>。拇指圖上可見斜形及環狀滑車。</li>
+<li>圖上另標出<span class="term">指纖維鞘<i>Fibrous digital sheath</i></span>、<span class="term">指滑膜鞘<i>Digital synovial sheath</i></span>及<span class="term">深橫掌骨韌帶<i>Deep transverse metacarpal ligament</i></span>。</li>
+</ul>
+<p>p.42 用「防止肌腱打結」描述滑車。圖上的重點是固定肌腱，使它貼近指骨。</p>
+<figure class="fig"><img src="figs/K4-p068.jpg" alt="掌側可見屈肌腱、屈肌滑車、指鞘、蚓狀肌與魚際肌"><figcaption>圖 8-38 手掌肌肉、屈肌腱與滑車（講義 p.68）</figcaption></figure>
+</section>
+
+<section class="page" id="p-K4-d" data-title="拇指與抓握動作" data-group="第4講 腕與手">
+<h2>拇指與抓握動作</h2>
+
+<h3>拇指肌肉</h3>
+<table class="tbl">
+<thead><tr><th>肌肉</th><th>講義圖示的附著或位置</th><th>動作</th><th>神經</th></tr></thead>
+<tbody>
+<tr><td>屈拇長肌（外在）</td><td>前臂深層至拇指遠節指骨</td><td>屈拇指</td><td>正中神經</td></tr>
+<tr><td><span class="term">伸拇長肌<i>Extensor pollicis longus, EPL</i></span>（外在）</td><td>前臂背側，肌腱經橈骨背側的腱溝</td><td>伸拇指</td><td>橈神經</td></tr>
+<tr><td>伸拇短肌（外在）</td><td>前臂背側至拇指</td><td>伸拇指、協助橈偏</td><td>橈神經</td></tr>
+<tr><td>拇長外展肌（外在）</td><td>前臂背側至第 1 掌骨基部</td><td>拇指外展、協助橈偏</td><td>橈神經</td></tr>
+<tr><td><span class="term">拇短屈肌<i>Flexor pollicis brevis, FPB</i></span>（內在）</td><td>大魚際至拇指近節指骨基部</td><td>屈拇指</td><td>淺頭正中神經，深頭尺神經</td></tr>
+<tr><td><span class="term">拇短外展肌<i>Abductor pollicis brevis, APB</i></span>（內在）</td><td>大魚際至拇指近節指骨基部</td><td>拇指外展</td><td>正中神經</td></tr>
+<tr><td><span class="term">拇指對掌肌<i>Opponens pollicis</i></span>（內在）</td><td>大魚際至第 1 掌骨</td><td>拇指對掌</td><td>正中神經</td></tr>
+<tr><td><span class="term">拇指內收肌<i>Adductor pollicis</i></span>（內在）</td><td>斜頭起於掌部近端，橫頭起於第 3 掌骨。止於拇指近節指骨基部。</td><td>拇指內收</td><td>尺神經</td></tr>
+</tbody>
+</table>
+<p>p.48 圖示由外向內辨認拇指對掌肌、拇短外展肌、拇指內收肌。</p>
+
+<h3>手指張合與小指對掌</h3>
+<ul>
+<li>手指張開靠背側骨間肌與<span class="term">小指外展肌<i>Abductor digiti minimi</i></span>。</li>
+<li>手指併攏靠掌側骨間肌。</li>
+<li>小魚際主要有小指外展肌、<span class="term">小指短屈肌<i>Flexor digiti minimi brevis</i></span>與<span class="term">小指對掌肌<i>Opponens digiti minimi</i></span>。小指對掌時，小指短屈肌可協助。</li>
+<li>p.47 對掌清單也列掌長肌與<span class="term">掌短肌<i>Palmaris brevis</i></span>。p.62 把掌長肌列為屈腕肌。p.68 把掌短肌單獨標在小魚際肌群之外。</li>
+</ul>
+<figure class="fig"><img src="figs/K4-p073.jpg" alt="照片示範手指及拇指的屈伸、內收、外展與拇指對掌"><figcaption>圖 8-10 手指與拇指的動作（講義 p.73）</figcaption></figure>
+
+<h3>抓握、伸指與肌肉協同</h3>
+<ul>
+<li><span class="term">用力握<i>Power grip</i></span>用到屈指淺肌、屈指深肌及骨間肌。</li>
+<li>捏、抓與用力握時，骨間肌的<span class="term">肌電活動<i>EMG activity</i></span>高。</li>
+<li>講義指出蚓狀肌很少與屈指深肌同時收縮，主要考屈掌指與伸指間的作用。</li>
+<li>伸指時，蚓狀肌降低被動張力，讓伸指總肌較容易把手指伸直。</li>
+<li>蚓狀肌也防止伸指總肌把掌指關節拉到過伸。</li>
+<li>抓握時，伸腕肌和屈指肌協同。伸腕肌把手腕穩住，避免手腕被拉向屈曲。</li>
+<li>主動伸指時，屈腕肌和伸指肌協同。</li>
+<li>握拳後再伸腕，講義 p.56 指出伸指總肌相對較少活動。</li>
+</ul>
+<div class="trap"><p class="lbl">易混淆</p>
+<ul>
+<li><span class="term">手內肌正位（掌面正向抓握）<i>Intrinsic-plus position</i></span>是<b>掌指屈曲、指間伸直</b>。</li>
+<li><span class="term">手內肌負位（掌面負向抓握）<i>Intrinsic-minus position</i></span>是<b>掌指過伸、指間部分屈曲</b>。</li>
+</ul>
+</div>
+
+<h3>七種抓握方式</h3>
+<table class="tbl">
+<thead><tr><th>抓握方式</th><th>講義例子或動作</th></tr></thead>
+<tbody>
+<tr><td><span class="term">鉤握<i>Hook grasp</i></span></td><td>提公事包</td></tr>
+<tr><td><span class="term">圓柱握<i>Cylindric grasp</i></span></td><td>拿玻璃杯</td></tr>
+<tr><td><span class="term">拳握<i>Fist grasp</i></span></td><td>握鐵鎚</td></tr>
+<tr><td><span class="term">球形握<i>Spheric grasp</i></span></td><td>抓球</td></tr>
+<tr><td><span class="term">指尖捏<i>Tip prehension</i></span></td><td>用指尖捏取。p.53 的例子寫作「指甲彄」，字義不清。</td></tr>
+<tr><td><span class="term">指腹捏<i>Palmar prehension</i></span></td><td>對指</td></tr>
+<tr><td><span class="term">側捏<i>Lateral prehension</i></span></td><td>拿扁平物品</td></tr>
+</tbody>
+</table>
+
+<h3>肌腱固定效應</h3>
+<ul>
+<li><span class="term">肌腱固定效應<i>Tenodesis action</i></span>是手腕改變位置時，跨腕肌腱的被動張力帶動手指。p.71 標成「Tendosis」，p.72 使用「Tenodesis」。</li>
+<li>伸腕會拉緊長屈指肌腱。拇指和其餘手指會被動屈曲。</li>
+<li>屈腕會拉緊長伸指肌腱。手指可被動伸直。</li>
+<li>p.71 右圖示範較大的腕部活動範圍。伸腕時握拳，屈腕時張開手。圖中的伸腕軸較屈腕軸靠近手端。</li>
+</ul>
+<figure class="fig"><img src="figs/K4-p071.jpg" alt="伸腕時手指被動屈曲，旁圖比較屈腕與伸腕的手指位置"><figcaption>肌腱固定效應與腕部屈伸（講義 p.71）</figcaption></figure>
+</section>
+
+<section class="page" id="p-K4-e" data-title="神經支配與臨床" data-group="第4講 腕與手">
+<h2>神經支配與臨床</h2>
+
+<h3>三條周邊神經</h3>
+<table class="tbl">
+<thead><tr><th>神經</th><th>講義圖的神經根</th><th>主要運動支配</th><th>感覺分布重點</th></tr></thead>
+<tbody>
+<tr><td>橈神經</td><td>C5–T1（p.59）</td><td>伸腕肌、長伸指肌，以及拇指外在伸肌與拇長外展肌</td><td>手背橈側，圖示集中於拇、食指間的手背區</td></tr>
+<tr><td>正中神經</td><td>C6–T1（p.60）</td><td>兩條旋前肌、多數屈腕與長屈指肌、多數大魚際肌及外側兩條蚓狀肌</td><td>圖說指出食指與中指末端，並涵蓋拇指與手指捏合時接觸的皮膚</td></tr>
+<tr><td>尺神經</td><td>C8–T1（p.61）</td><td>多數手內肌、尺側屈腕肌、屈指深肌的尺側半</td><td>小指與手的尺側</td></tr>
+</tbody>
+</table>
+<p>p.49 標題的「head」應為「hand」。</p>
+<div class="key"><p class="lbl">必背重點</p>
+<ul>
+<li>看起點猜神經（p.49）：起自<b>外上髁</b>、前臂<b>背側</b>的肌肉 → <b>橈神經</b>；起自<b>內上髁</b>、前臂<b>掌側</b>的肌肉 → 多為<b>正中神經</b>（尺側屈腕肌、屈指深肌尺側半例外，屬尺神經）。</li>
+<li>屈指深肌與蚓狀肌都分成正中、尺神經支配的兩側。食、中指側屬正中，無名、小指側屬尺神經。</li>
+<li>拇短屈肌淺頭屬正中，深頭屬尺神經。</li>
+<li>講義題目問「影響拇指動作最多的神經」，答案為<b>正中神經</b>。</li>
+</ul>
+</div>
+<figure class="fig"><img src="figs/K4-p061.jpg" alt="尺神經往尺側屈腕肌、屈指深肌尺側半及手內肌的支配，並顯示小指感覺區"><figcaption>圖 6-33 尺神經的運動與感覺分布（講義 p.61）</figcaption></figure>
+
+<h3>周邊神經麻痺與手部變形</h3>
+<table class="tbl">
+<thead><tr><th>受損神經</th><th>講義列出的表現</th><th>判讀重點</th></tr></thead>
+<tbody>
+<tr><td>橈神經</td><td><span class="term">垂腕<i>Wrist drop</i></span>、握力變弱</td><td>伸腕肌與長伸指肌麻痺。抓握時難以穩住腕部。</td></tr>
+<tr><td>尺神經</td><td><span class="term">爪形手<i>Claw hand</i></span></td><td>手內肌麻痺可出現爪形姿勢。掌指過伸，指間屈曲。</td></tr>
+<tr><td>正中神經</td><td><span class="term">猿手變形<i>Ape-hand deformity</i></span></td><td>正中神經支配多數大魚際肌。p.52 考猿手與神經的配對。</td></tr>
+</tbody>
+</table>
+<p>p.51 左圖標的是第一、第二指的爪形。神經麻痺與變形的配對依 p.50 文字。</p>
+
+<h3>腕隧道症候群</h3>
+<ul>
+<li><span class="term">腕隧道症候群<i>Carpal tunnel syndrome</i></span>與腕隧道內的正中神經受壓有關。</li>
+<li><span class="term">尺側滑膜鞘<i>Ulnar synovial sheath</i></span>包住屈指淺肌與深肌的 8 條腱。<span class="term">橈側滑膜鞘<i>Radial synovial sheath</i></span>包住屈拇長肌腱。</li>
+<li>滑膜鞘可減少摩擦。滑膜若腫脹，狹小的腕隧道內壓力會升高。</li>
+<li>常見正中神經感覺區疼痛、麻木或刺麻。進展後可有大魚際肌無力與萎縮。</li>
+<li>講義指出手腕到達極端角度或握拳時，隧道內壓可明顯增加。</li>
+<li>講義提到長時間使用鍵盤可能相關。調整鍵盤設計可減少打字時腕部的極端角度。</li>
+</ul>
+<figure class="fig"><img src="figs/K4-p069.jpg" alt="腕隧道切面標示正中神經、腕橫韌帶與橈尺側滑膜鞘"><figcaption>圖 8-39 腕隧道症候群的解剖（講義 p.69）</figcaption></figure>
+
+<h3>C6 脊髓損傷個案</h3>
+<ul>
+<li>p.72 的四肢癱瘓個案仍能主動伸腕。屈指與伸指肌的主動功能受損。</li>
+<li>準備拿杯時，讓重力把手腕帶向屈曲。伸指總肌被拉緊，手指被動張開。</li>
+<li>拿杯時主動伸腕。長屈指肌被拉緊，手指被動收攏抓住杯子。</li>
+<li>主動伸腕的幅度會影響屈指肌的被動拉力。</li>
+</ul>
+<p>p.72 右圖將主動伸腕肌標為橈側伸腕短肌，圖說寫橈側伸腕長肌。兩處都在示範主動伸腕帶出被動屈指。</p>
+<figure class="fig"><img src="figs/K4-p072.jpg" alt="C6 個案靠重力屈腕張手，再主動伸腕抓杯"><figcaption>圖 8-43 C6 個案運用肌腱固定效應拿杯（講義 p.72）</figcaption></figure>
+
+<h3>講義附錄的肩肘複習題</h3>
+<ul>
+<li>p.54–58 題組把小圓肌列為對肩峰鎖骨關節穩定貢獻最少的選項。</li>
+<li>題組把胸大肌列為對肩胛骨動作最少直接影響的選項。</li>
+<li><span class="term">喙鎖韌帶<i>Coracoclavicular ligament</i></span>包括<span class="term">斜方韌帶<i>Trapezoid ligament</i></span>與<span class="term">圓錐韌帶<i>Conoid ligament</i></span>。</li>
+<li><span class="term">前鋸肌<i>Serratus anterior</i></span>無力可出現<span class="term">翼狀肩胛<i>Winging scapulae</i></span>。前鋸肌麻痺會影響手臂完全抬舉。</li>
+<li><span class="term">肩胛肱骨節律<i>Scapulohumeral rhythm</i></span>有助盂肱關節穩定、三角肌收縮與手臂抬高。題組把「肩胛骨動作比盂肱關節大」列為錯項。</li>
+<li>腋下拐題的答案是背闊肌加肱三頭肌。</li>
+<li>肩外展時使肱骨頭下沉的題目，講義答案列棘上肌。</li>
+<li>肩水平外展 90° 舉重時，題目把大圓肌列為穩定作用最小的選項。</li>
+<li>肱二頭肌能同時屈肩、屈肘及旋後前臂。肱肌的屈肘作用最少受前臂旋前或旋後位置影響。</li>
+<li>轉螺絲起子時，題目列肱二頭肌與肱三頭肌協同收縮。肘屈伸軸通過肱骨滑車與小頭。</li>
+<li>p.57 肘關節題依 p.58 答案將「旋前或旋後都使骨間膜變緊」列為錯項。題目的全伸時關節接觸說法缺少條件。</li>
+</ul>
+</section>
+
+<!-- ===== K5 ===== -->
+<section class="page" id="p-K5-a" data-title="骨盆骨性標誌與薦髂關節" data-group="第5講 骨盆與髖">
+<h2>骨盆骨性標誌與薦髂關節</h2>
+
+<h3>骨盆帶與骨性標誌</h3>
+<ul>
+<li><span class="term">骨盆帶<i>Pelvic girdle</i></span>的左右各有一塊<span class="term">髖骨<i>Coxal bone</i></span>。每塊髖骨由<span class="term">髂骨<i>Ilium</i></span>、<span class="term">坐骨<i>Ischium</i></span>與<span class="term">恥骨<i>Pubis</i></span>構成。</li>
+<li>骨盆後方中央是<span class="term">薦骨<i>Sacrum</i></span>，下方接<span class="term">尾骨<i>Coccyx</i></span>。薦骨上緣前方的突起叫<span class="term">薦骨岬<i>Sacral promontory</i></span>。</li>
+<li>骨盆前方中央是<span class="term">恥骨聯合<i>Pubic symphysis</i></span>。下方可見<span class="term">恥骨弓<i>Pubic arch</i></span>，上方可辨認<span class="term">恥骨嵴<i>Pubic crest</i></span>和<span class="term">恥骨結節<i>Pubic tubercle</i></span>。</li>
+<li><span class="term">髂嵴<i>Iliac crest</i></span>是髂骨的上緣。<span class="term">髂窩<i>Iliac fossa</i></span>是髂骨內側的凹面。</li>
+<li>髂骨前方有<span class="term">髂前上棘<i>Anterior superior iliac spine, ASIS</i></span>與<span class="term">髂前下棘<i>Anterior inferior iliac spine, AIIS</i></span>。後方有<span class="term">髂後上棘<i>Posterior superior iliac spine, PSIS</i></span>與<span class="term">髂後下棘<i>Posterior inferior iliac spine, PIIS</i></span>。</li>
+<li><span class="term">坐骨棘<i>Ischial spine</i></span>介於<span class="term">大坐骨切跡<i>Greater sciatic notch</i></span>和<span class="term">小坐骨切跡<i>Lesser sciatic notch</i></span>之間。<span class="term">坐骨結節<i>Ischial tuberosity</i></span>位在更下方。</li>
+<li>圖上也可找<span class="term">骨盆緣<i>Pelvic brim</i></span>、<span class="term">髖臼<i>Acetabulum</i></span>、<span class="term">髖臼切跡<i>Acetabular notch</i></span>和<span class="term">閉孔<i>Obturator foramen</i></span>。</li>
+</ul>
+<p>講義 p.2 的 Ilium 應譯為髂骨。骨盆是整體。</p>
+<figure class="fig"><img src="figs/K5-p003.jpg" alt="骨盆前面標示三塊髖骨成分、薦尾骨、薦髂關節及恥骨聯合"><figcaption>骨盆前面與主要骨性標誌（講義 p.3）</figcaption></figure>
+
+<h3>薦髂關節與韌帶</h3>
+<ul>
+<li><span class="term">薦髂關節<i>Sacroiliac joint, SI joint</i></span>位在薦骨與髂骨之間。p.50 可見其<span class="term">耳狀面<i>Auricular surface</i></span>。</li>
+<li>講義列出上下滑動與前後移動。p.2、17 稱其為非自主動作，p.10 將它列為可動關節。</li>
+<li>三組薦髂韌帶是<span class="term">前薦髂韌帶<i>Anterior sacroiliac ligament</i></span>、<span class="term">後薦髂韌帶<i>Posterior sacroiliac ligament</i></span>及<span class="term">骨間薦髂韌帶<i>Interosseous sacroiliac ligament</i></span>。後薦髂韌帶在圖上分長束和短束。</li>
+<li>鄰近韌帶有<span class="term">髂腰韌帶<i>Iliolumbar ligament</i></span>、<span class="term">薦結節韌帶<i>Sacrotuberous ligament</i></span>與<span class="term">薦棘韌帶<i>Sacrospinous ligament</i></span>。</li>
+<li>後視圖可辨認<span class="term">大坐骨孔<i>Greater sciatic foramen</i></span>與<span class="term">小坐骨孔<i>Lesser sciatic foramen</i></span>。兩孔分別位於薦棘韌帶上、下方。</li>
+<li>前視圖還標前縱韌帶與前薦尾韌帶。後視圖標橫突間韌帶、棘上韌帶，以及後薦尾韌帶的深層與淺層（p.18–19）。</li>
+</ul>
+<figure class="fig"><img src="figs/K5-p019.jpg" alt="薦髂後面標示長短後薦髂韌帶、薦棘及薦結節韌帶和大小坐骨孔"><figcaption>薦髂區後面韌帶與坐骨孔（講義 p.19）</figcaption></figure>
+
+<h3>薦骨點頭與反點頭</h3>
+<table class="tbl">
+<thead><tr><th>動作</th><th>薦骨岬</th><th>薦骨下端或尾骨</th><th>骨盆開口</th></tr></thead>
+<tbody>
+<tr><td><span class="term">點頭<i>Nutation</i></span></td><td>向前下</td><td>向後</td><td><span class="term">骨盆出口<i>Pelvic outlet</i></span>變大</td></tr>
+<tr><td><span class="term">反點頭<i>Counternutation</i></span></td><td>向後上</td><td>尾骨向前</td><td><span class="term">骨盆入口<i>Pelvic inlet</i></span>變大</td></tr>
+</tbody>
+</table>
+<ul>
+<li>點頭時，兩側髂嵴靠近，兩側坐骨結節分開。p.10 中文括註寫「髂嵴分開」，與英文方向相反。</li>
+<li>p.11 在反點頭下另列單側例子。髂骨前轉、一側薦骨後轉，同時見一側下肢內轉與該側 ASIS 低、PSIS 高。</li>
+</ul>
+<div class="mn"><p class="lbl">記憶口訣</p>
+<p>「岬前下，出口大。岬後上，入口大。」</p>
+</div>
+<figure class="fig"><img src="figs/K5-p011.jpg" alt="薦髂關節側面，以兩組箭頭比較薦骨與髂骨的點頭和反點頭"><figcaption>圖 10-1 薦髂關節的點頭與反點頭（講義 p.11）</figcaption></figure>
+</section>
+
+<section class="page" id="p-K5-b" data-title="髖關節、韌帶與股骨角度" data-group="第5講 骨盆與髖">
+<h2>髖關節、韌帶與股骨角度</h2>
+
+<h3>股骨頭與髖臼</h3>
+<ul>
+<li><span class="term">髖關節<i>Hip joint</i></span>是<span class="term">球窩關節<i>Ball-and-socket joint</i></span>。球形的<span class="term">股骨頭<i>Femoral head</i></span>嵌在深杯形的髖臼內。</li>
+<li>股骨頭關節面覆有<span class="term">透明軟骨<i>Hyaline cartilage</i></span>。髖臼由髂骨、坐骨和恥骨共同構成。</li>
+<li><span class="term">大轉子<i>Greater trochanter, GT</i></span>與<span class="term">小轉子<i>Lesser trochanter</i></span>都在股骨近端。後面兩者之間可看到<span class="term">轉子間嵴<i>Intertrochanteric crest</i></span>。</li>
+</ul>
+
+<h3>股骨頸幹角與前傾角</h3>
+<ul>
+<li><span class="term">股骨頸幹角<i>Neck-shaft angle / Angle of inclination</i></span>是股骨頸長軸與股骨幹長軸的夾角。講義以 <b>125°</b> 為正常參考值。</li>
+<li><span class="term">髖內翻<i>Coxa vara</i></span>的頸幹角小於 125°。講義示例為 <b>105°</b>，腿長較短。</li>
+<li><span class="term">髖外翻<i>Coxa valga</i></span>的頸幹角大於 125°。講義示例為 <b>140°</b>，腿長較長。</li>
+<li><span class="term">股骨前傾角<i>Angle of anteversion</i></span>從上方看，以股骨頸長軸和股骨內、外髁的連線取角。p.6 內文列 <b>13–15°</b>，同頁小圖標 12°。p.7 正常示例為 15°。</li>
+<li><span class="term">股骨過度前傾<i>Excessive femoral anteversion</i></span>的示例是 35°。講義以髖內轉和<span class="term">內八<i>In-toeing</i></span>示範（p.7、9）。</li>
+<li><span class="term">股骨後傾<i>Femoral retroversion</i></span>與髖外轉和<span class="term">外八<i>Out-toeing</i></span>相配。p.7 的後傾圖標示 5°。</li>
+</ul>
+<div class="trap"><p class="lbl">易混淆</p>
+<p>頸幹角用股骨幹作參考，判讀髖內翻、外翻。前傾角用股骨內、外髁連線作參考，連到步態中的內八、外八。p.6 的「膝蓋內外髁」指股骨遠端的內外髁。</p>
+</div>
+<figure class="fig"><img src="figs/K5-p008.jpg" alt="比較頸幹角 125 度、髖內翻 105 度與髖外翻 140 度"><figcaption>股骨頸幹角、髖內翻與髖外翻（講義 p.8）</figcaption></figure>
+<figure class="fig"><img src="figs/K5-p007.jpg" alt="從上方比較正常股骨前傾、過度前傾及後傾"><figcaption>正常前傾、過度前傾與後傾（講義 p.7）</figcaption></figure>
+
+<h3>髖關節韌帶</h3>
+<table class="tbl">
+<thead><tr><th>韌帶</th><th>位置</th><th>限制或作用</th></tr></thead>
+<tbody>
+<tr><td><span class="term">髂股韌帶（Y 韌帶）<i>Iliofemoral ligament / Y ligament</i></span></td><td>前上方</td><td>限制過伸與過度骨盆後傾。p.13 也列上半部限制髖內收。</td></tr>
+<tr><td><span class="term">恥股韌帶<i>Pubofemoral ligament</i></span></td><td>前下方</td><td>限制過度外轉，也限制外展。</td></tr>
+<tr><td><span class="term">坐股韌帶<i>Ischiofemoral ligament</i></span></td><td>後下方</td><td>限制過度內轉。p.21 及 p.25 也列它限制內收。</td></tr>
+<tr><td><span class="term">股骨頭韌帶（股骨頭圓韌帶）<i>Ligament of the head of the femur / Ligamentum teres</i></span></td><td>股骨頭相關韌帶</td><td>講義列為股骨頭血液供應的途徑之一。p.21 也列它限制過度內收。</td></tr>
+<tr><td><span class="term">髖臼橫韌帶<i>Transverse acetabular ligament</i></span></td><td>髖臼</td><td>p.13 列名。</td></tr>
+</tbody>
+</table>
+<ul>
+<li>髖屈曲時，關節囊韌帶較鬆。髖伸直時，韌帶拉緊。</li>
+<li>p.13 的「Ligamentous teres」與「Teres femoris ligament」都在指股骨頭韌帶。</li>
+<li>p.13 將坐股韌帶也列為限制外展。p.21 的外展欄列恥股韌帶與內收肌，內收欄列坐股韌帶。</li>
+<li>前視圖可見<span class="term">髖臼唇<i>Acetabular labrum</i></span>（p.15 圖標 <span class="term">髖臼韌帶<i>Cotyloid ligament</i></span>）、<span class="term">滑膜<i>Synovial membrane</i></span>、恥囊韌帶與<span class="term">閉孔膜<i>Obturator membrane</i></span>。</li>
+<li>後視圖可見<span class="term">環形帶<i>Zona orbicularis</i></span>與突出的一小部分滑膜。</li>
+<li>髂股韌帶內側有部分股骨頭露出。p.52 圖說指出該處通常有滑液囊覆蓋。</li>
+</ul>
+<figure class="fig"><img src="figs/K5-p015.jpg" alt="髖前面標示髂股韌帶為 1，恥股韌帶為 2，並顯示股骨頭與滑膜"><figcaption>髖關節前面韌帶與股骨頭（講義 p.15）</figcaption></figure>
+<figure class="fig"><img src="figs/K5-p016.jpg" alt="髖後面標示坐股韌帶、環形帶、坐骨結節及股骨大小轉子"><figcaption>髖關節後面韌帶與轉子（講義 p.16）</figcaption></figure>
+</section>
+
+<section class="page" id="p-K5-c" data-title="髖關節活動度與骨盆動作" data-group="第5講 骨盆與髖">
+<h2>髖關節活動度與骨盆動作</h2>
+
+<h3>骨盆固定，股骨動</h3>
+<p>下表整理講義 p.20–22。<span class="term">活動範圍<i>Range of motion, ROM</i></span>欄的「—」表示該表未列數字。</p>
+<table class="tbl">
+<thead><tr><th>平面</th><th>髖動作</th><th>ROM</th><th>限制構造</th><th>主要肌肉</th></tr></thead>
+<tbody>
+<tr><td><span class="term">矢狀面<i>Sagittal plane</i></span></td><td><span class="term">屈曲<i>Flexion</i></span></td><td>0–120°</td><td><span class="term">腿後肌群（膕旁肌群）<i>Hamstrings</i></span></td><td><span class="term">腰大肌<i>Psoas major</i></span>、<span class="term">髂肌<i>Iliacus</i></span></td></tr>
+<tr><td>矢狀面</td><td><span class="term">伸直<i>Extension</i></span></td><td>—</td><td>恥股韌帶、Y 韌帶</td><td><span class="term">臀大肌<i>Gluteus maximus</i></span>、腿後肌群</td></tr>
+<tr><td>矢狀面</td><td><span class="term">過伸<i>Hyperextension</i></span></td><td>0–30°</td><td>髂股韌帶</td><td>—</td></tr>
+<tr><td><span class="term">額狀面<i>Frontal plane</i></span></td><td><span class="term">外展<i>Abduction</i></span></td><td>0–45°</td><td>恥股韌帶、<span class="term">髖內收肌群<i>Hip adductors</i></span></td><td><span class="term">臀中肌<i>Gluteus medius</i></span>、<span class="term">臀小肌<i>Gluteus minimus</i></span></td></tr>
+<tr><td>額狀面</td><td><span class="term">內收<i>Adduction</i></span></td><td>0–30°</td><td>坐股韌帶</td><td><span class="term">大收肌<i>Adductor magnus</i></span>、<span class="term">短收肌<i>Adductor brevis</i></span>、<span class="term">長收肌<i>Adductor longus</i></span>、<span class="term">恥骨肌<i>Pectineus</i></span>、<span class="term">股薄肌<i>Gracilis</i></span></td></tr>
+<tr><td>額狀面</td><td><span class="term">過度內收<i>Hyperadduction</i></span></td><td>—</td><td>股骨頭韌帶</td><td>—</td></tr>
+<tr><td><span class="term">水平面<i>Horizontal plane</i></span></td><td><span class="term">外轉<i>External rotation, ER</i></span></td><td>0–45°</td><td>恥股韌帶、Y 韌帶</td><td>六條短外轉肌、臀大肌後部</td></tr>
+<tr><td>水平面</td><td><span class="term">內轉<i>Internal rotation, IR</i></span></td><td>0–30°</td><td>坐股韌帶、Y 韌帶</td><td>臀小肌、臀中肌、<span class="term">闊筋膜張肌<i>Tensor fasciae latae, TFL</i></span></td></tr>
+</tbody>
+</table>
+<div class="trap"><p class="lbl">易混淆</p>
+<p>p.23–26 是股骨相對骨盆的被動活動圖。圖示約為屈 120°、伸 20°、外展 40°、內收 25°、內轉 35°、外轉 45°。題目若指定講義表格，讀 p.20–22 的值。</p>
+<p>圖中直黑箭頭指被拉緊的組織，波浪箭頭指放鬆的組織。它們有助辨認動作末端的組織張力。</p>
+</div>
+<ul>
+<li>屈髖圖顯示髂股韌帶放鬆、下方關節囊與臀大肌被拉長。伸髖圖標出髂股韌帶與腰大肌。</li>
+<li>外展圖標出恥股韌帶、長收肌與短收肌。內收圖標出坐股韌帶上束、臀中肌、闊筋膜張肌與<span class="term">髂脛束<i>Iliotibial tract / Iliotibial band, IT band</i></span>。</li>
+<li>內轉圖標出坐股韌帶與<span class="term">梨狀肌<i>Piriformis</i></span>。外轉圖標出髂股韌帶外側束。</li>
+</ul>
+<figure class="fig"><img src="figs/K5-p023.jpg" alt="股骨相對骨盆的屈伸、內外展及內外轉，附被動角度與組織標籤"><figcaption>圖 12-23 股骨相對骨盆的三平面髖動作（講義 p.23）</figcaption></figure>
+
+<h3>股骨固定，骨盆動</h3>
+<ul>
+<li><span class="term">骨盆傾斜角<i>Angle of pelvic inclination</i></span>是通過 PSIS 與恥骨聯合最前點的平面，和水平面之間的夾角。</li>
+<li>前傾時，骨盆傾斜角變大，<span class="term">腰椎前凸<i>Lumbar lordosis</i></span>增加。後傾時，兩者都減少。</li>
+</ul>
+<table class="tbl">
+<thead><tr><th>平面</th><th>骨盆動作</th><th>骨標誌方向</th><th>講義列出的肌群</th></tr></thead>
+<tbody>
+<tr><td>矢狀面</td><td><span class="term">前傾<i>Anterior pelvic tilt / Forward tilt</i></span></td><td>恥骨聯合向下，薦骨後側向上</td><td>髖屈肌、腰薦椎伸肌</td></tr>
+<tr><td>矢狀面</td><td><span class="term">後傾<i>Posterior pelvic tilt / Backward tilt</i></span></td><td>恥骨聯合向前上，薦骨後側向下</td><td>髖伸肌、腰薦椎屈肌</td></tr>
+<tr><td>額狀面</td><td><span class="term">骨盆側傾<i>Lateral pelvic tilt</i></span>向左</td><td>左髂嵴低，右髂嵴高</td><td>—</td></tr>
+<tr><td>額狀面</td><td>骨盆側傾向右</td><td>右髂嵴低，左髂嵴高</td><td>左腰薦椎側屈肌、右髖外展肌、左髖內收肌</td></tr>
+<tr><td>水平面</td><td><span class="term">骨盆旋轉<i>Pelvic rotation</i></span>向右</td><td>右半骨盆向前，左半向後</td><td>左腰薦椎旋轉肌、左髖外轉肌、右髖內轉肌</td></tr>
+<tr><td>水平面</td><td>骨盆旋轉向左</td><td>左半骨盆向前，右半向後</td><td>—</td></tr>
+</tbody>
+</table>
+<p>p.27 定義方向，p.31、56 列肌群。p.14 提到可做臨床骨盆傾斜角評估。</p>
+<div class="key"><p class="lbl">必背重點</p>
+<ul>
+<li>股骨固定時，骨盆前傾帶出髖屈曲。骨盆後傾帶出髖伸直（p.28）。</li>
+<li>上半身固定的圖例中，骨盆前傾約 30°、後傾約 15°。額狀面的髖外展約 30°、內收約 25°，水平面的內轉與外轉各約 15°（p.28–30）。</li>
+</ul>
+</div>
+<figure class="fig"><img src="figs/K5-p028.jpg" alt="股骨固定時，從側面看骨盆前傾與後傾帶出的相對髖動作"><figcaption>股骨固定時的骨盆前傾、後傾與髖屈伸（講義 p.28）</figcaption></figure>
+</section>
+
+<section class="page" id="p-K5-d" data-title="髖部肌肉、附著與神經" data-group="第5講 骨盆與髖">
+<h2>髖部肌肉、附著與神經</h2>
+
+<h3>前側與外側肌肉</h3>
+<table class="tbl">
+<thead><tr><th>肌肉</th><th>起點</th><th>止點</th><th>動作</th><th>神經</th></tr></thead>
+<tbody>
+<tr><td><span class="term">髂腰肌<i>Iliopsoas</i></span></td><td>髂肌起自髂窩，腰大肌起自脊柱（p.38、50、57）</td><td>小轉子</td><td>屈髖、外轉</td><td><span class="term">股神經<i>Femoral nerve</i></span>支配髂肌。p.38 將股神經列在整組下。</td></tr>
+<tr><td><span class="term">股直肌<i>Rectus femoris</i></span></td><td>髂前下棘，圖另標髖臼上緣附近</td><td>髕骨</td><td>屈髖、伸膝</td><td>股神經（p.60）</td></tr>
+<tr><td><span class="term">縫匠肌<i>Sartorius</i></span></td><td>髂前上棘</td><td>脛骨內側</td><td>屈髖、外轉、外展。屈膝並使膝內轉。</td><td>股神經</td></tr>
+<tr><td>闊筋膜張肌</td><td>髂嵴</td><td>髂脛束</td><td>屈髖、外展、內轉</td><td><span class="term">臀上神經<i>Superior gluteal nerve</i></span></td></tr>
+<tr><td>恥骨肌</td><td><span class="term">恥骨上支<i>Superior pubic ramus</i></span></td><td>股骨上端後內側</td><td>內收、屈髖</td><td>股神經</td></tr>
+<tr><td>臀中肌</td><td>髂嵴一帶的髂骨外面</td><td>大轉子</td><td>外展。前束內轉，後束外轉。</td><td>臀上神經</td></tr>
+<tr><td>臀小肌</td><td>髂骨外面</td><td>大轉子前緣</td><td>外展、內轉、屈髖</td><td>臀上神經</td></tr>
+</tbody>
+</table>
+<ul>
+<li>髂腰肌由腰大肌和髂肌組成。p.38 單列髂窩，圖顯示這是髂肌的起點。p.57 另標<span class="term">髂腰肌滑液囊<i>Iliopsoas bursa</i></span>。</li>
+<li>股直肌跨髖與膝。p.35 的 X 標出股直肌與<span class="term">股內側肌<i>Vastus medialis</i></span>的<span class="term">激痛點<i>Trigger point</i></span>。</li>
+<li>p.49 的髂骨外側圖有<span class="term">臀前線<i>Anterior gluteal line</i></span>、<span class="term">臀後線<i>Posterior gluteal line</i></span>與<span class="term">臀下線<i>Inferior gluteal line</i></span>。可用來對照臀中肌、臀小肌的附著。</li>
+</ul>
+<figure class="fig"><img src="figs/K5-p049.jpg" alt="右髖骨外側標示臀線、髂骨前後棘、坐骨切跡及髖肌附著"><figcaption>圖 12-1 髖骨外側骨標誌與肌肉附著（講義 p.49）</figcaption></figure>
+
+<h3>後側肌肉</h3>
+<table class="tbl">
+<thead><tr><th>肌肉</th><th>起點</th><th>止點</th><th>動作</th><th>神經</th></tr></thead>
+<tbody>
+<tr><td>臀大肌</td><td>髂嵴後部、腰背筋膜、薦骨、尾骨</td><td>髂脛束及股骨近端後側。p.32 另列大轉子，p.51 的臀大肌骨性止點標在其下方。</td><td>伸髖、外轉。上部外展，下部內收。</td><td><span class="term">臀下神經<i>Inferior gluteal nerve</i></span></td></tr>
+<tr><td>腿後肌群</td><td>坐骨結節。p.49、51 標出<span class="term">半腱肌<i>Semitendinosus</i></span>、<span class="term">半膜肌<i>Semimembranosus</i></span>與<span class="term">股二頭肌長頭<i>Long head of biceps femoris</i></span>。</td><td>p.33 概列脛骨近端。p.54 顯示各肌止腱走向不同。</td><td>伸髖、屈膝。半膜肌也使膝內轉（p.65–66）。</td><td><span class="term">坐骨神經<i>Sciatic nerve</i></span>的<span class="term">脛神經<i>Tibial nerve</i></span>部分（p.61）</td></tr>
+<tr><td><span class="term">股二頭肌短頭<i>Short head of biceps femoris</i></span></td><td>股骨後側（p.54）</td><td>沿外側與長頭相接（p.54）</td><td>—</td><td><span class="term">腓總神經<i>Common peroneal nerve</i></span>部分（p.61）</td></tr>
+</tbody>
+</table>
+<ul>
+<li>p.54 圖說將股二頭肌長頭、半腱肌與半膜肌列為腿後肌群。圖右另顯示股二頭肌短頭。</li>
+<li>p.33 把 Ischial tuberosity 誤寫成「大轉子」。正確名稱是坐骨結節。</li>
+</ul>
+
+<h3>六條短外轉肌</h3>
+<p>講義 p.34 概列起於骨盆內外、止於大轉子一帶。p.49–51、55 可對照各肌的附著區。六條都列為髖外轉肌。下表的個別起止點與走向（如閉孔內肌經小坐骨孔、雙子肌的位置）講義文字未列，是依圖判讀（講義無，補充），考試以 p.34 概述為準。</p>
+<table class="tbl">
+<thead><tr><th>肌肉</th><th>起點或位置</th><th>止點或走向</th><th>動作</th><th>神經</th></tr></thead>
+<tbody>
+<tr><td>梨狀肌</td><td>薦骨前面，位在六肌最上方</td><td>大轉子內側</td><td>伸髖時外轉，屈髖時可轉為內轉</td><td>第 1、2 薦神經（S1、S2）</td></tr>
+<tr><td><span class="term">閉孔內肌<i>Obturator internus</i></span></td><td>閉孔內側</td><td>經小坐骨孔區轉向大轉子，肌腱在兩條雙子肌之間</td><td>外轉</td><td>p.61 標閉孔內肌與上雙子肌共用一支</td></tr>
+<tr><td><span class="term">上雙子肌<i>Gemellus superior</i></span></td><td>坐骨棘附近，位在閉孔內肌上方</td><td>與閉孔內肌腱一起向大轉子</td><td>外轉</td><td>同閉孔內肌（p.61）</td></tr>
+<tr><td><span class="term">下雙子肌<i>Gemellus inferior</i></span></td><td>坐骨結節上方，位在閉孔內肌下方</td><td>與閉孔內肌腱一起向大轉子</td><td>外轉</td><td>p.61 標下雙子肌與股方肌共用一支</td></tr>
+<tr><td><span class="term">閉孔外肌<i>Obturator externus</i></span></td><td>閉孔外側</td><td>深層走向股骨近端（p.52、55）</td><td>外轉</td><td><span class="term">閉孔神經<i>Obturator nerve</i></span>（p.60）</td></tr>
+<tr><td><span class="term">股方肌<i>Quadratus femoris</i></span></td><td>坐骨結節外側附近，位在六肌最下方</td><td>股骨後面轉子間嵴一帶（p.51、55）</td><td>外轉</td><td>同下雙子肌（p.61）</td></tr>
+</tbody>
+</table>
+<figure class="fig"><img src="figs/K5-p055.jpg" alt="深層髖外轉肌與坐骨神經，可辨梨狀肌、閉孔肌、雙子肌與股方肌"><figcaption>圖 12-44 髖後外側深層肌與坐骨神經（講義 p.55）</figcaption></figure>
+
+<h3>內側肌肉</h3>
+<table class="tbl">
+<thead><tr><th>肌肉</th><th>起點</th><th>止點</th><th>動作</th><th>神經</th></tr></thead>
+<tbody>
+<tr><td>長收肌</td><td>恥骨前內側，接近恥骨聯合</td><td>股骨幹內後側</td><td>髖內收</td><td>閉孔神經</td></tr>
+<tr><td>短收肌</td><td>恥骨下支一帶</td><td>股骨近端後側</td><td>髖內收</td><td>閉孔神經</td></tr>
+<tr><td>大收肌</td><td>恥骨、坐骨支一帶，後方延至坐骨結節附近</td><td>股骨後內側</td><td>髖內收</td><td>閉孔神經。p.61 另標坐骨神經的脛神經部分到大收肌。</td></tr>
+<tr><td>股薄肌</td><td>恥骨下支一帶</td><td>到膝內側下方（p.42、54）</td><td>髖內收</td><td>閉孔神經</td></tr>
+<tr><td>恥骨肌</td><td>恥骨上支</td><td>股骨上端後內側</td><td>髖內收、屈髖</td><td>股神經</td></tr>
+</tbody>
+</table>
+<p>p.42 用恥骨支與坐骨支、<span class="term">股骨粗線<i>Linea aspera</i></span>概括整組的起止點。個別附著可看 p.39、42、49–54，表中的個別起止細節是依圖判讀（講義無，補充）。p.42 將整組列為股神經，p.60–61 的分支圖則顯示上述個別支配。</p>
+
+<h3>神經分布</h3>
+<ul>
+<li><span class="term">腰神經叢<i>Lumbar plexus</i></span>圖中，股神經與閉孔神經都標 <b>L2–L4</b>。</li>
+<li>股神經圖列髂肌、縫匠肌、恥骨肌與<span class="term">股四頭肌<i>Quadriceps femoris</i></span>。四頭是股直肌、股內側肌、<span class="term">股外側肌<i>Vastus lateralis</i></span>、<span class="term">股中間肌<i>Vastus intermedius</i></span>。</li>
+<li>閉孔神經圖列閉孔外肌、長收肌、短收肌、大收肌與股薄肌。</li>
+<li>p.60 的皮膚感覺圖標股前皮神經、閉孔神經與<span class="term">隱神經<i>Saphenous nerve</i></span>。隱神經是股神經的分支，分布延到小腿前內側。</li>
+<li><span class="term">薦神經叢<i>Sacral plexus</i></span>圖畫出神經經大坐骨孔離開骨盆。坐骨神經標為 <b>L4–S3</b>，再分脛神經（L4–S3）與腓總神經（L4–S2）。</li>
+</ul>
+<div class="mn"><p class="lbl">記憶口訣</p>
+<p>「臀上管中、小、張。臀下管臀大。」中、小、張就是臀中肌、臀小肌、闊筋膜張肌。</p>
+</div>
+<figure class="fig"><img src="figs/K5-p060.jpg" alt="腰神經叢的股神經與閉孔神經，標示所支配的肌肉和皮膚感覺區"><figcaption>圖 12-27 股神經、閉孔神經與感覺分布（講義 p.60）</figcaption></figure>
+<figure class="fig"><img src="figs/K5-p061.jpg" alt="薦神經叢的臀上、臀下與坐骨神經，另標腿後肌群及其神經分支"><figcaption>圖 12-27 續圖，臀部與腿後神經分布（講義 p.61）</figcaption></figure>
+</section>
+
+<section class="page" id="p-K5-e" data-title="肌肉協同與臨床判讀" data-group="第5講 骨盆與髖">
+<h2>肌肉協同與臨床判讀</h2>
+
+<h3>姿勢改變，肌肉作用也會改變</h3>
+<ul>
+<li><span class="term">非負重<i>Non-weight-bearing</i></span>時，肢體遠端能自由移動。<span class="term">負重<i>Weight-bearing</i></span>時，遠端固定。</li>
+<li>臀大肌的上部外展，下部內收。臀中肌的前部內轉，後部外轉。</li>
+<li>髖屈得越多，臀中肌與闊筋膜張肌的內轉作用越明顯。</li>
+<li>梨狀肌在髖伸直時外轉。在屈髖位置可轉為內轉。</li>
+<li>內收肌有內轉作用。髖在屈曲位時可協助伸髖，在伸直位可協助屈髖。</li>
+<li>髖屈曲時，內轉肌力矩約為髖伸直時的 <b>3 倍</b>。外轉肌力矩隨髖位置的變化較小。</li>
+</ul>
+
+<h3>站姿、坐姿與俯臥的肌肉分工</h3>
+<ul>
+<li>站姿抬腿屈髖會用到髂腰肌、股直肌、縫匠肌與闊筋膜張肌。</li>
+<li>縫匠肌的外轉作用可和闊筋膜張肌的內轉作用互相抵消。</li>
+<li>恥骨肌的內收作用可抵消闊筋膜張肌的外展作用。兩肌都能屈髖。</li>
+<li>坐姿抬腿屈髖主要用髂腰肌。</li>
+</ul>
+<table class="tbl">
+<thead><tr><th>姿勢</th><th>講義列出的主要肌肉</th></tr></thead>
+<tbody>
+<tr><td>俯臥單側伸髖，膝伸直</td><td>臀大肌、腿後肌群</td></tr>
+<tr><td>俯臥單側伸髖，膝彎曲</td><td>臀大肌</td></tr>
+<tr><td>俯臥雙側伸髖，雙膝伸直</td><td>髖伸肌、腰椎伸肌</td></tr>
+<tr><td>坐姿軀幹與骨盆前傾</td><td>髖伸肌，講義舉腿後肌群</td></tr>
+<tr><td>站姿軀幹前彎，髖屈曲</td><td>腿後肌群做<span class="term">離心收縮<i>Eccentric contraction</i></span>（p.65–66）</td></tr>
+</tbody>
+</table>
+
+<h3>單腳承重與 Trendelenburg 徵象</h3>
+<div class="key"><p class="lbl">必背重點</p>
+<ul>
+<li>單腳站時，講義指出髖外展肌要平衡約 <b>85% 體重</b>。</li>
+<li>同一姿勢下，髖關節的壓縮力約為 <b>2.5 倍體重</b>。</li>
+<li>外展肌麻痺時可見<span class="term">臀中肌跛行<i>Gluteus medius limp</i></span>。</li>
+<li>做<span class="term">特倫德倫堡徵象<i>Trendelenburg sign</i></span>的單腳站判讀時，看抬腳側的骨盆。</li>
+<li>若抬腳側骨盆下掉，表示<b>站立側</b>髖外展肌無力。右腳站、左側掉，先想到右側臀中肌等髖外展肌。</li>
+</ul>
+</div>
+<figure class="fig"><img src="figs/K5-p063.jpg" alt="單腳站正常和異常比較，異常圖的抬腳側骨盆向下掉"><figcaption>Trendelenburg 徵象的單腳站判讀（講義 p.63）</figcaption></figure>
+
+<h3>其他臨床例子</h3>
+<ul>
+<li><span class="term">下半身麻痺<i>Paraplegia</i></span>的例子中，膝和踝由<span class="term">矯具<i>Orthoses</i></span>固定。髖過伸拉緊 Y 韌帶，可協助取得站立平衡（p.62）。</li>
+<li>p.34 的圖把發炎的坐骨神經畫在梨狀肌旁。p.55 可對照兩者的走向。</li>
+</ul>
+
+<h3>講義附錄複習題</h3>
+<ul>
+<li>p.64 步態配對題把「Trendelenburg 配臀大肌」列為錯項。看髖外展肌，尤其臀中肌。</li>
+<li>同一題還列 <span class="term">高爾斯徵象<i>Gower sign</i></span>配股四頭肌、<span class="term">垂足<i>Drop foot</i></span>配<span class="term">脛前肌<i>Tibialis anterior</i></span>、髖過伸步態配臀大肌。</li>
+<li>提高骨盆的主要肌肉，題目答案是<span class="term">腰方肌<i>Quadratus lumborum</i></span>。</li>
+<li>蹲姿拉筋的題目答案是<span class="term">比目魚肌<i>Soleus</i></span>。</li>
+<li>題目所列的<span class="term">雙關節肌<i>Two-joint muscle</i></span>是股直肌。它同時屈髖、伸膝。</li>
+<li>p.65 的開鏈膝關節題把股四頭肌收縮列為使<span class="term">前十字韌帶<i>Anterior cruciate ligament, ACL</i></span>參與穩定的答案。該題未列膝角度。</li>
+<li>p.65 縫匠肌題把「腳趾朝內」列為錯項。髖動作以 p.36 為準，記屈曲、外展、外轉。題目用「外翻」描述髖動作，容易和股骨角度的髖外翻混淆。</li>
+<li>髖內收肌題的答案是恥骨肌。半膜肌題的答案是膝屈曲與內轉。</li>
+</ul>
+</section>
+
+<!-- ===== K6 ===== -->
+<section class="page" id="p-K6-a" data-title="膝部骨骼、動作與半月板" data-group="第6講 膝關節">
+<h2>膝部骨骼、動作與半月板</h2>
+
+<h3>膝關節與骨性標誌</h3>
+<ul>
+<li><span class="term">膝關節<i>Knee joint</i></span>主要像<span class="term">樞紐關節<i>Hinge joint</i></span>做屈伸，也能做軸向旋轉。</li>
+<li><span class="term">股骨<i>Femur</i></span>遠端的內、外髁呈凸面。<span class="term">脛骨<i>Tibia</i></span>近端的內、外髁呈凹面。</li>
+<li><span class="term">髕骨<i>Patella</i></span>有內、外側<span class="term">髕骨關節面<i>Patellar facets</i></span>，沿股骨前方的<span class="term">滑車溝<i>Trochlear groove</i></span>滑動。</li>
+<li>股骨遠端也可找內、外<span class="term">上髁<i>Epicondyles</i></span>、<span class="term">內收肌結節<i>Adductor tubercle</i></span>和兩髁之間的<span class="term">髁間切跡<i>Intercondylar notch</i></span>。</li>
+<li><span class="term">脛骨平台<i>Tibial plateau</i></span>的兩髁之間有<span class="term">髁間隆起<i>Intercondylar eminence</i></span>，前、後各有一個髁間窩。</li>
+<li><span class="term">髕韌帶<i>Patellar ligament</i></span>連接髕骨下方與<span class="term">脛骨粗隆<i>Tibial tuberosity</i></span>。</li>
+<li><span class="term">腓骨<i>Fibula</i></span>在小腿外側。圖上可找腓骨莖突、近端和遠端脛腓關節，以及脛腓兩骨之間的<span class="term">骨間膜<i>Interosseous membrane</i></span>。</li>
+<li>講義也列出<span class="term">半月板<i>Meniscus</i></span>、<span class="term">關節囊<i>Joint capsule</i></span>與<span class="term">滑囊<i>Bursa</i></span>。</li>
+</ul>
+<p>p.2 的<span class="term">髁狀構造<i>Unparalleled condyloid</i></span>用語不清楚。關節面形狀可看 p.6 的說明和 p.24 的圖。</p>
+<figure class="fig"><img src="figs/K6-p024.jpg" alt="右膝的髕骨、股骨遠端內外髁、脛骨平台與前後髁間窩"><figcaption>圖 13-4 膝部骨骼與關節面（講義 p.24）</figcaption></figure>
+<figure class="fig"><img src="figs/K6-p022.jpg" alt="右膝前面可見股骨上髁、髕韌帶附著、腓骨莖突與鵝足肌腱"><figcaption>圖 13-2 右膝前面骨性標誌與肌腱附著（講義 p.22）</figcaption></figure>
+
+<h3>活動度、運動軸與終端感</h3>
+<p>講義分為 <b>2 個自由度</b>。一個是屈伸，另一個是軸向旋轉。</p>
+<table class="tbl">
+<thead><tr><th>動作</th><th>角度與條件</th><th><span class="term">終端感<i>End-feel</i></span></th></tr></thead>
+<tbody>
+<tr><td><span class="term">屈曲<i>Flexion</i></span></td><td>0–120°。髖伸直時，能屈膝的角度變小。</td><td><span class="term">軟<i>Soft</i></span></td></tr>
+<tr><td><span class="term">伸直<i>Extension</i></span>與<span class="term">過伸<i>Hyperextension</i></span></td><td>過伸 ≤15°。髖屈 90° 時，膝伸直幅度減少。</td><td><span class="term">結實<i>Firm</i></span></td></tr>
+<tr><td><span class="term">軸向旋轉<i>Axial rotation</i></span></td><td>屈膝時兩側副韌帶較鬆，可以旋轉。<span class="term">外旋<i>External rotation, ER</i></span>約為<span class="term">內旋<i>Internal rotation, IR</i></span>的 2 倍。</td><td>結實</td></tr>
+</tbody>
+</table>
+<ul>
+<li>屈伸軸通過股骨兩髁。軸向旋轉繞<span class="term">縱軸<i>Longitudinal axis</i></span>。</li>
+<li>膝從屈曲轉為伸直時，可做的軸向旋轉幅度逐漸變小。</li>
+<li>膝由伸直開始彎曲時，先是<span class="term">滾動<i>Rolling</i></span>多、<span class="term">滑動<i>Gliding</i></span>少。繼續屈曲時，滑動增加，滾動減少。</li>
+</ul>
+<div class="key"><p class="lbl">必背重點</p>
+<p><span class="term">螺旋鎖定機轉<i>Screw-home mechanism</i></span>出現在膝伸直的最後 <b>20°</b>。</p>
+<ul>
+<li><span class="term">開放鏈<i>Open chain</i></span>：股骨固定，脛骨<b>外旋</b>。</li>
+<li><span class="term">閉鎖鏈<i>Closed chain</i></span>：脛骨固定，股骨<b>內旋</b>。</li>
+</ul>
+</div>
+
+<h3>半月板的形狀、血流與功能</h3>
+<table class="tbl">
+<thead><tr><th>構造</th><th>形狀</th><th>周緣有血流的比例</th></tr></thead>
+<tbody>
+<tr><td><span class="term">內側半月板<i>Medial meniscus</i></span></td><td>較大，呈 C 形</td><td>20–30%</td></tr>
+<tr><td><span class="term">外側半月板<i>Lateral meniscus</i></span></td><td>較小，近半 O 形</td><td>10–25%</td></tr>
+</tbody>
+</table>
+<ul>
+<li>半月板位於凹形的脛骨平台。兩塊半月板的前方以<span class="term">橫韌帶<i>Transverse ligament</i></span>相連。</li>
+<li>主要由<span class="term">內、外側膝動脈<i>Medial and lateral geniculate arteries</i></span>供血。外側半月板靠近<span class="term">膕肌腱裂孔<i>Popliteal hiatus</i></span>的區域血流較少。</li>
+<li>p.7 把膕肌腱裂孔列為關節囊的例外。外側半月板與關節囊的直接連接在這裡中斷（講義無，補充）。</li>
+<li>半月板協助<span class="term">傳遞負荷<i>Load transmission</i></span>，減少股骨與脛骨之間的接觸壓力。</li>
+<li>半月板也幫助<span class="term">潤滑<i>Lubrication</i></span>及供應<span class="term">軟骨營養<i>Chondral nutrition</i></span>。</li>
+<li>p.9 可看到兩塊半月板的<span class="term">前角與後角<i>Anterior and posterior horns</i></span>在脛骨髁間區的附著，前方也標出<span class="term">髕下脂肪墊<i>Infrapatellar fat pad</i></span>與<span class="term">冠狀韌帶<i>Coronary ligament</i></span>。</li>
+</ul>
+<figure class="fig"><img src="figs/K6-p009.jpg" alt="脛骨平台上視圖可比較 C 形與近半 O 形半月板，並辨認前後角及十字韌帶附著"><figcaption>圖 13-12 半月板與髁間區附著（講義 p.9）</figcaption></figure>
+</section>
+
+<section class="page" id="p-K6-b" data-title="膝韌帶與十字韌帶撕裂" data-group="第6講 膝關節">
+<h2>膝韌帶與十字韌帶撕裂</h2>
+
+<h3>副韌帶與後關節囊</h3>
+<ul>
+<li><span class="term">內側副韌帶（脛側副韌帶）<i>Medial or tibial collateral ligament, MCL</i></span>由股骨內側連到脛骨內側（講義無，補充）。p.28 圖也標出它和內側半月板相連。</li>
+<li><span class="term">外側副韌帶（腓側副韌帶）<i>Lateral or fibular collateral ligament, LCL</i></span>由股骨外側連到腓骨近端（講義無，補充）。p.12 圖可辨認膕肌腱經過外側半月板和 LCL 之間。</li>
+<li>兩側副韌帶限制<span class="term">額狀面<i>Frontal plane</i></span>的過度運動。MCL 限制脛骨外展所造成的膝外翻，LCL 限制脛骨內收所造成的膝內翻。</li>
+<li>膝伸直時，副韌帶也限制脛骨前後移動。它們在動作末端提供穩定。</li>
+<li>屈膝時副韌帶較鬆，讓膝能做軸向旋轉。</li>
+<li>膝後方有<span class="term">斜膕韌帶<i>Oblique popliteal ligament</i></span>和<span class="term">弓狀膕韌帶<i>Arcuate popliteal ligament</i></span>。p.28 也標出<span class="term">後脛腓韌帶<i>Posterior tibiofibular ligament</i></span>。</li>
+<li>p.28 的<span class="term">膕肌<i>Popliteus</i></span>位於<span class="term">膕窩<i>Popliteal fossa</i></span>深處，部分被<span class="term">半膜肌<i>Semimembranosus</i></span>延伸出的筋膜蓋住。</li>
+</ul>
+<figure class="fig"><img src="figs/K6-p028.jpg" alt="膝後側標示內側副韌帶與半月板的連接、斜膕韌帶、弓狀膕韌帶及膕肌"><figcaption>圖 13-10 膝後關節囊與韌帶（講義 p.28）</figcaption></figure>
+
+<h3>前、後十字韌帶</h3>
+<p>兩條十字韌帶在整段屈伸中提供穩定，也引導股骨與脛骨的髁面滑動。</p>
+<table class="tbl">
+<thead><tr><th>韌帶</th><th>從脛骨到股骨的路徑</th><th>講義所列功能</th></tr></thead>
+<tbody>
+<tr><td><span class="term">前十字韌帶<i>Anterior cruciate ligament, ACL</i></span></td><td>從脛骨<span class="term">前髁間窩<i>Anterior intercondylar fossa</i></span>向上、向後、向外，連到股骨外髁。</td><td>防止脛骨向前位移。p.12 也列出限制內、外旋。</td></tr>
+<tr><td><span class="term">後十字韌帶<i>Posterior cruciate ligament, PCL</i></span></td><td>從脛骨<span class="term">後髁間窩<i>Posterior intercondylar fossa</i></span>向上、向前、向內，連到股骨內髁。</td><td>限制脛骨向後位移。脛骨固定時，限制股骨髁向前位移。</td></tr>
+</tbody>
+</table>
+<ul>
+<li>p.12 英文把 ACL 的功能寫成「允許」脛骨前滑。依同頁中文與 p.16，應為「防止」。</li>
+<li>p.14 把 PCL 由脛骨往股骨寫成「向後」。依 p.25 側面圖，應為「向前」。</li>
+<li>p.25 側面圖看得出 ACL 的兩束纖維。p.9、12 也標出<span class="term">後半月股骨韌帶<i>Posterior meniscofemoral ligament</i></span>。</li>
+</ul>
+<figure class="fig"><img src="figs/K6-p025.jpg" alt="側面和前面圖對照 ACL 與 PCL，側面可辨認 ACL 的兩束纖維"><figcaption>圖 13-21 前、後十字韌帶的側面與前面（講義 p.25）</figcaption></figure>
+
+<h3>脛骨各方向的主要限制</h3>
+<table class="tbl">
+<thead><tr><th>脛骨的動作</th><th>主要限制</th></tr></thead>
+<tbody>
+<tr><td>向前位移</td><td>ACL</td></tr>
+<tr><td>向後位移</td><td>PCL</td></tr>
+<tr><td><span class="term">外翻<i>Valgus</i></span></td><td>MCL</td></tr>
+<tr><td><span class="term">內翻<i>Varus</i></span></td><td>LCL</td></tr>
+<tr><td>外旋</td><td>MCL、LCL</td></tr>
+<tr><td>內旋</td><td>ACL、PCL</td></tr>
+</tbody>
+</table>
+<div class="mn"><p class="lbl">記憶口訣</p>
+<p>「前擋前，後擋後。外旋副帶緊，內旋十字緊。」脛骨外旋時兩條副韌帶緊、十字韌帶鬆。內旋時相反。</p>
+</div>
+<div class="trap"><p class="lbl">易混淆</p>
+<p>題目問「主要限制」時看 p.16 的表。脛骨外旋由兩側副韌帶主要限制，內旋由兩條十字韌帶主要限制。</p>
+</div>
+
+<h3>十字韌帶撕裂</h3>
+<ul>
+<li>p.13 示範<span class="term">前十字韌帶撕裂<i>ACL tear</i></span>。受損後，脛骨向前位移較難控制。</li>
+<li>p.15 示範<span class="term">後十字韌帶撕裂<i>PCL tear</i></span>。受損後，脛骨向後位移較難控制。</li>
+</ul>
+<figure class="fig"><img src="figs/K6-p013.jpg" alt="前十字韌帶撕裂示意，旁圖標出兩條十字韌帶的位置"><figcaption>前十字韌帶撕裂與膝內構造（講義 p.13）</figcaption></figure>
+<figure class="fig"><img src="figs/K6-p015.jpg" alt="正常後十字韌帶與撕裂的對照，頁面上方也說明脛骨內外旋時韌帶的鬆緊"><figcaption>後十字韌帶撕裂與韌帶旋轉時的鬆緊（講義 p.15）</figcaption></figure>
+</section>
+
+<section class="page" id="p-K6-c" data-title="髕股關節、膝內外翻與 Q 角" data-group="第6講 膝關節">
+<h2>髕股關節、膝內外翻與 Q 角</h2>
+
+<h3>髕骨的四個作用</h3>
+<p><span class="term">髕股關節<i>Patellofemoral joint</i></span>由髕骨與股骨形成。</p>
+<ul>
+<li>增加<span class="term">股四頭肌<i>Quadriceps femoris</i></span>伸膝的力臂。</li>
+<li>屈膝時保護股骨遠端的關節髁。</li>
+<li>分散股骨承受的力量，降低壓力。</li>
+<li>屈膝遇到阻力時，減少<span class="term">股四頭肌腱<i>Quadriceps tendon</i></span>所受的有害壓迫。</li>
+</ul>
+<figure class="fig"><img src="figs/K6-p017.jpg" alt="髕股關節側面與前面圖，顯示股四頭肌腱、髕骨與髕腱的連接"><figcaption>髕股關節與伸膝構造（講義 p.17）</figcaption></figure>
+
+<h3>哪個方向有什麼構造穩定髕骨？</h3>
+<p><span class="term">伸膝機制<i>Extensor mechanism</i></span>從四面穩住髕骨，也引導它在股骨上滑動。</p>
+<table class="tbl">
+<thead><tr><th>方向</th><th>主要構造</th></tr></thead>
+<tbody>
+<tr><td>下方</td><td><span class="term">髕腱<i>Patellar tendon</i></span>，此處同指髕韌帶。</td></tr>
+<tr><td>外側</td><td>淺、深層<span class="term">髕骨支持帶<i>Patellar retinacula</i></span>、<span class="term">髂脛束<i>Iliotibial band or tract, ITB</i></span>、<span class="term">股外側肌<i>Vastus lateralis</i></span>。</td></tr>
+<tr><td>內側</td><td><span class="term">髕股韌帶<i>Patellofemoral ligament</i></span>、<span class="term">內側半月髕韌帶<i>Medial meniscopatellar ligament</i></span>、<span class="term">股內側斜肌<i>Vastus medialis obliquus, VMO</i></span>。</td></tr>
+<tr><td>上方</td><td><span class="term">股直肌<i>Rectus femoris</i></span>、<span class="term">股中間肌<i>Vastus intermedius</i></span>。</td></tr>
+</tbody>
+</table>
+<ul>
+<li>VMO 幫助髕骨沿著股骨滑車溝移動。</li>
+<li>依 p.19，從伸直到屈膝 <b>90°</b>，髕骨內、外側關節面的接觸都增加。伸直約 <b>1/3</b>，屈膝 90° 約 <b>1/2</b>。</li>
+<li>屈膝 <b>120°</b> 時，有兩處接觸。第一處是髕骨與股骨，第二處是股四頭肌腱與股骨。</li>
+</ul>
+<p>p.19 把伸直時的接觸寫為「前 1/3」，未標示方位。</p>
+
+<h3>膝內翻與外翻</h3>
+<p>p.20 量的是額狀面上股骨幹與脛骨幹的外側夾角。圖示正常約 <b>170–175°</b>。</p>
+<table class="tbl">
+<thead><tr><th>排列</th><th>外觀</th><th>講義 p.20 正文的角度</th></tr></thead>
+<tbody>
+<tr><td><span class="term">膝外翻<i>Genu valgum / Knock knee</i></span></td><td>兩膝較靠近，像 X 形。</td><td>小於 170°</td></tr>
+<tr><td><span class="term">膝內翻<i>Genu varum / Bowleg</i></span></td><td>兩膝較分開，像 O 形。</td><td>大於或等於 180°</td></tr>
+</tbody>
+</table>
+<p>p.20 圖中以 ≤165° 標示明顯外翻，正文以小於 170° 說明外翻。圖另標出股骨近端的傾斜角 125°。</p>
+<figure class="fig"><img src="figs/K6-p020.jpg" alt="額狀面圖比較正常排列、X 形膝外翻及 O 形膝內翻"><figcaption>圖 13-8 正常膝排列、膝外翻與膝內翻（講義 p.20）</figcaption></figure>
+
+<h3>Q 角的畫法與數值</h3>
+<ul>
+<li><span class="term">股四頭肌角<i>Q-angle</i></span>是兩條線的交角。第一條從<span class="term">髂前上棘<i>Anterior superior iliac spine, ASIS</i></span>到髕骨中心。</li>
+<li>第二條從脛骨粗隆連到髕骨中心，再沿同一方向延長。</li>
+<li>講義數值為男性 <b>11.2° ± 3°</b>，女性 <b>15.8° ± 4.5°</b>。</li>
+<li>講義把 <b>大於 20°</b> 列為髕股關節排列異常的線索。</li>
+</ul>
+<figure class="fig"><img src="figs/K6-p021.jpg" alt="髂前上棘、髕骨中心與脛骨粗隆三點畫出 Q 角"><figcaption>Q 角的三個骨性標誌（講義 p.21）</figcaption></figure>
+<div class="trap"><p class="lbl">易混淆</p>
+<p>膝內、外翻看股骨幹與脛骨幹的外側夾角。Q 角則用髂前上棘、髕骨中心、脛骨粗隆三點畫線。</p>
+</div>
+</section>
+
+<section class="page" id="p-K6-d" data-title="膝部肌肉、神經與鵝足" data-group="第6講 膝關節">
+<h2>膝部肌肉、神經與鵝足</h2>
+
+<h3>前側肌群與伸膝</h3>
+<p>股四頭肌由股直肌和三條股肌組成。表中止點整理到講義標出的髕骨部位，再由髕韌帶接到脛骨粗隆。</p>
+<table class="tbl">
+<thead><tr><th>肌肉</th><th>起點</th><th>止點</th><th>動作</th><th>神經</th></tr></thead>
+<tbody>
+<tr><td><span class="term">股直肌<i>Rectus femoris</i></span></td><td>髖臼上緣、<span class="term">髂前下棘<i>Anterior inferior iliac spine, AIIS</i></span>（講義無，補充）</td><td>髕骨上緣</td><td>屈髖、伸膝</td><td><span class="term">股神經<i>Femoral nerve</i></span> L2–L4</td></tr>
+<tr><td><span class="term">股外側肌<i>Vastus lateralis</i></span></td><td>股骨<span class="term">大轉子<i>Greater trochanter, GT</i></span></td><td>髕骨外緣</td><td>伸膝</td><td>股神經 L2–L4</td></tr>
+<tr><td><span class="term">股內側肌<i>Vastus medialis</i></span></td><td>股骨內、後側</td><td>髕骨上緣內側</td><td>伸膝</td><td>股神經 L2–L4</td></tr>
+<tr><td><span class="term">股中間肌<i>Vastus intermedius</i></span></td><td>股骨前、外側</td><td>髕骨上方</td><td>伸膝</td><td>股神經 L2–L4</td></tr>
+<tr><td><span class="term">膝關節肌<i>Articularis genu</i></span></td><td>股骨幹下段前面</td><td>膝關節囊</td><td>伸膝時拉動關節囊</td><td>講義未列</td></tr>
+</tbody>
+</table>
+<ul>
+<li>p.31 把股直肌起點的髂前下棘寫成髂前上棘。p.32 用「gt」簡寫大轉子，並畫出股中間肌位於股直肌深層。</li>
+<li>p.35 把膝關節肌放在伸膝肌段落。股四頭肌的四條肌肉以 p.26、44 的清單為準。</li>
+</ul>
+<figure class="fig"><img src="figs/K6-p032.jpg" alt="前側四條股四頭肌，圖上標明股中間肌在股直肌深層"><figcaption>股四頭肌的位置（講義 p.32）</figcaption></figure>
+
+<h3>後側肌群與屈膝</h3>
+<p><span class="term">腿後肌群（膕繩肌群）<i>Hamstrings</i></span>包括股二頭肌、半腱肌、半膜肌。講義也在屈膝肌群中列出腓腸肌、蹠肌、膕肌。</p>
+<table class="tbl">
+<thead><tr><th>肌肉</th><th>起點</th><th>止點</th><th>動作</th><th>神經</th></tr></thead>
+<tbody>
+<tr><td><span class="term">股二頭肌<i>Biceps femoris</i></span></td><td>長頭：<span class="term">坐骨結節<i>Ischial tuberosity</i></span><br>短頭：股骨幹下段</td><td>p.37 文字僅列脛骨外髁。p.22、37 圖也畫出腓骨側附著，實際主要在腓骨頭（講義無，補充）。</td><td>屈膝、膝外旋。長頭也伸髖、髖外旋。</td><td><span class="term">坐骨神經<i>Sciatic nerve</i></span> L4–L5、S1（講義所列）</td></tr>
+<tr><td><span class="term">半腱肌<i>Semitendinosus</i></span></td><td>坐骨結節</td><td>脛骨內側，屬鵝足</td><td>屈膝、膝內旋。伸髖、髖內旋。</td><td>坐骨神經 L5、S1、S2</td></tr>
+<tr><td><span class="term">半膜肌<i>Semimembranosus</i></span></td><td>坐骨結節</td><td>脛骨內髁</td><td>屈膝、膝內旋。伸髖、髖內旋。</td><td>坐骨神經 L5、S1、S2</td></tr>
+<tr><td><span class="term">腓腸肌<i>Gastrocnemius</i></span></td><td>股骨內、外髁上方（p.23 圖）</td><td>講義未列</td><td>屈膝，並跨踝關節。</td><td>講義未列</td></tr>
+<tr><td><span class="term">蹠肌<i>Plantaris</i></span></td><td>股骨外髁附近</td><td><span class="term">跟骨<i>Calcaneus</i></span></td><td>p.36 列為屈膝肌。p.40 的動作欄空白。</td><td><span class="term">脛神經<i>Tibial nerve</i></span></td></tr>
+<tr><td><span class="term">膕肌<i>Popliteus</i></span></td><td>股骨外髁</td><td>脛骨近端後面（p.28、41 圖）</td><td>屈膝、膝內旋</td><td>脛神經</td></tr>
+</tbody>
+</table>
+<p>p.37 把股二頭肌的髖部動作合列，依 p.47 只有長頭跨髖。p.41 的膕肌止點文字未寫清楚，圖上可辨認脛骨近端後面。</p>
+<figure class="fig"><img src="figs/K6-p039.jpg" alt="比較半腱肌與半膜肌的走向，以及兩者在膝內側的附著"><figcaption>半腱肌和半膜肌（講義 p.39）</figcaption></figure>
+
+<h3>旋轉肌與鵝足</h3>
+<ul>
+<li><b>膝內旋</b>：半腱肌、半膜肌、膕肌、<span class="term">股薄肌<i>Gracilis</i></span>、<span class="term">縫匠肌<i>Sartorius</i></span>。</li>
+<li><b>膝外旋</b>：股二頭肌。p.42 也列<span class="term">闊筋膜張肌<i>Tensor fasciae latae, TFL</i></span>，p.47 指出它透過髂脛束跨膝。</li>
+<li><span class="term">鵝足<i>Pes anserinus</i></span>是縫匠肌、股薄肌、半腱肌的肌腱在脛骨近端內側的附著。它有助於穩定膝內側。</li>
+<li><span class="term">鵝足滑囊<i>Pes anserine bursa</i></span>位在鵝足肌腱的深面（p.43 圖）。</li>
+</ul>
+<div class="mn"><p class="lbl">記憶口訣</p>
+<p>鵝足記「縫、薄、腱」。縫匠肌、股薄肌、半腱肌。</p>
+</div>
+<figure class="fig"><img src="figs/K6-p027.jpg" alt="膝前面標出髕骨兩側的支持帶、髂脛束和鵝足的三條肌腱"><figcaption>圖 13-7 膝前面的支持帶與鵝足肌腱（講義 p.27）</figcaption></figure>
+<figure class="fig"><img src="figs/K6-p043.jpg" alt="膝內側圖的指線標出位於鵝足肌腱深面的滑囊"><figcaption>鵝足肌腱深面的滑囊（講義 p.43）</figcaption></figure>
+</section>
+
+<section class="page" id="p-K6-e" data-title="單雙關節肌與日常動作" data-group="第6講 膝關節">
+<h2>單雙關節肌與日常動作</h2>
+
+<h3>伸膝、屈膝與旋轉的分工</h3>
+<ul>
+<li><b>伸膝肌</b>在閉鎖鏈動作中抬高或放低身體，例如起身、爬高和跳躍。</li>
+<li>走路、跑步和跳躍落地時，股四頭肌可防止膝蓋突然彎下去。</li>
+<li><b>屈膝肌</b>在開放鏈動作中參與走路和跑步。</li>
+<li>閉鎖鏈動作中，能跨髖的腿後肌可伸髖。軀幹伸直時，這些肌肉也可穩定骨盆。</li>
+<li>坐著或站著前彎摸腳，再回到直立時，腿後肌可控制骨盆在股骨上的動作。</li>
+<li><b>旋轉</b>方面，腿後肌群、縫匠肌和股薄肌參與髖與膝的旋轉。膕肌作用在膝。</li>
+<li>走路的<span class="term">站立期<i>Stance phase</i></span>可以用旋轉幫助身體前進。跑步、轉向也用到旋轉。</li>
+<li>跪姿或蹲姿時，脛骨固定，股骨與髖部可旋轉。</li>
+</ul>
+
+<h3>哪些肌肉跨一個或兩個關節？</h3>
+<table class="tbl">
+<thead><tr><th>分類</th><th>p.47 所列肌肉</th></tr></thead>
+<tbody>
+<tr><td><span class="term">單關節肌<i>One-joint muscle</i></span>（膝）</td><td>股外側肌、股內側肌、股中間肌、膕肌、股二頭肌短頭。</td></tr>
+<tr><td><span class="term">雙關節肌<i>Two-joint muscle</i></span>（髖與膝）</td><td>股直肌、縫匠肌、股薄肌、半腱肌、半膜肌、股二頭肌長頭、經髂脛束作用的闊筋膜張肌。</td></tr>
+<tr><td>雙關節肌（膝與踝）</td><td>腓腸肌。</td></tr>
+</tbody>
+</table>
+
+<h3>主動不足與被動不足</h3>
+<ul>
+<li><span class="term">主動不足<i>Active insufficiency</i></span>：雙關節肌在兩端同時縮短，出力變弱（定義講義無，補充）。</li>
+<li><span class="term">被動不足<i>Passive insufficiency</i></span>：雙關節肌在兩端同時被拉長，限制動作幅度（定義講義無，補充）。</li>
+</ul>
+<table class="tbl">
+<thead><tr><th>容易受限的姿勢</th><th>被拉長，限制幅度</th><th>縮得太短，出力變弱</th></tr></thead>
+<tbody>
+<tr><td>伸髖＋屈膝</td><td>股直肌</td><td>跨髖的腿後肌</td></tr>
+<tr><td>屈髖＋伸膝</td><td>跨髖的腿後肌</td><td>股直肌</td></tr>
+</tbody>
+</table>
+
+<h3>常用的髖、膝、踝搭配</h3>
+<ul>
+<li><b>屈髖＋屈膝</b>：肌肉長度有利於出力。髖屈肌與腿後肌協同。</li>
+<li><b>伸髖＋伸膝</b>：起身、上樓、跑步和跳躍都用得到。腿後肌群負責伸髖，股四頭肌負責伸膝。</li>
+<li>坐下時，伸肌以<span class="term">離心收縮<i>Eccentric contraction</i></span>控制下降。</li>
+<li>站起時，伸肌以<span class="term">向心收縮<i>Concentric contraction</i></span>抬高身體。</li>
+<li>講義把屈膝加踝<span class="term">蹠屈<i>Plantar flexion</i></span>列為「不是有用的動作」。</li>
+<li><b>伸膝＋踝蹠屈</b>用在踮腳、跑步與跳躍。</li>
+</ul>
+<div class="key"><p class="lbl">必背重點</p>
+<p>伸髖屈膝時，股直肌被拉長。屈髖伸膝時，腿後肌被拉長。從椅子起身，則靠腿後肌伸髖和股四頭肌伸膝。</p>
+</div>
+</section>
+
+<!-- ===== K7 ===== -->
+<section class="page" id="p-K7-a" data-title="足骨、踝與距下關節" data-group="第7講 踝與足">
+<h2>足骨、踝與距下關節</h2>
+
+<h3>骨頭數量與足部三區</h3>
+<ul>
+<li>一隻腳有 <b>26 塊骨</b>。小腿加上<span class="term">脛骨<i>Tibia</i></span>與<span class="term">腓骨<i>Fibula</i></span>，合計 <b>28 塊</b>。</li>
+<li>足部的 26 塊骨包括 7 塊<span class="term">跗骨<i>Tarsal bones</i></span>、5 塊<span class="term">蹠骨<i>Metatarsals</i></span>、14 塊<span class="term">趾骨<i>Phalanges</i></span>。</li>
+</ul>
+<table class="tbl">
+<thead><tr><th>功能分區</th><th>骨頭</th></tr></thead>
+<tbody>
+<tr><td><span class="term">後足<i>Hindfoot / rearfoot</i></span></td><td><span class="term">距骨<i>Talus</i></span>、<span class="term">跟骨<i>Calcaneus</i></span>。</td></tr>
+<tr><td><span class="term">中足<i>Midfoot</i></span></td><td><span class="term">舟狀骨<i>Navicular</i></span>、<span class="term">骰骨（方形骨）<i>Cuboid</i></span>、內側／中間／外側 3 塊<span class="term">楔形骨<i>Cuneiforms</i></span>。</td></tr>
+<tr><td><span class="term">前足<i>Forefoot</i></span></td><td>5 塊蹠骨、14 塊趾骨。</td></tr>
+</tbody>
+</table>
+<p>講義 p.3 的分區與 p.4 圖文不同。上表採 p.4 的功能分區。</p>
+<figure class="fig"><img src="figs/K7-p004.jpg" alt="足部外側圖以顏色區分後足、中足與前足"><figcaption>圖 14-1 後足、中足與前足（講義 p.4）</figcaption></figure>
+
+<h3>骨性標誌</h3>
+<ul>
+<li>脛骨末端是<span class="term">內踝<i>Medial malleolus</i></span>，腓骨末端是<span class="term">外踝<i>Lateral malleolus</i></span>。</li>
+<li>距骨可辨認出<span class="term">距骨頭<i>Head of talus</i></span>、<span class="term">距骨頸<i>Neck of talus</i></span>、<span class="term">距骨滑車<i>Trochlea of talus</i></span>及後方的內、外側結節。</li>
+<li>足背圖可辨認<span class="term">舟狀骨粗隆<i>Navicular tuberosity</i></span>與第 5 蹠骨的<span class="term">莖突<i>Styloid process</i></span>。</li>
+<li>蹠骨分基部、骨幹與蹠骨頭。</li>
+<li>大腳趾有近、遠兩節，其餘四趾各有近、中、遠三節。</li>
+</ul>
+
+<h3>踝關節與脛腓關節</h3>
+<ul>
+<li><span class="term">踝關節（距小腿關節）<i>Talocrural joint / ankle joint</i></span>由脛骨、腓骨與距骨組成。</li>
+<li>脛骨遠端、內踝與外踝像「ㄇ」字形夾住距骨滑車，提供骨性穩定。</li>
+<li>踝關節是<span class="term">鉸鏈關節<i>Hinge joint</i></span>，有 <b>1 個自由度</b>。主要做<span class="term">背屈<i>Dorsiflexion</i></span>與<span class="term">蹠屈<i>Plantarflexion</i></span>。</li>
+<li>p.54 題組以<span class="term">脛距關節<i>Tibiotalar joint</i></span>作為背屈、蹠屈的主要關節。</li>
+<li>屈膝時的踝背屈角度比伸膝時大。伸膝再背屈會同時拉長<span class="term">腓腸肌<i>Gastrocnemius</i></span>，出現<span class="term">被動不足<i>Passive insufficiency</i></span>。</li>
+<li>講義指出，改變膝的位置不影響踝的蹠屈活動度。</li>
+<li><span class="term">脛腓關節<i>Tibiofibular articulations</i></span>分<span class="term">上脛腓關節<i>Superior tibiofibular joint</i></span>與<span class="term">下脛腓關節<i>Inferior tibiofibular joint</i></span>。</li>
+</ul>
+<figure class="fig"><img src="figs/K7-p006.jpg" alt="踝關節前視圖標示脛骨、腓骨、距骨、內外踝及關節囊附著"><figcaption>圖 14-3 踝關節的骨性構造（講義 p.6）</figcaption></figure>
+
+<h3>距下關節與運動平面</h3>
+<ul>
+<li><span class="term">距下關節（距跟關節）<i>Subtalar joint / talocalcaneal joint</i></span>由距骨與跟骨構成，主要做<span class="term">內翻<i>Inversion</i></span>與<span class="term">外翻<i>Eversion</i></span>。</li>
+<li><span class="term">跗骨竇<i>Sinus tarsi</i></span>位於距骨與跟骨之間。p.8 描述這一帶的通道連通踝內、外側。</li>
+<li><span class="term">距跟骨間韌帶<i>Interosseous talocalcaneal ligament</i></span>位在這個區域，與距下關節的<span class="term">本體感覺<i>Proprioception</i></span>有關。</li>
+</ul>
+<table class="tbl">
+<thead><tr><th>平面</th><th>運動軸</th><th>動作與講義活動度</th></tr></thead>
+<tbody>
+<tr><td><span class="term">矢狀面<i>Sagittal plane</i></span></td><td><span class="term">內外側軸（橫軸）<i>Mediolateral axis / transverse axis</i></span></td><td>背屈 0–20°。蹠屈終點 45–55°（p.5 列 45°）。</td></tr>
+<tr><td><span class="term">額狀面<i>Frontal plane</i></span></td><td><span class="term">前後軸<i>Anteroposterior axis</i></span></td><td>從 0° 起，內翻終點 30–40°，外翻終點 15–25°。</td></tr>
+<tr><td><span class="term">水平面<i>Transverse plane</i></span></td><td><span class="term">垂直軸<i>Vertical axis</i></span></td><td><span class="term">外展<i>Abduction</i></span>與<span class="term">內收<i>Adduction</i></span>。</td></tr>
+</tbody>
+</table>
+<div class="key"><p class="lbl">必背重點</p>
+<ul>
+<li><span class="term">旋前<i>Pronation</i></span>＝背屈＋外展＋外翻。</li>
+<li><span class="term">旋後<i>Supination</i></span>＝蹠屈＋內收＋內翻。</li>
+<li>講義 p.12 以內翻、外翻描述<span class="term">開放鏈<i>Open chain</i></span>的動作，以旋前、旋後描述<span class="term">閉鎖鏈<i>Closed chain</i></span>的動作。</li>
+</ul></div>
+<p>p.8 把旋前、旋後列在「矢狀面」下。依 p.12 的平面表，兩者各包含三個平面的動作。</p>
+<div class="mn"><p class="lbl">記憶口訣</p>
+<p>旋前念「背、外、外」，依序是背屈、外展、外翻。旋後念「蹠、內、內」，依序是蹠屈、內收、內翻。</p>
+</div>
+
+<h3>踝內、外側韌帶</h3>
+<table class="tbl">
+<thead><tr><th>位置</th><th>講義列出的韌帶</th></tr></thead>
+<tbody>
+<tr><td>內側<span class="term">三角韌帶<i>Deltoid ligament</i></span></td><td><span class="term">前脛距韌帶<i>Anterior tibiotalar ligament</i></span>、<span class="term">後脛距韌帶<i>Posterior tibiotalar ligament</i></span>、<span class="term">脛跟韌帶<i>Tibiocalcaneal ligament</i></span>、<span class="term">脛舟韌帶<i>Tibionavicular ligament</i></span>。</td></tr>
+<tr><td>外側副韌帶</td><td><span class="term">前距腓韌帶<i>Anterior talofibular ligament, ATFL</i></span>、<span class="term">後距腓韌帶<i>Posterior talofibular ligament, PTFL</i></span>、<span class="term">跟腓韌帶<i>Calcaneofibular ligament, CFL</i></span>。</td></tr>
+<tr><td>脛骨與腓骨之間</td><td><span class="term">前脛腓韌帶<i>Anterior tibiofibular ligament</i></span>、<span class="term">後脛腓韌帶<i>Posterior tibiofibular ligament</i></span>。踝前視圖還標出<span class="term">骨間韌帶<i>Interosseous ligament</i></span>。</td></tr>
+</tbody>
+</table>
+<div class="trap"><p class="lbl">易混淆</p>
+<p>前<b>距</b>腓韌帶連距骨與腓骨。前<b>脛</b>腓韌帶連脛骨與腓骨。</p>
+</div>
+<figure class="fig"><img src="figs/K7-p033.jpg" alt="踝外側韌帶與內側三角韌帶的四束，旁圖示意踝扭傷"><figcaption>踝內側三角韌帶與外側副韌帶（講義 p.33）</figcaption></figure>
+</section>
+
+<section class="page" id="p-K7-b" data-title="橫跗、跗蹠與足趾關節" data-group="第7講 踝與足">
+<h2>橫跗、跗蹠與足趾關節</h2>
+
+<h3>橫跗關節與遠端跗間關節</h3>
+<ul>
+<li><span class="term">橫跗關節<i>Transverse tarsal joint / midtarsal joint / Chopart joint</i></span>呈 S 形。內側是<span class="term">距舟關節<i>Talonavicular joint</i></span>，外側是<span class="term">跟骰關節<i>Calcaneocuboid joint</i></span>。</li>
+<li>p.36 同列<span class="term">距跟舟關節<i>Talocalcaneonavicular joint</i></span>。橫跗關節的兩個組成，依 p.13 與 p.55 題組記「距舟＋跟骰」。</li>
+<li>橫跗關節通常與距下關節一起動。p.13 列出距舟 13°、距下 6°，未交代是哪個動作的量測。</li>
+<li>依圖 14-24，固定跟骨時，旋前或旋後主要發生在中足。放開跟骨時，後足與中足一起動。</li>
+<li>旋前時縱弓降低。旋後時縱弓升高，橫跗關節較穩固。</li>
+<li><span class="term">遠端跗間關節<i>Distal intertarsal joints</i></span>包括<span class="term">舟楔關節<i>Naviculocuneiform joints</i></span>、<span class="term">骰舟關節<i>Cuboideonavicular joint</i></span>、<span class="term">楔間關節<i>Intercuneiform joints</i></span>與<span class="term">楔骰關節<i>Cuneocuboid joint</i></span>。</li>
+</ul>
+<figure class="fig"><img src="figs/K7-p032.jpg" alt="足骨分解圖標出距下、橫跗、遠端跗間、跗蹠及足趾關節"><figcaption>圖 14-22 足骨與各區關節（講義 p.32）</figcaption></figure>
+<figure class="fig"><img src="figs/K7-p038.jpg" alt="比較跟骨固定及未固定時，距下關節與橫跗關節的旋前和旋後"><figcaption>圖 14-24 距下與橫跗關節在旋前、旋後時的配合（講義 p.38）</figcaption></figure>
+
+<h3>橫跗關節的兩條軸</h3>
+<table class="tbl">
+<thead><tr><th>運動軸</th><th>講義圖示角度</th><th>旋前的主要成分</th><th>旋後的主要成分</th></tr></thead>
+<tbody>
+<tr><td><span class="term">縱軸<i>Longitudinal axis</i></span></td><td>內側視圖 15°，上視圖 9°。</td><td>外翻。</td><td>內翻。</td></tr>
+<tr><td><span class="term">斜軸<i>Oblique axis</i></span></td><td>內側視圖 52°，上視圖 57°。</td><td>外展、背屈。</td><td>內收、蹠屈。</td></tr>
+</tbody>
+</table>
+<figure class="fig"><img src="figs/K7-p042.jpg" alt="橫跗關節縱軸的內側與上視圖，以及外翻、內翻動作"><figcaption>橫跗關節縱軸與主要動作（講義 p.42）</figcaption></figure>
+<figure class="fig"><img src="figs/K7-p043.jpg" alt="橫跗關節斜軸的內側與上視圖，以及外展加背屈、內收加蹠屈"><figcaption>橫跗關節斜軸與主要動作（講義 p.43）</figcaption></figure>
+
+<h3>橫跗韌帶</h3>
+<ul>
+<li>足底可見<span class="term">足底跟舟韌帶（彈簧韌帶）<i>Plantar calcaneonavicular ligament / spring ligament</i></span>。</li>
+<li>足底也有<span class="term">足底跟骰韌帶（短足底韌帶）<i>Plantar calcaneocuboid ligament / short plantar ligament</i></span>與<span class="term">長足底韌帶<i>Long plantar ligament</i></span>。</li>
+<li>外側圖標有<span class="term">分叉韌帶<i>Bifurcated ligament</i></span>及<span class="term">背側跟骰韌帶<i>Dorsal calcaneocuboid ligament</i></span>。</li>
+<li>p.35 另標出<span class="term">頸韌帶<i>Cervical ligament</i></span>、<span class="term">外側距跟韌帶<i>Lateral talocalcaneal ligament</i></span>與<span class="term">背側跗蹠韌帶<i>Dorsal tarsometatarsal ligaments</i></span>。</li>
+</ul>
+
+<h3>跗蹠、蹠趾與趾間關節</h3>
+<table class="tbl">
+<thead><tr><th>關節</th><th>骨性位置</th><th>動作</th></tr></thead>
+<tbody>
+<tr><td><span class="term">跗蹠關節<i>Tarsometatarsal joints, TMT</i></span></td><td>遠端一排跗骨與蹠骨基部。</td><td>少量背屈、蹠屈。第 2 跗蹠關節較固定，只能微量屈伸。其餘可繞第 2 區段微量轉動，第 4、5 最靈活。</td></tr>
+<tr><td><span class="term">蹠骨間關節<i>Intermetatarsal joints</i></span></td><td>相鄰蹠骨之間（p.32）。</td><td>講義未列。</td></tr>
+<tr><td><span class="term">蹠趾關節<i>Metatarsophalangeal joints, MTP</i></span></td><td>蹠骨頭與近節趾骨基部。</td><td><span class="term">過伸<i>Hyperextension</i></span> 90°，屈曲 30–45°。也能外展、內收，角度受<span class="term">橫蹠韌帶<i>Transverse metatarsal ligament</i></span>限制。</td></tr>
+<tr><td><span class="term">趾間關節<i>Interphalangeal joints, IP</i></span></td><td>大腳趾有一個趾間關節。第 2–5 趾各有<span class="term">近端趾間關節<i>Proximal interphalangeal joint, PIP</i></span>與<span class="term">遠端趾間關節<i>Distal interphalangeal joint, DIP</i></span>。</td><td>屈曲、伸直。</td></tr>
+</tbody>
+</table>
+
+<h3>最緊密位置與關節附屬動作</h3>
+<table class="tbl">
+<thead><tr><th>關節</th><th><span class="term">最緊密位置<i>Close-packed position</i></span></th><th><span class="term">附屬動作<i>Accessory motion</i></span></th></tr></thead>
+<tbody>
+<tr><td>踝關節</td><td>完全背屈。</td><td><span class="term">牽開<i>Distraction</i></span>、向前或向後滑動。</td></tr>
+<tr><td>跗部關節</td><td>最大旋後。</td><td>距下關節可向前、向內或向外滑動，也可牽開。距舟、跟骰、舟楔及跗蹠關節可向足背或足底滑動。</td></tr>
+<tr><td>蹠趾關節</td><td>過伸。</td><td>講義未列。</td></tr>
+<tr><td>趾間關節</td><td>伸直。</td><td>講義未列。</td></tr>
+</tbody>
+</table>
+</section>
+
+<section class="page" id="p-K7-c" data-title="小腿外在肌與神經" data-group="第7講 踝與足">
+<h2>小腿外在肌與神經</h2>
+
+<h3>小腿三頭肌與阿基里斯腱</h3>
+<p><span class="term">小腿三頭肌<i>Triceps surae</i></span>由腓腸肌的內、外側頭與<span class="term">比目魚肌<i>Soleus</i></span>組成。</p>
+<table class="tbl">
+<thead><tr><th>肌肉</th><th>起點（講義 p.51）</th><th>止點</th><th>動作與功能</th><th>神經</th></tr></thead>
+<tbody>
+<tr><td>腓腸肌</td><td>股骨內、外側髁。</td><td>匯入腱膜，經<span class="term">阿基里斯腱（跟腱）<i>Achilles tendon</i></span>至<span class="term">跟骨粗隆<i>Calcaneal tuberosity</i></span>。</td><td>蹠屈。跨膝和踝，肌力受膝位置影響較大。快肌纖維較多，常用於跑、跳。</td><td><span class="term">脛神經<i>Tibial nerve</i></span>。</td></tr>
+<tr><td>比目魚肌</td><td>講義列腓骨上三分之一。</td><td>匯入腱膜，經阿基里斯腱至跟骨粗隆。</td><td>蹠屈。是單關節肌，慢肌纖維較多。站立時穩定踝部，控制身體搖晃。</td><td>脛神經。</td></tr>
+</tbody>
+</table>
+<ul>
+<li>阿基里斯腱位在踝後側。講義稱它是人體最大、最粗、最強的肌腱，可承受約 <b>4–7 倍體重</b>的力量。</li>
+<li>小腿三頭肌的蹠屈力量，講義列為約 <b>2.4 倍體重</b>。</li>
+</ul>
+<figure class="fig"><img src="figs/K7-p050.jpg" alt="小腿後側淺層圖標示腓腸肌兩頭、比目魚肌、蹠肌、阿基里斯腱與跟骨粗隆"><figcaption>圖 14-45 小腿後側淺層肌與阿基里斯腱（講義 p.50）</figcaption></figure>
+
+<h3>深後側、外側與前側肌群</h3>
+<p>下表列講義圖可辨認的遠端位置或走向。</p>
+<table class="tbl">
+<thead><tr><th>肌群</th><th>肌肉</th><th>遠端位置或走向</th><th>動作</th><th>神經</th></tr></thead>
+<tbody>
+<tr><td>深後側</td><td><span class="term">脛後肌<i>Tibialis posterior</i></span></td><td>繞過內踝，往舟狀骨粗隆一帶與足底分布（p.21、37）。</td><td>讓距下關節內翻或旋後，維持足弓。</td><td>脛神經。</td></tr>
+<tr><td>深後側</td><td><span class="term">屈趾長肌<i>Flexor digitorum longus, FDL</i></span>與<span class="term">屈拇趾長肌<i>Flexor hallucis longus, FHL</i></span></td><td>經內踝後方走到足底（p.21、37）。</td><td>屈趾、協助踝蹠屈，並支撐縱弓。</td><td>脛神經。</td></tr>
+<tr><td>外側</td><td><span class="term">腓骨長肌<i>Peroneus longus</i></span>與<span class="term">腓骨短肌<i>Peroneus brevis</i></span></td><td>繞外踝。長肌腱轉入足底，短肌腱到第 5 蹠骨基部莖突（p.15、37、49）。</td><td>外翻、協助蹠屈。</td><td><span class="term">淺腓神經<i>Superficial peroneal nerve</i></span>。</td></tr>
+<tr><td>前側</td><td><span class="term">脛前肌<i>Tibialis anterior</i></span>、<span class="term">第三腓骨肌<i>Peroneus tertius</i></span></td><td>脛前肌腱走向足內側。第三腓骨肌腱走向足背外側（p.24、49）。</td><td>兩者都讓踝背屈。脛前肌也內翻，第三腓骨肌也外翻。</td><td><span class="term">深腓神經<i>Deep peroneal nerve</i></span>。</td></tr>
+<tr><td>前側</td><td><span class="term">伸趾長肌<i>Extensor digitorum longus, EDL</i></span>與<span class="term">伸拇趾長肌<i>Extensor hallucis longus, EHL</i></span></td><td>由足背分別走向第 2–5 趾與第 1 趾（p.15、49）。</td><td>伸趾，協助踝背屈。</td><td>深腓神經。</td></tr>
+</tbody>
+</table>
+<ul>
+<li>內踝側圖（p.21）從前往後可見脛後肌腱、屈趾長肌腱與屈拇趾長肌腱。圖上的口訣是「Tom, Dick &amp; Harry」。</li>
+<li>外踝像滑車，讓腓骨長肌與短肌的肌腱轉向。</li>
+<li>腓骨長、短肌在開放鏈時使足外翻。閉鎖鏈活動的例子有單腳站、走、跑與跳。</li>
+<li>小腿前側肌群在開放鏈時防止走路擺盪期拖腳，也用於踩踏板與打拍子。</li>
+<li>閉鎖鏈單腳站時，小腿前側肌群會強力收縮。</li>
+<li>小腿前、外側圖（p.49）還標出<span class="term">上、下伸肌支持帶<i>Superior and inferior extensor retinacula</i></span>、<span class="term">腓骨肌支持帶<i>Peroneal retinaculum</i></span>與<span class="term">伸趾短肌<i>Extensor digitorum brevis</i></span>。</li>
+</ul>
+<figure class="fig"><img src="figs/K7-p049.jpg" alt="前側背屈肌與外側腓骨肌，標示外踝及肌腱支持帶"><figcaption>圖 14-41、14-42 小腿前側與外側肌群（講義 p.49）</figcaption></figure>
+
+<h3>按動作找肌肉</h3>
+<table class="tbl">
+<thead><tr><th>動作</th><th>講義 p.48 的肌肉</th></tr></thead>
+<tbody>
+<tr><td>踝背屈</td><td>脛前肌、第三腓骨肌、伸趾長肌、伸拇趾長肌。</td></tr>
+<tr><td>踝蹠屈</td><td>腓腸肌、比目魚肌、腓骨長肌、腓骨短肌、屈趾長肌、屈拇趾長肌。</td></tr>
+<tr><td>足內翻</td><td>脛前肌、脛後肌。</td></tr>
+<tr><td>足外翻</td><td>腓骨長肌、腓骨短肌、第三腓骨肌。</td></tr>
+<tr><td>趾屈曲</td><td>屈趾長肌、屈拇趾長肌。</td></tr>
+<tr><td>趾伸直</td><td>伸趾長肌、伸拇趾長肌。</td></tr>
+</tbody>
+</table>
+<div class="trap"><p class="lbl">易混淆</p>
+<ul>
+<li>腓骨長肌和短肌<b>蹠屈＋外翻</b>。第三腓骨肌<b>背屈＋外翻</b>。</li>
+<li>講義 p.54 問哪條肌肉與外翻無關，答案是<b>脛後肌</b>。同題也把伸趾長肌視為與外翻有關。上表照錄 p.48 的外翻肌群。</li>
+<li>p.54 的橫軸題，脛前肌、伸拇趾長肌、伸趾長肌通過踝橫軸前方。腓骨長肌經外踝後方。</li>
+</ul></div>
+
+<h3>小腿與足的周邊神經</h3>
+<p><span class="term">坐骨神經<i>Sciatic nerve</i></span>分出總腓神經與脛神經。以下神經根與感覺區依 p.39–40 的圖。</p>
+<table class="tbl">
+<thead><tr><th>神經</th><th>運動支配或分支</th><th>感覺區</th></tr></thead>
+<tbody>
+<tr><td><span class="term">總腓神經<i>Common peroneal nerve</i></span>（L4–S2）</td><td>分出深、淺腓神經。</td><td>圖示在小腿上外側。</td></tr>
+<tr><td>深腓神經</td><td>脛前肌、伸趾長肌、伸拇趾長肌、第三腓骨肌、伸趾短肌。</td><td>第 1、2 趾之間的小區。</td></tr>
+<tr><td>淺腓神經</td><td>腓骨長肌與腓骨短肌。</td><td>小腿前外側下段與大部分足背。</td></tr>
+<tr><td>脛神經（L4–S3）</td><td>支配腓腸肌、比目魚肌、脛後肌、屈趾長肌、屈拇趾長肌、<span class="term">膕肌<i>Popliteus</i></span>與<span class="term">蹠肌<i>Plantaris</i></span>。末端分成<span class="term">內側蹠神經<i>Medial plantar nerve</i></span>及<span class="term">外側蹠神經<i>Lateral plantar nerve</i></span>。</td><td>圖示脛神經的足跟區，內、外側蹠神經分布在足底。</td></tr>
+<tr><td><span class="term">腓腸神經<i>Sural nerve</i></span></td><td>圖中標為感覺神經。</td><td>小腿後外側及足外緣。</td></tr>
+</tbody>
+</table>
+<figure class="fig"><img src="figs/K7-p039.jpg" alt="總腓神經的深、淺分支與肌肉支配，旁圖標示足背感覺區"><figcaption>總腓神經、深淺分支與感覺分布（講義 p.39）</figcaption></figure>
+<figure class="fig"><img src="figs/K7-p040.jpg" alt="脛神經支配小腿後側肌，末端分成內側與外側蹠神經"><figcaption>脛神經、末端分支與感覺分布（講義 p.40）</figcaption></figure>
+</section>
+
+<section class="page" id="p-K7-d" data-title="足底內在肌與足弓" data-group="第7講 踝與足">
+<h2>足底內在肌與足弓</h2>
+
+<h3>足底四層內在肌</h3>
+<p><span class="term">足底內在肌<i>Plantar intrinsic muscles</i></span>的起止點與神經依 p.25 的表 10-2。趾背的<span class="term">伸肌罩<i>Extensor hood</i></span>接到足趾的蹠趾關節區。原表把這裡的 MTP 誤寫成手部用的 MCP。</p>
+<table class="tbl">
+<thead><tr><th>層與肌肉</th><th>起點</th><th>止點</th><th>神經</th></tr></thead>
+<tbody>
+<tr><td>第 1 層<br><span class="term">拇趾外展肌<i>Abductor hallucis</i></span></td><td>跟骨粗隆、<span class="term">足底腱膜<i>Plantar aponeurosis</i></span>。</td><td>第 1 趾近節趾骨基部。</td><td>內側蹠神經（L4–L5）。</td></tr>
+<tr><td>第 1 層<br><span class="term">屈趾短肌<i>Flexor digitorum brevis</i></span></td><td>跟骨粗隆、足底腱膜。</td><td>第 2–5 趾中節趾骨。</td><td>內側蹠神經（L4–L5）。</td></tr>
+<tr><td>第 1 層<br><span class="term">小趾外展肌<i>Abductor digiti minimi</i></span></td><td>跟骨粗隆、足底腱膜。</td><td>第 5 趾近節趾骨基部。</td><td>外側蹠神經（S1–S2）。</td></tr>
+<tr><td>第 2 層<br><span class="term">足底方肌<i>Quadratus plantae</i></span></td><td>跟骨凹面。</td><td>屈趾長肌腱。</td><td>外側蹠神經（S1–S2）。</td></tr>
+<tr><td>第 2 層<br><span class="term">蚓狀肌<i>Lumbricals</i></span></td><td>屈趾長肌腱。</td><td>第 2–5 蹠趾關節的伸肌罩。</td><td>第 1 條為內側蹠神經，第 2–4 條為外側蹠神經。</td></tr>
+<tr><td>第 3 層<br><span class="term">屈拇趾短肌<i>Flexor hallucis brevis</i></span></td><td>骰骨、外側楔形骨。</td><td>第 1 趾近節趾骨基部。</td><td>內側蹠神經（L4–S1）。</td></tr>
+<tr><td>第 3 層<br><span class="term">拇趾內收肌<i>Adductor hallucis</i></span>（兩頭）</td><td>第 2–4 蹠骨基部、蹠趾關節韌帶。</td><td>第 1 趾近節趾骨基部。</td><td>外側蹠神經（S1–S2）。</td></tr>
+<tr><td>第 3 層<br><span class="term">小趾短屈肌<i>Flexor digiti minimi brevis</i></span></td><td>第 5 蹠骨基部。</td><td>第 5 趾近節趾骨基部。</td><td>外側蹠神經（S1–S2）。</td></tr>
+<tr><td>第 4 層<br><span class="term">背側骨間肌<i>Dorsal interossei</i></span></td><td>第 1–5 蹠骨相鄰面。</td><td>第 2–4 蹠趾關節的伸肌罩。</td><td>外側蹠神經（S1–S2）。</td></tr>
+<tr><td>第 4 層<br><span class="term">足底骨間肌<i>Plantar interossei</i></span></td><td>第 3–5 蹠骨內側面。</td><td>第 3–5 蹠趾關節的伸肌罩。</td><td>外側蹠神經（S1–S2）。</td></tr>
+</tbody>
+</table>
+<figure class="fig"><img src="figs/K7-p025.jpg" alt="足底四層內在肌的近端與遠端附著、神經支配原表"><figcaption>表 10-2 足底四層內在肌（講義 p.25）</figcaption></figure>
+<ul>
+<li>走路或跑步時，足底內在肌幫忙支撐足弓。</li>
+<li>足底內在肌可補足長屈趾肌的力量。</li>
+<li>足底內在肌可維持足趾伸直，讓屈肌在<span class="term">蹬地期<i>Push-off</i></span>有力拉動足趾。</li>
+<li>p.55 題組把<b>屈蹠趾＋伸趾間</b>配給蚓狀肌。題幹的「掌趾」和英文用字應為「蹠趾」。</li>
+<li>p.55 另問趾間和蹠趾同時屈曲。答案為蚓狀肌、骨間肌、屈趾長肌與屈趾短肌一起參與。這一題的<span class="term">趾拳曲<i>Clawing</i></span>指題幹指定的動作。</li>
+</ul>
+
+<h3>三條足弓與支撐構造</h3>
+<p><span class="term">足弓<i>Plantar arches</i></span>由骨頭、韌帶、肌肉與肌腱共同維持。足弓可分散體重，也讓足部保有活動性。<span class="term">縱弓<i>Longitudinal arch</i></span>再分內、外側。</p>
+<table class="tbl">
+<thead><tr><th>足弓</th><th>組成的骨頭</th><th>主要支撐</th></tr></thead>
+<tbody>
+<tr><td><span class="term">內側縱弓<i>Medial longitudinal arch</i></span></td><td>距骨、跟骨、舟狀骨、內側楔形骨、第 1 蹠骨。</td><td>彈簧韌帶。</td></tr>
+<tr><td><span class="term">外側縱弓<i>Lateral longitudinal arch</i></span></td><td>跟骨、骰骨、第 5 蹠骨。</td><td>長足底韌帶、短足底韌帶、足底腱膜。</td></tr>
+<tr><td><span class="term">橫弓<i>Transverse arch</i></span></td><td>骰骨、3 塊楔形骨、蹠骨。</td><td>骨性構造、腓骨長肌、<span class="term">深橫蹠韌帶<i>Deep transverse metatarsal ligament</i></span>。</td></tr>
+</tbody>
+</table>
+<ul>
+<li>p.31 的縱弓肌群包括脛後肌、腓骨長肌、屈趾長肌、屈趾短肌、足底方肌、拇趾外展肌與小趾外展肌。</li>
+<li>p.21 也列屈拇趾長肌支撐縱弓。</li>
+<li>p.31 的橫弓肌群是拇趾內收肌、脛後肌與腓骨長肌。</li>
+<li>自然站立時，p.56 題組指出足部受壓最多的區域是後足。</li>
+</ul>
+<figure class="fig"><img src="figs/K7-p037.jpg" alt="足底深層圖標示彈簧韌帶、長短足底韌帶及腓骨長肌、脛後肌的肌腱"><figcaption>圖 14-23 足底韌帶與深層肌腱（講義 p.37）</figcaption></figure>
+
+<h3><span class="term">蹠趾關節的足底腱膜機制<i>MTP aponeurotic mechanism</i></span></h3>
+<ul>
+<li>足底腱膜從跟骨粗隆延向足趾。</li>
+<li>蹠趾關節過伸時，足底腱膜拉緊，跗部形成較剛硬的構造。</li>
+<li>蹠趾關節在中立位或屈曲時，跗部較有彈性。</li>
+<li>站立時腳固定在地上，小腿向內轉會帶出距下關節旋前，內側縱弓因而降低（p.56）。</li>
+</ul>
+<div class="key"><p class="lbl">必背重點</p>
+<p>內側縱弓記彈簧韌帶。外側縱弓記長、短足底韌帶與足底腱膜。蹠趾過伸時，足底腱膜張力升高。</p>
+</div>
+</section>
+
+<section class="page" id="p-K7-e" data-title="足部變形與踝部傷害" data-group="第7講 踝與足">
+<h2>足部變形與踝部傷害</h2>
+
+<h3>足部變形</h3>
+<table class="tbl">
+<thead><tr><th>名稱</th><th>辨認重點</th></tr></thead>
+<tbody>
+<tr><td><span class="term">外翻足<i>Pes valgus</i></span></td><td>足向外翻，足弓降低。</td></tr>
+<tr><td><span class="term">內翻足<i>Pes varus</i></span></td><td>足向內翻，講義描述足弓較高。</td></tr>
+<tr><td><span class="term">跟足<i>Pes calcaneus</i></span></td><td>走路以腳跟著地。</td></tr>
+<tr><td><span class="term">馬蹄足<i>Pes equinus</i></span></td><td>用前腳掌著地，腳跟不著地。</td></tr>
+<tr><td><span class="term">空凹足（高弓足）<i>Pes cavus</i></span></td><td>足弓過高。</td></tr>
+<tr><td><span class="term">扁平足<i>Pes planus / flat foot</i></span></td><td>足弓塌低。講義描述距骨與舟狀骨向下移。</td></tr>
+<tr><td><span class="term">拇趾外翻<i>Hallux valgus</i></span></td><td>大腳趾朝其他腳趾偏。p.19 有正常與外翻的角度對照。</td></tr>
+</tbody>
+</table>
+<ul>
+<li>p.19 後視照片顯示足弓塌陷。同一張圖也標出從外側看見較多腳趾的<span class="term">多趾徵象<i>Too many toes</i></span>。</li>
+<li>同頁的後足圖以 3° 和 10° 作示意，圖上未列診斷界線。</li>
+</ul>
+<figure class="fig"><img src="figs/K7-p019.jpg" alt="足弓塌陷、多趾徵象、後足角度、拇趾外翻及足跟病變圖"><figcaption>足弓塌陷、拇趾外翻與足跟病變（講義 p.19）</figcaption></figure>
+
+<h3>踝扭傷、足跟病變與肌肉癱瘓</h3>
+<ul>
+<li>腳在<b>蹠屈＋內翻</b>時，前距腓韌帶最容易扭傷（p.56）。p.33 以籃球常見的踝扭傷作圖例。</li>
+<li>p.19 的足跟圖標出<span class="term">阿基里斯腱炎<i>Achilles tendinitis</i></span>、<span class="term">哈格倫德變形<i>Haglund’s deformity</i></span>、<span class="term">跟骨骨刺<i>Heel spur</i></span>與<span class="term">足底筋膜炎<i>Plantar fasciitis</i></span>。</li>
+<li>小腿三頭肌癱瘓時，無法踮腳尖。</li>
+<li>上樓梯會變慢、動作笨拙，且無法跑跳。</li>
+<li>兩側小腿三頭肌都癱瘓時，站立平衡會喪失。</li>
+</ul>
+</section>
+
 <!-- ===== J ===== -->
 <section class="page wide" id="p-J-a" data-title="全身關節地圖" data-group="跨科對照 全身關節地圖">
 <h2>全身滑膜關節地圖</h2>
@@ -1299,7 +2799,7 @@ section.page.wide{max-width:1280px}
 
 </main>
 </div>
-<script id="quizdata" type="application/json">{"K1": {"cards": [{"f": "Kinematics 運動學", "b": "描述物體在空間的運動範圍與軌跡（位置、速率、時間的關係），不談力"}, {"f": "Kinetics 運動力學包含哪兩部分？", "b": "靜力學 statics（平衡下外力產生的內力）與動力學 dynamics（不平衡時的外效應）"}, {"f": "人體計量學 Anthropometry：靜態 vs 動態", "b": "靜態＝結構性（尺寸、質量、體積、形狀）；動態＝功能性（活動角度、範圍、施力程度）"}, {"f": "Center of gravity (COG) 站立時的位置", "b": "第二薦椎（S2）前方約一吋"}, {"f": "矢狀面 Sagittal plane 的主要動作與軸", "b": "屈曲／伸直；額狀-水平軸（mediolateral axis）"}, {"f": "額狀面 Frontal (coronal) plane 的主要動作與軸", "b": "外展／內收；矢狀-水平軸（anteroposterior axis）"}, {"f": "水平面 Transverse plane 的主要動作與軸", "b": "旋轉 rotation；垂直軸 vertical (longitudinal) axis"}, {"f": "自由度 3 個的關節", "b": "髖關節 hip、盂肱關節 gleno-humeral（杵臼關節）"}, {"f": "環轉運動 Circumduction 出現於", "b": "2 或 3 個自由度的關節；1 個自由度的關節沒有"}, {"f": "Open vs Closed kinematic chain", "b": "開放鏈：遠端肢段自由懸空；封閉鏈：遠端肢段固定"}, {"f": "杵臼關節 Ball & socket 例子", "b": "肩、髖；動作含屈伸、外展內收、旋轉"}, {"f": "屈戍關節 Hinge joint", "b": "只做屈曲與伸直；肘、指間關節"}, {"f": "髁狀關節 Condyloid joint", "b": "橢圓凸面嵌橢圓凹面，多方向但無法旋轉；掌指關節、橈腕關節"}, {"f": "鞍狀關節 Saddle joint", "b": "兩關節面各有凹凸，多方向活動；腕骨大菱形骨—拇指掌骨、胸鎖關節"}, {"f": "樞軸關節 Pivot joint", "b": "只能旋轉；寰椎—樞椎、橈尺近端"}, {"f": "凹凸原則：凸面骨在凹面上動", "b": "關節面滑動方向與骨頭角動作方向相反"}, {"f": "凹凸原則：凹面骨在凸面上動", "b": "關節面滑動方向與骨頭角動作方向相同"}, {"f": "牛頓第二定律", "b": "F = ma，作用力＝質量×加速度"}, {"f": "第一類槓桿 位置與例子", "b": "支點在中間；抬頭（枕寰關節為支點，背部肌肉為作用力）"}, {"f": "第二類槓桿 位置與例子", "b": "阻力在中間，力臂>阻力臂；踮腳尖（蹠趾為支點，小腿肌為作用力）"}, {"f": "第三類槓桿 位置與例子", "b": "作用力在中間，力臂<阻力臂；肱二頭肌前臂舉重（肘為支點）；人體最普遍"}, {"f": "等長收縮 Isometric", "b": "肌肉長度不變；持續 6 秒才有增肌力效果；適合急性癒合期、增加關節穩定度"}, {"f": "等速收縮 Isokinetic 特色與限制", "b": "速度恆定、阻力隨力量調整；儀器昂貴、多為開放鏈、不宜急性期、速度不超過 120°/秒"}, {"f": "肌肉張力大小排序", "b": "eccentric > isometric > concentric"}, {"f": "最易引起遲發性肌肉酸痛 DOMS 的收縮", "b": "離心收縮 eccentric（也較易拉傷）"}, {"f": "被動不足 Passive insufficiency", "b": "拮抗肌為跨雙關節肌，被拉到最長而限制主動肌的關節活動度；例：髖屈曲配膝伸直僅 60–80°"}, {"f": "肌腱作用 Tendon action (tenodesis)", "b": "主動肌無力時，拮抗肌收縮把主動肌拉緊，產生被動關節動作"}, {"f": "肌肉在何長度產生最大主動張力", "b": "約休息長度的 110%（比靜止稍長）"}, {"f": "epimysium / perimysium / endomysium", "b": "肌外膜（整條肌肉）／肌束膜（每條肌束）／肌內膜（每條肌纖維）"}, {"f": "肌節 sarcomere 長度（放鬆／收縮／拉長）", "b": "2.5 μm／約 1.5 μm／約 3.0 μm"}, {"f": "肌肉收縮時 A band、I band、H zone", "b": "A 帶不變；I 帶變窄；H 區變窄甚至消失；Z 線靠近"}, {"f": "T system vs SR", "b": "橫小管 T system：加速傳導動作電位；肌漿網 SR：貯存與釋放 Ca²⁺"}, {"f": "Ca²⁺ 在收縮中與誰結合", "b": "肌鈣蛋白 troponin 的 C 單位，使 actin 活化位暴露"}, {"f": "神經肌肉接合處的傳導物質與分解酶", "b": "乙醯膽鹼 Acetylcholine；膽鹼酯酶 Cholinesterase"}, {"f": "動作電位閾值", "b": "約 −55 mV；全有全無定律"}, {"f": "Type I 慢縮纖維特徵", "b": "紅、小、粒線體多、肌紅蛋白高、氧化磷酸化、耐疲勞、收縮慢"}, {"f": "Type IIb（FG）快縮纖維特徵", "b": "白、大、粒線體少、醣解、收縮快、易疲勞"}, {"f": "肌纖維徵召順序", "b": "Type I → IIa → IIb（size principle：小運動神經元先徵召）"}, {"f": "運動單位 Motor unit", "b": "一個運動神經元＋其軸突＋所支配的所有肌纖維；眼肌約 5 條，大肌肉 1000 條以上"}, {"f": "肌力分級的三種方式", "b": "先用神經支配比最小的；增加徵召的運動單位數；增加刺激頻率"}, {"f": "Ia / Ib / II 傳入纖維", "b": "Ia：肌梭初級（速度）；Ib：高爾基腱器（張力）；II：肌梭次級（長度量）"}, {"f": "高爾基腱器 GTO 功能", "b": "偵測肌肉張力，過度收縮時經抑制性中間神經元抑制作用肌，保護肌肉"}, {"f": "肌梭 Muscle spindle 功能", "b": "偵測肌肉長度及其變化速率；維持姿勢肌張力；由 γ 運動神經元調節敏感度"}, {"f": "梭外肌／梭內肌 的運動神經", "b": "梭外：Aα；梭內：Aγ"}], "mcq": [{"q": "下列何項學問在研究動作的表徵（描述運動的位置、軌跡、速率）？", "o": ["動力學 kinetics", "運動學 kinematics", "肌肉力學 muscle mechanics", "人體計量學 anthropometry"], "a": 1, "e": "運動學描述運動的範圍與軌跡，不探討產生運動的力。"}, {"q": "使用量角器測量關節活動度（ROM）時，主要是應用下列何者？", "o": ["關節運動學 arthrokinematics", "動力學 kinetics", "骨運動學 osteokinematics", "人體計量學的靜態測量"], "a": 2, "e": "量角器測的是骨頭的角度運動，屬骨運動學。"}, {"q": "人體站立時，重心位於何處？", "o": ["第二薦椎前方約一吋", "第十二胸椎前方", "第五腰椎後方", "恥骨聯合上方"], "a": 0, "e": "站立重心約在 S2 前方一吋。"}, {"q": "肘關節彎曲、伸直（屈伸）發生在哪個平面、繞哪個軸？", "o": ["額狀面，矢狀-水平軸", "矢狀面，額狀-水平軸", "水平面，垂直軸", "額狀面，垂直軸"], "a": 1, "e": "屈伸在矢狀面，繞額狀（橫向）水平軸。"}, {"q": "下列何者有三個自由度？", "o": ["肘關節", "指間關節", "髖關節", "橈腕關節"], "a": 2, "e": "髖與盂肱關節為杵臼關節，3 自由度；肘、指間 1 個；橈腕 2 個。"}, {"q": "環轉運動（circumduction）存在於哪種關節？", "o": ["只有 1 個自由度的關節", "2 或 3 個自由度的關節", "所有滑液關節", "只有樞軸關節"], "a": 1, "e": "環轉是 2、3 自由度關節的特徵，1 自由度沒有。"}, {"q": "寰椎與樞椎之間的關節型態屬於？", "o": ["屈戍關節", "髁狀關節", "鞍狀關節", "樞軸關節"], "a": 3, "e": "樞軸關節只能旋轉；寰樞、橈尺近端為例。"}, {"q": "拇指的腕掌關節（大菱形骨與第一掌骨）及胸鎖關節屬於何種關節？", "o": ["鞍狀關節", "滑動關節", "髁狀關節", "屈戍關節"], "a": 0, "e": "兩關節面各有凹凸，可多方向活動，為鞍狀關節。"}, {"q": "凸面骨頭在凹面上移動（如肩外展時肱骨頭），關節面的滑動方向與骨頭角動作方向的關係為何？", "o": ["相同", "相反", "垂直", "沒有滑動"], "a": 1, "e": "凸動凹→滑動反向；肱骨頭外展時往上 roll、往下 slide。"}, {"q": "人體中最普遍的槓桿型式為？", "o": ["第一類", "第二類", "第三類", "三類一樣多"], "a": 2, "e": "第三類（作用力在中間）最普遍，如肱二頭肌屈肘。"}, {"q": "踮腳尖時，其槓桿類型與阻力位置分別為？", "o": ["第一類，支點在中央", "第二類，阻力（體重）在中央", "第三類，作用力在中央", "第二類，作用力在中央"], "a": 1, "e": "踮腳尖：蹠趾為支點、體重在中間，力臂>阻力臂，為第二類。"}, {"q": "關於離心收縮的敘述，下列何者正確？", "o": ["肌肉長度明顯變短", "產生同樣的力需要徵召較多運動單位", "最大離心收縮產生的力大於最大向心收縮", "與向心收縮相比，較不易造成遲發性肌肉酸痛"], "a": 2, "e": "離心最大力較大、徵召動作單位較少、肌肉被拉長，最易引起 DOMS。"}, {"q": "肌肉張力由大到小的排序為？", "o": ["concentric > isometric > eccentric", "isometric > concentric > eccentric", "eccentric > concentric > isometric", "eccentric > isometric > concentric"], "a": 3, "e": "離心 > 等長 > 向心。"}, {"q": "有關等速收縮訓練，下列何者錯誤？", "o": ["訓練速度每秒不宜超過 120 度", "大部分只能做開放鏈訓練", "儀器昂貴", "適合在急性期積極施行"], "a": 3, "e": "等速收縮不宜在急性期施行。"}, {"q": "等長收縮要持續多久才有增進肌力的效果？", "o": ["2 秒", "6 秒", "15 秒", "30 秒"], "a": 1, "e": "講義：持續收縮 6 秒才具增進肌力效果。"}, {"q": "髖屈曲時，膝伸直（約 60–80°）的活動度小於膝屈曲（115–125°），其原因為？", "o": ["主動肌無力", "主動不足", "被動不足（hamstrings 被拉長）", "關節囊鬆弛"], "a": 2, "e": "拮抗肌為跨雙關節肌（後大腿肌群）被拉到最長，使髖屈曲受限，稱被動不足。"}, {"q": "依肌肉長度-張力關係，離體肌肉在何種長度下可產生最大張力？", "o": ["休息時長度", "比休息長度稍長", "比休息長度稍短", "比休息長度再拉長一倍"], "a": 1, "e": "約 110% 靜止長度時達最大張力；再拉長主動張力先升後降。"}, {"q": "包覆「整條肌肉」的結締組織稱為？", "o": ["肌內膜", "肌束膜", "肌外膜", "肌纖維膜"], "a": 2, "e": "肌外膜包整條肌肉，肌束膜包肌束，肌內膜包肌纖維。"}, {"q": "肌肉收縮時，下列何者長度不變？", "o": ["A 帶", "I 帶", "H 區", "肌節"], "a": 0, "e": "A 帶＝粗肌絲全長，不變；I 帶、H 區、肌節都縮短。"}, {"q": "肌漿網（SR）的主要功能為？", "o": ["合成 ATP", "加速動作電位傳導", "貯存與釋放鈣離子", "分解乙醯膽鹼"], "a": 2, "e": "SR 貯存／釋放 Ca²⁺；加速傳導的是橫小管 T system。"}, {"q": "Ca²⁺ 進入肌漿後，與下列何者結合而啟動收縮？", "o": ["肌凝蛋白", "肌鈣蛋白 C", "肌動蛋白", "肌紅蛋白"], "a": 1, "e": "Ca²⁺ 與 troponin C 結合→構型改變→露出 actin 活化位。"}, {"q": "下列何者為慢縮（Type I）肌纖維的特徵？", "o": ["直徑大、顏色白", "粒線體稀少", "氧化磷酸化為主要 ATP 來源、疲乏慢", "醣解酵素活性最高"], "a": 2, "e": "Type I：小、紅、粒線體多、有氧、耐疲勞。"}, {"q": "在低強度運動時，肌纖維徵召順序為？", "o": ["IIb → IIa → I", "I → IIa → IIb", "IIa → I → IIb", "同時徵召"], "a": 1, "e": "依 size principle，由慢肌先開始，再加入 IIa、IIb。"}, {"q": "支配肌梭梭內肌纖維的運動神經元為？", "o": ["Aα", "Aβ", "Aγ", "C 纖維"], "a": 2, "e": "梭外肌：Aα；梭內肌：Aγ。"}, {"q": "偵測肌肉張力、在過度收縮時抑制作用肌的受器是？", "o": ["肌梭 Ia", "高爾基腱器 Ib", "肌梭 II", "關節囊受器"], "a": 1, "e": "GTO（Ib）位於肌腱，經抑制性中間神經元抑制作用肌，具保護作用。"}]}, "K2": {"cards": [{"f": "肩胛骨與胸廓第幾根肋骨相對？附著幾塊肌肉？", "b": "第 2–7 肋；17 塊肌肉"}, {"f": "coracoid process 喙突的附著", "b": "聯合肌腱（肱二頭肌短頭＋喙肱肌）起點、胸小肌止點、喙肱韌帶／喙肩韌帶附著"}, {"f": "acromion 肩峰", "b": "肩胛棘向外延伸的寬扁突出，覆蓋肱骨頭，三角肌起點之一"}, {"f": "肱骨頭後傾角（retroversion）", "b": "相對於上髁軸向後轉約 30°"}, {"f": "大結節 greater tuberosity 的附著肌", "b": "棘上肌、棘下肌、小圓肌"}, {"f": "小結節 lesser tuberosity 的附著肌", "b": "肩胛下肌 subscapularis"}, {"f": "bicipital groove 二頭肌溝", "b": "位於大小結節間，肱二頭肌長頭肌腱通過；上有橫韌帶防滑脫"}, {"f": "rotator cuff 四條肌肉（SITS）", "b": "supraspinatus、infraspinatus、teres minor、subscapularis"}, {"f": "棘上肌 supraspinatus 動作／神經", "b": "外展；肩胛上神經"}, {"f": "棘下肌 infraspinatus 動作", "b": "外轉 ER、內收（神經：肩胛上神經）"}, {"f": "小圓肌 teres minor 動作／神經", "b": "外轉 ER、內收；腋神經"}, {"f": "肩胛下肌 subscapularis 動作", "b": "內轉 IR（止於小結節）"}, {"f": "肩關節 ROM 排序", "b": "肩（0–180°）＞ 髖（0–120°）＞ 腕 ＞ 肘"}, {"f": "肩關節屬第幾級槓桿？特點", "b": "第三級；力臂短費力，但得較大速度與活動長度"}, {"f": "斜方韌帶＋圓錐韌帶合稱", "b": "喙鎖韌帶 coracoclavicular lig.，連接鎖骨與喙突"}, {"f": "防盂肱脫臼的結構", "b": "喙肱韌帶、盂肱韌帶、肱橫韌帶、盂脣 glenoid labrum"}, {"f": "肱骨頭向下滑動對應的動作", "b": "外展（向上滑＝內收；向前滑＝伸直、外轉、水平外展；向後滑＝屈曲、內轉、水平內收）"}, {"f": "凸面／凹面滑動規則", "b": "肱骨頭（凸）滑動方向與骨動作相反；關節窩（凹）與肩胛骨動作相同方向"}, {"f": "scapulothoracic joint 肩胛胸廓關節", "b": "無骨性連結的假關節／功能性關節"}, {"f": "唯一連接上肢與胸腔的關節", "b": "胸鎖關節 sternoclavicular（鞍狀，有關節盤，3 度自由度）"}, {"f": "胸鎖關節與哪個關節結構相同？", "b": "拇指腕掌關節（CMC）"}, {"f": "胸鎖關節的韌帶", "b": "鎖骨間韌帶、前後胸鎖（囊）韌帶、肋鎖韌帶（第 1 肋下方）"}, {"f": "SC 關節抬高／下壓角度", "b": "抬高 30–45°；下壓 5–10°（被第 1 肋擋住）"}, {"f": "SC 休息位前突／後縮", "b": "前突 15°、後縮 15°"}, {"f": "鎖骨軸向旋轉何時出現？由什麼引起？", "b": "肩上舉超過 90° 後；喙鎖韌帶（斜方＋圓錐）拉緊"}, {"f": "維持 AC 關節穩定最重要的韌帶", "b": "喙鎖韌帶 coracoclavicular ligaments"}, {"f": "coracoacromial arch / supraspinatus outlet", "b": "肩胛頸＋肩峰＋喙肩韌帶＋喙突；其下有旋轉肌腱、二頭肌長頭腱、滑囊"}, {"f": "scapulohumeral rhythm 額狀面比例", "b": "前 30° 後 ST：GH = 1：2；每 15° = GH 10° + ST 5°"}, {"f": "肩外展 180° 的組成", "b": "盂肱 120° ＋ 肩胛向上旋轉 60°（AC 30° + SC 30°）"}, {"f": "scapular plane 的 GH：ST", "b": "1.25：1"}, {"f": "盂肱完全內轉時主動外展極限", "b": "約 60°（大結節撞肩峰／喙肩韌帶）；外轉 90° 則可到 90°"}, {"f": "手臂放身側 vs 完全上舉的旋轉總量", "b": "身側 180°（ER+IR）；完全上舉 90°（韌帶扭轉繃緊）"}, {"f": "serratus anterior 前鋸肌：神經／動作", "b": "長胸神經；肩胛骨外展與向上旋轉；止於肩胛內側緣"}, {"f": "trapezius 斜方肌：神經與上中下動作", "b": "副神經；上：上提＋上轉；中：上轉＋內收；下：上轉＋內收＋下壓"}, {"f": "rhomboid 菱形肌：神經／動作", "b": "肩背神經 dorsal scapular n.；向下旋轉、內收、上提"}, {"f": "pectoralis minor 胸小肌", "b": "第 2–5 肋 → 喙突；胸內側神經；下壓"}, {"f": "levator scapulae 提肩胛肌", "b": "上位頸椎橫突 → 肩胛內側緣；肩背神經；上提、向下旋轉"}, {"f": "deltoid 三角肌 神經／動作", "b": "腋神經；外展；止於三角肌粗隆"}, {"f": "latissimus dorsi 闊背肌", "b": "胸背神經（C6–C8）；IR、伸直、內收、肩胛下壓、抬高骨盆；止於小結節嵴"}, {"f": "coracobrachialis 喙肱肌", "b": "喙突 → 肱骨內側面；肌皮神經；屈曲、內收"}, {"f": "肩部靜態防半脫位三項", "b": "水平喙肱韌帶、上盂肱韌帶、關節囊內負壓"}, {"f": "winging scapula 翼狀肩胛", "b": "前鋸肌（長胸神經）麻痺；肩胛內側緣掀起，無法完全上舉"}, {"f": "斜方肌麻痺的表現", "b": "肩胛休息位向下旋轉、外展、下壓；肱骨頭易半脫位；無法後縮肩胛"}], "mcq": [{"q": "斜方韌帶（trapezoid）與圓錐韌帶（conoid）合稱為？", "o": ["肋鎖韌帶", "鎖骨間韌帶", "喙鎖韌帶", "上肱骨韌帶"], "a": 2, "e": "兩者連接鎖骨與喙突，合稱喙骨鎖骨韌帶。"}, {"q": "肩關節外展 180° 時，鎖骨產生軸向旋轉是因哪條韌帶被拉緊？", "o": ["喙鎖韌帶", "橫肱韌帶", "喙肩韌帶", "喙肱韌帶"], "a": 0, "e": "喙鎖韌帶拉緊使鎖骨向上旋轉。"}, {"q": "scapulohumeral rhythm 中，ST 與 GH 關節動作的比值為？", "o": ["1：2", "2：1", "1：3", "3：1"], "a": 0, "e": "前 30° 後肩胛骨：肱骨 = 1：2。"}, {"q": "下列有關正常 scapulohumeral rhythm 的敘述何者錯誤？", "o": ["可維護盂肱關節穩定", "增加三角肌收縮效果", "可增加手舉高的角度", "scapula 動作比 GH 大"], "a": 3, "e": "肩胛動作量只有 GH 的一半。"}, {"q": "下列何者「不是」盂肱關節的內轉肌？", "o": ["闊背肌", "肩胛下肌", "棘下肌", "大圓肌"], "a": 2, "e": "棘下肌為外轉與內收；其餘為內轉。"}, {"q": "哪一肌肉可同時使肩胛骨上提、內收、下降？", "o": ["斜方肌", "菱形肌", "闊背肌", "大圓肌"], "a": 0, "e": "上部上提、中部內收、下部下壓。"}, {"q": "翼狀肩胛（winging scapula）是因哪條肌肉無力？", "o": ["菱形肌", "肩胛下肌", "前鋸肌", "提肩胛肌"], "a": 2, "e": "前鋸肌（長胸神經）無力使內側緣掀起。"}, {"q": "哪一條旋轉肌袖肌腱「不是」附著在大結節？", "o": ["棘上肌", "棘下肌", "小圓肌", "肩胛下肌"], "a": 3, "e": "肩胛下肌止於小結節。"}, {"q": "前鋸肌的神經支配為？", "o": ["副神經", "肩背神經", "長胸神經", "腋神經"], "a": 2, "e": "前鋸肌：長胸神經。"}, {"q": "下列何者麻痺會導致手臂無法完全抬舉？", "o": ["前鋸肌", "闊背肌", "菱形肌", "提肩胛肌"], "a": 0, "e": "前鋸肌使肩胛外展與上旋，缺失則節律異常。"}, {"q": "使用腋下拐杖，要訓練病人的哪組肌肉最恰當？", "o": ["前鋸肌及胸大肌", "肱三頭肌及前鋸肌", "闊背肌及肱三頭肌", "前鋸肌及闊背肌"], "a": 2, "e": "闊背肌使肩下壓撐身，肱三頭肌伸肘（講義解答 C）。"}, {"q": "維持肱骨頭於肩關節中避免半脫位，下列肌肉何者最不具關鍵角色？", "o": ["棘上肌", "大圓肌", "棘下肌", "小圓肌"], "a": 1, "e": "大圓肌不屬旋轉肌袖。"}, {"q": "肩部外展時，使肱骨頭下沉最主要的肌肉為？", "o": ["棘上肌", "肩胛下肌", "三角肌", "背闊肌"], "a": 0, "e": "講義解答：棘上肌。"}, {"q": "肱骨頭滑動方向與動作對應，何者正確？", "o": ["向前滑：屈曲", "向後滑：外轉", "向下滑：外展", "向上滑：外展"], "a": 2, "e": "向下滑＝外展；向上滑＝內收；向前＝伸直/外轉/水平外展。"}, {"q": "關於胸鎖關節，何者正確？", "o": ["為滑車關節且無關節盤", "是唯一連接上肢與胸腔的關節", "脫臼比鎖骨骨折更常見", "只有 1 度自由度"], "a": 1, "e": "鞍狀、有關節盤、3 度自由度；鎖骨常先骨折。"}, {"q": "肩關節完全內轉時，主動外展大約限制在？", "o": ["30°", "60°", "90°", "120°"], "a": 1, "e": "大結節撞擊肩峰與喙肩韌帶。"}, {"q": "手臂完全上舉時，盂肱關節旋轉總量約為？", "o": ["30°", "60°", "90°", "180°"], "a": 2, "e": "身側為 180°，完全上舉僅 90°。"}, {"q": "斜方肌麻痺最可能出現？", "o": ["肩胛休息位向上旋轉", "肩胛休息位向下旋轉、外展、下壓", "肩胛無法前突", "肩胛內側緣翼狀"], "a": 1, "e": "斜方肌麻痺使肩胛下旋、肱骨頭易半脫位；翼狀為前鋸肌。"}, {"q": "喙肩弓（supraspinatus outlet）下方的軟組織「不包括」？", "o": ["旋轉肌袖肌腱", "肱二頭肌長頭腱", "肩峰下滑囊", "盂脣下關節盤"], "a": 3, "e": "肩關節無關節盤；其餘皆在弓下，是肩夾擠的解剖基礎。"}, {"q": "肩關節屬於第幾級槓桿？", "o": ["第一級", "第二級", "第三級", "不屬槓桿"], "a": 2, "e": "施力點在支點與受力點中間，力臂短、速度大。"}, {"q": "當肩上舉時三角肌拉力線直接向上，容易導致？", "o": ["肱骨頭撞擊喙肩弓／肩夾擠", "鎖骨骨折", "胸鎖脫臼", "肋骨骨折"], "a": 0, "e": "肱骨垂直上移撞喙肩弓或肩峰。"}, {"q": "闊背肌的神經支配為？", "o": ["腋神經", "胸背神經", "肩胛上神經", "肌皮神經"], "a": 1, "e": "thoracodorsal nerve（C6–C8）。"}, {"q": "肩外展 180° 的組成，下列何者正確？", "o": ["肱骨 60°＋肩胛 120°", "肱骨 120°＋肩胛 60°", "肱骨 90°＋肩胛 90°", "肱骨 150°＋肩胛 30°"], "a": 1, "e": "肩胛 60° = AC 30° + SC 30°。"}]}, "K3": {"cards": [{"f": "外上髁 Lateral epicondyle", "b": "肱骨遠端外側；伸肌附著（extensor epicondyle）；網球肘"}, {"f": "內上髁 Medial epicondyle", "b": "肱骨遠端內側；腕與指屈肌附著（flexor epicondyle）；高爾夫球肘"}, {"f": "網球肘（Tennis elbow）發生部位", "b": "外上髁，腕與指伸肌附著處"}, {"f": "高爾夫球肘（Golfer's elbow）發生部位", "b": "內上髁，腕與指屈肌附著處"}, {"f": "Triangle sign", "b": "鷹嘴突、內上髁、外上髁：屈曲 90° 為等腰三角形；完全伸直時成一直線"}, {"f": "三點觸診法", "b": "拇指放外上髁、食指放鷹嘴突、中指放內上髁"}, {"f": "鷹嘴突 Olecranon process", "b": "尺骨上端大突起；肘尖著桌時碰到桌面的部位"}, {"f": "尺神經 ulnar nerve 在肘的位置與易受壓姿勢", "b": "通過鷹嘴突與內上髁之間（內上髁溝）；肘屈 90° 最易受壓"}, {"f": "肱尺關節 Elbow (ulnohumeral) joint 類型", "b": "單軸樞紐關節 (uniaxial hinge)；屈曲與伸直"}, {"f": "肱尺關節的穩定來源", "b": "骨性構形 (bony configuration) 與兩側副韌帶"}, {"f": "肘關節運動軸", "b": "通過滑車 (trochlea) 與肱骨小頭 (capitulum) 中心的連線"}, {"f": "橈尺關節 Radioulnar joint 類型與動作", "b": "單軸樞軸關節 (pivot)；旋前與旋後"}, {"f": "旋後 Supination 時橈尺骨關係", "b": "橈骨與尺骨互相平行"}, {"f": "旋前 Pronation 時橈尺骨關係", "b": "橈骨橫越過尺骨"}, {"f": "Carry angle（提攜角）正常值", "b": "男 5–10°、女 10–15°"}, {"f": "Carry angle 成因", "b": "伸直時，遠端內側滑車延伸大於外側肱橈之間的距離"}, {"f": "Carry angle 過大的臨床意義", "b": "內側副韌帶易被拉扯斷裂／扯傷"}, {"f": "環狀韌帶 Annular ligament", "b": "包住橈骨頭、防止橈骨頭其他方向移動；與 quadrate ligament 防止上橈尺關節脫離"}, {"f": "肘關節囊鬆緊分布", "b": "前、後側較鬆（允許屈伸）；內、外側較緊（加強副韌帶支持）"}, {"f": "肘屈曲 ROM 與 end-feel", "b": "120–160°；前側 soft（肌肉接觸），後側 hard（尺骨冠狀突頂肱骨冠狀窩）"}, {"f": "肘伸直 ROM 與 end-feel", "b": "0–5°；hard，尺骨鷹嘴突頂肱骨鷹嘴窩"}, {"f": "肱尺關節休息位與最緊位", "b": "休息：屈 70° + 旋後 10°；最緊：伸直 + 旋後"}, {"f": "近端橈尺關節休息位與最緊位", "b": "休息：旋後 35° + 屈 70°；最緊：旋後 5°"}, {"f": "MCL 前束 (anterior bundle)", "b": "20–120° 最緊（全屈、全伸時鬆）；對抗外翻不穩定 (valgus) 最重要"}, {"f": "外側副韌帶中「主要外側穩定者」", "b": "Lateral ulnar collateral ligament"}, {"f": "骨間膜 Interosseous membrane", "b": "穩定橈尺骨，避免近端橈骨跑到尺骨上"}, {"f": "棒球投手最常拉傷的肘韌帶", "b": "尺側（內側）副韌帶 ulnar collateral ligament"}, {"f": "肱二頭肌 Biceps brachii 起止、神經、動作", "b": "長頭：盂上結節；短頭：喙突；止橈骨粗隆；肌皮神經 C5–C6；肩屈、肘屈、旋後"}, {"f": "肱肌 Brachialis", "b": "肱骨幹→尺骨冠狀突；肌皮神經；純肘屈，不論位置皆有利"}, {"f": "肱橈肌 Brachioradialis", "b": "外側髁上嵴→橈骨莖突；前臂中立位的純屈肘肌"}, {"f": "肱三頭肌 Triceps brachii 長頭近端附著", "b": "肩胛骨盂下結節；止尺骨鷹嘴突；橈神經 C7–C8；肘伸、肩伸"}, {"f": "肘後肌 Anconeus", "b": "外上髁→尺骨；橈神經；肘伸、穩定肘與近端橈尺關節"}, {"f": "旋前方肌 Pronator quadratus", "b": "尺、橈骨遠端 1/4 掌側；正中神經分支 C8–T1；慢速無阻力旋前才收縮；位置不影響其力量；深層難觸摸"}, {"f": "旋前圓肌 Pronator teres", "b": "較強的旋前肌；正中神經；雙關節肌；也協助阻抗式肘屈時抵消二頭肌的旋後"}, {"f": "主動不足 Active insufficiency", "b": "肌肉在最短長度收縮，位於長度–張力曲線最低點，收縮力弱"}, {"f": "橈神經在肘的路徑", "b": "通過肱三頭肌外側頭下方"}, {"f": "肱二頭肌 + 肱肌癱瘓的原因與表現", "b": "肌皮神經損傷；無法抬手，只能用甩的"}, {"f": "旋前圓肌與旋前方肌癱瘓", "b": "肘上方正中神經損傷；無法握杯、開鎖"}], "mcq": [{"q": "下列何者為網球肘 (tennis elbow) 的主要受累部位？", "o": ["內上髁，屈肌群附著處", "外上髁，伸肌群附著處", "鷹嘴突", "橈骨頭"], "a": 1, "e": "外上髁為腕與指伸肌附著處＝網球肘；內上髁為屈肌＝高爾夫球肘。"}, {"q": "肘關節屈曲 90° 時，鷹嘴突、內上髁與外上髁三點呈何種形狀？", "o": ["一直線", "直角三角形", "等腰三角形", "無固定關係"], "a": 2, "e": "Triangle sign：屈 90° 為等腰三角形，完全伸直時成一直線。"}, {"q": "提攜角（carry angle）的正常範圍何者正確？", "o": ["男 10–15°、女 5–10°", "男 5–10°、女 10–15°", "男女皆 0–5°", "男女皆 20–25°"], "a": 1, "e": "男 5–10°、女 10–15°；女性較大。"}, {"q": "肱尺關節的關節類型是？", "o": ["單軸樞紐關節", "雙軸橢圓關節", "單軸樞軸關節", "球窩關節"], "a": 0, "e": "肱尺關節為 uniaxial hinge，只做屈曲與伸直；橈尺關節才是 pivot。"}, {"q": "肘關節屈曲到終點時，後側的 end-feel 為何？", "o": ["Soft，上臂與前臂肌肉接觸", "Empty", "Hard，尺骨冠狀突碰到肱骨冠狀窩", "Hard，鷹嘴突碰到鷹嘴窩"], "a": 2, "e": "屈曲：前側 soft、後側 hard（coronoid process 入 coronoid fossa）；伸直才是鷹嘴突入鷹嘴窩。"}, {"q": "下列何者是對抗肘外翻不穩定 (valgus instability) 最重要的構造？", "o": ["橈側副韌帶", "環狀韌帶", "內側副韌帶前束", "骨間膜"], "a": 2, "e": "MCL 的 anterior bundle 是 valgus 最重要的約束；棒球投手最易拉傷尺側副韌帶。"}, {"q": "棒球投手最常見的肘韌帶拉傷發生於？", "o": ["橈側副韌帶", "尺側副韌帶", "環狀韌帶", "骨間膜"], "a": 1, "e": "投球產生外翻力量，傷內側（尺側）副韌帶。"}, {"q": "防止上橈尺關節脫離，主要靠？", "o": ["Cooper's ligament", "Interosseous membrane", "Annular ligament 與 quadrate ligament", "Annular ligament 與 oblique cord"], "a": 2, "e": "講義考題答案為 C。"}, {"q": "尺神經在肘部最容易受壓的姿勢是？", "o": ["肘完全伸直", "肘屈曲 90°", "前臂旋前", "肩外展"], "a": 1, "e": "尺神經經過鷹嘴突與內上髁之間，屈 90° 最易被壓迫。"}, {"q": "下列何者對肘後肌 (anconeus) 的敘述為真？①受尺神經支配 ②負責肘關節伸直 ③起緣自鷹嘴突 ④扮演肘關節的穩定角色", "o": ["③④", "②", "①②③④", "②④"], "a": 3, "e": "肘後肌：橈神經、起自外上髁、肘伸並穩定肘；故 ②④ 正確（講義答案 D）。"}, {"q": "下列何者對旋前圓肌 (pronator teres) 的敘述為真？①受正中神經支配 ②屬於雙關節肌肉 ③不能由表面直接觸摸 ④作用最強之旋前肌", "o": ["①②④", "②③", "③④", "①④"], "a": 0, "e": "旋前圓肌可觸摸，故 ③ 錯；①②④ 正確（講義答案 A）。"}, {"q": "肱二頭肌的功能為何？", "o": ["肘屈、前臂旋前、肩屈", "肘屈、前臂旋後、肩伸", "肘屈、前臂旋前、肩伸", "肘屈、前臂旋後、肩屈"], "a": 3, "e": "肱二頭肌：肩屈 + 肘屈 + 旋後（講義答案 D）。"}, {"q": "在下列哪種情況下肱三頭肌（長頭）會被拉到最長？", "o": ["肩伸直 + 肘伸直", "肩屈曲 + 肘伸直", "肩伸直 + 肘屈曲", "肩屈曲 + 肘屈曲"], "a": 3, "e": "長頭跨肩與肘，肩屈（拉長）加肘屈（拉長）最長（講義答案 D）。"}, {"q": "下列哪一條旋前肌的作用力較不受肘關節及前臂位置影響？", "o": ["肱橈肌", "旋前圓肌", "旋前方肌", "橈側屈腕肌"], "a": 2, "e": "旋前方肌（深層、單關節）受位置影響最小。"}, {"q": "下列哪一條肘關節肌肉最不可能用徒手觸摸？", "o": ["肱肌", "旋前圓肌", "旋前方肌", "肘後肌"], "a": 2, "e": "旋前方肌位於前臂遠端深層，最難觸摸。"}, {"q": "下列哪一條肌肉不論肘關節與前臂位置如何，均為有利的屈肘肌？", "o": ["肱二頭肌", "肱肌", "肱橈肌", "喙肱肌"], "a": 1, "e": "肱肌永遠是肘屈肌；二頭肌需旋後位，肱橈肌在中立位最有效；喙肱肌不跨肘。"}, {"q": "肱三頭肌癱瘓的常見原因是下列何者？（病人無法伸肘，躺著無法維持兩手高舉）", "o": ["肌皮神經損傷", "正中神經損傷", "橈神經損傷", "尺神經損傷"], "a": 2, "e": "肱三頭肌由橈神經 (C7–C8) 支配。"}, {"q": "病人無法握住杯子、無法開鎖，最可能為哪些肌肉癱瘓？", "o": ["肱二頭肌與肱肌", "旋前圓肌與旋前方肌", "肱三頭肌", "旋後肌"], "a": 1, "e": "肘上方正中神經損傷造成旋前肌群癱瘓；二頭肌與肱肌癱瘓則是無法抬手。"}, {"q": "前 MCL 在肘關節哪個角度範圍最緊？", "o": ["完全伸直", "完全屈曲", "20–120°", "0–5°"], "a": 2, "e": "前 MCL 影響 20–120° 的屈曲，在此範圍最緊，全屈與全伸時鬆。"}]}, "J": {"cards": [{"f": "依解剖學圖6-5，胸鎖關節屬於哪一型？", "b": "滑動關節（gliding）；肌動學表則列為鞍狀。依講義兩科不同，考前確認老師標準。"}, {"f": "依肌動學講義，胸鎖關節屬於哪一型？", "b": "鞍狀關節（saddle）；解剖學圖6-5列為滑動。"}, {"f": "肩鎖關節的類型與構成骨？", "b": "滑動；肩胛骨肩峰與鎖骨肩峰端。"}, {"f": "本圖滑膜關節中的肋胸關節，指哪些肋骨？", "b": "第2–7肋軟骨與胸骨，屬滑動；第1肋軟骨與胸骨為軟骨結合。"}, {"f": "腕骨間關節：類型、自由度、構成骨？", "b": "滑動；本圖標示非軸／滑動；腕骨之間。"}, {"f": "肌動學表將距下關節列為哪一型？構成骨？", "b": "滑動（gliding）；距骨與跟骨，參與足內翻、外翻。"}, {"f": "脊椎小面關節的類型與構成骨？", "b": "滑動；相鄰椎骨上、下關節突之間。"}, {"f": "肘關節：類型與自由度？", "b": "屈戍（hinge）；1自由度，屈曲與伸展。"}, {"f": "表6-1中肘關節由哪些骨面構成？", "b": "肱骨滑車與尺骨滑車切跡；肱骨小頭與橈骨頭。"}, {"f": "膝關節：依圖6-5的類型、自由度與表6-1構成骨？", "b": "屈戍；1自由度（主要屈伸）；股骨髁與脛骨髁。"}, {"f": "踝關節：類型、構成骨與主要動作？", "b": "屈戍；脛骨及腓骨與距骨；足背屈曲、足底屈曲。"}, {"f": "指間關節：類型、自由度、構成骨？", "b": "屈戍；1自由度；相鄰指骨之間。"}, {"f": "趾間關節：類型、自由度、構成骨？", "b": "屈戍；1自由度；相鄰趾骨之間。"}, {"f": "掌指關節：類型、自由度、構成骨？", "b": "橢圓／髁狀；2自由度；掌骨與指骨。"}, {"f": "橈腕關節：類型、自由度、構成骨？", "b": "橢圓／髁狀；2自由度；橈骨與近側腕骨。"}, {"f": "寰軸（寰樞）關節：類型、自由度、構成骨？", "b": "車軸／樞軸；1自由度；寰椎與軸椎（C1–C2），主要旋轉。"}, {"f": "上橈尺關節：類型與構成骨？", "b": "車軸／樞軸；橈骨頭與尺骨橈骨切跡；參與旋前、旋後。"}, {"f": "依圖6-5與類型段落，下橈尺關節的類型與自由度？", "b": "車軸；1自由度。構成骨為尺骨頭與橈骨尺骨切跡；此處分類不採表6-1的不同記載。"}, {"f": "拇指腕掌關節：類型、自由度、構成骨？", "b": "鞍狀；2自由度；大多角骨（肌動學稱大菱形骨）與第一掌骨。"}, {"f": "肩（盂肱）關節：類型、自由度、構成骨？", "b": "球窩／杵臼；3自由度；肩胛骨關節盂與肱骨頭。"}, {"f": "髖關節：類型、自由度、構成骨？", "b": "球窩／杵臼；3自由度；髖臼與股骨頭。"}, {"f": "名稱對照：球窩關節＝？英文？", "b": "杵臼關節（ball-and-socket）。"}, {"f": "名稱對照：橢圓關節＝？英文？", "b": "髁狀關節（ellipsoidal／condyloid）。"}, {"f": "名稱對照：車軸關節＝？英文？", "b": "樞軸關節（pivot）；不要與屈戍的別名「樞紐」混淆。"}, {"f": "名稱對照：屈戍關節＝？英文？", "b": "鉸鏈關節（hinge）；解剖學段落亦寫作屈戌，別名樞紐。"}, {"f": "哪兩類在本圖以2自由度表示？", "b": "橢圓（髁狀）與鞍狀。"}, {"f": "哪一類可屈伸、外展內收及旋轉，共3自由度？", "b": "球窩（杵臼）：肩與髖。"}, {"f": "本圖如何標示滑動關節自由度？", "b": "非軸／滑動；這是本圖統一標示，解剖學類型段落另有單軸／多軸的用語。"}], "mcq": [{"q": "依解剖學圖6-5，胸鎖關節屬於？", "o": ["滑動", "鞍狀", "車軸", "球窩"], "a": 0, "e": "圖6-5列為滑動；肌動學表列為鞍狀。依講義兩科不同，考前確認老師標準。"}, {"q": "依肌動學講義，胸鎖關節屬於？", "o": ["滑動", "車軸", "鞍狀", "橢圓"], "a": 2, "e": "肌動學鞍狀關節例子包括胸鎖與拇指腕掌。"}, {"q": "哪一個名稱與球窩關節相同？", "o": ["樞軸", "杵臼", "髁狀", "鉸鏈"], "a": 1, "e": "球窩＝杵臼（ball-and-socket），有3自由度。"}, {"q": "橢圓關節在肌動學表的名稱是？", "o": ["鞍狀", "杵臼", "樞軸", "髁狀"], "a": 3, "e": "橢圓（ellipsoidal）＝髁狀（condyloid）。"}, {"q": "哪一組全屬車軸（樞軸）關節？", "o": ["肩、髖", "寰軸、上橈尺", "掌指、橈腕", "肘、指間"], "a": 1, "e": "寰軸與近端橈尺均以旋轉為主，1自由度。"}, {"q": "依圖6-5與類型段落，下橈尺關節屬於？", "o": ["鞍狀", "橢圓", "車軸", "球窩"], "a": 2, "e": "本題依圖6-5與p-L3-d的車軸分類；表6-1另有不同記載。"}, {"q": "拇指腕掌關節由哪些骨構成？", "o": ["大多角骨與第一掌骨", "橈骨與尺骨", "掌骨與近節指骨", "距骨與跟骨"], "a": 0, "e": "大多角骨（大菱形骨）與第一掌骨形成鞍狀關節。"}, {"q": "橈腕關節依類型具有幾個自由度？", "o": ["1", "3", "非軸／滑動", "2"], "a": 3, "e": "橈腕屬橢圓／髁狀，2自由度，可屈伸、外展內收。"}, {"q": "表6-1中的肩關節由哪些骨面構成？", "o": ["肩峰與鎖骨肩峰端", "肩胛骨關節盂與肱骨頭", "胸骨柄與鎖骨胸骨端", "肱骨滑車與尺骨滑車切跡"], "a": 1, "e": "肩（盂肱）關節是球窩；肩峰與鎖骨則為肩鎖關節。"}, {"q": "依肌動學表，距下關節屬於？", "o": ["車軸", "球窩", "滑動", "鞍狀"], "a": 2, "e": "表中滑動關節例子有腕、距下、脊椎小面。"}, {"q": "哪一項是本圖肋胸滑膜關節的正確範圍？", "o": ["第2–7肋軟骨與胸骨", "第1肋軟骨與胸骨", "鎖骨與胸骨", "所有肋骨頭與椎體"], "a": 0, "e": "第2–7為滑動；第1肋軟骨與胸骨是軟骨結合。"}, {"q": "踝關節的主要動作是？", "o": ["前臂旋前與旋後", "肩外展與內收", "拇指對掌", "足背屈曲與足底屈曲"], "a": 3, "e": "踝由脛骨、腓骨與距骨構成，屬屈戍關節。"}, {"q": "掌指與指間關節的類型依序為？", "o": ["屈戍、橢圓", "橢圓、屈戍", "滑動、車軸", "鞍狀、球窩"], "a": 1, "e": "掌指為橢圓／髁狀（2自由度）；指間為屈戍（1自由度）。"}, {"q": "髖關節的構成骨與類型，何者正確？", "o": ["薦骨與髂骨；球窩", "股骨與脛骨；鞍狀", "髖臼與股骨頭；球窩", "恥骨之間；橢圓"], "a": 2, "e": "髖臼與股骨頭形成球窩（杵臼），3自由度。"}, {"q": "本圖哪一類以「非軸／滑動」標示自由度？", "o": ["滑動", "屈戍", "車軸", "球窩"], "a": 0, "e": "本圖滑動型採非軸／滑動標示；屈戍、車軸為1，球窩為3。"}]}, "X": {"cards": [], "mcq": [{"q": "第1題　下列何種問題最可能產生「反向肩胛肱骨節律」（reverse scapulohumeral rhythm）現象？", "o": ["黏連性肩關節囊炎（adhesive capsulitis）", "斜頸（wry neck）", "肱三頭肌斷裂（triceps rupture）", "肱二頭肌斷裂（biceps rupture）"], "a": 0, "e": "黏連性肩關節囊炎（俗稱五十肩）會導致盂肱關節（glenohumeral joint）產生嚴重的關節囊黏連與活動受限。當患者嘗試舉高手臂時，盂肱關節無法正常旋轉，會改由肩胛骨相對於胸壁過度且過早地旋轉來代償，出現肩胛胸壁關節（scapulothoracic joint）活動量顯著大於盂肱關節的現象，此即稱為「反向肩胛肱骨節律」。"}, {"q": "第2題　有關開放鏈與閉鎖鏈動作的敘述，下列何者錯誤？", "o": ["開放鏈與閉鎖鏈動作屬於關節運動學（arthrokinematics）", "下肢蹲下動作為閉鎖鏈動作", "開放鏈動作特徵為固定近端－移動遠端（distal-on-proximal）的動作", "上肢投球動作為開放鏈動作"], "a": 0, "e": "開放鏈（Open Kinetic Chain）與閉鎖鏈（Closed Kinetic Chain）屬於骨骼運動學（osteokinematics）的分類方式，用以描述整體肢體段在空間中的移動特性。 關節運動學（arthrokinematics）探討的是關節內部的微觀動作，如滾動（rolling）、滑動（sliding）與旋轉（spinning），故 (A) 敘述錯誤。"}, {"q": "第3題　欲牽張緊縮的肱三頭肌，應：", "o": ["先伸直肩關節，再屈曲肘關節", "先屈曲肩關節，再伸直肘關節", "先屈曲肘關節，再屈曲肩關節", "先伸直肘關節，再過度伸直肩關節"], "a": 2, "e": "肱三頭肌（長頭）為雙關節肌肉，主要功能為伸直肘關節與伸直肩關節。 欲進行牽張（stretching）時，必須擺在與其主要肌肉作用完全相反的姿勢，即屈曲肘關節搭配屈曲肩關節（手高舉過頭且手肘彎曲）。"}, {"q": "第4題　在肌動學領域中，下列何者不是研究肌肉作用的方法？", "o": ["血液檢驗", "觸診", "解剖", "肌電圖"], "a": 0, "e": "肌動學分析肌肉功能的主要方法包含：觸診（Palpation，觀察與觸摸肌腹收縮）、解剖學（Anatomy/Dissection，分析肌肉起止點與拉力線）、肌電圖（EMG，紀錄肌肉電氣活化訊號）及肌力測試等。血液檢驗屬於醫學臨床生化檢測，無法用於評估肌肉的生物力學或運動學功能。"}, {"q": "第5題　喙突是哪一個肌肉附著的地方？", "o": ["肱二頭肌長頭", "肱三頭肌長頭", "肱肌", "喙肱肌"], "a": 3, "e": "附著於肩胛骨喙突（coracoid process）的肌肉共有三塊：胸小肌（pectoralis minor）、喙肱肌（coracobrachialis）以及肱二頭肌短頭（short head of biceps brachii）。（肱二頭肌長頭起於關節上結節；肱三頭肌長頭起於關節下結節）。"}, {"q": "第6題　肌節（sarcomere）是骨骼肌收縮的基本單位，在肌原纖維（myofibril）中，何種構造之間形成一個肌節？", "o": ["M線", "H區", "Z線", "A帶"], "a": 2, "e": "肌節（sarcomere）的結構定義為兩條相鄰 Z線（Z-disc / Z-line）之間的區域，包含一整段 A 帶與兩側各半個 I 帶，為骨骼肌進行滑行絲收縮（sliding filament theory）的最基本結構與功能單位。"}, {"q": "第7題　斜方韌帶（trapezoid ligament）與圓錐韌帶（conoid ligament）合稱：", "o": ["上肱骨（suprahumeral）韌帶", "肋骨鎖骨（costoclavicular）韌帶", "鎖骨間（interclavicular）韌帶", "喙骨鎖骨（coracoclavicular）韌帶"], "a": 3, "e": "喙鎖韌帶（coracoclavicular ligament, CC ligament）由位於外側的斜方韌帶（trapezoid ligament）與內側的圓錐韌帶（conoid ligament）共同組成，為維持肩峰鎖骨關節（AC joint）垂直方向穩定度的關鍵構造。"}, {"q": "第8題　下列有關斜方肌的敘述何者錯誤？", "o": ["肌肉終點位於肩胛骨", "由長胸神經所支配", "分為上、中、下部分的纖維", "上斜方肌主要動作包含聳肩"], "a": 1, "e": "斜方肌（trapezius）的運動神經支配為第 XI 對腦神經（副神經 accessory nerve）；長胸神經（long thoracic nerve）支配的是前鋸肌（serratus anterior），長胸神經受損會導致翼狀肩胛（winged scapula）。故 (B) 敘述錯誤。"}, {"q": "第9題　伏地挺身時，在側邊肋骨處與肩胛骨間可以看到鼓起的肌肉是？", "o": ["前鋸肌", "腹內側斜肌", "闊背肌", "腰方肌"], "a": 0, "e": "前鋸肌（serratus anterior）起源於第 1~8/9 肋骨側面，向後附著於肩胛骨內側緣。在進行伏地挺身或推送物體時，前鋸肌強烈收縮以將肩胛骨緊貼胸壁並向前推，會於側胸壁展現出獨特的鋸齒狀肌腹形貌。"}, {"q": "第10題　下列有關正常「肩胛肱骨節律」scapulohumeral rhythm的敘述何者錯誤？", "o": ["肩胛骨scapula的動作比盂肱關節glenohumeral joint大", "可維護glenohumeral joint的穩定度", "增加三角肌(deltoid)的收縮效果", "可增加手舉高的角度"], "a": 0, "e": "手臂高舉 180° 時，標準的肩胛肱骨節律比例為 2:1，即盂肱關節（GH joint）負責約 120° 的活動度，而肩胛骨（ST joint）負責約 60° 的上旋活動度。因此盂肱關節的活動角度大於肩胛骨，(A) 敘述錯誤。"}, {"q": "第11題　當你坐有扶手的椅子時，手臂支撐在座椅扶手上，下列那一肩胛肌肉的作用與身體撐起無關？", "o": ["下斜方肌", "菱形肌", "胸小肌", "闊背肌"], "a": 1, "e": "手臂支撐扶手將身體抬高（Trunk elevation）時，主要需要下壓肩胛骨（scapular depression）的肌肉作用（包含下斜方肌、胸小肌與闊背肌）。菱形肌（rhomboids）的主要功能為肩胛骨後收（retraction）與下旋（downward rotation），與撐起身體時的下壓動作無關。"}, {"q": "第12題　下列關於上肢骨骼關節的敘述，何者正確？", "o": ["肩關節（shoulder joint）屬於髁狀關節（condylar joint）", "橈骨（radius）不與肱骨（humerus）形成關節", "鎖骨（clavicle）的兩端分別與肱骨（humerus）及胸骨（sternum）形成關節", "尺骨（ulna）不直接與腕骨（carpus）形成關節"], "a": 3, "e": "(A) 盂肱關節為球窩關節（ball-and-socket joint）。 (B) 橈骨頭與肱骨小頭形成肱橈關節（humeroradial joint）。 (C) 鎖骨兩端分別與肩峰（肩胛骨）及胸骨柄形成關節，不直接接觸肱骨。 (D) 尺骨遠端與腕骨間隔有三角纖維軟骨複合體（TFCC），因此尺骨不直接與近排腕骨構成關節面，故 (D) 正確。"}, {"q": "第13題　下列哪一個肌肉不屬於旋轉袖肌群？", "o": ["棘上肌（supraspinatus）", "大圓肌 (teres major)", "棘下肌（infraspinatus）", "肩胛下肌（subscapularis）"], "a": 1, "e": "旋轉肌袖（Rotator Cuff, 口訣 SITS）由四塊肌肉組成：棘上肌（Supraspinatus）、棘下肌（Infraspinatus）、小圓肌（Teres minor）與肩胛下肌（Subscapularis）。大圓肌不屬於旋轉肌袖。"}, {"q": "第14題　關於盂肱關節的穩定度的敘述，下列何者正確？ ①關節盂（glenoid fossa）有足夠的深度，可包覆肱骨頭而維持足夠關節穩定度 ②關節唇（labrum）增加關節盂深度，因此增加盂肱關節的穩定度 ③關節囊強壯且緊繃是盂肱關節穩定度主要來源 ④當舉手時旋轉肌袖肌群會一起收縮，將肱骨頭拉入關節盂內，以增加穩定度", "o": ["①④", "①②", "③④", "②④"], "a": 3, "e": "① 關節盂淺而平坦，僅能接觸約 1/3 的肱骨頭，骨骼結構本身穩定度極低（①錯誤）。 ② 關節唇能增加約 50% 的關節盂深度，有效增加關節穩定度（②正確）。 ③ 盂肱關節囊結構相對鬆弛，以提供大範圍活動度，故被動限制能力有限（③錯誤）。 ④ 旋轉肌袖發揮動態穩定（dynamic stabilization）作用，收縮時能將肱骨頭穩定向內壓入關節盂中央（④正確）。"}, {"q": "第15題　在肱骨小結節可以觸診到哪條肌肉的附著點？", "o": ["闊背肌", "前鋸肌", "肩胛下肌", "大圓肌"], "a": 2, "e": "肩胛下肌（subscapularis）的止點位於肱骨小結節（lesser tubercle）。大圓肌與闊背肌則分別附著於結節間溝（bicipital groove）的內側唇與溝底。"}, {"q": "第16題　下列那條肌肉對於肩胛上轉的啟動（initiation of upward rotation）有最大的助益？", "o": ["下斜方肌（lower trapezius）", "上斜方肌（upper trapezius）", "前鋸肌（serratus anterior）", "中斜方肌（middle trapezius）"], "a": 1, "e": "在肩關節抬高/外展的初期階段（0~60°），上斜方肌（upper trapezius）最先收縮拉動鎖骨與肩峰，對「啟動」肩胛骨上旋作用最大；隨著舉高角度增加，前鋸肌與下斜方肌才會展現出更顯著的力偶輸出。"}, {"q": "第17題　肱二頭肌(biceps brachii)的功能,下列敘述何者正確?", "o": ["肘屈肌、前臂旋前肌、肩屈肌", "肘屈肌、前臂旋後肌、肩屈肌", "肘屈肌、前臂旋後肌、肩伸肌", "肘屈肌、前臂旋前肌、肩伸肌"], "a": 1, "e": "肱二頭肌（biceps brachii）跨越肩與肘兩個關節，主要運動功能包括：屈曲肘關節（elbow flexion）、使前臂旋後（forearm supination，特別在手肘屈曲 90 度時力矩最大）以及協助屈曲肩關節（shoulder flexion）。"}, {"q": "第18題　肌肉與肌腱常常被視為一個整體單位，可分為收縮部分、序列彈性部分、與並列彈性部分。下列何者屬於序列彈性部分？", "o": ["肌纖維膜（sarcolemma）", "肌束膜（perimysium）", "肌外膜（epimysium）", "肌腱"], "a": 3, "e": "在希爾肌肉模型（Hill's muscle model）中： 序列彈性元件（Series Elastic Component, SEC）：與肌節串聯，主要代表結構為肌腱（tendon）。 並列彈性元件（Parallel Elastic Component, PEC）：與肌節並聯，包含肌外膜、肌束膜、肌內膜及肌纖維膜等結締組織膜。"}, {"q": "第19題　肱二頭肌長頭（long head of biceps brachii）的韌帶通過下列何者？", "o": ["髁間線（intercondylar line）", "結節間溝（intertubercular sulcus）", "髁間窩（intercondylar fossa）", "轉子間線（intertrochanteric line）"], "a": 1, "e": "肱二頭肌長頭肌腱起自肩胛骨關節上結節，穿過盂肱關節囊後，行走於肱骨大結節與小結節之間的結節間溝（intertubercular sulcus / bicipital groove）內。"}, {"q": "第20題　在站立的姿勢下，將兩手高舉過頭，會使得：", "o": ["身體重心位置提高", "身體重心位置維持不動", "身體側向穩定性增加", "身體重心位置降低"], "a": 0, "e": "人體總重心（Center of Gravity, COG）取決於全身質量的空間分布。當雙手舉高過頭時，上肢質量向上位移，導致身體總重心位置向上提高，靜態平衡與穩定度相對降低。"}, {"q": "第21題　下列旋轉袖（rotator cuff）肌肉中，何者能內旋手臂？", "o": ["棘下肌（infraspinatus）", "棘上肌（supraspinatus）", "肩胛下肌（subscapularis）", "小圓肌（teres minor）"], "a": 2, "e": "肩胛下肌（subscapularis）：位於肩胛骨前方，附著於肱骨小結節，收縮時可使手臂內旋（internal rotation）。 棘下肌與小圓肌：主要負責手臂外旋（external rotation）。 棘上肌：主要負責啟動手臂外展（abduction）。"}, {"q": "第22題　盂肱關節外展時，下列那些肌肉作用的力偶，控制肩胛骨上旋（upward rotation）動作？", "o": ["前鋸肌－下斜方肌", "菱形肌－下斜方肌", "提肩胛肌－上斜方肌", "闊背肌－上斜方肌"], "a": 0, "e": "肩胛骨上旋（upward rotation）的三大力偶肌肉為：上斜方肌（上拉）、下斜方肌（下拉內側）與前鋸肌（向前外拉動下角）。選項中 (A) 前鋸肌－下斜方肌屬於此力偶組合。"}, {"q": "第23題　下列那一塊肌肉會將肩胛骨往下拉（depression）？", "o": ["菱形肌（rhomboids）", "上斜方肌（upper trapezius）", "胸小肌（pectoralis minor）", "提肩胛肌（levator scapulae）"], "a": 2, "e": "胸小肌起於第 3-5 肋骨，附著於喙突，收縮時會將肩胛骨向前下方拉動（scapular depression & anterior tilt）。下斜方肌亦具備下壓功能。而菱形肌、提肩胛肌與上斜方肌作用均為上提肩胛骨（elevation）。"}, {"q": "第24題　下列有關肩關節外展的敘述何者正確？", "o": ["要到外展 120 度一定要同時配合肩關節內轉才能達成", "外展到 90 度時，鎖骨已停止旋轉", "疼痛弧（painful arc）常發生在外展的 0~60 度", "在起始階段多依靠棘上肌用力"], "a": 3, "e": "(A) 肩關節外展時需配合外轉（external rotation）以防止肱骨大結節撞擊肩峰。 (B) 外展超過 90 度時，鎖骨會持續產生後旋（posterior rotation）。 (C) 肩關節擠壓症候群的疼痛弧（painful arc）通常出現在外展 60°~120° 的區間。 (D) 在手臂外展前 0~30° 的起始階段，主要由棘上肌（supraspinatus）負責啟動與靜態壓緊關節面，故 (D) 正確。"}, {"q": "第25題　有關骨骼肌分類與功能之敘述，下列何者正確？", "o": ["第一型肌肉纖維（type I fiber）較第二型肌肉纖維（type II fiber）更直接利用無氧代謝進行三磷酸腺苷（ATP）合成", "支配第一型肌肉纖維（type I fiber）之運動神經元，其神經傳導速度較第二型肌肉纖維（type II fiber）之運動神經元快", "第二型肌肉纖維（type II fiber）之肌漿網（sarcoplasmic reticulum）較第一型肌肉纖維（type I fiber）之肌漿網能更快釋放或儲存鈣離子", "第二型A肌肉纖維（type IIa fiber）較第二型B肌肉纖維（type IIb fiber）更直接利用無氧代謝進行三磷酸腺苷（ATP）合成"], "a": 2, "e": "(A) 第一型纖維（慢縮肌）富含粒線體與肌紅蛋白，主要依賴有氧代謝；第二型纖維（快縮肌）較依賴無氧糖解。 (B) 第二型纖維由較粗大的 α 運動神經元支配，神經傳導速度快於第一型。 (C) 第二型肌肉纖維具有更發達的肌漿網（SR）及高活性的鈣離子幫浦（SERCA），能極為迅速地釋放與回收鈣離子，從而達成迅速收縮與放鬆，故 (C) 正確。 (D) Type IIb 纖維較 Type IIa 纖維更直接利用無氧代謝。"}]}, "Y": {"cards": [], "mcq": [{"q": "補1　梭內、外肌纖維之特徵與功能，下列何者錯誤？", "o": ["大部分梭外肌纖維由γ運動神經元控制", "肌梭對牽張速度的反應，次要感覺纖維較主要感覺纖維敏感", "肌梭存在於梭內肌纖維，並提供肌纖維長度的本體感覺", "梭內肌纖維受伸展後興奮α運動神經元，引發牽張反射"], "a": 0, "e": "講義1-p.67：梭外肌由Aα支配、梭內肌由Aγ支配，(A)把α和γ對調了。(B)依一般教科書也不精確，初級末梢對速度較敏感；講義未提及。"}, {"q": "補2　旋轉肌群中，因與三角肌肌力不平衡，外展時無法將肱骨頭下壓，應訓練哪條肌肉？", "o": ["小圓肌", "棘下肌", "棘上肌", "肩胛下肌"], "a": 2, "e": "講義2-p.69～70（92專考古題）：外展時使肱骨頭下沉最主要的肌肉＝棘上肌。三角肌初期往上拉（2-p.54），需要棘上肌往內壓。"}]}, "Z": {"cards": [], "mcq": [{"q": "10/31 第1題　進行伏地挺身時，下列哪一肩關節的肌肉不是主要參與的肌肉？", "o": ["後三角肌", "胸大肌", "前鋸肌", "三頭肌"], "a": 0, "e": "講義 2-p.34（前鋸肌：前突、上旋）、2-p.49（肩關節各動作的主要肌肉）"}, {"q": "10/31 第2題　下列那塊肌肉收縮時，可使肩胛骨（scapula）往上旋轉（rotate upward）？", "o": ["菱形肌（rhomboids）", "棘上肌（supraspinatus）", "前鋸肌（serratus anterior）", "胸小肌（pectoralis minor）"], "a": 2, "e": "講義 2-p.34（前鋸肌 actions：abduction & upward rotation）、2-p.50 表、2-p.67 解答"}, {"q": "10/31 第3題　當你坐有扶手的椅子時，手臂支撐在座椅扶手上，下列那一肩胛肌肉的作用與身體撐起無關？", "o": ["菱形肌", "闊背肌", "胸小肌", "下斜方肌"], "a": 0, "e": "講義 2-p.13（Depression：穩定肩胛骨、把身體抬高 4–6 吋）、2-p.37（胸小肌 depression）、2-p.47（闊背肌 scapula depression）、2-p.35（下斜方肌 depression）"}, {"q": "10/31 第4題　維持肱骨頭（humeral head）關於肩關節中避免半脫位（subluxation），下列肌肉最不具關鍵角色？", "o": ["大圓肌（teres major）", "棘下肌（infraspinatus）", "棘上肌（supraspinatus）", "小圓肌（teres minor）"], "a": 0, "e": "講義 2-p.68 原題（第 3 題），解答在 2-p.70：B＝大圓肌；2-p.52（旋轉肌把肱骨頭固定，防止半脫位）"}, {"q": "10/31 第5題　梭內、外肌纖維（intrafusal and extrafusal muscle fibers）之特徵與功能，下列何者錯誤？正確答案選項： (D) 肌梭（muscle spindle）對肌肉被牽張之速度的反應，肌梭內次要感覺神經纖維（flower-spray endings）較主要感覺神經纖維（annulospiral nerve fiber）敏感。  正確解析：伺服肌梭（muscle spindle）內的主要感覺神經纖維（Ia 類纖維，即環螺狀神經纖維 annulospiral nerve fiber）對肌肉被牽張的速度與長度變化最為敏感；而次要感覺神經纖維（II 類纖維，即花spray樣終末 flower-spray endings）主要對靜態的長度變化較為敏感。因此選項 (D) 敘述「次要感覺神經纖維較主要感覺神經纖維敏感」是錯誤的。(註：原本解析誤植為選項 C，在此特別更正，選項 C 敘述梭外肌纖維由  運動神經元控制、梭內肌由  運動神經元支配，本來就是正確的生物力學觀念。", "o": ["大部分梭外肌纖維由γ（gamma）運動神經元控制", "肌梭對肌肉被牽張之速度的反應，肌梭內次要感覺神經纖維（flower-spray endings）較主要感覺神經纖維（annulospiral nerve fiber）敏感", "肌梭（muscle spindle）存在於梭內肌纖維，並提供有關肌纖維長度的本體感覺", "梭內肌纖維受伸展而產生感覺衝動，傳遞到脊髓後興奮α-運動神經元，引發牽張反射（stretch reflex）"], "a": 0, "e": "講義 1-p.67（梭外 ← Aα、梭內 ← Aγ）、1-p.69、1-p.64、1-p.66"}, {"q": "10/31 第6題　欲牽張緊縮的肱三頭肌，應：", "o": ["先伸直肩關節，再屈曲肘關節", "先屈曲肘關節，再屈曲肩關節", "先伸直肘關節，再過度伸直肩關節", "先屈曲肩關節，再伸直肘關節"], "a": 1, "e": "講義 3-p.17（肱三頭肌：長頭跨肩、肘）"}, {"q": "10/31 第7題　下列哪一個肌肉不屬於旋轉袖肌群？", "o": ["肩胛下肌（subscapularis）", "棘上肌（supraspinatus）", "棘下肌（infraspinatus）", "大圓肌（teres major）"], "a": 3, "e": "講義 2-p.7（旋轉肌袖）、2-p.64、2-p.70（大圓肌：內轉）"}, {"q": "10/31 第8題　喙突是哪一個肌肉附著的地方？", "o": ["肱二頭肌長頭", "喙肱肌", "肱三頭肌長頭", "肱肌"], "a": 1, "e": "講義 2-p.2（喙突：肱二頭肌短頭＋喙肱肌的聯合肌腱起點、胸小肌附著點）、2-p.37、2-p.45"}, {"q": "10/31 第9題　下列有關正常「肩胛肱骨節律」scapulohumeral rhythm的敘述何者錯誤？", "o": ["增加三角肌（deltoid）的收縮效果", "可增加手舉高的角度", "肩胛骨scapula的動作比盂肱關節glenohumeral joint大", "可維護glenohumeral joint的穩定度"], "a": 2, "e": "講義 2-p.33（額狀面外展 30° 之後 GH:ST＝2:1；肩胛平面 1.25:1）、2-p.63 原題"}, {"q": "10/31 第10題　關於肌肉收縮與負重的關係的敘述，下列何者正確？", "o": ["離心收縮時，肌肉負重大於等長收縮", "肌肉作離心收縮的速度越慢，負重越重", "肌肉作向心收縮的速度越快，負重越重", "向心收縮時，肌肉負重大於等長收縮"], "a": 0, "e": "講義 1-p.23（Muscle tension: eccentric > isometric > concentric）、1-p.22（離心 vs 向心比較表）"}, {"q": "10/31 第11題　下列有關肌肉向心、離心與等長收縮方式相互比較之敘述，何者錯誤？", "o": ["手肘從屈曲到伸直將啞鈴慢慢放下時，手肘屈肌進行離心收縮", "三種收縮方式中，向心方式可以產生最大的收縮力量", "手肘從伸直到屈曲將啞鈴舉起時，手肘屈肌進行向心收縮", "離心收縮通常用來做動作的減速用"], "a": 1, "e": "講義 1-p.23（Muscle tension: eccentric > isometric > concentric）、1-p.22（離心 vs 向心比較表）"}, {"q": "10/31 第12題　下列那一項動作不屬於開放鏈（open kinematic chain）？", "o": ["手持蚊拍追擊飛蚊", "行走時，下肢擺盪的動作", "打棒球時，上肢投球的動作", "騎腳踏車，下肢的動作"], "a": 3, "e": "講義 1-p.8（Kinematic chains：open＝遠端自由；closed＝遠端固定）"}, {"q": "10/31 第13題　下列有關斜方肌的敘述何者錯誤？", "o": ["分為上、中、下部分的纖維", "上斜方肌主要動作包含聳肩", "由長胸神經所支配", "肌肉終點位於肩胛骨"], "a": 2, "e": "講義 2-p.35（Trapezius：spinal accessory nerve）、2-p.34 與 2-p.67（前鋸肌：長胸神經）"}, {"q": "10/31 第14題　肩關節外展180度時，鎖骨會產生軸向旋轉（axial rotation）是因哪一條韌帶被拉緊所造成的？", "o": ["橫肱韌帶（transverse humeral ligament）", "喙肩峰韌帶（coracoacromial ligament）", "喙鎖韌帶（coracoclavicular ligament）", "喙肱韌帶（coracohumeral ligament）"], "a": 2, "e": "講義 2-p.62 原題（第 2 題）；2-p.21（鎖骨的轉動由喙鎖韌帶的斜方韌帶＋圓錐韌帶拉緊所造成）"}, {"q": "10/31 第15題　有關開放鏈與閉鎖鏈動作的敘述，下列何者錯誤？", "o": ["開放鏈與閉鎖鏈動作屬於關節運動學（arthrokinematics）", "上肢投球動作為開放鏈動作", "開放鏈動作特徵為固定近端－移動遠端（distal-on-proximal）的動作", "下肢蹲下動作為閉鎖鏈動作"], "a": 0, "e": "講義 1-p.8（Kinematic chains：open＝遠端自由；closed＝遠端固定）"}, {"q": "10/31 第16題　下列那一塊肌肉會將肩胛骨往下拉（depression）？", "o": ["菱形肌（rhomboids）", "上斜方肌（upper trapezius）", "提肩胛肌（levator scapulae）", "胸小肌（pectoralis minor）"], "a": 3, "e": "講義 2-p.37（胸小肌：depression）、2-p.67 解答（下斜方肌：降低；提肩胛肌：抬高）、2-p.70（菱形肌：抬高）"}, {"q": "10/31 第17題　翼狀肩胛（winging scapulae）是因為哪條肌肉無力？", "o": ["前鋸肌（serratus anterior）", "肩胛下肌（subscapularis）", "菱形肌（rhomboid）", "提肩胛肌（levator scapulae）"], "a": 0, "e": "講義 2-p.65 原題（第 3 題）；2-p.59（前鋸肌麻痺 → 肩胛骨內側緣翹起）"}, {"q": "10/31 第18題　有關前鋸肌的敘述，下列何者錯誤？", "o": ["為肩胛胸廓關節最主要的前突肌（protractor）", "肱三頭肌和前鋸肌執行手肘尚未伸直前伏地挺身的初期動作", "無力時會造成肩胛骨翼狀突出（winging）的現象", "前鋸肌和斜方肌於上臂抬舉時控制肩胛骨向上旋轉"], "a": 1, "e": "講義 2-p.34（前鋸肌：前突、上旋）、2-p.56（與斜方肌協同上旋）、2-p.59（麻痺 → 翼狀肩胛）"}, {"q": "10/31 第19題　下列有關肩關節外展的敘述何者正確？", "o": ["在起始階段多依靠棘上肌用力", "疼痛弧（painful arc）常發生在外展的 0~60 度", "要到外展 120 度一定要同時配合肩關節內轉才能達成", "外展到 90 度時，鎖骨已停止旋轉"], "a": 0, "e": "講義 2-p.28（完全內轉時外展只到 60°，外轉才能再抬高）、2-p.21（鎖骨在 90° 後轉動）、2-p.32、2-p.49（外展：三角肌、棘上肌）"}, {"q": "10/31 第20題　在站立的姿勢下，將兩手高舉過頭，會使得：", "o": ["身體重心位置提高", "身體重心位置維持不動", "身體側向穩定性增加", "身體重心位置降低"], "a": 0, "e": "講義 1-p.4（人體重心：站立時約在第二薦椎前方一吋）"}, {"q": "10/31 第21題　有關骨骼肌分類與功能之敘述，下列何者正確？", "o": ["第一型肌肉纖維（type I fiber）較第二型肌肉纖維（type II fiber）更直接利用無氧代謝進行三磷酸腺苷（ATP）合成", "第二型肌肉纖維（type II fiber）之肌漿網（sarcoplasmic reticulum）較第一型肌肉纖維（type I fiber）之肌漿網能更快釋放或儲存鈣離子", "支配第一型肌肉纖維（type I fiber）之運動神經元，其神經傳導速度較第二型肌肉纖維（type II fiber）之運動神經元快", "第二型A肌肉纖維（type IIa fiber）較第二型B肌肉纖維（type IIb fiber）更直接利用無氧代謝進行三磷酸腺苷（ATP）合成"], "a": 1, "e": "講義 1-p.48（Type IIa＝FOG、IIb＝FG）、1-p.51（三種肌纖維比較表）"}, {"q": "10/31 第22題　關於盂肱關節的穩定度的敘述，下列何者正確？ ①關節盂有足夠深度包覆肱骨頭 ②關節唇增加關節盂深度增加穩定度 ③關節囊強壯緊繃是穩定度主要來源 ④舉手時旋轉肌袖肌群會一起收縮將肱骨頭拉入關節盂內", "o": ["①④", "③④", "②④", "①②"], "a": 2, "e": "講義 2-p.6（肱骨頭大、肩盂小）、2-p.52（旋轉肌把肱骨頭固定在關節盂）、2-p.54"}, {"q": "10/31 第23題　在肌動學領域中，下列何者不是研究肌肉作用的方法？", "o": ["肌電圖", "血液檢驗", "解剖", "觸診"], "a": 1, "e": "講義沒有專頁列出「研究肌肉作用的方法」，可能是課堂口述；四個選項中只有血液檢驗跟肌肉的力學、運動無關。"}, {"q": "10/31 第24題　伏地挺身時，在側邊肋骨處與肩胛骨間可以看到鼓起的肌肉是？", "o": ["腹內側斜肌", "前鋸肌", "腰方肌", "闊背肌"], "a": 1, "e": "講義 2-p.34（前鋸肌：起於胸廓前外側、止於肩胛骨內側緣）"}, {"q": "10/31 第25題　肩部旋轉肌群（rotator cuff）中，因與三角肌（deltoid）肌力不平衡之故，導致外展動作（abduction）時無法將肱骨頭（humeral head）下壓，則下列那一條肌肉需要進行肌力訓練以改善此問題？  正確答案選項： (B) 肩胛下肌（subscapularis）  正確解析：在肩關節外展時，三角肌會產生將肱骨頭向上拉的向量力。為了防止肱骨頭向上撞擊肩峰（造成夾擠症候群），旋轉肌袖中的肩胛下肌（Subscapularis）扮演關鍵的「向下旋轉與下壓肱骨頭（downward glide）」角色。當肩胛下肌無力或與三角肌肌力失衡時，就無法有效將肱骨頭穩定下拉。因此針對此問題，最需要加強訓練的是肩胛下肌。（原解析誤植為棘下肌，在此修正為肩胛下肌）。", "o": ["小圓肌（teres minor）", "棘下肌（infraspinatus）", "棘上肌（supraspinatus）", "肩胛下肌（subscapularis）"], "a": 2, "e": "講義 2-p.69 原題（第 2 題），解答在 2-p.70：A(abd)＝棘上肌；2-p.54（三角肌初期垂直上拉）"}, {"q": "11/1 第1題　梭內、外肌纖維（intrafusal and extrafusal muscle fibers）之特徵與功能，下列何者錯誤？", "o": ["大部分梭外肌纖維由γ（gamma）運動神經元控制", "肌梭（muscle spindle）對肌肉被牽張之速度的反應，肌梭內次要感覺神經纖維較主要感覺神經纖維敏感", "肌梭（muscle spindle）存在於梭內肌纖維，並提供有關肌纖維長度的本體感覺", "梭內肌纖維受伸展而產生感覺衝動，傳遞到脊髓後興奮α-運動神經元，引發牽張反射（stretch reflex）"], "a": 0, "e": "講義 1-p.67（梭外 ← Aα、梭內 ← Aγ）、1-p.69、1-p.64、1-p.66"}, {"q": "11/1 第2題　肩部旋轉肌群（rotator cuff）中，因與三角肌（deltoid）肌力不平衡之故，導致外展動作（abduction）時無法將肱骨頭（humerus head）下壓，則下列那一條肌肉需要進行肌力訓練以改善此問題？", "o": ["小圓肌（teres minor）", "棘下肌（infraspinatus）", "棘上肌（supraspinatus）", "肩胛下肌（subscapularis）"], "a": 2, "e": "講義 2-p.69 原題（第 2 題），解答在 2-p.70：A(abd)＝棘上肌；2-p.54（三角肌初期垂直上拉）"}, {"q": "11/1 第3題　關於肌肉收縮與負重的關係的敘述，下列何者正確？", "o": ["離心收縮時，肌肉負重大於等長收縮", "肌肉作向心收縮的速度越快，負重越重", "向心收縮時，肌肉負重大於等長收縮", "肌肉作離心收縮的速度越慢，負重越重"], "a": 0, "e": "講義 1-p.23（Muscle tension: eccentric > isometric > concentric）、1-p.22（離心 vs 向心比較表）"}, {"q": "11/1 第4題　下列有關斜方肌的敘述何者錯誤？", "o": ["分為上、中、下部分的纖維", "肌肉終點位於肩胛骨", "上斜方肌主要動作包含聳肩", "由長胸神經所支佩"], "a": 3, "e": "講義 2-p.35（Trapezius：spinal accessory nerve）、2-p.34 與 2-p.67（前鋸肌：長胸神經）"}, {"q": "11/1 第5題　有關開放鏈與閉鎖鏈動作的敘述，下列何者錯誤？", "o": ["開放鏈與閉鎖鏈動作屬於關節運動學（arthrokinematics）", "開放鏈動作特徵為固定近端－移動遠端（distal-on-proximal）的動作", "上肢投球動作為開放鏈動作", "下肢蹲下動作為閉鎖鏈動作"], "a": 0, "e": "講義 1-p.8（Kinematic chains：open＝遠端自由；closed＝遠端固定）"}, {"q": "11/1 第6題　在站立的姿勢下，將兩手高舉過頭，會使得：", "o": ["身體側向穩定性增加", "身體重心位置提高", "身體重心位置降低", "身體重心位置維持不動"], "a": 1, "e": "講義 1-p.4（人體重心：站立時約在第二薦椎前方一吋）"}, {"q": "11/1 第7題　有關骨骼肌分類與功能之敘述，下列何者正確？", "o": ["支配第一型肌肉纖維之運動神經元，其神經傳導速度較第二型快", "第二型肌肉纖維之肌漿網較第一型能更快釋放或儲存鈣離子", "第一型肌肉纖維較第二型更直接利用無氧代謝進行ATP合成", "第二型A肌肉纖維較第二型B更直接利用無氧代謝進行ATP合成"], "a": 1, "e": "講義 1-p.48（Type IIa＝FOG、IIb＝FG）、1-p.51（三種肌纖維比較表）"}, {"q": "11/1 第8題　肌節（sarcomere）是骨骼肌收縮的基本單位，在肌原纖維中，何種構造之間形成一個肌節？", "o": ["H區", "Z線", "M線", "A帶"], "a": 1, "e": "講義 1-p.37（收縮時 Z 線靠近、A 帶不變、I 帶變窄、H 區消失）、1-p.33、1-p.41"}, {"q": "11/1 第9題　有關前鋸肌的敘述，下列何者錯誤？", "o": ["前鋸肌和斜方肌於上臂抬舉時控制肩胛骨向上旋轉", "無力時會造成肩胛骨翼狀突出（winging）的現象", "肱三頭肌和前鋸肌執行手肘尚未伸直前伏地挺身的初期動作", "為肩胛胸廓關節最主要的前突肌（protractor）"], "a": 2, "e": "講義 2-p.34（前鋸肌：前突、上旋）、2-p.56（與斜方肌協同上旋）、2-p.59（麻痺 → 翼狀肩胛）"}, {"q": "11/1 第10題　關於盂肱關節的穩定度的敘述，下列何者正確？①關節盂有足夠的深度②關節唇增加關節盂深度③關節囊強壯且緊繃④旋轉肌袖肌群會一起收縮將肱骨頭拉入關節盂內", "o": ["②④", "①④", "①②", "③④"], "a": 0, "e": "講義 2-p.6（肱骨頭大、肩盂小）、2-p.52（旋轉肌把肱骨頭固定在關節盂）、2-p.54"}, {"q": "11/1 第11題　對於「肩胛肱骨節律」，在肩關節外展動作時，肩胛胸關節和盂肱關節之產生的動作比值為：", "o": ["2：1", "3：1", "1：2", "1：3"], "a": 2, "e": "講義 2-p.33（額狀面外展 30° 之後 GH:ST＝2:1；肩胛平面 1.25:1）、2-p.63 原題"}, {"q": "11/1 第12題　下列那一組織與穩定肩峰鎖骨關節最無關？", "o": ["肩峰鎖骨韌帶", "下斜方肌", "三角肌", "喙突鎖骨韌帶"], "a": 1, "e": "講義 2-p.24（AC 關節由肩峰鎖骨韌帶、喙鎖韌帶限制；喙鎖韌帶是維持 AC 穩定最重要的韌帶）、2-p.39（三角肌起於鎖骨肩峰端與肩峰）"}, {"q": "11/1 第13題　下列旋轉袖（rotator cuff）肌肉中，何者能內旋手臂？", "o": ["棘下肌（infraspinatus）", "小圓肌（ teres minor ）", "棘上肌（supraspinatus）", "肩胛下肌（subscapularis）"], "a": 3, "e": "講義 2-p.42（肩胛下肌：internal rotation）、2-p.49（內轉：胸大肌、闊背肌、大圓肌；外轉：棘下肌、小圓肌）、2-p.70"}, {"q": "11/1 第14題　斜方韌帶(trapezoid ligament)與圓錐韌帶(conoid ligament)合稱：", "o": ["上肱骨(suprahumeral)韌帶", "肋骨鎖骨(costoclavicular)韌帶", "鎖骨間(interclavicular)韌帶", "喙骨鎖骨(coracoclavicular)韌帶"], "a": 3, "e": "講義 2-p.62 原題（第 1 題）、2-p.9、2-p.21"}, {"q": "11/1 第15題　操作者應如何對闊背肌進行最有效的徒手牽拉？", "o": ["固定胸廓的外側及骨盆上方，移動手臂至肩關節完全屈曲", "固定肩胛骨的腋緣，移動手臂至肩關節屈曲、外轉及部分外展的最終角度", "固定肩胛骨的腋緣，移動手臂至肩關節完全屈曲", "固定胸廓的外側及骨盆上方，移動手臂至肩關節屈曲、外轉及部分外展的最終角度"], "a": 3, "e": "講義 2-p.47（闊背肌：起於 T6 以下棘突、胸腰筋膜、髂嵴、下位肋骨；作用為內轉、伸直、內收、肩胛下壓）"}, {"q": "11/1 第16題　下列那塊肌肉收縮時，可使肩胛骨（scapula）往上旋轉（rotate upward）？", "o": ["棘上肌（supraspinatus）", "前鋸肌（serratus anterior）", "菱形肌（rhomboids）", "胸小肌（pectoralis minor）"], "a": 1, "e": "講義 2-p.34（前鋸肌 actions：abduction & upward rotation）、2-p.50 表、2-p.67 解答"}, {"q": "11/1 第17題　伏地挺身時，在側邊肋骨處與肩胛骨間可以看到鼓起的肌肉是？", "o": ["闊背肌", "腰方肌", "前鋸肌", "腹內側斜肌"], "a": 2, "e": "講義 2-p.34（前鋸肌：起於胸廓前外側、止於肩胛骨內側緣）"}, {"q": "11/1 第18題　下列有關肩關節外展的敘述何者正確？", "o": ["在起始階段多依靠棘上肌用力", "要到外展 120 度一定要同時配合肩關節內轉才能達成", "外展到 90 度時，鎖骨已停止旋轉", "疼痛弧（painful arc）常發生在外展的 0~60 度"], "a": 0, "e": "講義 2-p.28（完全內轉時外展只到 60°，外轉才能再抬高）、2-p.21（鎖骨在 90° 後轉動）、2-p.32、2-p.49（外展：三角肌、棘上肌）"}, {"q": "11/1 第19題　下列關於肌節（sarcomere）的敘述，何者正確？", "o": ["暗帶（A band）的長度就是粗肌絲（thick filament）的長度", "亮帶（I band）的範圍內只有粗肌絲", "H區中央的M線是細肌絲附著的位置", "粗肌絲主要由肌動蛋白構成"], "a": 0, "e": "講義 1-p.37（收縮時 Z 線靠近、A 帶不變、I 帶變窄、H 區消失）、1-p.33、1-p.41"}, {"q": "11/1 第20題　下列何者能外展手臂？", "o": ["棘下肌（infraspinatus）", "肩胛下肌（subscapularis）", "小圓肌（teres minor）", "棘上肌（supraspinatus）"], "a": 3, "e": "講義 2-p.49（Abduction：deltoideus、supraspinatus）、2-p.40（棘上肌）"}, {"q": "11/1 第21題　進行伏地挺身時，下列哪一肩關節的肌肉不是主要參與的肌肉？", "o": ["胸大肌", "三頭肌", "後三角肌", "前鋸肌"], "a": 2, "e": "講義 2-p.34（前鋸肌：前突、上旋）、2-p.49（肩關節各動作的主要肌肉）"}, {"q": "11/1 第22題　欲牽張緊縮的肱三頭肌，應：", "o": ["先屈曲肘關節，再屈曲肩關節", "先屈曲肩關節，再伸直肘關節", "先伸直肘關節，再過度伸直肩關節", "先伸直肩關節，再屈曲肘關節"], "a": 0, "e": "講義 3-p.17（肱三頭肌：長頭跨肩、肘）"}, {"q": "11/1 第23題　喙突是哪一個肌肉附著的地方？", "o": ["肱三頭肌長頭", "喙肱肌", "肱二頭肌長頭", "肱肌"], "a": 1, "e": "講義 2-p.2（喙突：肱二頭肌短頭＋喙肱肌的聯合肌腱起點、胸小肌附著點）、2-p.37、2-p.45"}, {"q": "11/1 第24題　下列那些肌肉收縮，會造成肩關節的內旋（medial rotation）動作？①小圓肌 ②大圓肌 ③肩胛下肌 ④棘下肌 ⑤胸大肌", "o": ["②③④", "②③⑤", "③④⑤", "①③⑤"], "a": 1, "e": "講義 2-p.42（肩胛下肌：internal rotation）、2-p.49（內轉：胸大肌、闊背肌、大圓肌；外轉：棘下肌、小圓肌）、2-p.70"}, {"q": "11/1 第25題　下列那一塊肌肉會將肩胛骨往下拉（depression）？", "o": ["提肩胛肌（levator scapulae）", "菱形肌（rhomboids）", "上斜方肌（upper trapezius）", "胸小肌（pectoralis minor）"], "a": 3, "e": "講義 2-p.37（胸小肌：depression）、2-p.67 解答（下斜方肌：降低；提肩胛肌：抬高）、2-p.70（菱形肌：抬高）"}]}}</script>
+<script id="quizdata" type="application/json">{"K1": {"cards": [{"f": "Kinematics 運動學", "b": "描述物體在空間的運動範圍與軌跡（位置、速率、時間的關係），不談力"}, {"f": "Kinetics 運動力學包含哪兩部分？", "b": "靜力學 statics（平衡下外力產生的內力）與動力學 dynamics（不平衡時的外效應）"}, {"f": "人體計量學 Anthropometry：靜態 vs 動態", "b": "靜態＝結構性（尺寸、質量、體積、形狀）；動態＝功能性（活動角度、範圍、施力程度）"}, {"f": "Center of gravity (COG) 站立時的位置", "b": "第二薦椎（S2）前方約一吋"}, {"f": "矢狀面 Sagittal plane 的主要動作與軸", "b": "屈曲／伸直；額狀-水平軸（mediolateral axis）"}, {"f": "額狀面 Frontal (coronal) plane 的主要動作與軸", "b": "外展／內收；矢狀-水平軸（anteroposterior axis）"}, {"f": "水平面 Transverse plane 的主要動作與軸", "b": "旋轉 rotation；垂直軸 vertical (longitudinal) axis"}, {"f": "自由度 3 個的關節", "b": "髖關節 hip、盂肱關節 gleno-humeral（杵臼關節）"}, {"f": "環轉運動 Circumduction 出現於", "b": "2 或 3 個自由度的關節；1 個自由度的關節沒有"}, {"f": "Open vs Closed kinematic chain", "b": "開放鏈：遠端肢段自由懸空；封閉鏈：遠端肢段固定"}, {"f": "杵臼關節 Ball & socket 例子", "b": "肩、髖；動作含屈伸、外展內收、旋轉"}, {"f": "屈戍關節 Hinge joint", "b": "只做屈曲與伸直；肘、指間關節"}, {"f": "髁狀關節 Condyloid joint", "b": "橢圓凸面嵌橢圓凹面，多方向但無法旋轉；掌指關節、橈腕關節"}, {"f": "鞍狀關節 Saddle joint", "b": "兩關節面各有凹凸，多方向活動；腕骨大菱形骨—拇指掌骨、胸鎖關節"}, {"f": "樞軸關節 Pivot joint", "b": "只能旋轉；寰椎—樞椎、橈尺近端"}, {"f": "凹凸原則：凸面骨在凹面上動", "b": "關節面滑動方向與骨頭角動作方向相反"}, {"f": "凹凸原則：凹面骨在凸面上動", "b": "關節面滑動方向與骨頭角動作方向相同"}, {"f": "牛頓第二定律", "b": "F = ma，作用力＝質量×加速度"}, {"f": "第一類槓桿 位置與例子", "b": "支點在中間；抬頭（枕寰關節為支點，背部肌肉為作用力）"}, {"f": "第二類槓桿 位置與例子", "b": "阻力在中間，力臂>阻力臂；踮腳尖（蹠趾為支點，小腿肌為作用力）"}, {"f": "第三類槓桿 位置與例子", "b": "作用力在中間，力臂<阻力臂；肱二頭肌前臂舉重（肘為支點）；人體最普遍"}, {"f": "等長收縮 Isometric", "b": "肌肉長度不變；持續 6 秒才有增肌力效果；適合急性癒合期、增加關節穩定度"}, {"f": "等速收縮 Isokinetic 特色與限制", "b": "速度恆定、阻力隨力量調整；儀器昂貴、多為開放鏈、不宜急性期、速度不超過 120°/秒"}, {"f": "肌肉張力大小排序", "b": "eccentric > isometric > concentric"}, {"f": "最易引起遲發性肌肉酸痛 DOMS 的收縮", "b": "離心收縮 eccentric（也較易拉傷）"}, {"f": "被動不足 Passive insufficiency", "b": "拮抗肌為跨雙關節肌，被拉到最長而限制主動肌的關節活動度；例：髖屈曲配膝伸直僅 60–80°"}, {"f": "肌腱作用 Tendon action (tenodesis)", "b": "主動肌無力時，拮抗肌收縮把主動肌拉緊，產生被動關節動作"}, {"f": "肌肉在何長度產生最大主動張力", "b": "約休息長度的 110%（比靜止稍長）"}, {"f": "epimysium / perimysium / endomysium", "b": "肌外膜（整條肌肉）／肌束膜（每條肌束）／肌內膜（每條肌纖維）"}, {"f": "肌節 sarcomere 長度（放鬆／收縮／拉長）", "b": "2.5 μm／約 1.5 μm／約 3.0 μm"}, {"f": "肌肉收縮時 A band、I band、H zone", "b": "A 帶不變；I 帶變窄；H 區變窄甚至消失；Z 線靠近"}, {"f": "T system vs SR", "b": "橫小管 T system：加速傳導動作電位；肌漿網 SR：貯存與釋放 Ca²⁺"}, {"f": "Ca²⁺ 在收縮中與誰結合", "b": "肌鈣蛋白 troponin 的 C 單位，使 actin 活化位暴露"}, {"f": "神經肌肉接合處的傳導物質與分解酶", "b": "乙醯膽鹼 Acetylcholine；膽鹼酯酶 Cholinesterase"}, {"f": "動作電位閾值", "b": "約 −55 mV；全有全無定律"}, {"f": "Type I 慢縮纖維特徵", "b": "紅、小、粒線體多、肌紅蛋白高、氧化磷酸化、耐疲勞、收縮慢"}, {"f": "Type IIb（FG）快縮纖維特徵", "b": "白、大、粒線體少、醣解、收縮快、易疲勞"}, {"f": "肌纖維徵召順序", "b": "Type I → IIa → IIb（size principle：小運動神經元先徵召）"}, {"f": "運動單位 Motor unit", "b": "一個運動神經元＋其軸突＋所支配的所有肌纖維；眼肌約 5 條，大肌肉 1000 條以上"}, {"f": "肌力分級的三種方式", "b": "先用神經支配比最小的；增加徵召的運動單位數；增加刺激頻率"}, {"f": "Ia / Ib / II 傳入纖維", "b": "Ia：肌梭初級（速度）；Ib：高爾基腱器（張力）；II：肌梭次級（長度量）"}, {"f": "高爾基腱器 GTO 功能", "b": "偵測肌肉張力，過度收縮時經抑制性中間神經元抑制作用肌，保護肌肉"}, {"f": "肌梭 Muscle spindle 功能", "b": "偵測肌肉長度及其變化速率；維持姿勢肌張力；由 γ 運動神經元調節敏感度"}, {"f": "梭外肌／梭內肌 的運動神經", "b": "梭外：Aα；梭內：Aγ"}], "mcq": [{"q": "下列何項學問在研究動作的表徵（描述運動的位置、軌跡、速率）？", "o": ["動力學 kinetics", "運動學 kinematics", "肌肉力學 muscle mechanics", "人體計量學 anthropometry"], "a": 1, "e": "運動學描述運動的範圍與軌跡，不探討產生運動的力。"}, {"q": "使用量角器測量關節活動度（ROM）時，主要是應用下列何者？", "o": ["關節運動學 arthrokinematics", "動力學 kinetics", "骨運動學 osteokinematics", "人體計量學的靜態測量"], "a": 2, "e": "量角器測的是骨頭的角度運動，屬骨運動學。"}, {"q": "人體站立時，重心位於何處？", "o": ["第二薦椎前方約一吋", "第十二胸椎前方", "第五腰椎後方", "恥骨聯合上方"], "a": 0, "e": "站立重心約在 S2 前方一吋。"}, {"q": "肘關節彎曲、伸直（屈伸）發生在哪個平面、繞哪個軸？", "o": ["額狀面，矢狀-水平軸", "矢狀面，額狀-水平軸", "水平面，垂直軸", "額狀面，垂直軸"], "a": 1, "e": "屈伸在矢狀面，繞額狀（橫向）水平軸。"}, {"q": "下列何者有三個自由度？", "o": ["肘關節", "指間關節", "髖關節", "橈腕關節"], "a": 2, "e": "髖與盂肱關節為杵臼關節，3 自由度；肘、指間 1 個；橈腕 2 個。"}, {"q": "環轉運動（circumduction）存在於哪種關節？", "o": ["只有 1 個自由度的關節", "2 或 3 個自由度的關節", "所有滑液關節", "只有樞軸關節"], "a": 1, "e": "環轉是 2、3 自由度關節的特徵，1 自由度沒有。"}, {"q": "寰椎與樞椎之間的關節型態屬於？", "o": ["屈戍關節", "髁狀關節", "鞍狀關節", "樞軸關節"], "a": 3, "e": "樞軸關節只能旋轉；寰樞、橈尺近端為例。"}, {"q": "拇指的腕掌關節（大菱形骨與第一掌骨）及胸鎖關節屬於何種關節？", "o": ["鞍狀關節", "滑動關節", "髁狀關節", "屈戍關節"], "a": 0, "e": "兩關節面各有凹凸，可多方向活動，為鞍狀關節。"}, {"q": "凸面骨頭在凹面上移動（如肩外展時肱骨頭），關節面的滑動方向與骨頭角動作方向的關係為何？", "o": ["相同", "相反", "垂直", "沒有滑動"], "a": 1, "e": "凸動凹→滑動反向；肱骨頭外展時往上 roll、往下 slide。"}, {"q": "人體中最普遍的槓桿型式為？", "o": ["第一類", "第二類", "第三類", "三類一樣多"], "a": 2, "e": "第三類（作用力在中間）最普遍，如肱二頭肌屈肘。"}, {"q": "踮腳尖時，其槓桿類型與阻力位置分別為？", "o": ["第一類，支點在中央", "第二類，阻力（體重）在中央", "第三類，作用力在中央", "第二類，作用力在中央"], "a": 1, "e": "踮腳尖：蹠趾為支點、體重在中間，力臂>阻力臂，為第二類。"}, {"q": "關於離心收縮的敘述，下列何者正確？", "o": ["肌肉長度明顯變短", "產生同樣的力需要徵召較多運動單位", "最大離心收縮產生的力大於最大向心收縮", "與向心收縮相比，較不易造成遲發性肌肉酸痛"], "a": 2, "e": "離心最大力較大、徵召動作單位較少、肌肉被拉長，最易引起 DOMS。"}, {"q": "肌肉張力由大到小的排序為？", "o": ["concentric > isometric > eccentric", "isometric > concentric > eccentric", "eccentric > concentric > isometric", "eccentric > isometric > concentric"], "a": 3, "e": "離心 > 等長 > 向心。"}, {"q": "有關等速收縮訓練，下列何者錯誤？", "o": ["訓練速度每秒不宜超過 120 度", "大部分只能做開放鏈訓練", "儀器昂貴", "適合在急性期積極施行"], "a": 3, "e": "等速收縮不宜在急性期施行。"}, {"q": "等長收縮要持續多久才有增進肌力的效果？", "o": ["2 秒", "6 秒", "15 秒", "30 秒"], "a": 1, "e": "講義：持續收縮 6 秒才具增進肌力效果。"}, {"q": "髖屈曲時，膝伸直（約 60–80°）的活動度小於膝屈曲（115–125°），其原因為？", "o": ["主動肌無力", "主動不足", "被動不足（hamstrings 被拉長）", "關節囊鬆弛"], "a": 2, "e": "拮抗肌為跨雙關節肌（後大腿肌群）被拉到最長，使髖屈曲受限，稱被動不足。"}, {"q": "依肌肉長度-張力關係，離體肌肉在何種長度下可產生最大張力？", "o": ["休息時長度", "比休息長度稍長", "比休息長度稍短", "比休息長度再拉長一倍"], "a": 1, "e": "約 110% 靜止長度時達最大張力；再拉長主動張力先升後降。"}, {"q": "包覆「整條肌肉」的結締組織稱為？", "o": ["肌內膜", "肌束膜", "肌外膜", "肌纖維膜"], "a": 2, "e": "肌外膜包整條肌肉，肌束膜包肌束，肌內膜包肌纖維。"}, {"q": "肌肉收縮時，下列何者長度不變？", "o": ["A 帶", "I 帶", "H 區", "肌節"], "a": 0, "e": "A 帶＝粗肌絲全長，不變；I 帶、H 區、肌節都縮短。"}, {"q": "肌漿網（SR）的主要功能為？", "o": ["合成 ATP", "加速動作電位傳導", "貯存與釋放鈣離子", "分解乙醯膽鹼"], "a": 2, "e": "SR 貯存／釋放 Ca²⁺；加速傳導的是橫小管 T system。"}, {"q": "Ca²⁺ 進入肌漿後，與下列何者結合而啟動收縮？", "o": ["肌凝蛋白", "肌鈣蛋白 C", "肌動蛋白", "肌紅蛋白"], "a": 1, "e": "Ca²⁺ 與 troponin C 結合→構型改變→露出 actin 活化位。"}, {"q": "下列何者為慢縮（Type I）肌纖維的特徵？", "o": ["直徑大、顏色白", "粒線體稀少", "氧化磷酸化為主要 ATP 來源、疲乏慢", "醣解酵素活性最高"], "a": 2, "e": "Type I：小、紅、粒線體多、有氧、耐疲勞。"}, {"q": "在低強度運動時，肌纖維徵召順序為？", "o": ["IIb → IIa → I", "I → IIa → IIb", "IIa → I → IIb", "同時徵召"], "a": 1, "e": "依 size principle，由慢肌先開始，再加入 IIa、IIb。"}, {"q": "支配肌梭梭內肌纖維的運動神經元為？", "o": ["Aα", "Aβ", "Aγ", "C 纖維"], "a": 2, "e": "梭外肌：Aα；梭內肌：Aγ。"}, {"q": "偵測肌肉張力、在過度收縮時抑制作用肌的受器是？", "o": ["肌梭 Ia", "高爾基腱器 Ib", "肌梭 II", "關節囊受器"], "a": 1, "e": "GTO（Ib）位於肌腱，經抑制性中間神經元抑制作用肌，具保護作用。"}]}, "K2": {"cards": [{"f": "肩胛骨與胸廓第幾根肋骨相對？附著幾塊肌肉？", "b": "第 2–7 肋；17 塊肌肉"}, {"f": "coracoid process 喙突的附著", "b": "聯合肌腱（肱二頭肌短頭＋喙肱肌）起點、胸小肌止點、喙肱韌帶／喙肩韌帶附著"}, {"f": "acromion 肩峰", "b": "肩胛棘向外延伸的寬扁突出，覆蓋肱骨頭，三角肌起點之一"}, {"f": "肱骨頭後傾角（retroversion）", "b": "相對於上髁軸向後轉約 30°"}, {"f": "大結節 greater tuberosity 的附著肌", "b": "棘上肌、棘下肌、小圓肌"}, {"f": "小結節 lesser tuberosity 的附著肌", "b": "肩胛下肌 subscapularis"}, {"f": "bicipital groove 二頭肌溝", "b": "位於大小結節間，肱二頭肌長頭肌腱通過；上有橫韌帶防滑脫"}, {"f": "rotator cuff 四條肌肉（SITS）", "b": "supraspinatus、infraspinatus、teres minor、subscapularis"}, {"f": "棘上肌 supraspinatus 動作／神經", "b": "外展；肩胛上神經"}, {"f": "棘下肌 infraspinatus 動作", "b": "外轉 ER、內收（神經：肩胛上神經）"}, {"f": "小圓肌 teres minor 動作／神經", "b": "外轉 ER、內收；腋神經"}, {"f": "肩胛下肌 subscapularis 動作", "b": "內轉 IR（止於小結節）"}, {"f": "肩關節 ROM 排序", "b": "肩（0–180°）＞ 髖（0–120°）＞ 腕 ＞ 肘"}, {"f": "肩關節屬第幾級槓桿？特點", "b": "第三級；力臂短費力，但得較大速度與活動長度"}, {"f": "斜方韌帶＋圓錐韌帶合稱", "b": "喙鎖韌帶 coracoclavicular lig.，連接鎖骨與喙突"}, {"f": "防盂肱脫臼的結構", "b": "喙肱韌帶、盂肱韌帶、肱橫韌帶、盂脣 glenoid labrum"}, {"f": "肱骨頭向下滑動對應的動作", "b": "外展（向上滑＝內收；向前滑＝伸直、外轉、水平外展；向後滑＝屈曲、內轉、水平內收）"}, {"f": "凸面／凹面滑動規則", "b": "肱骨頭（凸）滑動方向與骨動作相反；關節窩（凹）與肩胛骨動作相同方向"}, {"f": "scapulothoracic joint 肩胛胸廓關節", "b": "無骨性連結的假關節／功能性關節"}, {"f": "唯一連接上肢與胸腔的關節", "b": "胸鎖關節 sternoclavicular（鞍狀，有關節盤，3 度自由度）"}, {"f": "胸鎖關節與哪個關節結構相同？", "b": "拇指腕掌關節（CMC）"}, {"f": "胸鎖關節的韌帶", "b": "鎖骨間韌帶、前後胸鎖（囊）韌帶、肋鎖韌帶（第 1 肋下方）"}, {"f": "SC 關節抬高／下壓角度", "b": "抬高 30–45°；下壓 5–10°（被第 1 肋擋住）"}, {"f": "SC 休息位前突／後縮", "b": "前突 15°、後縮 15°"}, {"f": "鎖骨軸向旋轉何時出現？由什麼引起？", "b": "肩上舉超過 90° 後；喙鎖韌帶（斜方＋圓錐）拉緊"}, {"f": "維持 AC 關節穩定最重要的韌帶", "b": "喙鎖韌帶 coracoclavicular ligaments"}, {"f": "coracoacromial arch / supraspinatus outlet", "b": "肩胛頸＋肩峰＋喙肩韌帶＋喙突；其下有旋轉肌腱、二頭肌長頭腱、滑囊"}, {"f": "scapulohumeral rhythm 額狀面比例", "b": "前 30° 後 ST：GH = 1：2；每 15° = GH 10° + ST 5°"}, {"f": "肩外展 180° 的組成", "b": "盂肱 120° ＋ 肩胛向上旋轉 60°（AC 30° + SC 30°）"}, {"f": "scapular plane 的 GH：ST", "b": "1.25：1"}, {"f": "盂肱完全內轉時主動外展極限", "b": "約 60°（大結節撞肩峰／喙肩韌帶）；外轉 90° 則可到 90°"}, {"f": "手臂放身側 vs 完全上舉的旋轉總量", "b": "身側 180°（ER+IR）；完全上舉 90°（韌帶扭轉繃緊）"}, {"f": "serratus anterior 前鋸肌：神經／動作", "b": "長胸神經；肩胛骨外展與向上旋轉；止於肩胛內側緣"}, {"f": "trapezius 斜方肌：神經與上中下動作", "b": "副神經；上：上提＋上轉；中：上轉＋內收；下：上轉＋內收＋下壓"}, {"f": "rhomboid 菱形肌：神經／動作", "b": "肩背神經 dorsal scapular n.；向下旋轉、內收、上提"}, {"f": "pectoralis minor 胸小肌", "b": "第 2–5 肋 → 喙突；胸內側神經；下壓"}, {"f": "levator scapulae 提肩胛肌", "b": "上位頸椎橫突 → 肩胛內側緣；肩背神經；上提、向下旋轉"}, {"f": "deltoid 三角肌 神經／動作", "b": "腋神經；外展；止於三角肌粗隆"}, {"f": "latissimus dorsi 闊背肌", "b": "胸背神經（C6–C8）；IR、伸直、內收、肩胛下壓、抬高骨盆；止於小結節嵴"}, {"f": "coracobrachialis 喙肱肌", "b": "喙突 → 肱骨內側面；肌皮神經；屈曲、內收"}, {"f": "肩部靜態防半脫位三項", "b": "水平喙肱韌帶、上盂肱韌帶、關節囊內負壓"}, {"f": "winging scapula 翼狀肩胛", "b": "前鋸肌（長胸神經）麻痺；肩胛內側緣掀起，無法完全上舉"}, {"f": "斜方肌麻痺的表現", "b": "肩胛休息位向下旋轉、外展、下壓；肱骨頭易半脫位；無法後縮肩胛"}], "mcq": [{"q": "斜方韌帶（trapezoid）與圓錐韌帶（conoid）合稱為？", "o": ["肋鎖韌帶", "鎖骨間韌帶", "喙鎖韌帶", "上肱骨韌帶"], "a": 2, "e": "兩者連接鎖骨與喙突，合稱喙骨鎖骨韌帶。"}, {"q": "肩關節外展 180° 時，鎖骨產生軸向旋轉是因哪條韌帶被拉緊？", "o": ["喙鎖韌帶", "橫肱韌帶", "喙肩韌帶", "喙肱韌帶"], "a": 0, "e": "喙鎖韌帶拉緊使鎖骨向上旋轉。"}, {"q": "scapulohumeral rhythm 中，ST 與 GH 關節動作的比值為？", "o": ["1：2", "2：1", "1：3", "3：1"], "a": 0, "e": "前 30° 後肩胛骨：肱骨 = 1：2。"}, {"q": "下列有關正常 scapulohumeral rhythm 的敘述何者錯誤？", "o": ["可維護盂肱關節穩定", "增加三角肌收縮效果", "可增加手舉高的角度", "scapula 動作比 GH 大"], "a": 3, "e": "肩胛動作量只有 GH 的一半。"}, {"q": "下列何者「不是」盂肱關節的內轉肌？", "o": ["闊背肌", "肩胛下肌", "棘下肌", "大圓肌"], "a": 2, "e": "棘下肌為外轉與內收；其餘為內轉。"}, {"q": "哪一肌肉可同時使肩胛骨上提、內收、下降？", "o": ["斜方肌", "菱形肌", "闊背肌", "大圓肌"], "a": 0, "e": "上部上提、中部內收、下部下壓。"}, {"q": "翼狀肩胛（winging scapula）是因哪條肌肉無力？", "o": ["菱形肌", "肩胛下肌", "前鋸肌", "提肩胛肌"], "a": 2, "e": "前鋸肌（長胸神經）無力使內側緣掀起。"}, {"q": "哪一條旋轉肌袖肌腱「不是」附著在大結節？", "o": ["棘上肌", "棘下肌", "小圓肌", "肩胛下肌"], "a": 3, "e": "肩胛下肌止於小結節。"}, {"q": "前鋸肌的神經支配為？", "o": ["副神經", "肩背神經", "長胸神經", "腋神經"], "a": 2, "e": "前鋸肌：長胸神經。"}, {"q": "下列何者麻痺會導致手臂無法完全抬舉？", "o": ["前鋸肌", "闊背肌", "菱形肌", "提肩胛肌"], "a": 0, "e": "前鋸肌使肩胛外展與上旋，缺失則節律異常。"}, {"q": "使用腋下拐杖，要訓練病人的哪組肌肉最恰當？", "o": ["前鋸肌及胸大肌", "肱三頭肌及前鋸肌", "闊背肌及肱三頭肌", "前鋸肌及闊背肌"], "a": 2, "e": "闊背肌使肩下壓撐身，肱三頭肌伸肘（講義解答 C）。"}, {"q": "維持肱骨頭於肩關節中避免半脫位，下列肌肉何者最不具關鍵角色？", "o": ["棘上肌", "大圓肌", "棘下肌", "小圓肌"], "a": 1, "e": "大圓肌不屬旋轉肌袖。"}, {"q": "肩部外展時，使肱骨頭下沉最主要的肌肉為？", "o": ["棘上肌", "肩胛下肌", "三角肌", "背闊肌"], "a": 0, "e": "講義解答：棘上肌。"}, {"q": "肱骨頭滑動方向與動作對應，何者正確？", "o": ["向前滑：屈曲", "向後滑：外轉", "向下滑：外展", "向上滑：外展"], "a": 2, "e": "向下滑＝外展；向上滑＝內收；向前＝伸直/外轉/水平外展。"}, {"q": "關於胸鎖關節，何者正確？", "o": ["為滑車關節且無關節盤", "是唯一連接上肢與胸腔的關節", "脫臼比鎖骨骨折更常見", "只有 1 度自由度"], "a": 1, "e": "鞍狀、有關節盤、3 度自由度；鎖骨常先骨折。"}, {"q": "肩關節完全內轉時，主動外展大約限制在？", "o": ["30°", "60°", "90°", "120°"], "a": 1, "e": "大結節撞擊肩峰與喙肩韌帶。"}, {"q": "手臂完全上舉時，盂肱關節旋轉總量約為？", "o": ["30°", "60°", "90°", "180°"], "a": 2, "e": "身側為 180°，完全上舉僅 90°。"}, {"q": "斜方肌麻痺最可能出現？", "o": ["肩胛休息位向上旋轉", "肩胛休息位向下旋轉、外展、下壓", "肩胛無法前突", "肩胛內側緣翼狀"], "a": 1, "e": "斜方肌麻痺使肩胛下旋、肱骨頭易半脫位；翼狀為前鋸肌。"}, {"q": "喙肩弓（supraspinatus outlet）下方的軟組織「不包括」？", "o": ["旋轉肌袖肌腱", "肱二頭肌長頭腱", "肩峰下滑囊", "盂脣下關節盤"], "a": 3, "e": "肩關節無關節盤；其餘皆在弓下，是肩夾擠的解剖基礎。"}, {"q": "肩關節屬於第幾級槓桿？", "o": ["第一級", "第二級", "第三級", "不屬槓桿"], "a": 2, "e": "施力點在支點與受力點中間，力臂短、速度大。"}, {"q": "當肩上舉時三角肌拉力線直接向上，容易導致？", "o": ["肱骨頭撞擊喙肩弓／肩夾擠", "鎖骨骨折", "胸鎖脫臼", "肋骨骨折"], "a": 0, "e": "肱骨垂直上移撞喙肩弓或肩峰。"}, {"q": "闊背肌的神經支配為？", "o": ["腋神經", "胸背神經", "肩胛上神經", "肌皮神經"], "a": 1, "e": "thoracodorsal nerve（C6–C8）。"}, {"q": "肩外展 180° 的組成，下列何者正確？", "o": ["肱骨 60°＋肩胛 120°", "肱骨 120°＋肩胛 60°", "肱骨 90°＋肩胛 90°", "肱骨 150°＋肩胛 30°"], "a": 1, "e": "肩胛 60° = AC 30° + SC 30°。"}]}, "K3": {"cards": [{"f": "外上髁 Lateral epicondyle", "b": "肱骨遠端外側；伸肌附著（extensor epicondyle）；網球肘"}, {"f": "內上髁 Medial epicondyle", "b": "肱骨遠端內側；腕與指屈肌附著（flexor epicondyle）；高爾夫球肘"}, {"f": "網球肘（Tennis elbow）發生部位", "b": "外上髁，腕與指伸肌附著處"}, {"f": "高爾夫球肘（Golfer's elbow）發生部位", "b": "內上髁，腕與指屈肌附著處"}, {"f": "Triangle sign", "b": "鷹嘴突、內上髁、外上髁：屈曲 90° 為等腰三角形；完全伸直時成一直線"}, {"f": "三點觸診法", "b": "拇指放外上髁、食指放鷹嘴突、中指放內上髁"}, {"f": "鷹嘴突 Olecranon process", "b": "尺骨上端大突起；肘尖著桌時碰到桌面的部位"}, {"f": "尺神經 ulnar nerve 在肘的位置與易受壓姿勢", "b": "通過鷹嘴突與內上髁之間（內上髁溝）；肘屈 90° 最易受壓"}, {"f": "肱尺關節 Elbow (ulnohumeral) joint 類型", "b": "單軸樞紐關節 (uniaxial hinge)；屈曲與伸直"}, {"f": "肱尺關節的穩定來源", "b": "骨性構形 (bony configuration) 與兩側副韌帶"}, {"f": "肘關節運動軸", "b": "通過滑車 (trochlea) 與肱骨小頭 (capitulum) 中心的連線"}, {"f": "橈尺關節 Radioulnar joint 類型與動作", "b": "單軸樞軸關節 (pivot)；旋前與旋後"}, {"f": "旋後 Supination 時橈尺骨關係", "b": "橈骨與尺骨互相平行"}, {"f": "旋前 Pronation 時橈尺骨關係", "b": "橈骨橫越過尺骨"}, {"f": "Carry angle（提攜角）正常值", "b": "男 5–10°、女 10–15°"}, {"f": "Carry angle 成因", "b": "伸直時，遠端內側滑車延伸大於外側肱橈之間的距離"}, {"f": "Carry angle 過大的臨床意義", "b": "內側副韌帶易被拉扯斷裂／扯傷"}, {"f": "環狀韌帶 Annular ligament", "b": "包住橈骨頭、防止橈骨頭其他方向移動；與 quadrate ligament 防止上橈尺關節脫離"}, {"f": "肘關節囊鬆緊分布", "b": "前、後側較鬆（允許屈伸）；內、外側較緊（加強副韌帶支持）"}, {"f": "肘屈曲 ROM 與 end-feel", "b": "120–160°；前側 soft（肌肉接觸），後側 hard（尺骨冠狀突頂肱骨冠狀窩）"}, {"f": "肘伸直 ROM 與 end-feel", "b": "0–5°；hard，尺骨鷹嘴突頂肱骨鷹嘴窩"}, {"f": "肱尺關節休息位與最緊位", "b": "休息：屈 70° + 旋後 10°；最緊：伸直 + 旋後"}, {"f": "近端橈尺關節休息位與最緊位", "b": "休息：旋後 35° + 屈 70°；最緊：旋後 5°"}, {"f": "MCL 前束 (anterior bundle)", "b": "20–120° 最緊（全屈、全伸時鬆）；對抗外翻不穩定 (valgus) 最重要"}, {"f": "外側副韌帶中「主要外側穩定者」", "b": "Lateral ulnar collateral ligament"}, {"f": "骨間膜 Interosseous membrane", "b": "穩定橈尺骨，避免近端橈骨跑到尺骨上"}, {"f": "棒球投手最常拉傷的肘韌帶", "b": "尺側（內側）副韌帶 ulnar collateral ligament"}, {"f": "肱二頭肌 Biceps brachii 起止、神經、動作", "b": "長頭：盂上結節；短頭：喙突；止橈骨粗隆；肌皮神經 C5–C6；肩屈、肘屈、旋後"}, {"f": "肱肌 Brachialis", "b": "肱骨幹→尺骨冠狀突；肌皮神經；純肘屈，不論位置皆有利"}, {"f": "肱橈肌 Brachioradialis", "b": "外側髁上嵴→橈骨莖突；前臂中立位的純屈肘肌"}, {"f": "肱三頭肌 Triceps brachii 長頭近端附著", "b": "肩胛骨盂下結節；止尺骨鷹嘴突；橈神經 C7–C8；肘伸、肩伸"}, {"f": "肘後肌 Anconeus", "b": "外上髁→尺骨；橈神經；肘伸、穩定肘與近端橈尺關節"}, {"f": "旋前方肌 Pronator quadratus", "b": "尺、橈骨遠端 1/4 掌側；正中神經分支 C8–T1；慢速無阻力旋前才收縮；位置不影響其力量；深層難觸摸"}, {"f": "旋前圓肌 Pronator teres", "b": "較強的旋前肌；正中神經；雙關節肌；也協助阻抗式肘屈時抵消二頭肌的旋後"}, {"f": "主動不足 Active insufficiency", "b": "肌肉在最短長度收縮，位於長度–張力曲線最低點，收縮力弱"}, {"f": "橈神經在肘的路徑", "b": "通過肱三頭肌外側頭下方"}, {"f": "肱二頭肌 + 肱肌癱瘓的原因與表現", "b": "肌皮神經損傷；無法抬手，只能用甩的"}, {"f": "旋前圓肌與旋前方肌癱瘓", "b": "肘上方正中神經損傷；無法握杯、開鎖"}], "mcq": [{"q": "下列何者為網球肘 (tennis elbow) 的主要受累部位？", "o": ["內上髁，屈肌群附著處", "外上髁，伸肌群附著處", "鷹嘴突", "橈骨頭"], "a": 1, "e": "外上髁為腕與指伸肌附著處＝網球肘；內上髁為屈肌＝高爾夫球肘。"}, {"q": "肘關節屈曲 90° 時，鷹嘴突、內上髁與外上髁三點呈何種形狀？", "o": ["一直線", "直角三角形", "等腰三角形", "無固定關係"], "a": 2, "e": "Triangle sign：屈 90° 為等腰三角形，完全伸直時成一直線。"}, {"q": "提攜角（carry angle）的正常範圍何者正確？", "o": ["男 10–15°、女 5–10°", "男 5–10°、女 10–15°", "男女皆 0–5°", "男女皆 20–25°"], "a": 1, "e": "男 5–10°、女 10–15°；女性較大。"}, {"q": "肱尺關節的關節類型是？", "o": ["單軸樞紐關節", "雙軸橢圓關節", "單軸樞軸關節", "球窩關節"], "a": 0, "e": "肱尺關節為 uniaxial hinge，只做屈曲與伸直；橈尺關節才是 pivot。"}, {"q": "肘關節屈曲到終點時，後側的 end-feel 為何？", "o": ["Soft，上臂與前臂肌肉接觸", "Empty", "Hard，尺骨冠狀突碰到肱骨冠狀窩", "Hard，鷹嘴突碰到鷹嘴窩"], "a": 2, "e": "屈曲：前側 soft、後側 hard（coronoid process 入 coronoid fossa）；伸直才是鷹嘴突入鷹嘴窩。"}, {"q": "下列何者是對抗肘外翻不穩定 (valgus instability) 最重要的構造？", "o": ["橈側副韌帶", "環狀韌帶", "內側副韌帶前束", "骨間膜"], "a": 2, "e": "MCL 的 anterior bundle 是 valgus 最重要的約束；棒球投手最易拉傷尺側副韌帶。"}, {"q": "棒球投手最常見的肘韌帶拉傷發生於？", "o": ["橈側副韌帶", "尺側副韌帶", "環狀韌帶", "骨間膜"], "a": 1, "e": "投球產生外翻力量，傷內側（尺側）副韌帶。"}, {"q": "防止上橈尺關節脫離，主要靠？", "o": ["Cooper's ligament", "Interosseous membrane", "Annular ligament 與 quadrate ligament", "Annular ligament 與 oblique cord"], "a": 2, "e": "講義考題答案為 C。"}, {"q": "尺神經在肘部最容易受壓的姿勢是？", "o": ["肘完全伸直", "肘屈曲 90°", "前臂旋前", "肩外展"], "a": 1, "e": "尺神經經過鷹嘴突與內上髁之間，屈 90° 最易被壓迫。"}, {"q": "下列何者對肘後肌 (anconeus) 的敘述為真？①受尺神經支配 ②負責肘關節伸直 ③起緣自鷹嘴突 ④扮演肘關節的穩定角色", "o": ["③④", "②", "①②③④", "②④"], "a": 3, "e": "肘後肌：橈神經、起自外上髁、肘伸並穩定肘；故 ②④ 正確（講義答案 D）。"}, {"q": "下列何者對旋前圓肌 (pronator teres) 的敘述為真？①受正中神經支配 ②屬於雙關節肌肉 ③不能由表面直接觸摸 ④作用最強之旋前肌", "o": ["①②④", "②③", "③④", "①④"], "a": 0, "e": "旋前圓肌可觸摸，故 ③ 錯；①②④ 正確（講義答案 A）。"}, {"q": "肱二頭肌的功能為何？", "o": ["肘屈、前臂旋前、肩屈", "肘屈、前臂旋後、肩伸", "肘屈、前臂旋前、肩伸", "肘屈、前臂旋後、肩屈"], "a": 3, "e": "肱二頭肌：肩屈 + 肘屈 + 旋後（講義答案 D）。"}, {"q": "在下列哪種情況下肱三頭肌（長頭）會被拉到最長？", "o": ["肩伸直 + 肘伸直", "肩屈曲 + 肘伸直", "肩伸直 + 肘屈曲", "肩屈曲 + 肘屈曲"], "a": 3, "e": "長頭跨肩與肘，肩屈（拉長）加肘屈（拉長）最長（講義答案 D）。"}, {"q": "下列哪一條旋前肌的作用力較不受肘關節及前臂位置影響？", "o": ["肱橈肌", "旋前圓肌", "旋前方肌", "橈側屈腕肌"], "a": 2, "e": "旋前方肌（深層、單關節）受位置影響最小。"}, {"q": "下列哪一條肘關節肌肉最不可能用徒手觸摸？", "o": ["肱肌", "旋前圓肌", "旋前方肌", "肘後肌"], "a": 2, "e": "旋前方肌位於前臂遠端深層，最難觸摸。"}, {"q": "下列哪一條肌肉不論肘關節與前臂位置如何，均為有利的屈肘肌？", "o": ["肱二頭肌", "肱肌", "肱橈肌", "喙肱肌"], "a": 1, "e": "肱肌永遠是肘屈肌；二頭肌需旋後位，肱橈肌在中立位最有效；喙肱肌不跨肘。"}, {"q": "肱三頭肌癱瘓的常見原因是下列何者？（病人無法伸肘，躺著無法維持兩手高舉）", "o": ["肌皮神經損傷", "正中神經損傷", "橈神經損傷", "尺神經損傷"], "a": 2, "e": "肱三頭肌由橈神經 (C7–C8) 支配。"}, {"q": "病人無法握住杯子、無法開鎖，最可能為哪些肌肉癱瘓？", "o": ["肱二頭肌與肱肌", "旋前圓肌與旋前方肌", "肱三頭肌", "旋後肌"], "a": 1, "e": "肘上方正中神經損傷造成旋前肌群癱瘓；二頭肌與肱肌癱瘓則是無法抬手。"}, {"q": "前 MCL 在肘關節哪個角度範圍最緊？", "o": ["完全伸直", "完全屈曲", "20–120°", "0–5°"], "a": 2, "e": "前 MCL 影響 20–120° 的屈曲，在此範圍最緊，全屈與全伸時鬆。"}]}, "K4": {"cards": [{"f": "近端排腕骨（proximal carpal row），由橈側到尺側", "b": "舟狀骨 scaphoid、月狀骨 lunate、三角骨 triquetrum、豆狀骨 pisiform。"}, {"f": "Distal carpal row 有哪四塊腕骨？", "b": "由橈側到尺側是大多角骨 trapezium、小多角骨 trapezoid、頭狀骨 capitate、鉤狀骨 hamate。"}, {"f": "Anatomical snuffbox 的骨性底部", "b": "解剖鼻煙壺的底由舟狀骨與大多角骨構成。"}, {"f": "手腕往哪邊偏時容易摸到舟狀骨？", "b": "往尺側偏。舟狀骨會滑出橈骨莖突下方。"}, {"f": "李氏結節的英文？從結節往遠端的凹處是哪一塊腕骨？", "b": "Lister’s tubercle。凹處是頭狀骨 capitate。"}, {"f": "腕中立位時，月狀骨跟哪一塊腕骨和哪一根掌骨成一直線？", "b": "頭狀骨與第 3 掌骨。"}, {"f": "橈骨莖突與尺骨莖突相比，哪一個更靠手端？", "b": "橈骨莖突 radial styloid process。"}, {"f": "TFCC 全名與其中軟骨盤的作用", "b": "Triangular fibrocartilage complex，三角纖維軟骨複合體。軟骨盤連繫遠端橈、尺骨，也隔開遠端橈尺關節與橈腕關節。"}, {"f": "Extrinsic ligaments 和 intrinsic ligaments 在腕部各連接什麼？", "b": "外在韌帶連接橈骨、尺骨或掌骨與腕骨。內在韌帶連接腕骨與腕骨。"}, {"f": "Midcarpal joint 的位置與關節類型", "b": "中腕關節位於近端排和遠端排腕骨之間，由多個滑液平面關節組成。"}, {"f": "腕屈、腕伸時，橈腕與中腕的角度各是多少？", "b": "屈腕時橈腕 50°、中腕 35°。伸腕時橈腕 35°、中腕 50°。"}, {"f": "腕橈偏、尺偏的關節分工與終端感", "b": "橈偏由橈腕與中腕各分擔約一半，終端感硬（hard）。尺偏由中腕分擔約三分之一，終端感結實（firm）。"}, {"f": "手腕與手指掌指關節的 close-packed position", "b": "手腕完全伸直。手指掌指關節屈曲 90°。"}, {"f": "拇指 CMC 是哪一類關節？由哪兩塊骨形成？", "b": "馬鞍關節 saddle joint，由大多角骨與第 1 掌骨基部形成。"}, {"f": "Metacarpophalangeal joint 的類型與自由度", "b": "掌指關節 MCP 是滑液髁狀關節，2 個自由度。可屈、伸、外展、內收。"}, {"f": "PIP 和 DIP 各在手指哪裡？", "b": "PIP 在近節和中節指骨間。DIP 在中節和遠節指骨間。兩者都做屈伸。"}, {"f": "Checkrein ligament 在哪裡？限制什麼？", "b": "位於近端指間關節兩側的掌面，限制過度伸直。"}, {"f": "Volar plate 的作用，及控制它移動的韌帶", "b": "掌側板讓小關節面保有較大的活動範圍。附屬副韌帶控制它的移動。"}, {"f": "腕隧道在橈側和尺側各有哪些骨性標誌？", "b": "橈側是舟狀骨與大多角骨。尺側是豆狀骨與鉤骨鉤。"}, {"f": "Carpal tunnel 裡有什麼？", "b": "正中神經與 9 條肌腱。屈指淺肌 4 條、屈指深肌 4 條、屈拇長肌 1 條。"}, {"f": "腕隧道症候群壓到哪條神經？有哪些變化？", "b": "正中神經。其感覺區可痛或麻，進展後大魚際肌可無力與萎縮。"}, {"f": "FDS 與 FDP 的中文和止點", "b": "屈指淺肌止於第 2–5 指的中節指骨。屈指深肌止於第 2–5 指的遠節指骨。"}, {"f": "三條主要伸腕肌（wrist extensors）", "b": "橈側伸腕長肌 ECRL、橈側伸腕短肌 ECRB、尺側伸腕肌 ECU。"}, {"f": "三條主要屈腕肌（wrist flexors）", "b": "橈側屈腕肌 FCR、掌長肌 PL、尺側屈腕肌 FCU。"}, {"f": "Wrist ulnar deviation 要記哪兩條肌肉？", "b": "尺側偏移由尺側屈腕肌 FCU 與尺側伸腕肌 ECU 參與。"}, {"f": "講義列出哪些腕橈偏肌？", "b": "橈側伸腕長肌、橈側屈腕肌、拇長外展肌、伸拇短肌。"}, {"f": "前臂掌側屈肌群的中層和深層", "b": "中層是屈指淺肌。深層是屈指深肌、旋前方肌和屈拇長肌。"}, {"f": "手指 extrinsic muscle 與 intrinsic muscle 的分別", "b": "外在肌起於前臂或肱骨。內在肌的起點與止點都在手。"}, {"f": "Lumbricals 使掌指關節和指間關節各做什麼動作？", "b": "蚓狀肌屈掌指關節、伸指間關節。"}, {"f": "哪一組骨間肌張開手指？哪一組併攏？", "b": "背側骨間肌 dorsal interossei 外展。掌側骨間肌 palmar interossei 內收。"}, {"f": "Extensor assembly 的中央束附在哪裡？兩條側束在哪裡？", "b": "中央束附於中節指骨基部。側束分別走在近端指間關節兩側。"}, {"f": "Flexor pulleys 的作用", "b": "屈肌滑車讓屈指淺肌與屈指深肌的肌腱貼著指骨。"}, {"f": "拇指的四條外在肌（FPL、EPL、EPB、APL）", "b": "屈拇長肌、伸拇長肌、伸拇短肌與拇長外展肌。"}, {"f": "FPB 的淺頭與深頭各由哪條神經支配？", "b": "拇短屈肌淺頭由正中神經支配，深頭由尺神經支配。"}, {"f": "Claw hand 對應哪條神經麻痺？", "b": "爪形手對應尺神經麻痺。手內肌麻痺時可見掌指過伸、指間屈曲。"}, {"f": "垂腕的英文及對應神經", "b": "Wrist drop 對應橈神經麻痺。伸腕、伸指無力，抓握也會變弱。"}, {"f": "Ape-hand deformity 對應哪條神經麻痺？", "b": "猿手變形對應正中神經麻痺。"}, {"f": "屈指深肌和蚓狀肌的橈側與尺側各由哪條神經支配？", "b": "食、中指側是正中神經。無名、小指側是尺神經。"}, {"f": "Power grip 的三組肌肉", "b": "用力握用到屈指淺肌、屈指深肌及骨間肌。"}, {"f": "Intrinsic-plus 與 intrinsic-minus 的關節位置", "b": "正位是掌指屈曲、指間伸直。負位是掌指過伸、指間部分屈曲。"}, {"f": "Tenodesis action：伸腕時手指為什麼會彎？", "b": "伸腕把長屈指肌腱拉緊，手指因此被動屈曲。"}, {"f": "講義中的 C6 個案如何張手和抓杯？", "b": "靠重力屈腕，拉緊伸指肌腱以張手。再主動伸腕，拉緊屈指肌腱以抓杯。"}, {"f": "提公事包、拿玻璃杯、握鐵鎚、抓球，各是哪一種握法？", "b": "依序為鉤握 hook grasp、圓柱握 cylindric grasp、拳握 fist grasp、球形握 spheric grasp。"}, {"f": "拿扁平物品是什麼捏法？", "b": "側捏 lateral prehension。"}, {"f": "伸腕肌在抓握時做什麼？", "b": "穩定手腕，避免屈指時手腕被帶向屈曲。"}], "mcq": [{"q": "某生練習觸診時將手腕向尺側偏，在鼻煙壺底摸到講義指出最容易骨折的腕骨。這是哪一塊？", "o": ["舟狀骨", "月狀骨", "大多角骨", "三角骨"], "a": 0, "e": "尺偏時，舟狀骨從橈骨莖突下方滑出，也是講義列出的易骨折部位。"}, {"q": "手腕在中立位時，下列哪三個構造排列在一直線？", "o": ["月狀骨、鉤狀骨、第 2 掌骨", "月狀骨、頭狀骨、第 4 掌骨", "月狀骨、頭狀骨、第 3 掌骨", "月狀骨、舟狀骨、第 3 掌骨"], "a": 2, "e": "講義 p.16–17 的中立位題，排列為月狀骨、頭狀骨與第 3 掌骨。"}, {"q": "三角纖維軟骨複合體（TFCC）中的軟骨盤有何作用？", "o": ["連接第 1 掌骨與大多角骨", "連繫遠端橈、尺骨，隔開遠端橈尺關節與橈腕關節", "覆蓋腕隧道的掌側開口", "把屈指深肌腱固定在指骨上"], "a": 1, "e": "三角纖維軟骨盤位於腕尺側，連繫橈、尺骨，也是遠端橈尺關節與橈腕關節之間的分隔。"}, {"q": "哪一組是腕隧道尺側的骨性標誌？", "o": ["舟狀骨和大多角骨", "月狀骨和頭狀骨", "大多角骨和小多角骨", "豆狀骨和鉤骨鉤"], "a": 3, "e": "腕隧道尺側為豆狀骨與鉤骨鉤，橈側為舟狀骨與大多角骨。"}, {"q": "下列何者正確列出腕隧道的內容物？", "o": ["4 條 FDS、4 條 FDP、1 條 FPL 肌腱與尺神經", "4 條 FDS、4 條 FDP、1 條 FPL 肌腱與正中神經", "4 條 FDS、4 條 FDP、1 條 FCR 肌腱與正中神經", "4 條 FDS、4 條 FDP、1 條 EPL 肌腱與正中神經"], "a": 1, "e": "腕隧道內是四淺、四深、一拇長屈肌腱，共 9 條，另有正中神經。"}, {"q": "位在兩排腕骨之間、由多個滑液平面關節組成的是哪個關節？", "o": ["中腕關節", "橈腕關節", "掌指關節", "拇指腕掌關節"], "a": 0, "e": "中腕關節位於近端排與遠端排腕骨之間，參與腕屈伸及橈、尺偏。"}, {"q": "依講義的數值，伸腕時橈腕關節與中腕關節各提供多少角度？", "o": ["橈腕 50°，中腕 35°", "橈腕 50°，中腕 50°", "橈腕 35°，中腕 35°", "橈腕 35°，中腕 50°"], "a": 3, "e": "伸腕時橈腕 35°、中腕 50°。屈腕時這兩個數值對調。"}, {"q": "拇指能做對掌。哪兩塊骨形成拇指的馬鞍關節？", "o": ["小多角骨與第 1 掌骨基部", "舟狀骨與第 1 掌骨基部", "大多角骨與第 1 掌骨基部", "第 1 掌骨頭與拇指近節指骨"], "a": 2, "e": "拇指腕掌關節由大多角骨與第 1 掌骨基部形成，屬馬鞍關節。"}, {"q": "手指掌指關節屈曲至 90° 時，較難張開手指，其主要原因為何？", "o": ["掌指關節的副韌帶放鬆", "掌側板失去附屬副韌帶的控制", "掌指關節的內、外側副韌帶拉緊", "遠端指間關節的側束拉緊"], "a": 2, "e": "掌指關節屈曲 90° 時兩側副韌帶拉緊，因此外展受限。"}, {"q": "近端指間關節掌側的 checkrein ligament 主要限制何種動作？", "o": ["過度屈曲", "伸腕", "手指內收", "近端指間關節過伸"], "a": 3, "e": "限制韌帶在近端指間關節兩側的掌面，可防止關節過伸。"}, {"q": "對照講義的掌面圖，屈指淺肌與屈指深肌的止點分別在哪裡？", "o": ["中節指骨、遠節指骨", "遠節指骨、中節指骨", "近節指骨、中節指骨", "中節指骨、近節指骨"], "a": 0, "e": "淺肌腱到第 2–5 指的中節指骨，深肌腱再往遠端到遠節指骨。"}, {"q": "下列哪兩條肌肉都參與腕尺偏？", "o": ["橈側伸腕長肌與橈側屈腕肌", "尺側屈腕肌與尺側伸腕肌", "掌長肌與屈拇長肌", "拇長外展肌與伸拇短肌"], "a": 1, "e": "尺側屈腕肌與尺側伸腕肌雖分別屈腕和伸腕，兩者都能造成尺偏。"}, {"q": "捏緊物品時，何者可防止手腕被屈指肌帶向屈曲？", "o": ["屈腕肌放鬆手腕", "屈指深肌帶動伸腕", "拇指對掌肌維持手腕", "伸腕肌收縮以穩定手腕"], "a": 3, "e": "抓握時，伸腕肌與屈指肌協同，以維持手腕穩定。"}, {"q": "蚓狀肌（lumbricals）收縮時，典型的關節配對為何？", "o": ["掌指伸直、指間屈曲", "掌指屈曲、指間伸直", "掌指屈曲、指間屈曲", "掌指伸直、指間伸直"], "a": 1, "e": "蚓狀肌使掌指關節屈曲，同時使指間關節伸直。"}, {"q": "依講義複習題，哪組肌肉最符合手指內收與遠端指間關節伸直？", "o": ["伸指總肌", "蚓狀肌", "掌側骨間肌", "背側骨間肌"], "a": 2, "e": "掌側骨間肌使手指內收，並經伸肌裝置協助伸直指間關節。"}, {"q": "伸肌裝置中，長伸肌腱的中央束附著在哪裡？", "o": ["中節指骨基部", "近節指骨基部", "遠節指骨基部", "第 3 掌骨基部"], "a": 0, "e": "中央束附於中節指骨基部，兩條側束走在近端指間關節兩側。"}, {"q": "屈肌滑車（flexor pulleys）的主要功能是什麼？", "o": ["讓掌指關節外展", "遮住腕隧道掌側", "讓屈指淺肌與屈指深肌的肌腱貼近指骨", "把中央束固定在中節指骨基部"], "a": 2, "e": "屈肌滑車形成通道，讓長屈指肌腱沿指骨滑動。"}, {"q": "依講義，拇短屈肌（FPB）的淺頭和深頭各受哪條神經支配？", "o": ["淺頭正中神經，深頭尺神經", "淺頭尺神經，深頭正中神經", "淺頭橈神經，深頭尺神經", "淺頭正中神經，深頭橈神經"], "a": 0, "e": "拇短屈肌具有雙重神經支配，淺頭由正中神經支配，深頭由尺神經支配。"}, {"q": "某患者垂腕，主動伸腕和伸指皆明顯無力，抓握也變弱。依講義最符合哪條神經麻痺？", "o": ["尺神經", "橈神經", "正中神經", "腋神經"], "a": 1, "e": "橈神經支配伸腕肌與長伸指肌，麻痺可出現垂腕與弱握。"}, {"q": "某患者手內肌麻痺，手指呈掌指過伸、指間屈曲的爪形姿勢。依講義哪條神經麻痺最典型？", "o": ["正中神經", "橈神經", "肌皮神經", "尺神經"], "a": 3, "e": "講義將尺神經麻痺與爪形手配對，圖文指出手內肌麻痺可呈爪形姿勢。"}, {"q": "講義中的猿手變形（ape-hand deformity）與何種神經受損配對？", "o": ["橈神經", "正中神經", "尺神經", "腋神經"], "a": 1, "e": "正中神經麻痺會影響大部分大魚際肌，講義以猿手變形說明。"}, {"q": "某人腕部症狀伴有食指與中指末端刺麻，進展後出現大魚際肌無力。依講義，腕隧道內最可能受壓的神經為何？", "o": ["尺神經", "橈神經", "肌皮神經", "正中神經"], "a": 3, "e": "正中神經通過腕隧道，受壓可出現該神經感覺區刺麻，進展後大魚際肌可無力或萎縮。"}, {"q": "講義 p.72 的 C6 脊髓損傷個案仍能主動伸腕。他如何用肌腱固定效應抓住杯子？", "o": ["主動伸腕，拉緊長屈指肌腱，使手指被動屈曲", "主動伸腕，拉緊長伸指肌腱，使手指被動伸直", "以重力屈腕，拉緊長屈指肌腱，使手指被動屈曲", "主動屈腕，縮短長伸指肌腱，使手指被動屈曲"], "a": 0, "e": "主動伸腕會拉緊跨腕的長屈指肌腱，使手指被動收攏抓杯。"}, {"q": "依講義的抓握分類，以手指勾住提把來提公事包，屬於哪一類？", "o": ["圓柱握", "拳握", "鉤握", "側捏"], "a": 2, "e": "講義用提公事包示範鉤握（hook grasp）。"}]}, "K5": {"cards": [{"f": "Coxal bone 由哪三塊骨構成？", "b": "髖骨由髂骨 ilium、坐骨 ischium 與恥骨 pubis 構成。三者也共同構成髖臼。"}, {"f": "ASIS、AIIS、PSIS 的中文與英文全名", "b": "髂前上棘 anterior superior iliac spine、髂前下棘 anterior inferior iliac spine、髂後上棘 posterior superior iliac spine。"}, {"f": "Ischial spine 與 ischial tuberosity 各在哪裡？", "b": "坐骨棘在大、小坐骨切跡之間。坐骨結節位在更下方，也是主要腿後肌群的起點。"}, {"f": "薦髂關節（SI joint）三組韌帶", "b": "前薦髂韌帶 anterior sacroiliac、後薦髂韌帶 posterior sacroiliac、骨間薦髂韌帶 interosseous sacroiliac。"}, {"f": "Iliolumbar、sacrotuberous、sacrospinous 的中文", "b": "依序為髂腰韌帶、薦結節韌帶、薦棘韌帶。"}, {"f": "Nutation 時薦骨岬、尾骨與骨盆出口怎麼變？", "b": "點頭時薦骨岬向前下，尾骨向後，兩側坐骨結節分開，骨盆出口變大。"}, {"f": "薦骨岬向後上、尾骨向前，叫什麼？哪個開口變大？", "b": "反點頭 counternutation。骨盆入口 pelvic inlet 變大。"}, {"f": "p.11 的反點頭單側例子中，ASIS 與 PSIS 哪個高？", "b": "同一側髂前上棘（ASIS）低、髂後上棘（PSIS）高。"}, {"f": "Hip joint 的關節類型、接合部與股骨頭表面", "b": "球窩關節 ball-and-socket joint。股骨頭與深杯形髖臼接合，股骨頭關節面覆有透明軟骨。"}, {"f": "股骨頸幹角（neck-shaft angle）怎麼量？講義正常值？", "b": "取股骨頸長軸和股骨幹長軸的夾角。講義參考值為 125°。"}, {"f": "Coxa vara 和 coxa valga 的頸幹角及腿長", "b": "髖內翻小於 125°，腿長較短。髖外翻大於 125°，腿長較長。"}, {"f": "Angle of anteversion 的參考線、p.6 內文正常值", "b": "股骨前傾角取股骨頸長軸與股骨內、外髁連線的夾角。內文列 13–15°。"}, {"f": "股骨過度前傾與股骨後傾，各對應哪種步態？", "b": "過度前傾 excessive anteversion 對應髖內轉、內八。後傾 retroversion 對應髖外轉、外八。"}, {"f": "Y ligament 的全名、位置與主要限制", "b": "髂股韌帶 iliofemoral ligament，在髖關節前上方。限制髖過伸及骨盆過度後傾。"}, {"f": "Pubofemoral 和 ischiofemoral ligament 各在何處？各限制哪個轉向？", "b": "恥股韌帶在前下方，限制外轉。坐股韌帶在後下方，限制內轉。"}, {"f": "Ligamentum teres 在講義中有哪兩項作用？", "b": "股骨頭圓韌帶參與股骨頭血液供應。p.21 亦列為限制髖過度內收的構造。"}, {"f": "髖從屈曲變成伸直時，關節囊韌帶鬆緊如何改變？", "b": "髖屈曲較鬆，伸直時韌帶拉緊。"}, {"f": "講義 p.20 的髖屈曲、過伸各有多少角度？在哪個平面？", "b": "屈曲 0–120°，過伸 0–30°。兩者都在矢狀面 sagittal plane。"}, {"f": "依 p.21–22 表，髖外展、內收、外轉、內轉的 ROM", "b": "外展 0–45°，內收 0–30°，外轉 0–45°，內轉 0–30°。"}, {"f": "講義 p.21 表中，髖外展有哪些限制構造？", "b": "恥股韌帶 pubofemoral ligament 與髖內收肌群。"}, {"f": "Pelvic inclination 怎麼取角？骨盆前傾時腰椎前凸如何？", "b": "取通過 PSIS 和恥骨聯合最前點的平面對水平面的夾角。前傾時傾斜角與腰椎前凸都增加。"}, {"f": "骨盆前傾、後傾各由哪兩組肌群參與？", "b": "前傾用髖屈肌與腰薦椎伸肌。後傾用髖伸肌與腰薦椎屈肌。"}, {"f": "骨盆向右側傾時，兩側髂嵴與肌群如何？", "b": "右髂嵴低，左髂嵴高。講義列左腰薦椎側屈肌、右髖外展肌、左髖內收肌。"}, {"f": "依講義定義，骨盆向右旋轉時兩側怎麼動？哪些肌群參與？", "b": "右半骨盆向前，左半向後。左腰薦椎旋轉肌、左髖外轉肌、右髖內轉肌參與。"}, {"f": "Iliopsoas 由哪兩條肌肉組成？共同止點？", "b": "髂腰肌由髂肌 iliacus 與腰大肌 psoas major 組成。共同止於小轉子。"}, {"f": "股直肌的英文、講義主列起止點與動作", "b": "Rectus femoris。起於髂前下棘，p.35 列止於髕骨。屈髖、伸膝。"}, {"f": "Sartorius 起止點與髖、膝動作", "b": "縫匠肌由髂前上棘到脛骨內側。髖屈曲、外展、外轉。膝屈曲、內轉。"}, {"f": "Tensor fasciae latae 的止點、神經與動作", "b": "闊筋膜張肌止於髂脛束，由臀上神經支配。屈髖、外展、內轉。"}, {"f": "恥骨肌的英文、起點、動作與神經", "b": "Pectineus。起於恥骨上支，屈髖、內收。由股神經支配。"}, {"f": "臀上神經與臀下神經，各支配哪幾條髖肌？", "b": "Superior gluteal nerve 支配臀中肌、臀小肌與闊筋膜張肌。Inferior gluteal nerve 支配臀大肌。"}, {"f": "臀大肌與臀中肌的不同部位，各有什麼動作？", "b": "臀大肌上部外展、下部內收。臀中肌前部內轉、後部外轉。"}, {"f": "Hamstrings 在 p.54 列哪三肌？主要動作？", "b": "股二頭肌長頭、半腱肌、半膜肌。主要伸髖和屈膝。"}, {"f": "六條短外轉肌是哪些？哪條最上、哪條最下？", "b": "梨狀肌、閉孔內肌、閉孔外肌、上雙子肌、下雙子肌、股方肌。梨狀肌最上、股方肌最下。"}, {"f": "Piriformis 的起止點、神經與伸髖時的動作", "b": "梨狀肌起於薦骨前面、止於大轉子內側，由 S1、S2 薦神經支配。伸髖時作髖外轉。"}, {"f": "髖屈曲角度改變時，梨狀肌與髖內轉力矩有何變化？", "b": "梨狀肌在屈髖時可轉為內轉。屈髖時內轉肌力矩約為伸髖時的 3 倍。"}, {"f": "Femoral nerve 和 obturator nerve 各來自哪幾節？閉孔神經圖列哪些內收肌？", "b": "股神經、閉孔神經均標 L2–L4。閉孔神經圖列長收肌、短收肌、大收肌及股薄肌。"}, {"f": "髖內收肌群在屈髖位與伸髖位，可各協助什麼？", "b": "髖已屈曲時可協助伸髖。髖在伸直位可協助屈髖。"}, {"f": "想做單純髖屈曲，哪兩條肌肉分別抵消 TFL 的內轉與外展？", "b": "縫匠肌的外轉抵消內轉。恥骨肌的內收抵消外展。"}, {"f": "俯臥單側伸髖，膝伸直與屈膝時主要肌肉有何不同？", "b": "膝伸直時，臀大肌與腿後肌群一起作用。膝屈曲時，講義列臀大肌。"}, {"f": "坐姿抬腿屈髖用哪條肌肉？站姿軀幹前彎時腿後肌如何收縮？", "b": "坐姿屈髖主要用髂腰肌。站姿前彎、髖屈曲時，腿後肌做離心收縮。"}, {"f": "單腳站時，髖外展肌平衡多少體重？關節壓縮力多少？", "b": "約平衡 85% 體重。髖關節壓縮力約 2.5 倍體重。"}, {"f": "Trendelenburg sign 陽性時，哪側骨盆下降？哪側肌肉無力？", "b": "抬腳側骨盆下降。站立側髖外展肌無力，主要想到臀中肌。"}, {"f": "Paraplegia 例子中，如何靠膝踝矯具和髖過伸取得站立平衡？", "b": "膝與踝由矯具固定。髖過伸將髂股韌帶（Y 韌帶）拉緊，協助站立平衡。"}, {"f": "講義步態題把 drop foot 和 Gower sign 各配哪條肌肉？", "b": "垂足配脛前肌。高爾斯徵象配股四頭肌。"}, {"f": "提高骨盆與蹲姿拉筋，依講義附錄各對應哪條肌肉？", "b": "提高骨盆為腰方肌 quadratus lumborum。蹲姿拉筋題選比目魚肌 soleus。"}], "mcq": [{"q": "下列哪三塊骨共同形成髖臼（acetabulum）？", "o": ["髂骨、薦骨、恥骨", "薦骨、坐骨、恥骨", "髂骨、坐骨、恥骨", "髂骨、坐骨、尾骨"], "a": 2, "e": "髂骨、坐骨與恥骨共同構成髖骨與髖臼。"}, {"q": "依講義 p.10，薦骨岬朝前下移動時，下列哪項變化正確？", "o": ["尾骨向後，骨盆出口變大", "尾骨向前，骨盆出口變大", "尾骨向後，骨盆入口變大", "尾骨向前，兩側坐骨結節靠近"], "a": 0, "e": "薦骨點頭時薦骨岬向前下、尾骨向後，坐骨結節分開，骨盆出口變大。"}, {"q": "依 p.8 的圖例，股骨頸幹角為 140° 時，下列哪組配對正確？", "o": ["髖內翻，腿長較短", "髖外翻，腿長較短", "髖內翻，腿長較長", "髖外翻，腿長較長"], "a": 3, "e": "140° 大於講義的參考值 125°，屬髖外翻，講義列腿長較長。"}, {"q": "依講義 p.8 的圖例，某人的股骨頸幹角為 105°。下列何者最符合？", "o": ["髖外翻，腿長較長", "髖內翻，腿長較短", "正常頸幹角，腿長較短", "股骨後傾，呈外八"], "a": 1, "e": "講義以 125° 為頸幹角參考值，小於此值的 105° 圖例是髖內翻，腿長較短。"}, {"q": "講義以 35° 示範股骨過度前傾。若髖出現相應的旋轉，步態最可能如何？", "o": ["髖內轉，腳趾朝內", "髖外轉，腳趾朝外", "髖內轉，腳趾朝外", "髖外轉，腳趾朝內"], "a": 0, "e": "p.6、9 將股骨過度前傾與髖內轉、內八並列。"}, {"q": "下列髖關節韌帶、位置與限制的配對，何者符合講義？", "o": ["髂股韌帶，前下方，限制過伸", "恥股韌帶，後下方，限制外轉", "坐股韌帶，後下方，限制內轉", "坐股韌帶，前上方，限制內轉"], "a": 2, "e": "坐股韌帶位於髖關節後下方，講義列它限制過度內轉。"}, {"q": "講義指出哪條韌帶可參與股骨頭血液供應，並在 p.21 被列為限制髖過度內收的構造？", "o": ["髖臼橫韌帶", "股骨頭圓韌帶", "髂股韌帶", "坐股韌帶"], "a": 1, "e": "Ligamentum teres 是股骨頭圓韌帶，這兩項分別列於 p.13 與 p.21。"}, {"q": "依講義 p.20–22 活動度表，下列哪一組動作的最大角度都是 45°？", "o": ["髖外展與內轉", "髖內收與外轉", "髖過伸與外展", "髖外展與外轉"], "a": 3, "e": "講義表格列髖外展與外轉各至 45°，內收、內轉和過伸各至 30°。"}, {"q": "依講義 p.21 動作表，髖外展主要由哪兩條肌肉執行，並受哪條韌帶限制？", "o": ["臀中肌、臀小肌，受坐股韌帶限制", "臀中肌、臀大肌，受恥股韌帶限制", "臀中肌、臀小肌，受恥股韌帶限制", "臀大肌、臀小肌，受髂股韌帶限制"], "a": 2, "e": "p.21 列臀中肌與臀小肌為外展肌，恥股韌帶及內收肌群為限制構造。"}, {"q": "股骨固定時，骨盆前傾會出現哪一組變化？", "o": ["髖屈曲，腰椎前凸增加", "髖屈曲，腰椎前凸減少", "髖伸直，腰椎前凸增加", "髖伸直，腰椎前凸減少"], "a": 0, "e": "p.28 將骨盆前傾與相對髖屈曲配對，p.14 指前傾會增加腰椎前凸。"}, {"q": "依講義，骨盆向右側傾時，哪組骨標誌與髖肌分工正確？", "o": ["右髂嵴高，右髖外展肌與左髖內收肌", "右髂嵴低，右髖外展肌與左髖內收肌", "右髂嵴低，左髖外展肌與右髖內收肌", "右髂嵴高，兩側髖內收肌"], "a": 1, "e": "骨盆右側傾是右髂嵴降低，講義列右髖外展肌、左髖內收肌及左腰薦椎側屈肌。"}, {"q": "依講義 p.27、56，右半骨盆向前、左半向後時，哪組髖肌參與？", "o": ["左髖內轉肌與右髖外轉肌", "左髖外展肌與右髖內收肌", "左髖內收肌與右髖外展肌", "左髖外轉肌與右髖內轉肌"], "a": 3, "e": "講義把右半骨盆前移定為右旋，列出左髖外轉肌與右髖內轉肌。"}, {"q": "某肌從髂前上棘到脛骨內側，收縮可屈髖、外展、外轉。這是哪條肌肉？", "o": ["股直肌", "縫匠肌", "恥骨肌", "闊筋膜張肌"], "a": 1, "e": "縫匠肌自髂前上棘到脛骨內側，除了髖屈、外展及外轉，也能屈膝及內轉膝。"}, {"q": "哪一組皆由臀上神經支配？", "o": ["臀中肌、臀大肌、闊筋膜張肌", "臀大肌、臀小肌、恥骨肌", "臀中肌、臀小肌、闊筋膜張肌", "臀中肌、臀小肌、縫匠肌"], "a": 2, "e": "臀上神經支配臀中肌、臀小肌與闊筋膜張肌，臀大肌由臀下神經支配。"}, {"q": "依 p.60 神經圖，下列哪組肌肉的連線皆指向閉孔神經？", "o": ["短收肌與股薄肌", "股直肌與縫匠肌", "恥骨肌與髂肌", "臀中肌與臀小肌"], "a": 0, "e": "p.60 將短收肌及股薄肌列於閉孔神經分布。"}, {"q": "講義 p.34 在梨狀肌旁標出一條發炎的神經。p.55 的深層圖也顯示這條神經的走向。它是哪一條？", "o": ["股神經", "閉孔神經", "臀上神經", "坐骨神經"], "a": 3, "e": "p.34 標示發炎的坐骨神經，p.55 顯示坐骨神經由梨狀肌旁向下。"}, {"q": "想做單純髖屈曲時，下列哪條肌肉可抵消闊筋膜張肌的外展傾向？", "o": ["縫匠肌", "髂肌", "恥骨肌", "腰大肌"], "a": 2, "e": "恥骨肌能屈髖並內收，可中和闊筋膜張肌的外展作用。"}, {"q": "俯臥、單側膝彎曲時，依講義主要以哪條肌肉伸髖？", "o": ["腿後肌群", "臀大肌", "臀小肌", "股直肌"], "a": 1, "e": "p.46 將俯臥單側伸髖且屈膝的主要肌肉列為臀大肌。"}, {"q": "從站立緩慢前彎時，髖關節屈曲。依講義，何者是主要的肌肉作用？", "o": ["腿後肌群離心收縮", "腿後肌群向心收縮", "股四頭肌離心收縮", "股四頭肌向心收縮"], "a": 0, "e": "p.65–66 的答案為腿後肌群離心收縮。"}, {"q": "單腳站立時，依講義髖外展肌約要平衡多少體重？髖關節壓縮力約為多少？", "o": ["50% 與 2.5 倍體重", "85% 與 1 倍體重", "50% 與 3 倍體重", "85% 與 2.5 倍體重"], "a": 3, "e": "p.47 列外展肌平衡約 85% 體重，髖關節壓縮力約為體重的 2.5 倍。"}, {"q": "受測者用右腳站立，抬起左腳後左半骨盆下掉。依 Trendelenburg 徵象，最應想到哪一組肌肉無力？", "o": ["右髖外展肌", "左髖外展肌", "右髖屈肌", "左髖內收肌"], "a": 0, "e": "承重的右側髖外展肌無力，無法維持抬腳側的骨盆高度。"}, {"q": "依講義的下半身麻痺例子，膝踝矯具配合髖過伸時，主要利用哪個構造協助站立平衡？", "o": ["股骨頭圓韌帶", "髖臼橫韌帶", "髂股韌帶", "後薦髂韌帶"], "a": 2, "e": "髂股韌帶就是 Y 韌帶，髖過伸時拉緊，可協助取得站立平衡。"}, {"q": "依講義 p.64–66 的步態題，下列哪組配對是錯項？", "o": ["Gower sign 與股四頭肌", "垂足與脛前肌", "髖過伸步態與臀大肌", "Trendelenburg 徵象與臀大肌"], "a": 3, "e": "Trendelenburg 徵象對應站立側髖外展肌無力，講義特別提到臀中肌。"}, {"q": "依講義 p.65 的附錄題，在開鏈膝關節活動中，哪一項是使前十字韌帶參與穩定的答案？", "o": ["股四頭肌與膝屈肌一起收縮", "股四頭肌收縮", "膝屈肌收縮", "膝屈肌與腓腸肌一起收縮"], "a": 1, "e": "p.66 的題組答案將此題列為 B，股四頭肌收縮。"}, {"q": "依講義複習題，半膜肌（semimembranosus）在膝關節主要做哪兩個動作？", "o": ["伸直與外轉", "伸直與內轉", "屈曲與內轉", "屈曲與外轉"], "a": 2, "e": "p.65–66 將半膜肌功能配對為屈膝與膝內轉。"}]}, "K6": {"cards": [{"f": "膝關節有哪兩個動作自由度？", "b": "屈伸（flexion–extension）和軸向旋轉（axial rotation）。"}, {"f": "膝屈伸軸與軸向旋轉的軸在哪裡？", "b": "屈伸軸通過股骨兩髁。軸向旋轉繞縱軸（longitudinal axis）。"}, {"f": "講義的屈膝、膝過伸活動度與終端感", "b": "屈膝 0–120°，軟（soft）。過伸 ≤15°，結實（firm）。"}, {"f": "屈膝時為何能做 axial rotation？外旋和內旋的幅度如何比較？", "b": "兩側副韌帶較鬆。外旋約為內旋的 2 倍，旋轉終端感結實。"}, {"f": "Screw-home mechanism 在哪一段出現？開放鏈時哪塊骨頭向哪裡轉？", "b": "螺旋鎖定機轉出現在伸膝最後 20°。股骨固定，脛骨外旋。"}, {"f": "閉鎖鏈伸膝最後 20°，哪一塊骨固定？另一塊怎麼轉？", "b": "脛骨固定，股骨內旋（femoral internal rotation）。"}, {"f": "股骨髁與脛骨髁的關節面，哪邊凸？哪邊凹？", "b": "股骨的內、外髁凸（convex），脛骨的內、外髁凹（concave）。"}, {"f": "膝從伸直開始彎曲，rolling 和 gliding 的比例如何改變？", "b": "開始時滾動多、滑動少。屈得更深時，滑動增加、滾動減少。"}, {"f": "Medial meniscus 與 lateral meniscus 的形狀與周緣血流比例", "b": "內側半月板較大，呈 C 形，有血流的周緣約 20–30%。外側較小，近半 O 形，約 10–25%。"}, {"f": "Popliteal hiatus 是哪一側半月板的血流較少處？半月板主要由哪些動脈供血？", "b": "膕肌腱裂孔在外側半月板附近。主要供血為內、外側膝動脈。"}, {"f": "哪一條韌帶連著兩塊半月板的前方？", "b": "橫韌帶（transverse ligament）。"}, {"f": "半月板有哪四個功能？", "b": "傳遞負荷、降低股骨與脛骨的接觸壓力、幫助潤滑、協助供應軟骨營養。"}, {"f": "ACL 的中英文全名、兩端附著及主要限制", "b": "前十字韌帶（anterior cruciate ligament）。從脛骨前髁間窩到股骨外髁，限制脛骨前移。"}, {"f": "PCL 的中英文全名、兩端附著及主要限制", "b": "後十字韌帶（posterior cruciate ligament）。從脛骨後髁間窩到股骨內髁，限制脛骨後移。"}, {"f": "脛骨固定時，PCL 限制什麼位移？", "b": "限制股骨髁相對脛骨向前位移。"}, {"f": "哪條副韌帶限制膝外翻？哪條限制膝內翻？", "b": "內側副韌帶（MCL）限制外翻，外側副韌帶（LCL）限制內翻。"}, {"f": "脛骨內、外旋時，兩組韌帶的鬆緊怎麼變？", "b": "內旋時十字韌帶緊、副韌帶鬆。外旋時副韌帶緊、十字韌帶鬆。"}, {"f": "Patellar ligament 和 patellar tendon 在講義圖中指哪個位置？", "b": "髕韌帶或髕腱，在髕骨下方連到脛骨粗隆。"}, {"f": "髕骨如何幫股四頭肌伸膝？", "b": "髕骨增加股四頭肌的力臂。"}, {"f": "伸直、屈膝 90° 時，講義各列出多少髕股接觸面？", "b": "伸直約 1/3，屈膝 90° 約 1/2。"}, {"f": "屈膝 120° 時，與股骨接觸的兩個構造是什麼？", "b": "髕骨和股四頭肌腱。"}, {"f": "從上、下方穩住髕骨的構造有哪些？", "b": "上方是股直肌和股中間肌。下方是髕腱。"}, {"f": "VMO 是什麼？它在髕骨哪一側？", "b": "股內側斜肌（vastus medialis obliquus）。它從內側穩住髕骨，幫助髕骨沿滑車溝滑動。"}, {"f": "膝外翻與膝內翻的英文、外觀與講義正文的角度", "b": "外翻是 genu valgum（knock knee、X 形），小於 170°。內翻是 genu varum（bowleg、O 形），大於或等於 180°。"}, {"f": "Q-angle 由哪兩條線構成？", "b": "髂前上棘到髕骨中心的線，與脛骨粗隆通過髕骨中心的延長線。"}, {"f": "Q 角在講義中的男女數值及異常線索", "b": "男性 11.2° ± 3°，女性 15.8° ± 4.5°。大於 20° 是髕股關節排列異常的線索。"}, {"f": "股四頭肌（quadriceps femoris）由哪四條肌肉組成？", "b": "股直肌、股外側肌、股內側肌和股中間肌。"}, {"f": "股四頭肌由哪一條神經支配？講義列的節段是什麼？", "b": "股神經（femoral nerve），L2–L4。"}, {"f": "Rectus femoris 的兩個主要動作", "b": "股直肌屈髖、伸膝。"}, {"f": "哪條股肌在股直肌深層？附著在髕骨哪邊？", "b": "股中間肌（vastus intermedius），附著在髕骨上方。"}, {"f": "Articularis genu 的止點和作用", "b": "膝關節肌止於膝關節囊，伸膝時把關節囊拉動。"}, {"f": "股二頭肌的長頭與短頭分別起於哪裡？", "b": "長頭起於坐骨結節，短頭起於股骨幹下段。"}, {"f": "股二頭肌和兩條內側腿後肌的膝動作有什麼差別？", "b": "都可屈膝。股二頭肌使膝外旋，半腱肌和半膜肌使膝內旋。"}, {"f": "半腱肌與半膜肌的止點及神經", "b": "半腱肌止於脛骨內側，屬鵝足。半膜肌止於脛骨內髁。兩者皆為坐骨神經 L5、S1、S2。"}, {"f": "Plantaris 的中文、講義止點與支配神經", "b": "蹠肌，止於跟骨，受脛神經支配。"}, {"f": "Popliteus 的中文、膝部動作與支配神經", "b": "膕肌，使膝屈曲、內旋，受脛神經支配。"}, {"f": "Pes anserinus 由哪些肌腱組成？作用是什麼？", "b": "鵝足由縫匠肌、股薄肌和半腱肌的肌腱組成，有助於穩定膝內側。"}, {"f": "Pes anserine bursa 在哪裡？", "b": "鵝足滑囊在膝內側，位於鵝足肌腱深面。"}, {"f": "講義列出的膝外旋肌是哪兩條？", "b": "股二頭肌與闊筋膜張肌。闊筋膜張肌透過髂脛束跨膝。"}, {"f": "p.47 列出哪些膝的單關節肌？", "b": "股外側肌、股內側肌、股中間肌、膕肌及股二頭肌短頭。"}, {"f": "p.47 哪一條雙關節肌跨膝與踝？", "b": "腓腸肌（gastrocnemius）。"}, {"f": "伸髖加屈膝時，哪一條肌肉限制幅度？哪一組肌肉出力變弱？", "b": "股直肌被拉長，出現被動不足。跨髖的腿後肌縮短，出現主動不足。"}, {"f": "屈髖加伸膝時，哪一組肌肉被拉長？哪一條肌肉縮短而出力變弱？", "b": "跨髖的腿後肌被拉長。股直肌縮短，出力變弱。"}, {"f": "由椅子站起和慢慢坐回去，伸肌各做何種收縮？", "b": "站起是向心收縮（concentric），坐下控制下降是離心收縮（eccentric）。"}, {"f": "伸膝與踝蹠屈（plantar flexion）同時出現在哪些活動？", "b": "踮腳、跑步和跳躍。"}], "mcq": [{"q": "依講義，膝屈曲的活動度與終端感，何者正確？", "o": ["0–120°，終端感結實", "0–120°，終端感軟", "0–90°，終端感結實", "0–90°，終端感軟"], "a": 1, "e": "講義列屈膝 0–120°、終端感軟，並把膝過伸的終端感列為結實。"}, {"q": "膝關節由屈曲逐漸伸直時，可做的軸向旋轉幅度怎麼變？", "o": ["幅度增加，因為兩側副韌帶放鬆", "幅度不變，因為旋轉軸固定", "幅度增加，因為內旋幅度大於外旋", "幅度減少，屈膝時副韌帶較鬆、較能旋轉"], "a": 3, "e": "屈膝時兩側副韌帶較鬆，膝伸直時可做的軸向旋轉幅度變小。"}, {"q": "坐著讓腳離地，把膝蓋伸到最後 20°。在股骨固定時，哪個動作符合螺旋鎖定機轉？", "o": ["脛骨外旋", "脛骨內旋", "股骨外旋", "股骨內旋"], "a": 0, "e": "開放鏈伸膝的最後 20°，脛骨在固定的股骨上外旋。"}, {"q": "雙腳踩地，從微蹲站直。在脛骨固定的條件下，膝伸直最後一段的轉動為何？", "o": ["脛骨外旋", "股骨外旋", "股骨內旋", "脛骨內旋"], "a": 2, "e": "閉鎖鏈伸膝最後 20°，脛骨固定，股骨內旋。"}, {"q": "膝從完全伸直開始屈曲，關節面滾動與滑動的變化為何？", "o": ["由滑動多轉為滾動多", "由滾動多轉為滑動多", "全程都是滾動", "全程都是滑動"], "a": 1, "e": "屈膝初期以滾動為主，屈曲增加時滑動比例上升。"}, {"q": "依講義，內側半月板的形狀與外圍有血流的比例，何者正確？", "o": ["較大的 C 形，約 20–30%", "較大的 C 形，約 10–25%", "較小的近半 O 形，約 20–30%", "較小的近半 O 形，約 10–25%"], "a": 0, "e": "內側半月板較大，呈 C 形，外圍約 20–30% 有血流。"}, {"q": "膝承重時，半月板對股骨與脛骨的接觸有何作用？", "o": ["把負荷集中在髁間窩", "增加股骨與脛骨間的接觸壓力", "使髕骨沿滑車溝移動", "傳遞負荷並降低股骨與脛骨間的接觸壓力"], "a": 3, "e": "半月板協助傳遞負荷，並降低股骨與脛骨之間的接觸壓力。"}, {"q": "膝受傷後，脛骨相對股骨向前的位移過大。依講義的限制表，最可能是哪條韌帶受損？", "o": ["後十字韌帶", "外側副韌帶", "前十字韌帶", "內側副韌帶"], "a": 2, "e": "前十字韌帶（ACL）是限制脛骨前移的主要構造。"}, {"q": "講義的後十字韌帶撕裂圖出現纖維斷裂。依講義，哪個位移會最直接失去主要限制？", "o": ["脛骨向前位移", "脛骨外翻", "脛骨向後位移", "脛骨內翻"], "a": 2, "e": "後十字韌帶（PCL）主要限制脛骨向後位移。"}, {"q": "膝受力後出現過大的外翻。依講義，哪條韌帶主要抵抗這個方向？", "o": ["內側副韌帶", "外側副韌帶", "前十字韌帶", "後十字韌帶"], "a": 0, "e": "內側副韌帶主要抵抗膝外翻，外側副韌帶主要抵抗膝內翻。"}, {"q": "脛骨相對股骨向內旋轉時，依講義哪一組韌帶變緊？", "o": ["內、外側副韌帶", "前、後十字韌帶", "只有髕韌帶", "只有橫韌帶"], "a": 1, "e": "脛骨內旋時，兩條十字韌帶變緊，兩條副韌帶變鬆。"}, {"q": "依講義，屈膝達 120° 時，哪兩處會與股骨接觸而承受壓力？", "o": ["髕骨與髕韌帶", "髕韌帶與股四頭肌腱", "髕骨與髂脛束", "髕骨與股四頭肌腱"], "a": 3, "e": "此角度可見髕骨與股骨接觸，也可見股四頭肌腱與股骨接觸。"}, {"q": "伸膝時，髕骨對股四頭肌的主要力學作用是什麼？", "o": ["增加股四頭肌的力臂", "縮短股四頭肌的力臂", "固定使脛骨無法旋轉", "直接限制脛骨後移"], "a": 0, "e": "髕骨使股四頭肌的伸膝力臂增加。"}, {"q": "某生觀察髕骨滑動，想複習講義中負責從內側協助維持髕骨軌跡的肌肉。是哪一條？", "o": ["股外側肌", "股中間肌", "股內側斜肌", "股直肌"], "a": 2, "e": "股內側斜肌（VMO）從內側穩定髕骨，協助它沿股骨滑車溝滑動。"}, {"q": "一張站姿圖中兩膝靠近，股骨幹與脛骨幹的外側夾角為 162°。依講義，這符合哪種排列？", "o": ["膝內翻（genu varum）", "圖中的正常膝排列", "髕股關節的 Q 角大於 20°", "膝外翻（genu valgum）"], "a": 3, "e": "講義把小於 170° 列為膝外翻，外觀呈 X 形。"}, {"q": "一張站姿圖中兩膝分開，股骨幹與脛骨幹的外側夾角為 184°。依講義，這符合哪種排列？", "o": ["膝外翻（genu valgum）", "膝內翻（genu varum）", "圖中的正常膝排列", "髕股關節的 Q 角大於 20°"], "a": 1, "e": "講義把大於或等於 180° 列為膝內翻，外觀呈 O 形。"}, {"q": "一位女同學練習量出 Q 角為 23°。按講義 p.21 的數值，下列何者正確？", "o": ["23° 低於男性的平均值", "23° 超過 20°，可作為髕股關節排列異常的線索", "23° 低於女性的平均值", "23° 是股骨幹與脛骨幹外側夾角的正常值"], "a": 1, "e": "講義列女性 Q 角為 15.8° ± 4.5°，並將大於 20° 列為髕股關節排列異常的線索。"}, {"q": "測量 Q 角時，哪三個骨性標誌用來畫出兩條線？", "o": ["髂前上棘、股骨內上髁、髕骨中心", "髂前上棘、股骨外上髁、脛骨粗隆", "股骨大轉子、髕骨中心、脛骨粗隆", "髂前上棘、髕骨中心、脛骨粗隆"], "a": 3, "e": "一條線連髂前上棘和髕骨中心，另一條從脛骨粗隆通過髕骨中心。"}, {"q": "同為腿後肌群，哪個肌肉動作配對正確？", "o": ["股二頭肌：屈膝、膝內旋", "半腱肌：屈膝、膝外旋", "半膜肌：屈膝、膝內旋", "半膜肌：伸膝、膝內旋"], "a": 2, "e": "半膜肌與半腱肌都可屈膝、膝內旋，股二頭肌則屈膝、膝外旋。"}, {"q": "講義中哪條肌肉在伸膝時拉動膝關節囊？", "o": ["膝關節肌", "半膜肌", "膕肌", "蹠肌"], "a": 0, "e": "膝關節肌起於股骨幹下段前面，止於膝關節囊，伸膝時拉動關節囊。"}, {"q": "下列何者在講義 p.47 屬於只跨膝的單關節肌？", "o": ["股二頭肌長頭", "股二頭肌短頭", "股直肌", "腓腸肌"], "a": 1, "e": "股二頭肌短頭只跨膝，長頭跨髖與膝。"}, {"q": "看膝內側的肌腱圖時，哪三條肌腱合成鵝足？", "o": ["縫匠肌、股薄肌、半腱肌", "縫匠肌、股薄肌、半膜肌", "縫匠肌、半腱肌、股二頭肌", "股薄肌、半膜肌、膕肌"], "a": 0, "e": "鵝足由縫匠肌、股薄肌和半腱肌的肌腱組成，有助於穩定膝內側。"}, {"q": "講義 p.43 在膝內側標出一個滑囊。它位於哪裡？", "o": ["股四頭肌腱上方", "髂脛束淺面", "膕肌腱外側", "鵝足肌腱深面"], "a": 3, "e": "p.43 的標線指向鵝足滑囊，位於鵝足肌腱的深面。"}, {"q": "把髖伸直再試著屈膝時，哪一條肌肉因被拉長而限制屈膝幅度？", "o": ["半腱肌", "股二頭肌長頭", "股直肌", "半膜肌"], "a": 2, "e": "伸髖與屈膝都拉長股直肌，因此股直肌會出現被動不足。"}, {"q": "從椅子站起時，依講義哪一組肌肉分工與收縮方式正確？", "o": ["腿後肌伸髖，股四頭肌伸膝，伸肌做向心收縮", "腿後肌伸髖，股四頭肌伸膝，伸肌做離心收縮", "股四頭肌屈髖，腿後肌屈膝，屈肌做離心收縮", "股四頭肌伸髖，腿後肌伸膝，伸肌做向心收縮"], "a": 0, "e": "站起時，腿後肌伸髖、股四頭肌伸膝，伸肌向心收縮抬高身體。"}]}, "K7": {"cards": [{"f": "單腳有幾塊骨？加上脛骨、腓骨共有幾塊？", "b": "單腳 26 塊：7 塊跗骨、5 塊蹠骨、14 塊趾骨。加上脛骨與腓骨，共 28 塊。"}, {"f": "Hindfoot、midfoot、forefoot 各有哪些骨頭？", "b": "後足是距骨、跟骨。中足是舟狀骨、骰骨、3 塊楔形骨。前足是蹠骨和趾骨。"}, {"f": "Medial malleolus 與 lateral malleolus 各是哪塊骨的末端？", "b": "內踝是脛骨末端，外踝是腓骨末端。"}, {"f": "Talocrural joint 的骨頭、類型與主要動作", "b": "踝關節由脛骨、腓骨及距骨組成，是 1 個自由度的鉸鏈關節。主要做背屈與蹠屈。"}, {"f": "膝蓋彎曲或伸直，何時踝背屈較大？", "b": "屈膝時較大。伸膝再背屈會同時拉長跨兩個關節的腓腸肌，出現被動不足。"}, {"f": "p.53 的背屈、蹠屈、內翻與外翻活動度", "b": "從 0° 起，背屈到 20°，蹠屈到 45–55°，內翻到 30–40°，外翻到 15–25°。"}, {"f": "Subtalar joint 又叫什麼？由哪些骨頭組成？", "b": "距下關節又稱距跟關節（talocalcaneal joint），由距骨與跟骨組成。主要做內翻、外翻。"}, {"f": "Sinus tarsi 在哪裡？同區哪條韌帶與本體感覺有關？", "b": "跗骨竇位於距骨與跟骨之間。距跟骨間韌帶（interosseous talocalcaneal ligament）與距下關節的本體感覺有關。"}, {"f": "背屈與蹠屈、內翻與外翻、外展與內收，各在哪個平面？", "b": "背屈、蹠屈在矢狀面。內翻、外翻在額狀面。外展、內收在水平面。"}, {"f": "Pronation 與 supination 各由什麼動作組合？", "b": "旋前是背屈、外展、外翻。旋後是蹠屈、內收、內翻。"}, {"f": "講義 p.12 用哪些詞描述足部的開放鏈與閉鎖鏈動作？", "b": "開放鏈用 inversion／eversion（內翻／外翻）。閉鎖鏈用 supination／pronation（旋後／旋前）。"}, {"f": "踝內側的 deltoid ligament 有哪四束？", "b": "三角韌帶包括前脛距韌帶、後脛距韌帶、脛跟韌帶與脛舟韌帶。"}, {"f": "外側副韌帶三條是哪三條？", "b": "前距腓韌帶（ATFL）、後距腓韌帶（PTFL）、跟腓韌帶（CFL）。"}, {"f": "Chopart joint 的中文、形狀與組成", "b": "橫跗關節，呈 S 形，由距舟關節與跟骰關節組成。"}, {"f": "橫跗關節繞縱軸與斜軸旋前時，各以什麼動作為主？", "b": "縱軸以外翻為主。斜軸以外展與背屈為主。"}, {"f": "Tarsometatarsal joints 由哪些部位形成？哪幾個最靈活？", "b": "跗蹠關節由遠端一排跗骨與蹠骨基部形成。第 2 較固定，第 4、5 最靈活。"}, {"f": "蹠趾關節的骨性位置及動作", "b": "MTP 是蹠骨頭和近節趾骨基部之間的關節。屈曲 30–45°、過伸 90°，也可外展及內收。"}, {"f": "踝、跗部、蹠趾與趾間關節的 close-packed position", "b": "踝完全背屈，跗部最大旋後，蹠趾過伸，趾間伸直。"}, {"f": "Achilles tendon 主要由哪些肌肉的肌腱組成？止於何處？", "b": "阿基里斯腱主要由腓腸肌與比目魚肌的肌腱組成，止於跟骨粗隆，可承受約 4–7 倍體重的力量。"}, {"f": "Gastrocnemius 和 soleus 在跨關節、肌纖維及功能上有何差別？", "b": "腓腸肌跨膝、踝，快肌較多，用於跑跳。比目魚肌為單關節肌，慢肌較多，站立時幫忙控制身體搖晃。"}, {"f": "講義列出小腿三頭肌的蹠屈力量約為體重的幾倍？", "b": "約 2.4 倍。"}, {"f": "Tibialis posterior 的中文與兩項重點功能", "b": "脛後肌。使距下關節內翻或旋後，也維持足弓。"}, {"f": "FDL 和 FHL 是哪兩條肌肉？有何共同功能？", "b": "屈趾長肌與屈拇趾長肌。可屈趾、協助踝蹠屈，並支撐縱弓。"}, {"f": "腓骨長、短肌與第三腓骨肌都能做哪個動作？踝屈伸方向有何差異？", "b": "都能外翻。腓骨長、短肌協助蹠屈，第三腓骨肌協助背屈。"}, {"f": "小腿前側肌群在走路的擺盪期有何作用？", "b": "讓足背屈，避免腳趾拖地。"}, {"f": "脛前肌、伸拇趾長肌、伸趾長肌、腓骨長肌，哪條不經踝的橫軸前方？", "b": "腓骨長肌。它的肌腱從外踝後方繞行。"}, {"f": "Deep peroneal nerve 的中文與感覺區", "b": "深腓神經。感覺圖標在第 1、2 趾間的小區。"}, {"f": "哪條神經支配腓骨長肌與腓骨短肌？", "b": "淺腓神經（superficial peroneal nerve）。"}, {"f": "Tibial nerve 的兩條末端分支", "b": "脛神經末端分為內側蹠神經和外側蹠神經。"}, {"f": "足底第 1 層是哪三條肌肉？有何共同起點？", "b": "拇趾外展肌、屈趾短肌、小趾外展肌。都從跟骨粗隆和足底腱膜起始。"}, {"f": "Flexor digitorum brevis 的止點和神經", "b": "屈趾短肌止於第 2–5 趾中節趾骨，受內側蹠神經支配。"}, {"f": "Quadratus plantae 的層次、止點與神經", "b": "足底方肌在第 2 層，止於屈趾長肌腱，由外側蹠神經支配。"}, {"f": "Lumbricals 從何處起始？各受什麼神經支配？", "b": "蚓狀肌起於屈趾長肌腱。第 1 條受內側蹠神經支配，第 2–4 條受外側蹠神經支配。"}, {"f": "Dorsal interossei 及 plantar interossei 位於哪一層？由哪條神經支配？", "b": "背側及足底骨間肌都在第 4 層，受外側蹠神經支配。"}, {"f": "足底內在肌在走跑與蹬地時有什麼功能？", "b": "走跑時支撐足弓，並補足長屈趾肌的力量。蹬地時維持趾伸直，讓屈肌有力拉動。"}, {"f": "Medial longitudinal arch 由哪些骨組成？主要韌帶是哪條？", "b": "內側縱弓由距骨、跟骨、舟狀骨、內側楔形骨和第 1 蹠骨組成。主要靠彈簧韌帶。"}, {"f": "外側縱弓的骨頭與主要支撐", "b": "跟骨、骰骨、第 5 蹠骨。主要靠長足底韌帶、短足底韌帶及足底腱膜。"}, {"f": "Transverse arch 的骨頭與主要支撐", "b": "橫弓由骰骨、3 塊楔形骨和蹠骨組成。主要支撐為骨性構造、腓骨長肌和深橫蹠韌帶。"}, {"f": "蹠趾過伸時，足底腱膜的張力及跗部的剛性如何變化？", "b": "足底腱膜張力升高，跗部變得較剛硬。"}, {"f": "足固定在地上，小腿內轉會引起什麼變化？", "b": "距下關節旋前，內側縱弓降低。"}, {"f": "Pes planus 與 pes cavus 有何差別？", "b": "扁平足的足弓塌低，講義描述距骨與舟狀骨下移。空凹足的足弓過高。"}, {"f": "Pes calcaneus 和 pes equinus 各用哪裡走路？", "b": "跟足以腳跟著地。馬蹄足以前腳掌著地，腳跟不著地。"}, {"f": "Hallux valgus 與 pes valgus 各是什麼？", "b": "Hallux valgus 是拇趾外翻。Pes valgus 是外翻足，伴隨足弓下降。"}, {"f": "前距腓韌帶最容易在哪個動作組合下扭傷？", "b": "踝蹠屈加足內翻。"}, {"f": "小腿三頭肌癱瘓有哪些動作表現？", "b": "無法踮腳或跑跳，上樓梯又慢又不靈活。兩側都癱瘓時，站立平衡會喪失。"}], "mcq": [{"q": "依講義 p.4 的功能分區，下列哪一組都是中足的骨頭？", "o": ["距骨與跟骨", "跟骨與舟狀骨", "舟狀骨與骰骨", "骰骨與第 5 蹠骨"], "a": 2, "e": "中足包括舟狀骨、骰骨與三塊楔形骨。"}, {"q": "同一位同學屈膝時的踝背屈比伸膝時大。依講義，主要原因為何？", "o": ["伸膝加背屈時，腓腸肌出現被動不足", "伸膝加背屈時，比目魚肌被兩個關節拉長", "屈膝時，蹠趾關節帶動踝背屈", "屈膝時，足底腱膜拉緊"], "a": 0, "e": "腓腸肌同時跨膝與踝，伸膝加背屈時會同時被兩個關節拉長。"}, {"q": "依 p.53 的活動度表，內翻與外翻從 0° 起的終點角度各為多少？", "o": ["內翻 15–25°，外翻 30–40°", "內翻 20°，外翻 45–55°", "內翻 45–55°，外翻 20°", "內翻 30–40°，外翻 15–25°"], "a": 3, "e": "講義的內翻終點是 30–40°，外翻終點是 15–25°。"}, {"q": "足部內翻與外翻主要發生於哪個關節？屬於哪個平面？", "o": ["踝關節，矢狀面", "距下關節，額狀面", "距下關節，水平面", "踝關節，額狀面"], "a": 1, "e": "距下關節是內翻與外翻的主要部位，這一對動作屬額狀面。"}, {"q": "下列哪組動作可合成足部旋前？", "o": ["背屈、內收、外翻", "背屈、外展、外翻", "蹠屈、外展、內翻", "蹠屈、內收、內翻"], "a": 1, "e": "足旋前的三個成分是背屈、外展及外翻。"}, {"q": "依講義 p.42–43，橫跗關節繞斜軸旋後時，主要是哪組動作？", "o": ["外翻", "內翻", "外展加背屈", "內收加蹠屈"], "a": 3, "e": "斜軸旋後以內收和蹠屈為主，縱軸旋後以內翻為主。"}, {"q": "距舟關節與跟骰關節共同組成哪一個關節？", "o": ["橫跗關節", "距下關節", "踝關節", "跗蹠關節"], "a": 0, "e": "橫跗關節也叫 Chopart joint，呈 S 形。"}, {"q": "講義指出哪個跗蹠關節較固定，只能做微量屈伸？", "o": ["第 1 跗蹠關節", "第 3 跗蹠關節", "第 2 跗蹠關節", "第 5 跗蹠關節"], "a": 2, "e": "第 2 跗蹠關節較固定，第 4、5 跗蹠關節最靈活。"}, {"q": "踝關節的最緊密位置（close-packed position）為何？", "o": ["完全背屈", "完全蹠屈", "最大旋後", "最大內翻"], "a": 0, "e": "p.17 將完全背屈列為踝關節的最緊密位置。"}, {"q": "走路時腳在擺盪期，哪一組肌肉可使踝背屈，避免拖腳？", "o": ["小腿三頭肌", "外側的腓骨長肌與短肌", "小腿前側肌群", "深後側的屈趾長肌與屈拇趾長肌"], "a": 2, "e": "脛前肌等前側肌在擺盪期做踝背屈，幫助腳離地。"}, {"q": "依 p.48 的動作表，哪條肌肉同時參與踝背屈與足外翻？", "o": ["脛後肌", "腓骨長肌", "腓骨短肌", "第三腓骨肌"], "a": 3, "e": "第三腓骨肌列在背屈與外翻兩列。"}, {"q": "依 p.39 的神經圖，哪條神經同時支配腓骨長肌與腓骨短肌？", "o": ["深腓神經", "淺腓神經", "脛神經", "內側蹠神經"], "a": 1, "e": "總腓神經的淺分支支配外側的腓骨長肌和短肌。"}, {"q": "同學練習單腳站，想了解哪條小腿三頭肌的成員慢肌較多，也幫忙控制站立搖晃。應選何者？", "o": ["腓腸肌內側頭", "腓腸肌外側頭", "比目魚肌", "脛後肌"], "a": 2, "e": "比目魚肌慢肌較多，站立時有助穩定踝與控制姿勢。"}, {"q": "哪一組足底內在肌起自屈趾長肌腱，第 1 條受內側蹠神經支配？", "o": ["足底方肌", "足底骨間肌", "背側骨間肌", "蚓狀肌"], "a": 3, "e": "足底蚓狀肌起自屈趾長肌腱，第 1 條由內側、第 2–4 條由外側蹠神經支配。"}, {"q": "講義把哪一條韌帶列為內側縱弓的主要韌帶支撐？", "o": ["長足底韌帶", "彈簧韌帶", "短足底韌帶", "深橫蹠韌帶"], "a": 1, "e": "彈簧韌帶就是足底跟舟韌帶，主要支撐內側縱弓。"}, {"q": "腳跟抬起、蹠趾關節過伸時，依足底腱膜機制，會發生什麼變化？", "o": ["足底腱膜張力升高，跗部較剛硬", "足底腱膜張力升高，跗部較有彈性", "足底腱膜張力降低，跗部較剛硬", "足底腱膜張力降低，跗部較有彈性"], "a": 0, "e": "蹠趾過伸牽緊足底腱膜，使跗部形成較剛硬的構造。"}, {"q": "站立時足固定在地上。小腿向內轉，距下關節與內側縱弓會如何變化？", "o": ["距下旋後，內側縱弓升高", "距下旋後，內側縱弓降低", "距下旋前，內側縱弓升高", "距下旋前，內側縱弓降低"], "a": 3, "e": "講義 p.56 將小腿內轉與距下旋前、內側縱弓降低配對。"}, {"q": "打籃球落地時腳尖朝下，足底又向內翻。依講義，哪條韌帶最容易在這個位置扭傷？", "o": ["前距腓韌帶", "前脛腓韌帶", "脛舟韌帶", "後脛距韌帶"], "a": 0, "e": "蹠屈加內翻是講義所列前距腓韌帶最容易扭傷的姿勢。"}, {"q": "某人走路以前腳掌著地，腳跟不著地。依講義最符合哪種變形？", "o": ["Pes calcaneus", "Pes cavus", "Pes equinus", "Pes planus"], "a": 2, "e": "馬蹄足（pes equinus）以前腳掌著地，跟足（pes calcaneus）以腳跟著地。"}, {"q": "足弓塌低，講義描述距骨與舟狀骨向下移。最符合哪種足部變形？", "o": ["Pes cavus", "Pes planus", "Pes varus", "Hallux valgus"], "a": 1, "e": "距骨、舟狀骨向下移是講義描述的扁平足（pes planus）。"}, {"q": "某人無法踮腳尖，走樓梯變慢，也無法跑跳。講義把這組表現與哪個肌群癱瘓配對？", "o": ["小腿前側肌群", "小腿三頭肌", "腓骨長肌與腓骨短肌", "足底內在肌群"], "a": 1, "e": "小腿三頭肌提供踝蹠屈力，癱瘓時難以完成踮腳、上樓與跑跳。"}, {"q": "講義 p.19 有一張角度對照圖，畫出大腳趾朝其他腳趾偏。圖示的是哪種變形？", "o": ["Pes valgus", "Pes equinus", "Hallux valgus", "Pes calcaneus"], "a": 2, "e": "Hallux valgus 指拇趾外翻，圖中比較了正常角度與外翻角度。"}, {"q": "對照講義的感覺分布圖，第 1、2 趾之間的小區由哪條神經分布？", "o": ["深腓神經", "淺腓神經", "腓腸神經", "外側蹠神經"], "a": 0, "e": "p.39 把第 1、2 趾間的小區標為深腓神經的感覺區。"}, {"q": "依講義複習題，自然站立時足部承受最多壓力的是哪個區域？", "o": ["前足", "中足", "第 1 蹠趾關節", "後足"], "a": 3, "e": "p.56 的題組以後足為自然站立時受壓最多的區域。"}, {"q": "講義 p.19 的足跟圖把靠近跟骨下方的足底筋膜發炎處標成什麼？", "o": ["Plantar fasciitis", "Achilles tendinitis", "Haglund’s deformity", "Heel spur"], "a": 0, "e": "Plantar fasciitis 是足底筋膜炎，圖中的箭頭指向足底筋膜靠跟骨的位置。"}]}, "J": {"cards": [{"f": "依解剖學圖6-5，胸鎖關節屬於哪一型？", "b": "滑動關節（gliding）；肌動學表則列為鞍狀。依講義兩科不同，考前確認老師標準。"}, {"f": "依肌動學講義，胸鎖關節屬於哪一型？", "b": "鞍狀關節（saddle）；解剖學圖6-5列為滑動。"}, {"f": "肩鎖關節的類型與構成骨？", "b": "滑動；肩胛骨肩峰與鎖骨肩峰端。"}, {"f": "本圖滑膜關節中的肋胸關節，指哪些肋骨？", "b": "第2–7肋軟骨與胸骨，屬滑動；第1肋軟骨與胸骨為軟骨結合。"}, {"f": "腕骨間關節：類型、自由度、構成骨？", "b": "滑動；本圖標示非軸／滑動；腕骨之間。"}, {"f": "肌動學表將距下關節列為哪一型？構成骨？", "b": "滑動（gliding）；距骨與跟骨，參與足內翻、外翻。"}, {"f": "脊椎小面關節的類型與構成骨？", "b": "滑動；相鄰椎骨上、下關節突之間。"}, {"f": "肘關節：類型與自由度？", "b": "屈戍（hinge）；1自由度，屈曲與伸展。"}, {"f": "表6-1中肘關節由哪些骨面構成？", "b": "肱骨滑車與尺骨滑車切跡；肱骨小頭與橈骨頭。"}, {"f": "膝關節：依圖6-5的類型、自由度與表6-1構成骨？", "b": "屈戍；1自由度（主要屈伸）；股骨髁與脛骨髁。"}, {"f": "踝關節：類型、構成骨與主要動作？", "b": "屈戍；脛骨及腓骨與距骨；足背屈曲、足底屈曲。"}, {"f": "指間關節：類型、自由度、構成骨？", "b": "屈戍；1自由度；相鄰指骨之間。"}, {"f": "趾間關節：類型、自由度、構成骨？", "b": "屈戍；1自由度；相鄰趾骨之間。"}, {"f": "掌指關節：類型、自由度、構成骨？", "b": "橢圓／髁狀；2自由度；掌骨與指骨。"}, {"f": "橈腕關節：類型、自由度、構成骨？", "b": "橢圓／髁狀；2自由度；橈骨與近側腕骨。"}, {"f": "寰軸（寰樞）關節：類型、自由度、構成骨？", "b": "車軸／樞軸；1自由度；寰椎與軸椎（C1–C2），主要旋轉。"}, {"f": "上橈尺關節：類型與構成骨？", "b": "車軸／樞軸；橈骨頭與尺骨橈骨切跡；參與旋前、旋後。"}, {"f": "依圖6-5與類型段落，下橈尺關節的類型與自由度？", "b": "車軸；1自由度。構成骨為尺骨頭與橈骨尺骨切跡；此處分類不採表6-1的不同記載。"}, {"f": "拇指腕掌關節：類型、自由度、構成骨？", "b": "鞍狀；2自由度；大多角骨（肌動學稱大菱形骨）與第一掌骨。"}, {"f": "肩（盂肱）關節：類型、自由度、構成骨？", "b": "球窩／杵臼；3自由度；肩胛骨關節盂與肱骨頭。"}, {"f": "髖關節：類型、自由度、構成骨？", "b": "球窩／杵臼；3自由度；髖臼與股骨頭。"}, {"f": "名稱對照：球窩關節＝？英文？", "b": "杵臼關節（ball-and-socket）。"}, {"f": "名稱對照：橢圓關節＝？英文？", "b": "髁狀關節（ellipsoidal／condyloid）。"}, {"f": "名稱對照：車軸關節＝？英文？", "b": "樞軸關節（pivot）；不要與屈戍的別名「樞紐」混淆。"}, {"f": "名稱對照：屈戍關節＝？英文？", "b": "鉸鏈關節（hinge）；解剖學段落亦寫作屈戌，別名樞紐。"}, {"f": "哪兩類在本圖以2自由度表示？", "b": "橢圓（髁狀）與鞍狀。"}, {"f": "哪一類可屈伸、外展內收及旋轉，共3自由度？", "b": "球窩（杵臼）：肩與髖。"}, {"f": "本圖如何標示滑動關節自由度？", "b": "非軸／滑動；這是本圖統一標示，解剖學類型段落另有單軸／多軸的用語。"}], "mcq": [{"q": "依解剖學圖6-5，胸鎖關節屬於？", "o": ["滑動", "鞍狀", "車軸", "球窩"], "a": 0, "e": "圖6-5列為滑動；肌動學表列為鞍狀。依講義兩科不同，考前確認老師標準。"}, {"q": "依肌動學講義，胸鎖關節屬於？", "o": ["滑動", "車軸", "鞍狀", "橢圓"], "a": 2, "e": "肌動學鞍狀關節例子包括胸鎖與拇指腕掌。"}, {"q": "哪一個名稱與球窩關節相同？", "o": ["樞軸", "杵臼", "髁狀", "鉸鏈"], "a": 1, "e": "球窩＝杵臼（ball-and-socket），有3自由度。"}, {"q": "橢圓關節在肌動學表的名稱是？", "o": ["鞍狀", "杵臼", "樞軸", "髁狀"], "a": 3, "e": "橢圓（ellipsoidal）＝髁狀（condyloid）。"}, {"q": "哪一組全屬車軸（樞軸）關節？", "o": ["肩、髖", "寰軸、上橈尺", "掌指、橈腕", "肘、指間"], "a": 1, "e": "寰軸與近端橈尺均以旋轉為主，1自由度。"}, {"q": "依圖6-5與類型段落，下橈尺關節屬於？", "o": ["鞍狀", "橢圓", "車軸", "球窩"], "a": 2, "e": "本題依圖6-5與p-L3-d的車軸分類；表6-1另有不同記載。"}, {"q": "拇指腕掌關節由哪些骨構成？", "o": ["大多角骨與第一掌骨", "橈骨與尺骨", "掌骨與近節指骨", "距骨與跟骨"], "a": 0, "e": "大多角骨（大菱形骨）與第一掌骨形成鞍狀關節。"}, {"q": "橈腕關節依類型具有幾個自由度？", "o": ["1", "3", "非軸／滑動", "2"], "a": 3, "e": "橈腕屬橢圓／髁狀，2自由度，可屈伸、外展內收。"}, {"q": "表6-1中的肩關節由哪些骨面構成？", "o": ["肩峰與鎖骨肩峰端", "肩胛骨關節盂與肱骨頭", "胸骨柄與鎖骨胸骨端", "肱骨滑車與尺骨滑車切跡"], "a": 1, "e": "肩（盂肱）關節是球窩；肩峰與鎖骨則為肩鎖關節。"}, {"q": "依肌動學表，距下關節屬於？", "o": ["車軸", "球窩", "滑動", "鞍狀"], "a": 2, "e": "表中滑動關節例子有腕、距下、脊椎小面。"}, {"q": "哪一項是本圖肋胸滑膜關節的正確範圍？", "o": ["第2–7肋軟骨與胸骨", "第1肋軟骨與胸骨", "鎖骨與胸骨", "所有肋骨頭與椎體"], "a": 0, "e": "第2–7為滑動；第1肋軟骨與胸骨是軟骨結合。"}, {"q": "踝關節的主要動作是？", "o": ["前臂旋前與旋後", "肩外展與內收", "拇指對掌", "足背屈曲與足底屈曲"], "a": 3, "e": "踝由脛骨、腓骨與距骨構成，屬屈戍關節。"}, {"q": "掌指與指間關節的類型依序為？", "o": ["屈戍、橢圓", "橢圓、屈戍", "滑動、車軸", "鞍狀、球窩"], "a": 1, "e": "掌指為橢圓／髁狀（2自由度）；指間為屈戍（1自由度）。"}, {"q": "髖關節的構成骨與類型，何者正確？", "o": ["薦骨與髂骨；球窩", "股骨與脛骨；鞍狀", "髖臼與股骨頭；球窩", "恥骨之間；橢圓"], "a": 2, "e": "髖臼與股骨頭形成球窩（杵臼），3自由度。"}, {"q": "本圖哪一類以「非軸／滑動」標示自由度？", "o": ["滑動", "屈戍", "車軸", "球窩"], "a": 0, "e": "本圖滑動型採非軸／滑動標示；屈戍、車軸為1，球窩為3。"}]}, "X": {"cards": [], "mcq": [{"q": "第1題　下列何種問題最可能產生「反向肩胛肱骨節律」（reverse scapulohumeral rhythm）現象？", "o": ["黏連性肩關節囊炎（adhesive capsulitis）", "斜頸（wry neck）", "肱三頭肌斷裂（triceps rupture）", "肱二頭肌斷裂（biceps rupture）"], "a": 0, "e": "黏連性肩關節囊炎（俗稱五十肩）會導致盂肱關節（glenohumeral joint）產生嚴重的關節囊黏連與活動受限。當患者嘗試舉高手臂時，盂肱關節無法正常旋轉，會改由肩胛骨相對於胸壁過度且過早地旋轉來代償，出現肩胛胸壁關節（scapulothoracic joint）活動量顯著大於盂肱關節的現象，此即稱為「反向肩胛肱骨節律」。"}, {"q": "第2題　有關開放鏈與閉鎖鏈動作的敘述，下列何者錯誤？", "o": ["開放鏈與閉鎖鏈動作屬於關節運動學（arthrokinematics）", "下肢蹲下動作為閉鎖鏈動作", "開放鏈動作特徵為固定近端－移動遠端（distal-on-proximal）的動作", "上肢投球動作為開放鏈動作"], "a": 0, "e": "開放鏈（Open Kinetic Chain）與閉鎖鏈（Closed Kinetic Chain）屬於骨骼運動學（osteokinematics）的分類方式，用以描述整體肢體段在空間中的移動特性。 關節運動學（arthrokinematics）探討的是關節內部的微觀動作，如滾動（rolling）、滑動（sliding）與旋轉（spinning），故 (A) 敘述錯誤。"}, {"q": "第3題　欲牽張緊縮的肱三頭肌，應：", "o": ["先伸直肩關節，再屈曲肘關節", "先屈曲肩關節，再伸直肘關節", "先屈曲肘關節，再屈曲肩關節", "先伸直肘關節，再過度伸直肩關節"], "a": 2, "e": "肱三頭肌（長頭）為雙關節肌肉，主要功能為伸直肘關節與伸直肩關節。 欲進行牽張（stretching）時，必須擺在與其主要肌肉作用完全相反的姿勢，即屈曲肘關節搭配屈曲肩關節（手高舉過頭且手肘彎曲）。"}, {"q": "第4題　在肌動學領域中，下列何者不是研究肌肉作用的方法？", "o": ["血液檢驗", "觸診", "解剖", "肌電圖"], "a": 0, "e": "肌動學分析肌肉功能的主要方法包含：觸診（Palpation，觀察與觸摸肌腹收縮）、解剖學（Anatomy/Dissection，分析肌肉起止點與拉力線）、肌電圖（EMG，紀錄肌肉電氣活化訊號）及肌力測試等。血液檢驗屬於醫學臨床生化檢測，無法用於評估肌肉的生物力學或運動學功能。"}, {"q": "第5題　喙突是哪一個肌肉附著的地方？", "o": ["肱二頭肌長頭", "肱三頭肌長頭", "肱肌", "喙肱肌"], "a": 3, "e": "附著於肩胛骨喙突（coracoid process）的肌肉共有三塊：胸小肌（pectoralis minor）、喙肱肌（coracobrachialis）以及肱二頭肌短頭（short head of biceps brachii）。（肱二頭肌長頭起於關節上結節；肱三頭肌長頭起於關節下結節）。"}, {"q": "第6題　肌節（sarcomere）是骨骼肌收縮的基本單位，在肌原纖維（myofibril）中，何種構造之間形成一個肌節？", "o": ["M線", "H區", "Z線", "A帶"], "a": 2, "e": "肌節（sarcomere）的結構定義為兩條相鄰 Z線（Z-disc / Z-line）之間的區域，包含一整段 A 帶與兩側各半個 I 帶，為骨骼肌進行滑行絲收縮（sliding filament theory）的最基本結構與功能單位。"}, {"q": "第7題　斜方韌帶（trapezoid ligament）與圓錐韌帶（conoid ligament）合稱：", "o": ["上肱骨（suprahumeral）韌帶", "肋骨鎖骨（costoclavicular）韌帶", "鎖骨間（interclavicular）韌帶", "喙骨鎖骨（coracoclavicular）韌帶"], "a": 3, "e": "喙鎖韌帶（coracoclavicular ligament, CC ligament）由位於外側的斜方韌帶（trapezoid ligament）與內側的圓錐韌帶（conoid ligament）共同組成，為維持肩峰鎖骨關節（AC joint）垂直方向穩定度的關鍵構造。"}, {"q": "第8題　下列有關斜方肌的敘述何者錯誤？", "o": ["肌肉終點位於肩胛骨", "由長胸神經所支配", "分為上、中、下部分的纖維", "上斜方肌主要動作包含聳肩"], "a": 1, "e": "斜方肌（trapezius）的運動神經支配為第 XI 對腦神經（副神經 accessory nerve）；長胸神經（long thoracic nerve）支配的是前鋸肌（serratus anterior），長胸神經受損會導致翼狀肩胛（winged scapula）。故 (B) 敘述錯誤。"}, {"q": "第9題　伏地挺身時，在側邊肋骨處與肩胛骨間可以看到鼓起的肌肉是？", "o": ["前鋸肌", "腹內側斜肌", "闊背肌", "腰方肌"], "a": 0, "e": "前鋸肌（serratus anterior）起源於第 1~8/9 肋骨側面，向後附著於肩胛骨內側緣。在進行伏地挺身或推送物體時，前鋸肌強烈收縮以將肩胛骨緊貼胸壁並向前推，會於側胸壁展現出獨特的鋸齒狀肌腹形貌。"}, {"q": "第10題　下列有關正常「肩胛肱骨節律」scapulohumeral rhythm的敘述何者錯誤？", "o": ["肩胛骨scapula的動作比盂肱關節glenohumeral joint大", "可維護glenohumeral joint的穩定度", "增加三角肌(deltoid)的收縮效果", "可增加手舉高的角度"], "a": 0, "e": "手臂高舉 180° 時，標準的肩胛肱骨節律比例為 2:1，即盂肱關節（GH joint）負責約 120° 的活動度，而肩胛骨（ST joint）負責約 60° 的上旋活動度。因此盂肱關節的活動角度大於肩胛骨，(A) 敘述錯誤。"}, {"q": "第11題　當你坐有扶手的椅子時，手臂支撐在座椅扶手上，下列那一肩胛肌肉的作用與身體撐起無關？", "o": ["下斜方肌", "菱形肌", "胸小肌", "闊背肌"], "a": 1, "e": "手臂支撐扶手將身體抬高（Trunk elevation）時，主要需要下壓肩胛骨（scapular depression）的肌肉作用（包含下斜方肌、胸小肌與闊背肌）。菱形肌（rhomboids）的主要功能為肩胛骨後收（retraction）與下旋（downward rotation），與撐起身體時的下壓動作無關。"}, {"q": "第12題　下列關於上肢骨骼關節的敘述，何者正確？", "o": ["肩關節（shoulder joint）屬於髁狀關節（condylar joint）", "橈骨（radius）不與肱骨（humerus）形成關節", "鎖骨（clavicle）的兩端分別與肱骨（humerus）及胸骨（sternum）形成關節", "尺骨（ulna）不直接與腕骨（carpus）形成關節"], "a": 3, "e": "(A) 盂肱關節為球窩關節（ball-and-socket joint）。 (B) 橈骨頭與肱骨小頭形成肱橈關節（humeroradial joint）。 (C) 鎖骨兩端分別與肩峰（肩胛骨）及胸骨柄形成關節，不直接接觸肱骨。 (D) 尺骨遠端與腕骨間隔有三角纖維軟骨複合體（TFCC），因此尺骨不直接與近排腕骨構成關節面，故 (D) 正確。"}, {"q": "第13題　下列哪一個肌肉不屬於旋轉袖肌群？", "o": ["棘上肌（supraspinatus）", "大圓肌 (teres major)", "棘下肌（infraspinatus）", "肩胛下肌（subscapularis）"], "a": 1, "e": "旋轉肌袖（Rotator Cuff, 口訣 SITS）由四塊肌肉組成：棘上肌（Supraspinatus）、棘下肌（Infraspinatus）、小圓肌（Teres minor）與肩胛下肌（Subscapularis）。大圓肌不屬於旋轉肌袖。"}, {"q": "第14題　關於盂肱關節的穩定度的敘述，下列何者正確？ ①關節盂（glenoid fossa）有足夠的深度，可包覆肱骨頭而維持足夠關節穩定度 ②關節唇（labrum）增加關節盂深度，因此增加盂肱關節的穩定度 ③關節囊強壯且緊繃是盂肱關節穩定度主要來源 ④當舉手時旋轉肌袖肌群會一起收縮，將肱骨頭拉入關節盂內，以增加穩定度", "o": ["①④", "①②", "③④", "②④"], "a": 3, "e": "① 關節盂淺而平坦，僅能接觸約 1/3 的肱骨頭，骨骼結構本身穩定度極低（①錯誤）。 ② 關節唇能增加約 50% 的關節盂深度，有效增加關節穩定度（②正確）。 ③ 盂肱關節囊結構相對鬆弛，以提供大範圍活動度，故被動限制能力有限（③錯誤）。 ④ 旋轉肌袖發揮動態穩定（dynamic stabilization）作用，收縮時能將肱骨頭穩定向內壓入關節盂中央（④正確）。"}, {"q": "第15題　在肱骨小結節可以觸診到哪條肌肉的附著點？", "o": ["闊背肌", "前鋸肌", "肩胛下肌", "大圓肌"], "a": 2, "e": "肩胛下肌（subscapularis）的止點位於肱骨小結節（lesser tubercle）。大圓肌與闊背肌則分別附著於結節間溝（bicipital groove）的內側唇與溝底。"}, {"q": "第16題　下列那條肌肉對於肩胛上轉的啟動（initiation of upward rotation）有最大的助益？", "o": ["下斜方肌（lower trapezius）", "上斜方肌（upper trapezius）", "前鋸肌（serratus anterior）", "中斜方肌（middle trapezius）"], "a": 1, "e": "在肩關節抬高/外展的初期階段（0~60°），上斜方肌（upper trapezius）最先收縮拉動鎖骨與肩峰，對「啟動」肩胛骨上旋作用最大；隨著舉高角度增加，前鋸肌與下斜方肌才會展現出更顯著的力偶輸出。"}, {"q": "第17題　肱二頭肌(biceps brachii)的功能,下列敘述何者正確?", "o": ["肘屈肌、前臂旋前肌、肩屈肌", "肘屈肌、前臂旋後肌、肩屈肌", "肘屈肌、前臂旋後肌、肩伸肌", "肘屈肌、前臂旋前肌、肩伸肌"], "a": 1, "e": "肱二頭肌（biceps brachii）跨越肩與肘兩個關節，主要運動功能包括：屈曲肘關節（elbow flexion）、使前臂旋後（forearm supination，特別在手肘屈曲 90 度時力矩最大）以及協助屈曲肩關節（shoulder flexion）。"}, {"q": "第18題　肌肉與肌腱常常被視為一個整體單位，可分為收縮部分、序列彈性部分、與並列彈性部分。下列何者屬於序列彈性部分？", "o": ["肌纖維膜（sarcolemma）", "肌束膜（perimysium）", "肌外膜（epimysium）", "肌腱"], "a": 3, "e": "在希爾肌肉模型（Hill's muscle model）中： 序列彈性元件（Series Elastic Component, SEC）：與肌節串聯，主要代表結構為肌腱（tendon）。 並列彈性元件（Parallel Elastic Component, PEC）：與肌節並聯，包含肌外膜、肌束膜、肌內膜及肌纖維膜等結締組織膜。"}, {"q": "第19題　肱二頭肌長頭（long head of biceps brachii）的韌帶通過下列何者？", "o": ["髁間線（intercondylar line）", "結節間溝（intertubercular sulcus）", "髁間窩（intercondylar fossa）", "轉子間線（intertrochanteric line）"], "a": 1, "e": "肱二頭肌長頭肌腱起自肩胛骨關節上結節，穿過盂肱關節囊後，行走於肱骨大結節與小結節之間的結節間溝（intertubercular sulcus / bicipital groove）內。"}, {"q": "第20題　在站立的姿勢下，將兩手高舉過頭，會使得：", "o": ["身體重心位置提高", "身體重心位置維持不動", "身體側向穩定性增加", "身體重心位置降低"], "a": 0, "e": "人體總重心（Center of Gravity, COG）取決於全身質量的空間分布。當雙手舉高過頭時，上肢質量向上位移，導致身體總重心位置向上提高，靜態平衡與穩定度相對降低。"}, {"q": "第21題　下列旋轉袖（rotator cuff）肌肉中，何者能內旋手臂？", "o": ["棘下肌（infraspinatus）", "棘上肌（supraspinatus）", "肩胛下肌（subscapularis）", "小圓肌（teres minor）"], "a": 2, "e": "肩胛下肌（subscapularis）：位於肩胛骨前方，附著於肱骨小結節，收縮時可使手臂內旋（internal rotation）。 棘下肌與小圓肌：主要負責手臂外旋（external rotation）。 棘上肌：主要負責啟動手臂外展（abduction）。"}, {"q": "第22題　盂肱關節外展時，下列那些肌肉作用的力偶，控制肩胛骨上旋（upward rotation）動作？", "o": ["前鋸肌－下斜方肌", "菱形肌－下斜方肌", "提肩胛肌－上斜方肌", "闊背肌－上斜方肌"], "a": 0, "e": "肩胛骨上旋（upward rotation）的三大力偶肌肉為：上斜方肌（上拉）、下斜方肌（下拉內側）與前鋸肌（向前外拉動下角）。選項中 (A) 前鋸肌－下斜方肌屬於此力偶組合。"}, {"q": "第23題　下列那一塊肌肉會將肩胛骨往下拉（depression）？", "o": ["菱形肌（rhomboids）", "上斜方肌（upper trapezius）", "胸小肌（pectoralis minor）", "提肩胛肌（levator scapulae）"], "a": 2, "e": "胸小肌起於第 3-5 肋骨，附著於喙突，收縮時會將肩胛骨向前下方拉動（scapular depression & anterior tilt）。下斜方肌亦具備下壓功能。而菱形肌、提肩胛肌與上斜方肌作用均為上提肩胛骨（elevation）。"}, {"q": "第24題　下列有關肩關節外展的敘述何者正確？", "o": ["要到外展 120 度一定要同時配合肩關節內轉才能達成", "外展到 90 度時，鎖骨已停止旋轉", "疼痛弧（painful arc）常發生在外展的 0~60 度", "在起始階段多依靠棘上肌用力"], "a": 3, "e": "(A) 肩關節外展時需配合外轉（external rotation）以防止肱骨大結節撞擊肩峰。 (B) 外展超過 90 度時，鎖骨會持續產生後旋（posterior rotation）。 (C) 肩關節擠壓症候群的疼痛弧（painful arc）通常出現在外展 60°~120° 的區間。 (D) 在手臂外展前 0~30° 的起始階段，主要由棘上肌（supraspinatus）負責啟動與靜態壓緊關節面，故 (D) 正確。"}, {"q": "第25題　有關骨骼肌分類與功能之敘述，下列何者正確？", "o": ["第一型肌肉纖維（type I fiber）較第二型肌肉纖維（type II fiber）更直接利用無氧代謝進行三磷酸腺苷（ATP）合成", "支配第一型肌肉纖維（type I fiber）之運動神經元，其神經傳導速度較第二型肌肉纖維（type II fiber）之運動神經元快", "第二型肌肉纖維（type II fiber）之肌漿網（sarcoplasmic reticulum）較第一型肌肉纖維（type I fiber）之肌漿網能更快釋放或儲存鈣離子", "第二型A肌肉纖維（type IIa fiber）較第二型B肌肉纖維（type IIb fiber）更直接利用無氧代謝進行三磷酸腺苷（ATP）合成"], "a": 2, "e": "(A) 第一型纖維（慢縮肌）富含粒線體與肌紅蛋白，主要依賴有氧代謝；第二型纖維（快縮肌）較依賴無氧糖解。 (B) 第二型纖維由較粗大的 α 運動神經元支配，神經傳導速度快於第一型。 (C) 第二型肌肉纖維具有更發達的肌漿網（SR）及高活性的鈣離子幫浦（SERCA），能極為迅速地釋放與回收鈣離子，從而達成迅速收縮與放鬆，故 (C) 正確。 (D) Type IIb 纖維較 Type IIa 纖維更直接利用無氧代謝。"}]}, "Y": {"cards": [], "mcq": [{"q": "補1　梭內、外肌纖維之特徵與功能，下列何者錯誤？", "o": ["大部分梭外肌纖維由γ運動神經元控制", "肌梭對牽張速度的反應，次要感覺纖維較主要感覺纖維敏感", "肌梭存在於梭內肌纖維，並提供肌纖維長度的本體感覺", "梭內肌纖維受伸展後興奮α運動神經元，引發牽張反射"], "a": 0, "e": "講義1-p.67：梭外肌由Aα支配、梭內肌由Aγ支配，(A)把α和γ對調了。(B)依一般教科書也不精確，初級末梢對速度較敏感；講義未提及。"}, {"q": "補2　旋轉肌群中，因與三角肌肌力不平衡，外展時無法將肱骨頭下壓，應訓練哪條肌肉？", "o": ["小圓肌", "棘下肌", "棘上肌", "肩胛下肌"], "a": 2, "e": "講義2-p.69～70（92專考古題）：外展時使肱骨頭下沉最主要的肌肉＝棘上肌。三角肌初期往上拉（2-p.54），需要棘上肌往內壓。"}]}, "Z": {"cards": [], "mcq": [{"q": "10/31 第1題　進行伏地挺身時，下列哪一肩關節的肌肉不是主要參與的肌肉？", "o": ["後三角肌", "胸大肌", "前鋸肌", "三頭肌"], "a": 0, "e": "講義 2-p.34（前鋸肌：前突、上旋）、2-p.49（肩關節各動作的主要肌肉）"}, {"q": "10/31 第2題　下列那塊肌肉收縮時，可使肩胛骨（scapula）往上旋轉（rotate upward）？", "o": ["菱形肌（rhomboids）", "棘上肌（supraspinatus）", "前鋸肌（serratus anterior）", "胸小肌（pectoralis minor）"], "a": 2, "e": "講義 2-p.34（前鋸肌 actions：abduction & upward rotation）、2-p.50 表、2-p.67 解答"}, {"q": "10/31 第3題　當你坐有扶手的椅子時，手臂支撐在座椅扶手上，下列那一肩胛肌肉的作用與身體撐起無關？", "o": ["菱形肌", "闊背肌", "胸小肌", "下斜方肌"], "a": 0, "e": "講義 2-p.13（Depression：穩定肩胛骨、把身體抬高 4–6 吋）、2-p.37（胸小肌 depression）、2-p.47（闊背肌 scapula depression）、2-p.35（下斜方肌 depression）"}, {"q": "10/31 第4題　維持肱骨頭（humeral head）關於肩關節中避免半脫位（subluxation），下列肌肉最不具關鍵角色？", "o": ["大圓肌（teres major）", "棘下肌（infraspinatus）", "棘上肌（supraspinatus）", "小圓肌（teres minor）"], "a": 0, "e": "講義 2-p.68 原題（第 3 題），解答在 2-p.70：B＝大圓肌；2-p.52（旋轉肌把肱骨頭固定，防止半脫位）"}, {"q": "10/31 第5題　梭內、外肌纖維（intrafusal and extrafusal muscle fibers）之特徵與功能，下列何者錯誤？正確答案選項： (D) 肌梭（muscle spindle）對肌肉被牽張之速度的反應，肌梭內次要感覺神經纖維（flower-spray endings）較主要感覺神經纖維（annulospiral nerve fiber）敏感。  正確解析：伺服肌梭（muscle spindle）內的主要感覺神經纖維（Ia 類纖維，即環螺狀神經纖維 annulospiral nerve fiber）對肌肉被牽張的速度與長度變化最為敏感；而次要感覺神經纖維（II 類纖維，即花spray樣終末 flower-spray endings）主要對靜態的長度變化較為敏感。因此選項 (D) 敘述「次要感覺神經纖維較主要感覺神經纖維敏感」是錯誤的。(註：原本解析誤植為選項 C，在此特別更正，選項 C 敘述梭外肌纖維由  運動神經元控制、梭內肌由  運動神經元支配，本來就是正確的生物力學觀念。", "o": ["大部分梭外肌纖維由γ（gamma）運動神經元控制", "肌梭對肌肉被牽張之速度的反應，肌梭內次要感覺神經纖維（flower-spray endings）較主要感覺神經纖維（annulospiral nerve fiber）敏感", "肌梭（muscle spindle）存在於梭內肌纖維，並提供有關肌纖維長度的本體感覺", "梭內肌纖維受伸展而產生感覺衝動，傳遞到脊髓後興奮α-運動神經元，引發牽張反射（stretch reflex）"], "a": 0, "e": "講義 1-p.67（梭外 ← Aα、梭內 ← Aγ）、1-p.69、1-p.64、1-p.66"}, {"q": "10/31 第6題　欲牽張緊縮的肱三頭肌，應：", "o": ["先伸直肩關節，再屈曲肘關節", "先屈曲肘關節，再屈曲肩關節", "先伸直肘關節，再過度伸直肩關節", "先屈曲肩關節，再伸直肘關節"], "a": 1, "e": "講義 3-p.17（肱三頭肌：長頭跨肩、肘）"}, {"q": "10/31 第7題　下列哪一個肌肉不屬於旋轉袖肌群？", "o": ["肩胛下肌（subscapularis）", "棘上肌（supraspinatus）", "棘下肌（infraspinatus）", "大圓肌（teres major）"], "a": 3, "e": "講義 2-p.7（旋轉肌袖）、2-p.64、2-p.70（大圓肌：內轉）"}, {"q": "10/31 第8題　喙突是哪一個肌肉附著的地方？", "o": ["肱二頭肌長頭", "喙肱肌", "肱三頭肌長頭", "肱肌"], "a": 1, "e": "講義 2-p.2（喙突：肱二頭肌短頭＋喙肱肌的聯合肌腱起點、胸小肌附著點）、2-p.37、2-p.45"}, {"q": "10/31 第9題　下列有關正常「肩胛肱骨節律」scapulohumeral rhythm的敘述何者錯誤？", "o": ["增加三角肌（deltoid）的收縮效果", "可增加手舉高的角度", "肩胛骨scapula的動作比盂肱關節glenohumeral joint大", "可維護glenohumeral joint的穩定度"], "a": 2, "e": "講義 2-p.33（額狀面外展 30° 之後 GH:ST＝2:1；肩胛平面 1.25:1）、2-p.63 原題"}, {"q": "10/31 第10題　關於肌肉收縮與負重的關係的敘述，下列何者正確？", "o": ["離心收縮時，肌肉負重大於等長收縮", "肌肉作離心收縮的速度越慢，負重越重", "肌肉作向心收縮的速度越快，負重越重", "向心收縮時，肌肉負重大於等長收縮"], "a": 0, "e": "講義 1-p.23（Muscle tension: eccentric > isometric > concentric）、1-p.22（離心 vs 向心比較表）"}, {"q": "10/31 第11題　下列有關肌肉向心、離心與等長收縮方式相互比較之敘述，何者錯誤？", "o": ["手肘從屈曲到伸直將啞鈴慢慢放下時，手肘屈肌進行離心收縮", "三種收縮方式中，向心方式可以產生最大的收縮力量", "手肘從伸直到屈曲將啞鈴舉起時，手肘屈肌進行向心收縮", "離心收縮通常用來做動作的減速用"], "a": 1, "e": "講義 1-p.23（Muscle tension: eccentric > isometric > concentric）、1-p.22（離心 vs 向心比較表）"}, {"q": "10/31 第12題　下列那一項動作不屬於開放鏈（open kinematic chain）？", "o": ["手持蚊拍追擊飛蚊", "行走時，下肢擺盪的動作", "打棒球時，上肢投球的動作", "騎腳踏車，下肢的動作"], "a": 3, "e": "講義 1-p.8（Kinematic chains：open＝遠端自由；closed＝遠端固定）"}, {"q": "10/31 第13題　下列有關斜方肌的敘述何者錯誤？", "o": ["分為上、中、下部分的纖維", "上斜方肌主要動作包含聳肩", "由長胸神經所支配", "肌肉終點位於肩胛骨"], "a": 2, "e": "講義 2-p.35（Trapezius：spinal accessory nerve）、2-p.34 與 2-p.67（前鋸肌：長胸神經）"}, {"q": "10/31 第14題　肩關節外展180度時，鎖骨會產生軸向旋轉（axial rotation）是因哪一條韌帶被拉緊所造成的？", "o": ["橫肱韌帶（transverse humeral ligament）", "喙肩峰韌帶（coracoacromial ligament）", "喙鎖韌帶（coracoclavicular ligament）", "喙肱韌帶（coracohumeral ligament）"], "a": 2, "e": "講義 2-p.62 原題（第 2 題）；2-p.21（鎖骨的轉動由喙鎖韌帶的斜方韌帶＋圓錐韌帶拉緊所造成）"}, {"q": "10/31 第15題　有關開放鏈與閉鎖鏈動作的敘述，下列何者錯誤？", "o": ["開放鏈與閉鎖鏈動作屬於關節運動學（arthrokinematics）", "上肢投球動作為開放鏈動作", "開放鏈動作特徵為固定近端－移動遠端（distal-on-proximal）的動作", "下肢蹲下動作為閉鎖鏈動作"], "a": 0, "e": "講義 1-p.8（Kinematic chains：open＝遠端自由；closed＝遠端固定）"}, {"q": "10/31 第16題　下列那一塊肌肉會將肩胛骨往下拉（depression）？", "o": ["菱形肌（rhomboids）", "上斜方肌（upper trapezius）", "提肩胛肌（levator scapulae）", "胸小肌（pectoralis minor）"], "a": 3, "e": "講義 2-p.37（胸小肌：depression）、2-p.67 解答（下斜方肌：降低；提肩胛肌：抬高）、2-p.70（菱形肌：抬高）"}, {"q": "10/31 第17題　翼狀肩胛（winging scapulae）是因為哪條肌肉無力？", "o": ["前鋸肌（serratus anterior）", "肩胛下肌（subscapularis）", "菱形肌（rhomboid）", "提肩胛肌（levator scapulae）"], "a": 0, "e": "講義 2-p.65 原題（第 3 題）；2-p.59（前鋸肌麻痺 → 肩胛骨內側緣翹起）"}, {"q": "10/31 第18題　有關前鋸肌的敘述，下列何者錯誤？", "o": ["為肩胛胸廓關節最主要的前突肌（protractor）", "肱三頭肌和前鋸肌執行手肘尚未伸直前伏地挺身的初期動作", "無力時會造成肩胛骨翼狀突出（winging）的現象", "前鋸肌和斜方肌於上臂抬舉時控制肩胛骨向上旋轉"], "a": 1, "e": "講義 2-p.34（前鋸肌：前突、上旋）、2-p.56（與斜方肌協同上旋）、2-p.59（麻痺 → 翼狀肩胛）"}, {"q": "10/31 第19題　下列有關肩關節外展的敘述何者正確？", "o": ["在起始階段多依靠棘上肌用力", "疼痛弧（painful arc）常發生在外展的 0~60 度", "要到外展 120 度一定要同時配合肩關節內轉才能達成", "外展到 90 度時，鎖骨已停止旋轉"], "a": 0, "e": "講義 2-p.28（完全內轉時外展只到 60°，外轉才能再抬高）、2-p.21（鎖骨在 90° 後轉動）、2-p.32、2-p.49（外展：三角肌、棘上肌）"}, {"q": "10/31 第20題　在站立的姿勢下，將兩手高舉過頭，會使得：", "o": ["身體重心位置提高", "身體重心位置維持不動", "身體側向穩定性增加", "身體重心位置降低"], "a": 0, "e": "講義 1-p.4（人體重心：站立時約在第二薦椎前方一吋）"}, {"q": "10/31 第21題　有關骨骼肌分類與功能之敘述，下列何者正確？", "o": ["第一型肌肉纖維（type I fiber）較第二型肌肉纖維（type II fiber）更直接利用無氧代謝進行三磷酸腺苷（ATP）合成", "第二型肌肉纖維（type II fiber）之肌漿網（sarcoplasmic reticulum）較第一型肌肉纖維（type I fiber）之肌漿網能更快釋放或儲存鈣離子", "支配第一型肌肉纖維（type I fiber）之運動神經元，其神經傳導速度較第二型肌肉纖維（type II fiber）之運動神經元快", "第二型A肌肉纖維（type IIa fiber）較第二型B肌肉纖維（type IIb fiber）更直接利用無氧代謝進行三磷酸腺苷（ATP）合成"], "a": 1, "e": "講義 1-p.48（Type IIa＝FOG、IIb＝FG）、1-p.51（三種肌纖維比較表）"}, {"q": "10/31 第22題　關於盂肱關節的穩定度的敘述，下列何者正確？ ①關節盂有足夠深度包覆肱骨頭 ②關節唇增加關節盂深度增加穩定度 ③關節囊強壯緊繃是穩定度主要來源 ④舉手時旋轉肌袖肌群會一起收縮將肱骨頭拉入關節盂內", "o": ["①④", "③④", "②④", "①②"], "a": 2, "e": "講義 2-p.6（肱骨頭大、肩盂小）、2-p.52（旋轉肌把肱骨頭固定在關節盂）、2-p.54"}, {"q": "10/31 第23題　在肌動學領域中，下列何者不是研究肌肉作用的方法？", "o": ["肌電圖", "血液檢驗", "解剖", "觸診"], "a": 1, "e": "講義沒有專頁列出「研究肌肉作用的方法」，可能是課堂口述；四個選項中只有血液檢驗跟肌肉的力學、運動無關。"}, {"q": "10/31 第24題　伏地挺身時，在側邊肋骨處與肩胛骨間可以看到鼓起的肌肉是？", "o": ["腹內側斜肌", "前鋸肌", "腰方肌", "闊背肌"], "a": 1, "e": "講義 2-p.34（前鋸肌：起於胸廓前外側、止於肩胛骨內側緣）"}, {"q": "10/31 第25題　肩部旋轉肌群（rotator cuff）中，因與三角肌（deltoid）肌力不平衡之故，導致外展動作（abduction）時無法將肱骨頭（humeral head）下壓，則下列那一條肌肉需要進行肌力訓練以改善此問題？  正確答案選項： (B) 肩胛下肌（subscapularis）  正確解析：在肩關節外展時，三角肌會產生將肱骨頭向上拉的向量力。為了防止肱骨頭向上撞擊肩峰（造成夾擠症候群），旋轉肌袖中的肩胛下肌（Subscapularis）扮演關鍵的「向下旋轉與下壓肱骨頭（downward glide）」角色。當肩胛下肌無力或與三角肌肌力失衡時，就無法有效將肱骨頭穩定下拉。因此針對此問題，最需要加強訓練的是肩胛下肌。（原解析誤植為棘下肌，在此修正為肩胛下肌）。", "o": ["小圓肌（teres minor）", "棘下肌（infraspinatus）", "棘上肌（supraspinatus）", "肩胛下肌（subscapularis）"], "a": 2, "e": "講義 2-p.69 原題（第 2 題），解答在 2-p.70：A(abd)＝棘上肌；2-p.54（三角肌初期垂直上拉）"}, {"q": "11/1 第1題　梭內、外肌纖維（intrafusal and extrafusal muscle fibers）之特徵與功能，下列何者錯誤？", "o": ["大部分梭外肌纖維由γ（gamma）運動神經元控制", "肌梭（muscle spindle）對肌肉被牽張之速度的反應，肌梭內次要感覺神經纖維較主要感覺神經纖維敏感", "肌梭（muscle spindle）存在於梭內肌纖維，並提供有關肌纖維長度的本體感覺", "梭內肌纖維受伸展而產生感覺衝動，傳遞到脊髓後興奮α-運動神經元，引發牽張反射（stretch reflex）"], "a": 0, "e": "講義 1-p.67（梭外 ← Aα、梭內 ← Aγ）、1-p.69、1-p.64、1-p.66"}, {"q": "11/1 第2題　肩部旋轉肌群（rotator cuff）中，因與三角肌（deltoid）肌力不平衡之故，導致外展動作（abduction）時無法將肱骨頭（humerus head）下壓，則下列那一條肌肉需要進行肌力訓練以改善此問題？", "o": ["小圓肌（teres minor）", "棘下肌（infraspinatus）", "棘上肌（supraspinatus）", "肩胛下肌（subscapularis）"], "a": 2, "e": "講義 2-p.69 原題（第 2 題），解答在 2-p.70：A(abd)＝棘上肌；2-p.54（三角肌初期垂直上拉）"}, {"q": "11/1 第3題　關於肌肉收縮與負重的關係的敘述，下列何者正確？", "o": ["離心收縮時，肌肉負重大於等長收縮", "肌肉作向心收縮的速度越快，負重越重", "向心收縮時，肌肉負重大於等長收縮", "肌肉作離心收縮的速度越慢，負重越重"], "a": 0, "e": "講義 1-p.23（Muscle tension: eccentric > isometric > concentric）、1-p.22（離心 vs 向心比較表）"}, {"q": "11/1 第4題　下列有關斜方肌的敘述何者錯誤？", "o": ["分為上、中、下部分的纖維", "肌肉終點位於肩胛骨", "上斜方肌主要動作包含聳肩", "由長胸神經所支佩"], "a": 3, "e": "講義 2-p.35（Trapezius：spinal accessory nerve）、2-p.34 與 2-p.67（前鋸肌：長胸神經）"}, {"q": "11/1 第5題　有關開放鏈與閉鎖鏈動作的敘述，下列何者錯誤？", "o": ["開放鏈與閉鎖鏈動作屬於關節運動學（arthrokinematics）", "開放鏈動作特徵為固定近端－移動遠端（distal-on-proximal）的動作", "上肢投球動作為開放鏈動作", "下肢蹲下動作為閉鎖鏈動作"], "a": 0, "e": "講義 1-p.8（Kinematic chains：open＝遠端自由；closed＝遠端固定）"}, {"q": "11/1 第6題　在站立的姿勢下，將兩手高舉過頭，會使得：", "o": ["身體側向穩定性增加", "身體重心位置提高", "身體重心位置降低", "身體重心位置維持不動"], "a": 1, "e": "講義 1-p.4（人體重心：站立時約在第二薦椎前方一吋）"}, {"q": "11/1 第7題　有關骨骼肌分類與功能之敘述，下列何者正確？", "o": ["支配第一型肌肉纖維之運動神經元，其神經傳導速度較第二型快", "第二型肌肉纖維之肌漿網較第一型能更快釋放或儲存鈣離子", "第一型肌肉纖維較第二型更直接利用無氧代謝進行ATP合成", "第二型A肌肉纖維較第二型B更直接利用無氧代謝進行ATP合成"], "a": 1, "e": "講義 1-p.48（Type IIa＝FOG、IIb＝FG）、1-p.51（三種肌纖維比較表）"}, {"q": "11/1 第8題　肌節（sarcomere）是骨骼肌收縮的基本單位，在肌原纖維中，何種構造之間形成一個肌節？", "o": ["H區", "Z線", "M線", "A帶"], "a": 1, "e": "講義 1-p.37（收縮時 Z 線靠近、A 帶不變、I 帶變窄、H 區消失）、1-p.33、1-p.41"}, {"q": "11/1 第9題　有關前鋸肌的敘述，下列何者錯誤？", "o": ["前鋸肌和斜方肌於上臂抬舉時控制肩胛骨向上旋轉", "無力時會造成肩胛骨翼狀突出（winging）的現象", "肱三頭肌和前鋸肌執行手肘尚未伸直前伏地挺身的初期動作", "為肩胛胸廓關節最主要的前突肌（protractor）"], "a": 2, "e": "講義 2-p.34（前鋸肌：前突、上旋）、2-p.56（與斜方肌協同上旋）、2-p.59（麻痺 → 翼狀肩胛）"}, {"q": "11/1 第10題　關於盂肱關節的穩定度的敘述，下列何者正確？①關節盂有足夠的深度②關節唇增加關節盂深度③關節囊強壯且緊繃④旋轉肌袖肌群會一起收縮將肱骨頭拉入關節盂內", "o": ["②④", "①④", "①②", "③④"], "a": 0, "e": "講義 2-p.6（肱骨頭大、肩盂小）、2-p.52（旋轉肌把肱骨頭固定在關節盂）、2-p.54"}, {"q": "11/1 第11題　對於「肩胛肱骨節律」，在肩關節外展動作時，肩胛胸關節和盂肱關節之產生的動作比值為：", "o": ["2：1", "3：1", "1：2", "1：3"], "a": 2, "e": "講義 2-p.33（額狀面外展 30° 之後 GH:ST＝2:1；肩胛平面 1.25:1）、2-p.63 原題"}, {"q": "11/1 第12題　下列那一組織與穩定肩峰鎖骨關節最無關？", "o": ["肩峰鎖骨韌帶", "下斜方肌", "三角肌", "喙突鎖骨韌帶"], "a": 1, "e": "講義 2-p.24（AC 關節由肩峰鎖骨韌帶、喙鎖韌帶限制；喙鎖韌帶是維持 AC 穩定最重要的韌帶）、2-p.39（三角肌起於鎖骨肩峰端與肩峰）"}, {"q": "11/1 第13題　下列旋轉袖（rotator cuff）肌肉中，何者能內旋手臂？", "o": ["棘下肌（infraspinatus）", "小圓肌（ teres minor ）", "棘上肌（supraspinatus）", "肩胛下肌（subscapularis）"], "a": 3, "e": "講義 2-p.42（肩胛下肌：internal rotation）、2-p.49（內轉：胸大肌、闊背肌、大圓肌；外轉：棘下肌、小圓肌）、2-p.70"}, {"q": "11/1 第14題　斜方韌帶(trapezoid ligament)與圓錐韌帶(conoid ligament)合稱：", "o": ["上肱骨(suprahumeral)韌帶", "肋骨鎖骨(costoclavicular)韌帶", "鎖骨間(interclavicular)韌帶", "喙骨鎖骨(coracoclavicular)韌帶"], "a": 3, "e": "講義 2-p.62 原題（第 1 題）、2-p.9、2-p.21"}, {"q": "11/1 第15題　操作者應如何對闊背肌進行最有效的徒手牽拉？", "o": ["固定胸廓的外側及骨盆上方，移動手臂至肩關節完全屈曲", "固定肩胛骨的腋緣，移動手臂至肩關節屈曲、外轉及部分外展的最終角度", "固定肩胛骨的腋緣，移動手臂至肩關節完全屈曲", "固定胸廓的外側及骨盆上方，移動手臂至肩關節屈曲、外轉及部分外展的最終角度"], "a": 3, "e": "講義 2-p.47（闊背肌：起於 T6 以下棘突、胸腰筋膜、髂嵴、下位肋骨；作用為內轉、伸直、內收、肩胛下壓）"}, {"q": "11/1 第16題　下列那塊肌肉收縮時，可使肩胛骨（scapula）往上旋轉（rotate upward）？", "o": ["棘上肌（supraspinatus）", "前鋸肌（serratus anterior）", "菱形肌（rhomboids）", "胸小肌（pectoralis minor）"], "a": 1, "e": "講義 2-p.34（前鋸肌 actions：abduction & upward rotation）、2-p.50 表、2-p.67 解答"}, {"q": "11/1 第17題　伏地挺身時，在側邊肋骨處與肩胛骨間可以看到鼓起的肌肉是？", "o": ["闊背肌", "腰方肌", "前鋸肌", "腹內側斜肌"], "a": 2, "e": "講義 2-p.34（前鋸肌：起於胸廓前外側、止於肩胛骨內側緣）"}, {"q": "11/1 第18題　下列有關肩關節外展的敘述何者正確？", "o": ["在起始階段多依靠棘上肌用力", "要到外展 120 度一定要同時配合肩關節內轉才能達成", "外展到 90 度時，鎖骨已停止旋轉", "疼痛弧（painful arc）常發生在外展的 0~60 度"], "a": 0, "e": "講義 2-p.28（完全內轉時外展只到 60°，外轉才能再抬高）、2-p.21（鎖骨在 90° 後轉動）、2-p.32、2-p.49（外展：三角肌、棘上肌）"}, {"q": "11/1 第19題　下列關於肌節（sarcomere）的敘述，何者正確？", "o": ["暗帶（A band）的長度就是粗肌絲（thick filament）的長度", "亮帶（I band）的範圍內只有粗肌絲", "H區中央的M線是細肌絲附著的位置", "粗肌絲主要由肌動蛋白構成"], "a": 0, "e": "講義 1-p.37（收縮時 Z 線靠近、A 帶不變、I 帶變窄、H 區消失）、1-p.33、1-p.41"}, {"q": "11/1 第20題　下列何者能外展手臂？", "o": ["棘下肌（infraspinatus）", "肩胛下肌（subscapularis）", "小圓肌（teres minor）", "棘上肌（supraspinatus）"], "a": 3, "e": "講義 2-p.49（Abduction：deltoideus、supraspinatus）、2-p.40（棘上肌）"}, {"q": "11/1 第21題　進行伏地挺身時，下列哪一肩關節的肌肉不是主要參與的肌肉？", "o": ["胸大肌", "三頭肌", "後三角肌", "前鋸肌"], "a": 2, "e": "講義 2-p.34（前鋸肌：前突、上旋）、2-p.49（肩關節各動作的主要肌肉）"}, {"q": "11/1 第22題　欲牽張緊縮的肱三頭肌，應：", "o": ["先屈曲肘關節，再屈曲肩關節", "先屈曲肩關節，再伸直肘關節", "先伸直肘關節，再過度伸直肩關節", "先伸直肩關節，再屈曲肘關節"], "a": 0, "e": "講義 3-p.17（肱三頭肌：長頭跨肩、肘）"}, {"q": "11/1 第23題　喙突是哪一個肌肉附著的地方？", "o": ["肱三頭肌長頭", "喙肱肌", "肱二頭肌長頭", "肱肌"], "a": 1, "e": "講義 2-p.2（喙突：肱二頭肌短頭＋喙肱肌的聯合肌腱起點、胸小肌附著點）、2-p.37、2-p.45"}, {"q": "11/1 第24題　下列那些肌肉收縮，會造成肩關節的內旋（medial rotation）動作？①小圓肌 ②大圓肌 ③肩胛下肌 ④棘下肌 ⑤胸大肌", "o": ["②③④", "②③⑤", "③④⑤", "①③⑤"], "a": 1, "e": "講義 2-p.42（肩胛下肌：internal rotation）、2-p.49（內轉：胸大肌、闊背肌、大圓肌；外轉：棘下肌、小圓肌）、2-p.70"}, {"q": "11/1 第25題　下列那一塊肌肉會將肩胛骨往下拉（depression）？", "o": ["提肩胛肌（levator scapulae）", "菱形肌（rhomboids）", "上斜方肌（upper trapezius）", "胸小肌（pectoralis minor）"], "a": 3, "e": "講義 2-p.37（胸小肌：depression）、2-p.67 解答（下斜方肌：降低；提肩胛肌：抬高）、2-p.70（菱形肌：抬高）"}]}}</script>
 <script>
 window.VIZ={};
 /* links to the other subject's site: relative on GitHub Pages / local, artifact URL inside claude.ai */
@@ -1854,7 +3354,11 @@ VIZ.spindle = function (el) {
     p.querySelectorAll('.viz[data-viz]:not([data-ready])').forEach(function(el){el.dataset.ready='1';var f=window.VIZ[el.dataset.viz];if(f){try{f(el)}catch(err){el.remove();console.error(err)}}else el.remove()});
     document.body.classList.remove('navopen');
     window.scrollTo(0,0);store('anat-last',p.id);
+    if(p.id!=='home'){seen[p.id]=1;store('anat-seen',JSON.stringify(seen));var na=nl.querySelector('a[data-for="'+p.id+'"]');if(na)na.classList.add('seen')}
   }
+  /* 看過的頁面在目錄打勾（只存在這台裝置） */
+  var seen={};try{seen=JSON.parse(store('anat-seen')||'{}')||{}}catch(_){seen={}}
+  nl.querySelectorAll('a').forEach(function(a){if(seen[a.dataset.for])a.classList.add('seen')});
   window.addEventListener('hashchange',function(){show(location.hash.slice(1))});
   document.addEventListener('click',function(e){var a=e.target.closest('a[href^="#"]');if(a){e.preventDefault();var id=a.getAttribute('href').slice(1);try{history.replaceState(null,'','#'+id)}catch(_){}show(id)}});
 
@@ -1909,6 +3413,15 @@ VIZ.spindle = function (el) {
   he.onclick=function(){setHide(!document.body.classList.contains('hide-en'))};
   document.addEventListener('click',function(e){var i=e.target.closest('.term i');if(i&&document.body.classList.contains('hide-en'))i.classList.toggle('peek')});
   if(store('anat-hide')==='1')setHide(true);
+  /* 字級 */
+  var fsb=[].slice.call(document.querySelectorAll('#fsrow button'));
+  function setFs(c){document.body.classList.remove('fs-l','fs-xl');if(c)document.body.classList.add(c);fsb.forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.fs===c))});store('anat-fs',c)}
+  fsb.forEach(function(b){b.onclick=function(){setFs(b.dataset.fs)}});
+  setFs(store('anat-fs')||'');
+  /* 回到頂端 */
+  var tt=document.createElement('button');tt.id='toTop';tt.textContent='↑ 回頂端';tt.hidden=true;document.body.appendChild(tt);
+  tt.onclick=function(){window.scrollTo({top:0,behavior:'smooth'})};
+  window.addEventListener('scroll',function(){tt.hidden=window.scrollY<900},{passive:true});
   document.getElementById('themeBtn').onclick=function(){var r=document.documentElement,dark=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;r.dataset.theme=dark?'light':'dark'};
   document.getElementById('menuBtn').onclick=function(){document.body.classList.toggle('navopen')};
   document.addEventListener('click',function(e){if(document.body.classList.contains('navopen')&&!e.target.closest('nav.side')&&!e.target.closest('#menuBtn'))document.body.classList.remove('navopen')});
@@ -1917,5 +3430,6 @@ VIZ.spindle = function (el) {
   document.addEventListener('keydown',function(e){if(e.key==='Escape'){var z=document.querySelector('.zoom');if(z)z.remove()}});
 
   show(location.hash.slice(1)||store('anat-last')||'home');
+  setTimeout(function(){window.scrollTo(0,0)},60); /* 瀏覽器自己跳到錨點後再拉回頂端 */
 })();
 </script>
